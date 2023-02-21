@@ -1,7 +1,7 @@
 site_name: Introduction to R
 site_author: Genomics Aotearoa
 site_dir: public
-site_url: "https://genomicsaotearoa.github.io/data-management-resources/"
+site_url: "https://genomicsaotearoa.github.io/Introduction-to-R/"
 
 #Repository information
 
@@ -11,8 +11,8 @@ repo_url: https://github.com/GenomicsAotearoa/Introduction-to-R.git
 
 theme:
   name: material
-  logo: ./figures/ga_logo_blacksquare.jpg
-  favicon: ./figures/ga_logo_blacksquare.jpg
+  logo: ./theme_figures/nesi_ga.png
+  favicon: ./theme_figures/nesi_ga.png
    # 404 page
   static_templates:
     - 404.html
