@@ -1,27 +1,27 @@
----
-exercises: 15
-keypoints:
-- Use the `dplyr` package to manipulate data frames.
-- Use `glimpse()` to quickly look at your data frame.
-- Use `select()` to choose variables from a data frame.
-- Use `filter()` to choose data based on values.
-- Use `mutate()` to create new variables.
-- Use `group_by()` and `summarize()` to work with subsets of data.
-objectives:
-- Describe what the `dplyr` package in R is used for.
-- Apply common `dplyr` functions to manipulate data in R.
-- Employ the 'pipe' operator to link together a sequence of functions.
-- Employ the 'mutate' function to apply other chosen functions to
-  existing columns and create new columns of data.
-- Employ the 'split-apply-combine' concept to split the data into
-  groups, apply analysis to each group, and combine the results.
-questions: How can I manipulate data frames without repeating myself?
-source: Rmd
-teaching: 40
-title: Data Wrangling and Analyses with Tidyverse
----
+# Data Wrangling and Analyses with Tidyverse
 
-`{r, include = FALSE} source("../bin/chunk-options.R") knitr_fig_path("05-")`
+!!! info 
+    
+    keypoints:
+    
+    - Use the `dplyr` package to manipulate data frames.
+    - Use `glimpse()` to quickly look at your data frame.
+    - Use `select()` to choose variables from a data frame.
+    - Use `filter()` to choose data based on values.
+    - Use `mutate()` to create new variables.
+    - Use `group_by()` and `summarize()` to work with subsets of data.
+
+    objectives:
+    - Describe what the `dplyr` package in R is used for.
+    - Apply common `dplyr` functions to manipulate data in R.
+    - Employ the 'pipe' operator to link together a sequence of functions.
+    - Employ the 'mutate' function to apply other chosen functions to
+      existing columns and create new columns of data.
+    - Employ the 'split-apply-combine' concept to split the data into
+      groups, apply analysis to each group, and combine the results.
+
+    questions: How can I manipulate data frames without repeating myself?
+
 
 Bracket subsetting is handy, but it can be cumbersome and difficult to
 read, especially for complicated operations.
