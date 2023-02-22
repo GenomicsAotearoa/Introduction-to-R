@@ -1,23 +1,24 @@
----
-exercises: 5
-keypoints:
-- R provides thousands of functions for analyzing data, and provides
-  several way to get help
-- Using R will mean searching for online help, and there are tips and
-  resources on how to search effectively
-objectives:
-- Locate help for an R function using `?`, `??`, and `args()`
-- Check the version of R
-- Be able to ask effective questions when searching for help on forums
-  or using web searches
-questions:
-- How do I get help using R and RStudio?
-source: Rmd
-teaching: 10
-title: Getting help with R
----
+# Getting help with R
 
-`{r, include=FALSE} source("../bin/chunk-options.R") knitr_fig_path("08-")`
+!!! info 
+
+    keypoints:
+
+    - R provides thousands of functions for analyzing data, and provides
+      several way to get help
+    - Using R will mean searching for online help, and there are tips and
+      resources on how to search effectively
+
+    objectives:
+
+    - Locate help for an R function using `?`, `??`, and `args()`
+    - Check the version of R
+    - Be able to ask effective questions when searching for help on forums
+      or using web searches
+
+    questions:
+    
+    - How do I get help using R and RStudio?
 
 ## Getting help with R
 
