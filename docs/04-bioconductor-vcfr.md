@@ -1,26 +1,28 @@
----
-exercises: 3
-keypoints:
-- Bioconductor is an alternative package repository for bioinformatics
-  packages.
-- Installing packages from Bioconductor requires a new method, since it
-  is not compatible with the `install.packages()` function used for
-  CRAN.
-- Check Bioconductor to see if there is a package relevant to your
-  analysis before writing code yourself.
-objectives:
-- Describe what the Bioconductor repository is and what it is used for
-- Describe how Bioconductor differs from CRAN
-- Search Bioconductor for relevant packages
-- Install a package from Bioconductor
-questions:
-- How do I use packages from the Bioconductor repository?
-source: Rmd
-teaching: 10
-title: Using packages from Bioconductor
----
+# Using packages from Bioconductor
 
-`{r chunk_options, include=FALSE} source("../bin/chunk-options.R") knitr_fig_path("04-")`
+!!! info 
+
+    keypoints:
+
+    - Bioconductor is an alternative package repository for bioinformatics
+      packages.
+    - Installing packages from Bioconductor requires a new method, since it
+      is not compatible with the `install.packages()` function used for
+      CRAN.
+    - Check Bioconductor to see if there is a package relevant to your
+      analysis before writing code yourself.
+
+    objectives:
+
+    - Describe what the Bioconductor repository is and what it is used for
+    - Describe how Bioconductor differs from CRAN
+    - Search Bioconductor for relevant packages
+    - Install a package from Bioconductor
+    
+    questions:
+    
+    - How do I use packages from the Bioconductor repository?
+
 
 ## Installing packages from somewhere else besides CRAN?
 
