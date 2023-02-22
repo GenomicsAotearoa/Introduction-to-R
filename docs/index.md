@@ -1,13 +1,17 @@
-<center>
-# Introduction to R
 </center>
+<style>h1 {text-align: center;}</style>
+<h1><b>Introduction to R</b></h1>
+</center>
+
+
 
 <center>
 ![image](./theme_figures/images.jpeg){width="250"}
 </center>
 
 
-
+<br>
+<center>
 
 | **Lesson**                                         | **Overview** | 
 |:---------------------------------------------------|:-------------|
@@ -20,3 +24,5 @@
 |[7. Data Visualisation](./06-data-visualization.md){ .md-button .md-button--primary } | General overview of R|
 |[8. Producing reports with knitr](./07-knitr-markdown.md){ .md-button .md-button--primary } | General overview of R|
 |[9. R-help](./08-r-help.md){ .md-button .md-button--primary } | General overview of R|
+
+</center>
