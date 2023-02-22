@@ -24,7 +24,3 @@
 |[7. Data Visualisation](./06-data-visualization.md){ .md-button .md-button--primary } | General overview of R|
 |[8. Producing reports with knitr](./07-knitr-markdown.md){ .md-button .md-button--primary } | General overview of R|
 |[9. R-help](./08-r-help.md){ .md-button .md-button--primary } | General overview of R|
-
-</center>
-
-
