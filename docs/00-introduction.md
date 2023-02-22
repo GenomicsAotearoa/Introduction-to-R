@@ -166,38 +166,40 @@ Here are the major windows (or panes) of the RStudio environment:
 
 `<img src="../fig/rstudio_session_4pane_layout.png" alt="rstudio default session" style="width: 1000px;"/>`{=html}
 
--   **Source**: This pane is where you will write/view R scripts. Some
-    outputs (such as if you view a dataset using `View()`) will appear
-    as a tab here.
--   **Console/Terminal/Jobs**: This is actually where you see the
-    execution of commands. This is the same display you would see if you
-    were using R at the command line without RStudio. You can work
-    interactively (i.e. enter R commands here), but for the most part we
-    will run a script (or lines in a script) in the source pane and
-    watch their execution and output here. The "Terminal" tab give you
-    access to the BASH terminal (the Linux operating system, unrelated
-    to R). RStudio also allows you to run jobs (analyses) in the
-    background. This is useful if some analysis will take a while to
-    run. You can see the status of those jobs in the background.
--   **Environment/History**: Here, RStudio will show you what datasets
-    and objects (variables) you have created and which are defined in
-    memory. You can also see some properties of objects/datasets such as
-    their type and dimensions. The "History" tab contains a history of
-    the R commands you've executed R.
--   **Files/Plots/Packages/Help/Viewer**: This multipurpose pane will
-    show you the contents of directories on your computer. You can also
-    use the "Files" tab to navigate and set the working directory. The
-    "Plots" tab will show the output of any plots generated. In
-    "Packages" you will see what packages are actively loaded, or you
-    can attach installed packages. "Help" will display help files for R
-    functions and packages. "Viewer" will allow you to view local web
-    content (e.g. HTML outputs).
+!!! quote ""
 
-> ## Tip: Uploads and downloads in the cloud
->
-> In the "Files" tab you can select a file and download it from your
-> cloud instance (click the "more" button) to your local computer.
-> Uploads are also possible. {: .callout}
+    -   **Source**: This pane is where you will write/view R scripts. Some
+        outputs (such as if you view a dataset using `View()`) will appear
+        as a tab here.
+    -   **Console/Terminal/Jobs**: This is actually where you see the
+        execution of commands. This is the same display you would see if you
+        were using R at the command line without RStudio. You can work
+        interactively (i.e. enter R commands here), but for the most part we
+        will run a script (or lines in a script) in the source pane and
+        watch their execution and output here. The "Terminal" tab give you
+        access to the BASH terminal (the Linux operating system, unrelated
+        to R). RStudio also allows you to run jobs (analyses) in the
+        background. This is useful if some analysis will take a while to
+        run. You can see the status of those jobs in the background.
+    -   **Environment/History**: Here, RStudio will show you what datasets
+        and objects (variables) you have created and which are defined in
+        memory. You can also see some properties of objects/datasets such as
+        their type and dimensions. The "History" tab contains a history of
+        the R commands you've executed R.
+    -   **Files/Plots/Packages/Help/Viewer**: This multipurpose pane will
+        show you the contents of directories on your computer. You can also
+        use the "Files" tab to navigate and set the working directory. The
+        "Plots" tab will show the output of any plots generated. In
+        "Packages" you will see what packages are actively loaded, or you
+        can attach installed packages. "Help" will display help files for R
+        functions and packages. "Viewer" will allow you to view local web
+        content (e.g. HTML outputs).
+
+!!! tip "Uploads and downloads in the cloud"
+
+    In the "Files" tab you can select a file and download it from your
+    cloud instance (click the "more" button) to your local computer.
+    Uploads are also possible. {: .callout}
 
 All of the panes in RStudio have configuration options. For example, you
 can minimize/maximize a pane, or by moving your mouse in the space
