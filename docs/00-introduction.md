@@ -46,31 +46,33 @@ popularity](https://www.tiobe.com/tiobe-index/r/). However, programming
 isn't a popularity contest. Here are key advantages of analyzing data in
 R:
 
--   **R is [open
-    source](https://en.wikipedia.org/wiki/Open-source_software)**. This
-    means R is free - an advantage if you are at an institution where
-    you have to pay for your own MATLAB or SAS license. Open source, is
-    important to your colleagues in parts of the world where expensive
-    software in inaccessible. It also means that R is actively developed
-    by a community (see [r-project.org](https://www.r-project.org/)),
-    and there are regular updates.
--   **R is widely used**. Ok, maybe programming is a popularity contest.
-    Because, R is used in many areas (not just bioinformatics), you are
-    more likely to find help online when you need it. Chances are,
-    almost any error message you run into, someone else has already
-    experienced.
--   **R is powerful**. R runs on multiple platforms
-    (Windows/MacOS/Linux). It can work with much larger datasets than
-    popular spreadsheet programs like Microsoft Excel, and because of
-    its scripting capabilities is far more reproducible. Also, there are
-    thousands of available software packages for science, including
+!!! quote ""
+
+    -   **R is [open
+        source](https://en.wikipedia.org/wiki/Open-source_software)**. This
+        means R is free - an advantage if you are at an institution where
+        you have to pay for your own MATLAB or SAS license. Open source, is
+        important to your colleagues in parts of the world where expensive
+        software in inaccessible. It also means that R is actively developed
+        by a community (see [r-project.org](https://www.r-project.org/)),
+        and there are regular updates.
+    -   **R is widely used**. Ok, maybe programming is a popularity contest.
+        Because, R is used in many areas (not just bioinformatics), you are
+        more likely to find help online when you need it. Chances are,
+        almost any error message you run into, someone else has already
+        experienced.
+    -   **R is powerful**. R runs on multiple platforms
+        (Windows/MacOS/Linux). It can work with much larger datasets than
+        popular spreadsheet programs like Microsoft Excel, and because of
+        its scripting capabilities is far more reproducible. Also, there are
+        thousands of available software packages for science, including
     genomics and other areas of life science.
 
-> ## Discussion: Your experience
->
-> What has motivated you to learn R? Have you had a research question
-> for which spreadsheet programs such as Excel have proven difficult to
-> use, or where the size of the data set created issues? {: .discussion}
+!!! people-group "Discussion: Your experience"
+   
+    What has motivated you to learn R? Have you had a research question
+    for which spreadsheet programs such as Excel have proven difficult to
+    use, or where the size of the data set created issues? {: .discussion}
 
 ## Introducing RStudio Server
 
@@ -87,31 +89,10 @@ RStudio that can be accessed in your web browser. RStudio Server has the
 same features of the Desktop version of RStudio you could download as
 standalone software.
 
-## Log on to RStudio Server
 
-Open a web browser and enter the URL you used to log in at the terminal
-(provided by your instructors), followed by `:8787`. For example, if
-your URL was ec2.12.2.45.678.compute-1.amazonaws.com, you should enter:
 
-    http://ec2.12.2.45.678.compute-1.amazonaws.com:8787
 
-> ## Tip: Make sure there are no spaces before or after your URL.
->
-> If your URL has spaces, your web browser may interpret it as a search
-> query. {: .callout}
-
-You should now be looking at a page that will allow you to login to the
-RStudio server:
-
-`<img src="../fig/rstudio_login_screen.png" alt="rstudio default session" style="width: 1000px;"/>`{=html}
-
-Enter your user credentials and click `<kbd>`{=html}Sign
-In`</kbd>`{=html}. The credentials for the genomics Data Carpentry
-instances will be provided by your instructors.
-
-You should now see the RStudio interface:
-
-`<img src="../fig/rstudio_session_default.png" alt="rstudio default session" style="width:1000px;"/>`{=html}
+![image](./figures/rstudio_session_default.png){width="700"}
 
 ## Create an RStudio project
 
@@ -125,10 +106,12 @@ to more easily:
 -   Collaborate, especially if you are using version control such as
     [git](http://swcarpentry.github.io/git-novice/).
 
-1.  To create a project, go to the `<kbd>`{=html}File`</kbd>`{=html}
-    menu, and click `<kbd>`{=html}New Project...`</kbd>`{=html}.
 
-`<img src="../fig/new_project_window.png" alt="rstudio default session" style="width: 600px;"/>`{=html}
+
+1.  To create a project, go to the **File** menu, and click **New Project**
+
+![image](./figures/new_project_window.png){width-"400"}
+
 
 2.  In the window that opens select **New Directory**, then **New
     Project**. For "Directory name:" enter **dc_genomics_r**. For
@@ -143,22 +126,23 @@ to more easily:
     **dc_genomics_r.Rproj**. All RStudio projects end with the
     "**.Rproj**" file extension.
 
-> ## Tip: Make your project more reproducible with renv
->
-> One of the most wonderful and also frustrating aspects of working with
-> R is managing packages. We will talk more about them, but packages
-> (e.g. ggplot2) are add-ons that extend what you can do with R.
-> Unfortunately it is very common that you may run into versions of R
-> and/or R packages that are not compatible. This may make it difficult
-> for someone to run your R script using their version of R or a given R
-> package, and/or make it more difficult to run their scripts on your
-> machine. [renv](https://rstudio.github.io/renv/) is an RStudio add-on
-> that will associate your packages and project so that your work is
-> more portable and reproducible. To turn on renv click on the
-> `<KBD>`{=html}Tools`</KBD>`{=html} menu and select
-> `<KBD>`{=html}Project Options`</KBD>`{=html}. Under **Enviornments**
-> check off "**Use renv with this project**" and follow any installation
-> instructions. {: .callout}
+
+!!! tip "Make your project more reproducible with renv"
+   
+    One of the most wonderful and also frustrating aspects of working with
+    R is managing packages. We will talk more about them, but packages
+    (e.g. ggplot2) are add-ons that extend what you can do with R.
+    Unfortunately it is very common that you may run into versions of R
+    and/or R packages that are not compatible. This may make it difficult
+    for someone to run your R script using their version of R or a given R
+    package, and/or make it more difficult to run their scripts on your
+    machine. [renv](https://rstudio.github.io/renv/) is an RStudio add-on
+    that will associate your packages and project so that your work is
+    more portable and reproducible. To turn on renv click on the
+    `<KBD>`{=html}Tools`</KBD>`{=html} menu and select
+    `<KBD>`{=html}Project Options`</KBD>`{=html}. Under **Enviornments**
+    check off "**Use renv with this project**" and follow any installation
+    instructions. {: .callout}
 
 ## Creating your first R script
 
