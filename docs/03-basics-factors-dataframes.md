@@ -1,40 +1,43 @@
----
-exercises: 30
-keypoints:
-- It is easy to import data into R from tabular formats including Excel.
-  However, you still need to check that R has imported and interpreted
-  your data correctly
-- There are best practices for organizing your data (keeping it tidy)
-  and R is great for this
-- Base R has many useful functions for manipulating your data, but all
-  of R's capabilities are greatly enhanced by software packages
-  developed by the community
-objectives:
-- Explain the basic principle of tidy datasets
-- Be able to load a tabular dataset using base R functions
-- Be able to determine the structure of a data frame including its
-  dimensions and the datatypes of variables
-- Be able to subset/retrieve values from a data frame
-- Understand how R may coerce data into different modes
-- Be able to change the mode of an object
-- Understand that R uses factors to store and manipulate categorical
-  data
-- Be able to manipulate a factor, including subsetting and reordering
-- Be able to apply an arithmetic function to a data frame
-- Be able to coerce the class of an object (including variables in a
-  data frame)
-- Be able to import data from Excel
-- Be able to save a data frame as a delimited file
-questions:
-- How do I get started with tabular data (e.g. spreadsheets) in R?
-- What are some best practices for reading data into R?
-- How do I save tabular data generated in R?
-source: Rmd
-teaching: 60
-title: R Basics continued - factors and data frames
----
+# R Basics continued - factors and data frames  
 
-`{r, include = FALSE} source("../bin/chunk-options.R") knitr_fig_path("03-")`
+
+!!! info 
+    keypoints:
+    
+    - It is easy to import data into R from tabular formats including Excel.
+      However, you still need to check that R has imported and interpreted
+      your data correctly
+    - There are best practices for organizing your data (keeping it tidy)
+      and R is great for this
+    - Base R has many useful functions for manipulating your data, but all
+      of R's capabilities are greatly enhanced by software packages
+      developed by the community
+
+    objectives:
+ 
+    - Explain the basic principle of tidy datasets
+    - Be able to load a tabular dataset using base R functions
+    - Be able to determine the structure of a data frame including its
+      dimensions and the datatypes of variables
+    - Be able to subset/retrieve values from a data frame
+    - Understand how R may coerce data into different modes
+    - Be able to change the mode of an object
+    - Understand that R uses factors to store and manipulate categorical
+      data
+    - Be able to manipulate a factor, including subsetting and reordering
+    - Be able to apply an arithmetic function to a data frame
+    - Be able to coerce the class of an object (including variables in a
+      data frame)
+    - Be able to import data from Excel
+    - Be able to save a data frame as a delimited file
+    
+    questions:
+ 
+    - How do I get started with tabular data (e.g. spreadsheets) in R?
+    - What are some best practices for reading data into R?
+    - How do I save tabular data generated in R?
+
+
 
 ## Working with spreadsheets (tabular data)
 

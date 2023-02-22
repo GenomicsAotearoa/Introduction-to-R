@@ -1,23 +1,22 @@
----
-exercises: 0
-keypoints:
-- The dataset comes from a real world experiment in E. coli.
-- Publicly available FASTQ files can be downloaded from NCBI SRA.
-- Several steps are taken outside of R/RStudio to create VCF files from
-  FASTQ files.
-- VCF files store variant calls in a special format.
-objectives:
-- Know what the example dataset represents
-- Know the concepts of how VCF files are generated
-questions:
-- What data are we using in the lesson?
-- What are VCF files?
-source: Rmd
-teaching: 15
-title: Introduction to the example dataset and file type
----
+# Introduction to the example dataset and file type
 
-`{r, include = FALSE} source("../bin/chunk-options.R") knitr_fig_path("02-")`
+!!! info 
+
+    keypoints:
+    - The dataset comes from a real world experiment in E. coli.
+    - Publicly available FASTQ files can be downloaded from NCBI SRA.
+    - Several steps are taken outside of R/RStudio to create VCF files from
+      FASTQ files.
+    - VCF files store variant calls in a special format.
+
+    objectives:
+    - Know what the example dataset represents
+    - Know the concepts of how VCF files are generated
+    
+    questions:
+    - What data are we using in the lesson?
+    - What are VCF files?
+
 
 ## Preface
 
