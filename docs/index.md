@@ -2,6 +2,11 @@
 # Introduction to R
 </center>
 
+<center>
+![image](./theme_figures/images.jpeg){width="250"}
+</center>
+
+
 
 
 | **Lesson**                                         | **Overview** | 
