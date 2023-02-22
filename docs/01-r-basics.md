@@ -1,33 +1,35 @@
----
-exercises: 20
-keypoints:
-- Effectively using R is a journey of months or years. Still you don't
-  have to be an expert to use R and you can start using and analyzing
-  your data with with about a day's worth of training
-- It is important to understand how data are organized by R in a given
-  object type and how the mode of that type (e.g. numeric, character,
-  logical, etc.) will determine how R will operate on that data.
-- Working with vectors effectively prepares you for understanding how
-  data are organized in R.
-objectives:
-- Be able to create the most common R objects including vectors
-- Understand that vectors have modes, which correspond to the type of
-  data they contain
-- Be able to use arithmetic operators on R objects
-- Be able to retrieve (subset), name, or replace, values from a vector
-- Be able to use logical operators in a subsetting operation
-- Understand that lists can hold data of more than one mode and can be
-  indexed
-questions:
-- What will these lessons not cover?
-- What are the basic features of the R language?
-- What are the most common objects in R?
-source: Rmd
-teaching: 60
-title: R Basics
----
+# R Basics
 
-`{r, include = FALSE} source("../bin/chunk-options.R") knitr_fig_path("01-")`
+!!! info 
+
+    keypoints:
+
+    - Effectively using R is a journey of months or years. Still you don't
+      have to be an expert to use R and you can start using and analyzing
+      your data with with about a day's worth of training
+    - It is important to understand how data are organized by R in a given
+      object type and how the mode of that type (e.g. numeric, character,
+      logical, etc.) will determine how R will operate on that data.
+    - Working with vectors effectively prepares you for understanding how
+      data are organized in R.
+
+    objectives:
+
+    - Be able to create the most common R objects including vectors
+    - Understand that vectors have modes, which correspond to the type of
+      data they contain
+    - Be able to use arithmetic operators on R objects
+    - Be able to retrieve (subset), name, or replace, values from a vector
+    - Be able to use logical operators in a subsetting operation
+    - Understand that lists can hold data of more than one mode and can be
+      indexed
+
+    questions:
+
+    - What will these lessons not cover?
+    - What are the basic features of the R language?
+    - What are the most common objects in R?
+
 
 ## "The fantastic world of R awaits you" OR "Nobody wants to learn how to use R"
 

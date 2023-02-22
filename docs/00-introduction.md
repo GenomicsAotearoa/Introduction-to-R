@@ -1,32 +1,28 @@
----
-exercises: 15
-keypoints:
-- R is a powerful, popular open-source scripting language
-- You can customize the layout of RStudio, and use the project feature
-  to manage the files and packages used in your analysis
-- RStudio allows you to run R in an easy-to-use interface and makes it
-  easy to find help
-objectives:
-- Know advantages of analyzing data in R
-- Know advantages of using RStudio
-- Create an RStudio project, and know the benefits of working within a
-  project
-- Be able to customize the RStudio layout
-- Be able to locate and change the current working directory with
-  `getwd()` and `setwd()`
-- Compose an R script file containing comments and commands
-- Understand what an R function is
-- Locate help for an R function using `?`, `??`, and `args()`
-questions:
-- Why use R?
-- Why use RStudio and how does it differ from R?
-source: Rmd
-teaching: 30
-title: Introducing R and RStudio IDE
----
+# Introducing R and RStudio IDE
 
-`{r, include = FALSE} source("../bin/chunk-options.R") knitr_fig_path("00-")`
+!!! info 
+    keypoints:
+    
+    - R is a powerful, popular open-source scripting language
+    - You can customize the layout of RStudio, and use the project feature
+      to manage the files and packages used in your analysis
+    - RStudio allows you to run R in an easy-to-use interface and makes it
+      easy to find help
 
+    objectives:
+
+    - Know advantages of analyzing data in R
+    - Know advantages of using RStudio
+    - Create an RStudio project, and know the benefits of working within a
+      project
+    - Be able to customize the RStudio layout
+    - Be able to locate and change the current working directory with
+      `getwd()` and `setwd()`
+    - Compose an R script file containing comments and commands
+    - Understand what an R function is
+    - Locate help for an R function using `?`, `??`, and `args()`
+
+ 
 ## Getting ready to use R for the first time
 
 In this lesson we will take you through the very first things you need
