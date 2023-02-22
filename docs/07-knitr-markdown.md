@@ -1,25 +1,27 @@
----
-exercises: 15
-keypoints:
-- Keep reporting and R software together in one document using R
-  Markdown.
-- Control formatting using chunk options.
-- "`knitr` can convert R Markdown documents to PDF and other formats."
-objectives:
-- Value of reproducible reports
-- Basics of Markdown
-- R code chunks
-- Chunk options
-- Inline R code
-- Other output formats
-questions:
-- How can I integrate analyses and reports?
-source: Rmd
-teaching: 60
-title: Producing Reports With knitr
----
+# Producing Reports With knitr
 
-`{r chunk_options, include=FALSE} source("../bin/chunk-options.R") knitr_fig_path("07-")`
+!!! info 
+
+    keypoints:
+
+    - Keep reporting and R software together in one document using R
+      Markdown.
+    - Control formatting using chunk options.
+    - "`knitr` can convert R Markdown documents to PDF and other formats."
+    
+    objectives:
+    
+    - Value of reproducible reports
+    - Basics of Markdown
+    - R code chunks
+    - Chunk options
+    - Inline R code
+    - Other output formats
+    
+    questions:
+
+    - How can I integrate analyses and reports?
+
 
 ## Data analysis reports
 

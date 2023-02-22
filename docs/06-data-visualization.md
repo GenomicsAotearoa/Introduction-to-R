@@ -1,32 +1,32 @@
----
-exercises: 30
-keypoints:
-- ggplot2 is a powerful tool for high-quality plots
-- ggplot2 provides a flexiable and readable grammar to build plots
-objectives:
-- Describe the role of data, aesthetics, and geoms in ggplot functions.
-- Choose the correct aesthetics and alter the geom parameters for a
-  scatter plot, histogram, or box plot.
-- Layer multiple geometries in a single plot.
-- Customize plot scales, titles, themes, and fonts.
-- Apply a facet to a plot.
-- Apply additional ggplot2-compatible plotting libraries.
-- Save a ggplot to a file.
-- List several resources for getting help with ggplot.
-- List several resources for creating informative scientific plots.
-questions:
-- What is ggplot2?
-- What is mapping, and what is aesthetics?
-- What is the process of creating a publication-quality plots with
-  ggplot in R?
-source: Rmd
-teaching: 60
-title: Data Visualization with ggplot2
----
+# Data Visualization with ggplot2
 
-`{r, include=FALSE} source("../bin/chunk-options.R") knitr_fig_path("05-")`
+!!! info 
 
-`{r echo=FALSE, message=FALSE, warning=FALSE} library(printr)`
+    keypoints:
+
+    - ggplot2 is a powerful tool for high-quality plots
+    - ggplot2 provides a flexiable and readable grammar to build plots
+    
+    objectives:
+
+    - Describe the role of data, aesthetics, and geoms in ggplot functions.
+    - Choose the correct aesthetics and alter the geom parameters for a
+      scatter plot, histogram, or box plot.
+    - Layer multiple geometries in a single plot.
+    - Customize plot scales, titles, themes, and fonts.
+    - Apply a facet to a plot.
+    - Apply additional ggplot2-compatible plotting libraries.
+    - Save a ggplot to a file.
+    - List several resources for getting help with ggplot.
+    - List several resources for creating informative scientific plots.
+
+    questions:
+    
+    - What is ggplot2?
+    - What is mapping, and what is aesthetics?
+    - What is the process of creating a publication-quality plots with
+      ggplot in R?
+
 
 \`\`\`{r, echo = FALSE, eval = TRUE, purl = FALSE} \## silently read in
 CSV file from FigShare
