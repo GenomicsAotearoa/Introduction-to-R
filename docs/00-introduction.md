@@ -28,17 +28,6 @@
 In this lesson we will take you through the very first things you need
 to get R working.
 
-> ## Tip: This lesson works best on the cloud
->
-> Remember, these lessons assume we are using the pre-configured virtual
-> machine instances provided to you at a genomics workshop. Much of this
-> work could be done on your laptop, but we use instances to simplify
-> workshop setup requirements, and to get you familiar with using the
-> cloud (a common requirement for working with big data). Visit the
-> [Genomics Workshop setup
-> page](http://www.datacarpentry.org/genomics-workshop/setup.html) for
-> details on getting this instance running on your own, or for the info
-> you need to do this on your own computer. {: .callout}
 
 ## A Brief History of R
 
