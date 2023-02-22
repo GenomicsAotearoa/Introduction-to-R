@@ -6,7 +6,7 @@ site_url: "https://genomicsaotearoa.github.io/Introduction-to-R/"
 #Repository information
 
 repo_name:   GenomicsAotearoa/Introduction-to-R 
-repo_url: https://github.com/GenomicsAotearoa/Introduction-to-R.git
+repo_url: https://github.com/GenomicsAotearoa/Introduction-to-R
 
 
 theme:
