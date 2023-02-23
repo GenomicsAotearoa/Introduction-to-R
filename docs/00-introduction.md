@@ -297,23 +297,23 @@ Congratulations! Although it seems small, knowing what your working
 directory is and being able to set your working directory is the first
 step to analyzing your data.
 
-> ## Tip: Never use `setwd()`
->
-> Wait, what was the last 2 minutes about? Well, setting your working
-> directory is something you need to do, you need to be very careful
-> about using this as a step in your script. For example, what if your
-> script is being on a computer that has a different directory
-> structure? The top-level path in a Unix file system is root `/`, but
-> on Windows it is likely `C:\`. This is one of several ways you might
-> cause a script to break because a file path is configured differently
-> than your script anticipates. R packages like
-> [here](https://cran.r-project.org/package=here) and
-> [file.path](https://www.rdocumentation.org/packages/base/versions/3.4.3/topics/file.path)
-> allow you to specify file paths is a way that is more operating system
-> independent. See Jenny Bryan's [blog
-> post](https://www.tidyverse.org/articles/2017/12/workflow-vs-script/)
-> for this and other R tips. {: .callout}
+!!! tip  "Never use `setwd()`"
 
+
+    Wait, what was the last 2 minutes about? Well, setting your working
+    directory is something you need to do, you need to be very careful
+    about using this as a step in your script. For example, what if your
+    script is being on a computer that has a different directory
+    structure? The top-level path in a Unix file system is root `/`, but
+    on Windows it is likely `C:\`. This is one of several ways you might
+    cause a script to break because a file path is configured differently
+    than your script anticipates. R packages like
+    [here](https://cran.r-project.org/package=here) and
+    [file.path](https://www.rdocumentation.org/packages/base/versions/3.4.3/topics/file.path)
+    allow you to specify file paths is a way that is more operating system
+    independent. See Jenny Bryan's [blog
+    post](https://www.tidyverse.org/articles/2017/12/workflow-vs-script/)
+    for this and other R tips. {: .callout}   
 ## Using functions in R, without needing to master them
 
 A function in R (or any computing language) is a short program that
