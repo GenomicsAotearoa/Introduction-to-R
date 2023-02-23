@@ -349,10 +349,12 @@ An argument may be a specific input for your function and/or may modify
 the function's behavior. For example the function `round()` will round a
 number with a decimal:
 
-``` {r}
-# This will round a number to the nearest integer
-round(3.14)
-```
+!!! r-project "r"
+
+    ``` 
+    # This will round a number to the nearest integer
+    round(3.14)
+    ```
 
 ## Getting help with function arguments
 
@@ -361,7 +363,8 @@ this, but you may first need to read the help to find out how. To see
 the help (In R sometimes also called a "vignette") enter a `?` in front
 of the function name:
 
-`{r, eval=FALSE} ?round()`
+!!! r-project "r"
+    `round()`
 
 The "Help" tab will show you information (often, too much information).
 You will slowly learn how to read and make sense of help files. Checking
@@ -370,9 +373,9 @@ If you look under "Arguments," we also see what arguments we can pass to
 this function to modify its behavior. You can also see a function's
 argument using the `args()` function:
 
-``` {r}
-args(round)
-```
+!!! r-project "r"
+    `args(round)`
+
 
 `round()` takes two arguments, `x`, which is the number to be rounded,
 and a `digits` argument. The `=` sign indicates that a default (in this
