@@ -202,44 +202,48 @@ There are a few more suggestions about naming and style you may want to learn
 more about as you write more R code. There are several "style guides" that
 have advice, and one to start with is the [tidyverse R style guide](http://style.tidyverse.org/index.html).
 
-    > ## Tip: Pay attention to warnings in the script console
-    >
-    > If you enter a line of code in your script that contains an error, RStudio
-    > may give you an error message and underline this mistake. Sometimes these
-    > messages are easy to understand, but often the messages may need some figuring
-    > out. Paying attention to these warnings will help you avoid mistakes. In the example below, our object name has a space, which
-    > is not allowed in R. The error message does not say this directly,
-    > but R is "not sure"
-    > about how to assign the name to "human_ chr_number" when the object name we
-    > want is "human_chr_number".
-    >
-    > <img src="../fig/rstudio_script_warning.png" alt="rstudio script warning" style="width: 600px;"/>
-    {: .callout}
+!!! tip "Pay attention to warnings in the script console"
+    
+    If you enter a line of code in your script that contains an error, RStudio
+    may give you an error message and underline this mistake. Sometimes these
+    messages are easy to understand, but often the messages may need some figuring
+    out. Paying attention to these warnings will help you avoid mistakes. In the example below, our object name has a space, which
+    is not allowed in R. The error message does not say this directly,
+    but R is "not sure"
+    about how to assign the name to "human_ chr_number" when the object name we
+    want is "human_chr_number".
+    
+    ![images](./figures/rstudio_script_warning.png){width="700"}
 
-    ## Reassigning object names or deleting objects
+## Reassigning object names or deleting objects
 
-    Once an object has a value, you can change that value by overwriting it. R will
-    not give you a warning or error if you overwriting an object, which
-    may or may not be a good thing
-    depending on how you look at it.
+Once an object has a value, you can change that value by overwriting it. R will not give you a warning or error if you overwriting an object, which may or may not be a good thing depending on how you look at it.
 
-    ```{r, purl = FALSE}
-    # gene_name has the value 'pten' or whatever value you used in the challenge.
+!!! r-project "r"
+    ```
+    # gene_name has the value 'pten' or whatever value you used in the challenge
     # We will now assign the new value 'tp53'
+
     gene_name <- 'tp53'
+    ```
 
-You can also remove an object from R's memory entirely. The `rm()`
-function will delete the object.
+You can also remove an object from R's memory entirely. The `rm()` function will delete the object.
 
-`{r, purl = FALSE, eval = FALSE} # delete the object 'gene_name' rm(gene_name)`
+!!! r-project "r"
+    ```
+    # delete the object 'gene_name'
+    rm(gene_name)
+    ```
 
 If you run a line of code that has only an object name, R will normally
 display the contents of that object. In this case, we are told the
 object no longer exists.
 
+!!! failure "Error"
+    ```
     Error: object 'gene_name' not found
+    ```
 
-{: .error}
 
 ## Understanding object data types (modes)
 
@@ -285,24 +289,24 @@ in one category or another (e.g "cut" may be a noun when it's on your
 finger, or a verb when you are preparing vegetables). These concepts
 have important analogies when working with R objects.
 
-> ## Exercise: Create objects and check their modes
->
-> Create the following objects in R, then use the `mode()` function to
-> verify their modes. Try to guess what the mode will be before you look
-> at the solution
->
-> 1.  `chromosome_name <- 'chr02'`
-> 2.  `od_600_value <- 0.47`
-> 3.  `chr_position <- '1001701'`
-> 4.  `spock <- TRUE`
-> 5.  `pilot <- Earhart`
->
-> > ## Solution
-> >
-> > `{r, echo = FALSE, purl = FALSE} chromosome_name <- 'chr02' od_600_value <- 0.47 chr_position <- '1001701' spock <- TRUE pilot <- Earhart`
-> >
-> > `{r, purl = FALSE} mode(chromosome_name) mode(od_600_value) mode(chr_position) mode(spock) mode(pilot)`
-> > {: .solution} {: .challenge}
+!!! question "Exercise: Create objects and check their modes"
+  
+    Create the following objects in R, then use the `mode()` function to
+    verify their modes. Try to guess what the mode will be before you look
+    at the solution
+  
+    1.  `chromosome_name <- 'chr02'`
+    2.  `od_600_value <- 0.47`
+    3.  `chr_position <- '1001701'`
+    4.  `spock <- TRUE`
+    5.  `pilot <- Earhart`
+  
+    ??? success "Solution"
+       
+        `{r, echo = FALSE, purl = FALSE} chromosome_name <- 'chr02' od_600_value <- 0.47 chr_position <- '1001701' spock <- TRUE pilot <- Earhart`
+       
+        `{r, purl = FALSE} mode(chromosome_name) mode(od_600_value) mode(chr_position) mode(spock) mode(pilot)`
+        {: .solution} {: .challenge}
 
 Notice from the solution that even if a series of numbers is given as a
 value R will consider them to be in the "character" mode if they are
@@ -314,7 +318,8 @@ exist, then the mode of `pilot` would be whatever the mode of `Earhart`
 was originally. If we want to create an object called `pilot` that was
 the **name** "Earhart", we need to enclose `Earhart` in quotation marks.
 
-`{r, purl = FALSE} pilot <- "Earhart" mode(pilot)`
+!!! r-project "r"
+    `pilot <- "Earhart" mode(pilot)`
 
 ## Mathematical and functional operations on objects
 
