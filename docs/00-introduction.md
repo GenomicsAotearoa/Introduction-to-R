@@ -210,7 +210,7 @@ menu. Other options such as font sizes, colors/themes, and more are in
 the `Tools` menu under `Global
 Options`.
 
-!!! r-project "You are working with R"
+!!! bell "You are working with R"
 
     
     Although we won't be working with R at the terminal, there are lots of
@@ -239,14 +239,12 @@ command is written. Then click the `Run`
 button that is just above the first line of your script in the header of
 the Source pane.
 
-In the console, we expect to see the following output\*:
+In the console, we expect to see the following output :
 
-    [1] "/home/dcuser/dc_genomics_r"
+!!! solution ""
+    `[1] "/home/dcuser/dc_genomics_r"`
 
-{: .output}
-
-\* Notice, at the Console, you will also see the instruction you
-executed above the output in blue.
+* Notice, at the Console, you will also see the instruction you executed above the output in blue.
 
 Since we will be learning several commands, we may already want to keep
 some short notes in our script to explain the purpose of the command.
@@ -258,19 +256,18 @@ include a comment on the purpose of commands you are learning, e.g.:
 
     `# this `ommand shows the current working directory getwd()`
 
-> ## Exercise: Work interactively in R
->
-> What happens when you try to enter the `getwd()` command in the
-> Console pane?
->
-> > ## Solution
-> >
-> > You will get the same output you did as when you ran `getwd()` from
-> > the source. You can run any command in the Console, however,
-> > executing it from the source script will make it easier for us to
-> > record what we have done, and ultimately run an entire script,
-> > instead of entering commands one-by-one. {: .solution} {:
-> > .challenge}
+!!! question "Work interactively in R"   
+   
+    What happens when you try to enter the `getwd()` command in the Console pane?
+   
+    ??? success "Solution"
+
+         You will get the same output you did as when you ran `getwd()` from
+         the source. You can run any command in the Console, however,
+         executing it from the source script will make it easier for us to
+         record what we have done, and ultimately run an entire script,
+         instead of entering commands one-by-one. {: .solution} {:
+         .challenge}
 
 For the purposes of this exercise we want you to be in the directory
 `"/home/dcuser/R_data"`. What if you weren't? You can set your home
