@@ -434,7 +434,7 @@ function.
     
         While your search results may return several tests, we list a few
         you might find: 
-        
+
         - Chi-Squared test: `stats::Chisquare` 
         - Student t-test: `stats::t.test` 
         - mixed linear model: `stats::lm.glm`
@@ -453,10 +453,11 @@ function. When you start typing the name of a function and hit the
 `Tab` key, RStudio will display functions and
 associated help:
 
-`<img src="../fig/studio_contexthelp1.png" alt="rstudio default session" style="width: 600px;"/>`
+![images](./figures/studio_contexthelp1.png)
 
 Once you type a function, hitting the `Tab`
 inside the parentheses will show you the function's arguments and
 provide additional help for each of these arguments.
 
-`<img src="../fig/studio_contexthelp2.png" alt="rstudio default session" style="width: 600px;"/>`
+![image](./figures/studio_contexthelp2.png)
+
