@@ -174,7 +174,9 @@ doing:
 
 ## Naming objects in R
 
-    Here are some important details about naming objects in R.
+Here are some important details about naming objects in R
+
+!!! quote ""
 
     - **Avoid spaces and special characters**: Object names cannot contain spaces or the minus sign (`-`). You can use '_' to make names more readable. You should avoid
       using special characters in your object name (e.g. ! @ # . , etc.). Also,
@@ -195,10 +197,10 @@ doing:
       for the R assignment operator:
       - Windows execution shortcut: Alt+-
       - Mac execution shortcut: Option+-
-
-    There are a few more suggestions about naming and style you may want to learn
-    more about as you write more R code. There are several "style guides" that
-    have advice, and one to start with is the [tidyverse R style guide](http://style.tidyverse.org/index.html).
+    
+There are a few more suggestions about naming and style you may want to learn
+more about as you write more R code. There are several "style guides" that
+have advice, and one to start with is the [tidyverse R style guide](http://style.tidyverse.org/index.html).
 
     > ## Tip: Pay attention to warnings in the script console
     >
