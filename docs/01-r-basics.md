@@ -69,34 +69,34 @@ the additional learning materials in the tip box below.
     `ggplot2`)
 -   How to use advanced R statistical functions
 
-> ## Tip: Where to learn more
->
-> The following are good resources for learning more about R. Some of
-> them can be quite technical, but if you are a regular R user you may
-> ultimately need this technical knowledge. - [R for
-> Beginners](https://cran.r-project.org/doc/contrib/Paradis-rdebuts_en.pdf):
-> By Emmanuel Paradis and a great starting point - [The R
-> Manuals](https://cran.r-project.org/manuals.html): Maintained by the R
-> project - [R contributed
-> documentation](https://cran.r-project.org/other-docs.html): Also
-> linked to the R project; importantly there are materials available in
-> several languages - [R for Data Science](http://r4ds.had.co.nz/): A
-> wonderful collection by noted R educators and developers Garrett
-> Grolemund and Hadley Wickham - [Practical Data Science for
-> Stats](https://peerj.com/collections/50-practicaldatascistats/): Not
-> exclusively about R usage, but a nice collection of pre-prints on data
-> science and applications for R - [Programming in R Software Carpentry
-> lesson](https://software-carpentry.org/lessons/): There are several
-> Software Carpentry lessons in R to choose from {: .callout}
+!!! tip "Where to learn more"
+    
+    The following are good resources for learning more about R. Some of
+    them can be quite technical, but if you are a regular R user you may
+    ultimately need this technical knowledge. - [R for
+    Beginners](https://cran.r-project.org/doc/contrib/Paradis-rdebuts_en.pdf):
+    By Emmanuel Paradis and a great starting point - [The R
+    Manuals](https://cran.r-project.org/manuals.html): Maintained by the R
+    project - [R contributed
+    documentation](https://cran.r-project.org/other-docs.html): Also
+    linked to the R project; importantly there are materials available in
+    several languages - [R for Data Science](http://r4ds.had.co.nz/): A
+    wonderful collection by noted R educators and developers Garrett
+    Grolemund and Hadley Wickham - [Practical Data Science for
+    Stats](https://peerj.com/collections/50-practicaldatascistats/): Not
+    exclusively about R usage, but a nice collection of pre-prints on data
+    science and applications for R - [Programming in R Software Carpentry
+    lesson](https://software-carpentry.org/lessons/): There are several
+    Software Carpentry lessons in R to choose from 
 
 ## Creating objects in R
 
-> ## Reminder
->
-> At this point you should be coding along in the
-> "**genomics_r\_basics.R**" script we created in the last episode.
-> Writing your commands in the script (and commenting it) will make it
-> easier to record what you did and why. {: .prereq}
+!!! bell "Reminder"
+    
+    At this point you should be coding along in the
+    "**genomics_r\_basics.R**" script we created in the last episode.
+    Writing your commands in the script (and commenting it) will make it
+    easier to record what you did and why. 
 
 What might be called a variable in many languages is called an
 **object** in R.
@@ -112,21 +112,21 @@ operator '\<-', assign '1' to the object 'a' as shown. Remember to leave
 a comment in the line above (using the '\#') to explain what you are
 doing:
 
-\`\`\`{r, purl = FALSE} \# this line creates the object 'a' and assigns
-it the value '1'
+!!! r-project "r"
+    ```
+    # this line creates the object 'a' and assigns it the value '1'
+    
+    a \<- 1
+    ```
 
-a \<- 1
 
-
-    Next, run this line of code in your script. You can run a line of code
-    by hitting the <KBD>Run</KBD> button that is just above the first line of your
-    script in the header of the Source pane or you can use the appropriate shortcut:
-
-    - Windows execution shortcut: <KBD>Ctrl</KBD>+<KBD>Enter</KBD>
-    - Mac execution shortcut: <KBD>Cmd(⌘)</KBD>+<KBD>Enter</KBD>
-
-    To run multiple lines of code, you can highlight all the line you wish to run
-    and then hit <KBD>Run</KBD> or use the shortcut key combo listed above.
+  Next, run this line of code in your script. You can run a line of code
+  by hitting the <KBD>Run</KBD> button that is just above the first line of your
+  script in the header of the Source pane or you can use the appropriate shortcut:
+  - Windows execution shortcut: <KBD>Ctrl</KBD>+<KBD>Enter</KBD>
+  - Mac execution shortcut: <KBD>Cmd(⌘)</KBD>+<KBD>Enter</KBD>
+  To run multiple lines of code, you can highlight all the line you wish to run
+  and then hit <KBD>Run</KBD> or use the shortcut key combo listed above.
 
     In the RStudio 'Console' you should see:
 
