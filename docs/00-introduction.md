@@ -117,11 +117,11 @@ to more easily:
     2.  In the window that opens select **New Directory**, then **New
         Project**. For "Directory name:" enter **dc_genomics_r**. For
         "Create project as subdirectory of", click
-        `<kbd>`{=html}Browse...`</kbd>`{=html} and then click
-        `<kbd>`{=html}Choose`</kbd>`{=html} which will select your home
+        `Browse...` and then click
+        `Choose` which will select your home
         directory "\~".
     
-    3.  Finally click `<kbd>`{=html}Create Project`</kbd>`{=html}. In the
+    3.  Finally click `Create Project`. In the
         "Files" tab of your output pane (more about the RStudio layout in a
         moment), you should see an RStudio project file,
         **dc_genomics_r.Rproj**. All RStudio projects end with the
@@ -140,8 +140,8 @@ to more easily:
     machine. [renv](https://rstudio.github.io/renv/) is an RStudio add-on
     that will associate your packages and project so that your work is
     more portable and reproducible. To turn on renv click on the
-    `<KBD>`{=html}Tools`</KBD>`{=html} menu and select
-    `<KBD>`{=html}Project Options`</KBD>`{=html}. Under **Enviornments**
+    `Tools` menu and select
+    `Project Options`. Under **Enviornments**
     check off "**Use renv with this project**" and follow any installation
     instructions. {: .callout}
 
@@ -151,12 +151,12 @@ Now that we are ready to start exploring R, we will want to keep a
 record of the commands we are using. To do this we can create an R
 script:
 
-Click the `<kbd>`{=html}File`</kbd>`{=html} menu and select
-`<kbd>`{=html}New File`</kbd>`{=html} and then `<kbd>`{=html}R
-Script`</kbd>`{=html}. Before we go any further, save your script by
+Click the `File` menu and select
+`New File` and then `R
+Script`. Before we go any further, save your script by
 clicking the save/disk icon that is in the bar above the first line in
-the script editor, or click the `<kbd>`{=html}File`</kbd>`{=html} menu
-and select `<kbd>`{=html}save`</kbd>`{=html}. In the "Save File" window
+the script editor, or click the `File` menu
+and select `save`. In the "Save File" window
 that opens, name your file **"genomics_r\_basics"**. The new script
 **genomics_r\_basics.R** should appear under "files" in the output pane.
 By convention, R scripts end with the file extension **.R**.
@@ -165,7 +165,7 @@ By convention, R scripts end with the file extension **.R**.
 
 Here are the major windows (or panes) of the RStudio environment:
 
-`<img src="../fig/rstudio_session_4pane_layout.png" alt="rstudio default session" style="width: 1000px;"/>`{=html}
+`<img src="../fig/rstudio_session_4pane_layout.png" alt="rstudio default session" style="width: 1000px;"/>`
 
 !!! quote ""
 
@@ -205,10 +205,10 @@ Here are the major windows (or panes) of the RStudio environment:
 All of the panes in RStudio have configuration options. For example, you
 can minimize/maximize a pane, or by moving your mouse in the space
 between panes you can resize as needed. The most important customization
-options for pane layout are in the `<KBD>`{=html}View`</KBD>`{=html}
+options for pane layout are in the `View`
 menu. Other options such as font sizes, colors/themes, and more are in
-the `<KBD>`{=html}Tools`</KBD>`{=html} menu under `<KBD>`{=html}Global
-Options`</KBD>`{=html}.
+the `Tools` menu under `Global
+Options`.
 
 > ## You are working with R
 >
@@ -232,7 +232,7 @@ type the following command into the script:
 `{r, eval = FALSE, purl = FALSE} getwd()`
 
 To execute this command, make sure your cursor is on the same line the
-command is written. Then click the `<KBD>`{=html}Run`</KBD>`{=html}
+command is written. Then click the `Run`
 button that is just above the first line of your script in the header of
 the Source pane.
 
@@ -278,7 +278,7 @@ You may have guessed, you need to tell the `setwd()` command what
 directory you want to set as your working directory. To do so, inside of
 the parentheses, open a set of quotes. Inside the quotes enter a `/`
 which is the root directory for Linux. Next, use the
-`<KBD>`{=html}Tab`</KBD>`{=html} key, to take advantage of RStudio's
+`Tab` key, to take advantage of RStudio's
 Tab-autocompletion method, to select `home`, `dcuser`, and
 `dc_genomics_r` directory. The path in your script should look like
 this:
@@ -436,13 +436,13 @@ popular repository for bioinformatics-related R packages.
 Here is one last bonus we will mention about RStudio. It's difficult to
 remember all of the arguments and definitions associated with a given
 function. When you start typing the name of a function and hit the
-`<KBD>`{=html}Tab`</KBD>`{=html} key, RStudio will display functions and
+`Tab` key, RStudio will display functions and
 associated help:
 
-`<img src="../fig/studio_contexthelp1.png" alt="rstudio default session" style="width: 600px;"/>`{=html}
+`<img src="../fig/studio_contexthelp1.png" alt="rstudio default session" style="width: 600px;"/>`
 
-Once you type a function, hitting the `<KBD>`{=html}Tab`</KBD>`{=html}
+Once you type a function, hitting the `Tab`
 inside the parentheses will show you the function's arguments and
 provide additional help for each of these arguments.
 
-`<img src="../fig/studio_contexthelp2.png" alt="rstudio default session" style="width: 600px;"/>`{=html}
+`<img src="../fig/studio_contexthelp2.png" alt="rstudio default session" style="width: 600px;"/>`
