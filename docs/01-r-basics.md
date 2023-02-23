@@ -121,12 +121,13 @@ doing:
 
 
   Next, run this line of code in your script. You can run a line of code
-  by hitting the <KBD>Run</KBD> button that is just above the first line of your
+  by hitting the `Run` button that is just above the first line of your
   script in the header of the Source pane or you can use the appropriate shortcut:
-  - Windows execution shortcut: <KBD>Ctrl</KBD>+<KBD>Enter</KBD>
-  - Mac execution shortcut: <KBD>Cmd(⌘)</KBD>+<KBD>Enter</KBD>
+
+  - Windows execution shortcut: `Ctrl+Enter`
+  - Mac execution shortcut: `Cmd(⌘)+Enter`
   To run multiple lines of code, you can highlight all the line you wish to run
-  and then hit <KBD>Run</KBD> or use the shortcut key combo listed above.
+  and then hit Run or use the shortcut key combo listed above.
 
     In the RStudio 'Console' you should see:
 
@@ -148,30 +149,30 @@ doing:
     The 'Environment' window allows you to keep track of the objects you have
     created in R.
 
-    > ## Exercise: Create some objects in R
-    >
-    > Create the following objects; give each object an appropriate name
-    > (your best guess at what name to use is fine):
-    >
-    > 1. Create an object that has the value of number of pairs of human chromosomes
-    > 2. Create an object that has a value of your favorite gene name
-    > 3. Create an object that has this URL as its value: "ftp://ftp.ensemblgenomes.org/pub/bacteria/release-39/fasta/bacteria_5_collection/escherichia_coli_b_str_rel606/"
-    > 4. Create an object that has the value of the number of chromosomes in a
-    > diploid human cell
-    >
-    >> ## Solution
-    >>
-    >> Here as some possible answers to the challenge:
-    >> ```{r, purl = FALSE}
-    >> human_chr_number <- 23
-    >> gene_name <- 'pten'
-    >> ensemble_url <- 'ftp://ftp.ensemblgenomes.org/pub/bacteria/release-39/fasta/bacteria_5_collection/escherichia_coli_b_str_rel606/'
-    >> human_diploid_chr_num <-  2 * human_chr_number
-    >> ```
-    > {: .solution}
-    {: .challenge}
+!!! question  "Exercise: Create some objects in R"
+  
+    Create the following objects; give each object an appropriate name
+    (your best guess at what name to use is fine):
+  
+    1. Create an object that has the value of number of pairs of human chromosomes
+    2. Create an object that has a value of your favorite gene name
+    3. Create an object that has this URL as its value: "ftp://ftp.ensemblgenomes.org/pub/bacteria/release-39/fasta/bacteria_5_collection/escherichia_coli_b_str_rel606/"
+    4. Create an object that has the value of the number of chromosomes in a
+    diploid human cell
+  
+    ??? success "Solution"
+  
+        Here as some possible answers to the challenge:
+        !!! r-project "r"
 
-    ## Naming objects in R
+        ```
+        human_chr_number <- 23
+        gene_name <- 'pten'
+        ensemble_url <- 'ftp://ftp.ensemblgenomes.org/pub/bacteria/release-39/fasta/bacteria_5_collection/escherichia_coli_b_str_rel606/'
+        human_diploid_chr_num <-  2 * human_chr_number
+        ```
+
+## Naming objects in R
 
     Here are some important details about naming objects in R.
 
@@ -192,8 +193,8 @@ doing:
       preferred assignment operator. '=' works too, but is most commonly used in
       passing arguments to functions (more on functions later). There is a shortcut
       for the R assignment operator:
-      - Windows execution shortcut: <KBD>Alt</KBD>+<KBD>-</KBD>
-      - Mac execution shortcut: <KBD>Option</KBD>+<KBD>-</KBD>
+      - Windows execution shortcut: Alt+-
+      - Mac execution shortcut: Option+-
 
     There are a few more suggestions about naming and style you may want to learn
     more about as you write more R code. There are several "style guides" that
