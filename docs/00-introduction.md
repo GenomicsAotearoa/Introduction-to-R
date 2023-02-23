@@ -384,31 +384,34 @@ provide it, in contrast to `digits` where R will use the default value 0
 unless you explicitly provide a different value. We can explicitly set
 the digits parameter when we call the function:
 
-``` {r}
-round(3.14159, digits = 2)
-```
+!!! r-project "r"
+    `round(3.14159, digits = 2)`
+
 
 Or, R accepts what we call "positional arguments", if you pass a
 function arguments separated by commas, R assumes that they are in the
 order you saw when we used `args()`. In the case below that means that
 `x` is 3.14159 and digits is 2.
 
-``` {r}
-round(3.14159, 2)
-```
+!!! r-project "r"
+    `round(3.14159, 2)`
 
 Finally, what if you are using `?` to get help for a function in a
 package not installed on your system, such as when you are running a
 script which has dependencies.
 
-`{r, eval=FALSE} ?geom_point()`
+!!! r-project "r"
+    `geom_point()`
 
 will return an error:
 
+!!! failure "Error"
+    ```
     Error in .helpForCall(topicExpr, parent.frame()) :
        no methods for ‘geom_point’ and no documentation for it as a function
+    ```
 
-{: .error}
+
 
 Use two question marks (i.e. `??geom_point()`) and R will return results
 from a search of the documentation for packages you have installed on
@@ -418,21 +421,23 @@ called in R, or what functions may be available, use the `help.search()`
 function.
 
 !!! question "Exercise: Searching for R functions"
->
-> Use `help.search()` to find R functions for the following statistical
-> functions. Remember to put your search query in quotes inside the
-> function's parentheses.
->
-> -   Chi-Squared test
-> -   Student t-test
-> -   mixed linear model
->
-> > ## Solution
-> >
-> > While your search results may return several tests, we list a few
-> > you might find: - Chi-Squared test: `stats::Chisquare` - Student
-> > t-test: `stats::t.test` - mixed linear model: `stats::lm.glm` {:
-> > .solution} {: .challenge}
+   
+    Use `help.search()` to find R functions for the following statistical
+    functions. Remember to put your search query in quotes inside the
+    function's parentheses.
+   
+    -   Chi-Squared test
+    -   Student t-test
+    -   mixed linear model
+   
+    ??? success Solution
+    
+        While your search results may return several tests, we list a few
+        you might find: 
+        
+        - Chi-Squared test: `stats::Chisquare` 
+        - Student t-test: `stats::t.test` 
+        - mixed linear model: `stats::lm.glm`
 
 We will discuss more on where to look for the libraries and packages
 that contain functions you want to use. For now, be aware that two
