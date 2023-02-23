@@ -165,7 +165,7 @@ By convention, R scripts end with the file extension **.R**.
 
 Here are the major windows (or panes) of the RStudio environment:
 
-`<img src="../fig/rstudio_session_4pane_layout.png" alt="rstudio default session" style="width: 1000px;"/>`
+![images](./figures/rstudio_session_4pane_layout.png)
 
 !!! quote ""
 
