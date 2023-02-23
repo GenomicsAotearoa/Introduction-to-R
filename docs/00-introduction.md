@@ -256,7 +256,7 @@ include a comment on the purpose of commands you are learning, e.g.:
 
     `# this `ommand shows the current working directory getwd()`
 
-!!! question "Work interactively in R"   
+!!! question "Exercise : Work interactively in R"   
    
     What happens when you try to enter the `getwd()` command in the Console pane?
    
@@ -322,22 +322,22 @@ advanced topic (and they are), but you have already used at least one
 function in R. `getwd()` is a function! The next sections will help you
 understand what is happening in any R script.
 
-> ## Exercise: What do these functions do?
->
-> Try the following functions by writing them in your script. See if you
-> can guess what they do, and make sure to add comments to your script
-> about your assumed purpose. - `dir()` - `sessionInfo()` - `date()` -
-> `Sys.time()`
->
-> > ## Solution
-> >
-> > -   `dir()` \# Lists files in the working directory
-> > -   `sessionInfo()` \# Gives the version of R and additional info
-> >     including on attached packages
-> > -   `date()` \# Gives the current date
-> > -   `Sys.time()` \# Gives the current time
-> >
-> > *Notice*: Commands are case sensitive! {: .solution} {: .challenge}
+!!! question "Exercise: What do these functions do?"
+   
+    Try the following functions by writing them in your script. See if you
+    can guess what they do, and make sure to add comments to your script
+    about your assumed purpose. - `dir()` - `sessionInfo()` - `date()` -
+    `Sys.time()`
+   
+    ??? success "Solution"
+        
+        -   `dir()` \# Lists files in the working directory
+        -   `sessionInfo()` \# Gives the version of R and additional info
+            including on attached packages
+        -   `date()` \# Gives the current date
+        -   `Sys.time()` \# Gives the current time
+        
+        **Notice**: Commands are case sensitive! 
 
 You have hopefully noticed a pattern - an R function has three key
 properties: - Functions have a name (e.g. `dir`, `getwd`); note that
@@ -414,7 +414,7 @@ function, for example a statistical test, but you aren't sure what it is
 called in R, or what functions may be available, use the `help.search()`
 function.
 
-> ## Exercise: Searching for R functions
+!!! question "Exercise: Searching for R functions"
 >
 > Use `help.search()` to find R functions for the following statistical
 > functions. Remember to put your search query in quotes inside the
