@@ -100,32 +100,33 @@ One of the first benefits we will take advantage of in RStudio is
 something called an **RStudio Project**. An RStudio project allows you
 to more easily:
 
--   Save data, files, variables, packages, etc. related to a specific
-    analysis project
--   Restart work where you left off
--   Collaborate, especially if you are using version control such as
+ -   Save data, files, variables, packages, etc. related to a specific
+     analysis project
+ -   Restart work where you left off
+ -   Collaborate, especially if you are using version control such as
     [git](http://swcarpentry.github.io/git-novice/).
 
+!!! info ""
 
 
-1.  To create a project, go to the **File** menu, and click **New Project**
-
-![image](./figures/new_project_window.png){width-"400"}
-
-
-2.  In the window that opens select **New Directory**, then **New
-    Project**. For "Directory name:" enter **dc_genomics_r**. For
-    "Create project as subdirectory of", click
-    `<kbd>`{=html}Browse...`</kbd>`{=html} and then click
-    `<kbd>`{=html}Choose`</kbd>`{=html} which will select your home
-    directory "\~".
-
-3.  Finally click `<kbd>`{=html}Create Project`</kbd>`{=html}. In the
-    "Files" tab of your output pane (more about the RStudio layout in a
-    moment), you should see an RStudio project file,
-    **dc_genomics_r.Rproj**. All RStudio projects end with the
-    "**.Rproj**" file extension.
-
+    1.  To create a project, go to the **File** menu, and click **New Project**
+    
+        ![image](./figures/new_project_window.png){width-"400"}
+    
+    
+    2.  In the window that opens select **New Directory**, then **New
+        Project**. For "Directory name:" enter **dc_genomics_r**. For
+        "Create project as subdirectory of", click
+        `<kbd>`{=html}Browse...`</kbd>`{=html} and then click
+        `<kbd>`{=html}Choose`</kbd>`{=html} which will select your home
+        directory "\~".
+    
+    3.  Finally click `<kbd>`{=html}Create Project`</kbd>`{=html}. In the
+        "Files" tab of your output pane (more about the RStudio layout in a
+        moment), you should see an RStudio project file,
+        **dc_genomics_r.Rproj**. All RStudio projects end with the
+        "**.Rproj**" file extension.
+    
 
 !!! tip "Make your project more reproducible with renv"
    
