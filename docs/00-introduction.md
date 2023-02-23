@@ -210,16 +210,17 @@ menu. Other options such as font sizes, colors/themes, and more are in
 the `Tools` menu under `Global
 Options`.
 
-> ## You are working with R
->
-> Although we won't be working with R at the terminal, there are lots of
-> reasons to. For example, once you have written an RScript, you can run
-> it at any Linux or Windows terminal without the need to start up
-> RStudio. We don't want you to get confused - RStudio runs R, but R is
-> not RStudio. For more on running an R Script at the terminal see this
-> [Software Carpentry
-> lesson](https://swcarpentry.github.io/r-novice-inflammation/05-cmdline/).
-> {: .callout}
+!!! r-project "You are working with R"
+
+    
+    Although we won't be working with R at the terminal, there are lots of
+    reasons to. For example, once you have written an RScript, you can run
+    it at any Linux or Windows terminal without the need to start up
+    RStudio. We don't want you to get confused - RStudio runs R, but R is
+    not RStudio. For more on running an R Script at the terminal see this
+    [Software Carpentry
+    lesson](https://swcarpentry.github.io/r-novice-inflammation/05-cmdline/).
+    
 
 ## Getting to work with R: navigating directories
 
@@ -229,7 +230,9 @@ commands we learn in our **genomics_r\_basics.R** script that is loaded
 in the Source pane. First, lets see what directory we are in. To do so,
 type the following command into the script:
 
-`{r, eval = FALSE, purl = FALSE} getwd()`
+!!! r-project
+
+    `getwd()`
 
 To execute this command, make sure your cursor is on the same line the
 command is written. Then click the `Run`
@@ -251,7 +254,9 @@ Entering a `#` before any line in an R script turns that line into a
 comment, which R will not try to interpret as code. Edit your script to
 include a comment on the purpose of commands you are learning, e.g.:
 
-`{r, eval = FALSE, purl = FALSE} # this command shows the current working directory getwd()`
+!!! r-project
+
+    `# this `ommand shows the current working directory getwd()`
 
 > ## Exercise: Work interactively in R
 >
@@ -272,7 +277,9 @@ For the purposes of this exercise we want you to be in the directory
 directory using the `setwd()` command. Enter this command in your
 script, but *don't run* this yet.
 
-`{r, eval = FALSE, purl = FALSE} # This sets the working directory setwd()`
+!!! r-project
+
+    `# This `ets the working directory setwd()`
 
 You may have guessed, you need to tell the `setwd()` command what
 directory you want to set as your working directory. To do so, inside of
@@ -283,7 +290,9 @@ Tab-autocompletion method, to select `home`, `dcuser`, and
 `dc_genomics_r` directory. The path in your script should look like
 this:
 
-`{r, eval = FALSE, purl = FALSE} # This sets the working directory setwd("/home/dcuser/dc_genomics_r")`
+!!! r-project
+
+    `# This `ets the working directory setwd("/home/dcuser/dc_genomics_r")`
 
 When you run this command, the console repeats the command, but gives
 you no output. Instead, you see the blank R prompt: `>`.
