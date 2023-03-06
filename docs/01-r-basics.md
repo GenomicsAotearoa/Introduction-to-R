@@ -809,9 +809,9 @@ Here, we have a *named list* that contains the vectors `genes`, `reference_snps`
      $ positions     : num [1:4] 8.76e+06 6.66e+07 6.75e+07 1.54e+08
     ```
 
-!!! info "Unnamed objects in a list"
+!!! info "Unnamed items in a list"
 
-    When we created our list, we assigned a name to each object within the list. However, this is not strictly necessary. Let's try it out and see what happens:
+    When we created our list, we assigned a name to each item within the list. However, this is not strictly necessary. Let's try it out and see what happens:
     
     !!! r-project "r"
 
@@ -844,49 +844,49 @@ Here, we have a *named list* that contains the vectors `genes`, `reference_snps`
         [1]   8762685  66560624  67545785 154039662
         ```
 
-    Notice that the objects are not named and simply given an numeric index within double square brackets `[[1]]`. In fact, you can create a list with a mixture of named and unnamed objects. While this is still a valid way to create lists, it is not very user-friendly as we have no way of telling what information is stored in each of the items. Ideally, you should assign names to each item in the list when creating it to easily identify the kinds of information stored within it.
+    Notice that the items are not named and simply given an numeric index within double square brackets `[[1]]`. In fact, you can create a list with a mixture of named and unnamed items. While this is still a valid way to create lists, it is not very user-friendly as we have no way of telling what information is stored in each of the items. Ideally, you should assign names to each item in the list when creating it to easily identify the kinds of information stored within it.
 
 
-### Importance of correct symbols for adding objects to lists
+!!! bell "Importance of correct symbols for adding items to lists"
 
-Notice that we have used the assignment operator `<-` to create `snps_list`, and the equal symbol `=` to add vectors to each item in the list. When creating a vector, you can use either symbol to achieve the same goal. However, when creating lists, the distinction between symbols is ***NOT*** a stylistic choice and will affect the output. We can see what happens if we were to change the `=` operator to `<-` within the brackets.
-
-!!! r-project "r"
-
-    ```r
-    wrong_operator <- list(
-      genes <- snp_genes,
-      reference_snps = snps,
-      chromosomes = snp_chromosomes,
-      positions = snp_positions
-    )
+    Notice that we have used the assignment operator `<-` to create `snps_list`, and the equal symbol `=` to add vectors to each item in the list. When creating a vector, you can use either symbol to achieve the same goal. However, when creating lists, the distinction between symbols is ***NOT*** a stylistic choice and will affect the output. We can see what happens if we were to change the `=` operator to `<-` within the brackets.
     
-    # Call the list
-    snps_list_2
-    ```
-
-??? success "Output"
-
-    ```
-    [[1]]
-    [1] "OXTR"  "ACTN3" "AR"    "OPRM1"
+    !!! r-project "r"
     
-    $reference_snps
-    [1] "rs53576"   "rs1815739" "rs6152"    "rs1799971"
+        ```r
+        wrong_operator <- list(
+          genes <- snp_genes,
+          reference_snps = snps,
+          chromosomes = snp_chromosomes,
+          positions = snp_positions
+        )
+        
+        # Call the list
+        snps_list_2
+        ```
     
-    $chromosomes
-    [1] "3"  "11" "X"  "6" 
+    ??? success "Output"
     
-    $positions
-    [1]   8762685  66560624  67545785 154039662
-    ```
-
-We can observe two things: 
-
-- The name for the first list item `genes` is now simply a numeric index `[[1]]`. 
-- There is an additional object in the global environment called `genes`. 
- 
-Switching the assignment operator adds an unnamed item in the list, and creates a vector object called `genes` in the global environment. Make certain to use the correct operator when creating lists to avoid unintentionally populating your working environment.
+        ```
+        [[1]]
+        [1] "OXTR"  "ACTN3" "AR"    "OPRM1"
+        
+        $reference_snps
+        [1] "rs53576"   "rs1815739" "rs6152"    "rs1799971"
+        
+        $chromosomes
+        [1] "3"  "11" "X"  "6" 
+        
+        $positions
+        [1]   8762685  66560624  67545785 154039662
+        ```
+    
+    We can observe two things: 
+    
+    - The name for the first list item `genes` is now simply a numeric index `[[1]]`. 
+    - There is an additional object in the global environment called `genes`. 
+    
+    Switching the assignment operator adds an unnamed item in the list, and creates a vector object called `genes` in the global environment. Make certain to use the correct operator when creating lists to avoid unintentionally populating your working environment.
 
 
 ### Refer to items in a list
