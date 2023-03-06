@@ -745,6 +745,8 @@ Due to their flexibility, many complex analyses store data/return results using 
 !!! info "Attribution"
     Some of the content here was adapted from an excellent [tutorial](https://r4ds.had.co.nz/vectors.html#lists), which we highly recommend you read.
 
+### Creating lists
+
 Let's begin by creating a list using existing vectors created [prior](#creating-and-subsetting-vectors).
 
 !!! r-project "r"
