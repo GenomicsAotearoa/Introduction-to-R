@@ -2,23 +2,23 @@
 
 !!! info 
 
-    Keypoints:
+    === "Keypoints"
 
-    - The dataset comes from a real world experiment in *E. coli*.
-    - Publicly available FASTQ files can be downloaded from NCBI SRA.
-    - Several steps are taken outside of R/RStudio to create VCF files from
-      FASTQ files.
-    - VCF files store variant calls in a special format.
+        - The dataset comes from a real world experiment in *E. coli*.
+        - Publicly available FASTQ files can be downloaded from NCBI SRA.
+        - Several steps are taken outside of R/RStudio to create VCF files from
+          FASTQ files.
+        - VCF files store variant calls in a special format.
 
-    Objectives:
+    === "Objectives"
 
-    - Know what the example dataset represents
-    - Know the concepts of how VCF files are generated
+        - Know what the example dataset represents
+        - Know the concepts of how VCF files are generated
     
-    Questions:
+    === "Questions"
 
-    - What data are we using in the lesson?
-    - What are VCF files?
+        - What data are we using in the lesson?
+        - What are VCF files?
 
 
 ## Preface
