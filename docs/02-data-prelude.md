@@ -2,20 +2,23 @@
 
 !!! info 
 
-    keypoints:
-    - The dataset comes from a real world experiment in E. coli.
-    - Publicly available FASTQ files can be downloaded from NCBI SRA.
-    - Several steps are taken outside of R/RStudio to create VCF files from
-      FASTQ files.
-    - VCF files store variant calls in a special format.
+    === "Keypoints"
 
-    objectives:
-    - Know what the example dataset represents
-    - Know the concepts of how VCF files are generated
+        - The dataset comes from a real world experiment in *E. coli*.
+        - Publicly available FASTQ files can be downloaded from NCBI SRA.
+        - Several steps are taken outside of R/RStudio to create VCF files from
+          FASTQ files.
+        - VCF files store variant calls in a special format.
+
+    === "Objectives"
+
+        - Know what the example dataset represents
+        - Know the concepts of how VCF files are generated
     
-    questions:
-    - What data are we using in the lesson?
-    - What are VCF files?
+    === "Questions"
+
+        - What data are we using in the lesson?
+        - What are VCF files?
 
 
 ## Preface
@@ -33,18 +36,19 @@ independently of the Genomics Data Carpentry lessons.
 
 This dataset was selected for several reasons, including:
 
--   Simple, but iconic NGS-problem: Examine a population where we want
+- Simple, but iconic NGS-problem: Examine a population where we want
     to characterize changes in sequence *a priori*
--   Dataset publicly available - in this case through the NCBI SRA
+- Dataset publicly available - in this case through the NCBI SRA
     (http://www.ncbi.nlm.nih.gov/sra)
 
-# Introduction to the dataset
+
+## Introduction to the dataset
 
 Microbes are ideal organisms for exploring 'Long-term Evolution
 Experiments' (LTEEs) - thousands of generations can be generated and
 stored in a way that would be virtually impossible for more complex
-eukaryotic systems. In [Tenaillon et al
-2016](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4988878/), 12
+eukaryotic systems. In [Tenaillon et al.
+(2016)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4988878/), 12
 populations of *Escherichia coli* were propagated for more than 50,000
 generations in a glucose-limited minimal medium. This medium was
 supplemented with citrate which *E. coli* cannot metabolize in the
@@ -66,25 +70,21 @@ ones that were both Cit+ and Cit- and hypermutable in later generations.
 For the purposes of this workshop we're going to be working with 3 of
 the sequence reads from this experiment.
 
-  -------------------------------------------------------------------------------------------
-  SRA Run Number     Clone      Generation    Cit       Hypermutable   Read      Sequencing
-                                                                       Length    Depth
-  ------------------ ---------- ------------- --------- -------------- --------- ------------
-  SRR2589044         REL2181A   5,000         Unknown   None           150       60.2
-
-  SRR2584863         REL7179B   15,000        Unknown   None           150       88
-
-  SRR2584866         REL11365   50,000        Cit+      plus           150       138.3
-  -------------------------------------------------------------------------------------------
+| SRA run number | Clone    | Generation | Cit     | Hypermutable | Read length | Sequencing depth |
+| -------------- | -------- | ---------- | ------- | ------------ | ----------- | ---------------- |
+| SRR2589044     | REL2181A | 5,000      | Unknown | None         | 150         | 60.2             |
+| SRR2584863     | REL7179B | 15,000     | Unknown | None         | 150         | 88               |
+| SRR2584866     | REL11365 | 50,000     | Cit+    | plus         | plus        | 138.3            |
 
 We want to be able to look at differences in mutation rates between
 hypermutable and non-hypermutable strains. We also want to analyze the
 sequences to figure out what changes occurred in genomes to make the
-strains Cit+. Ultimately, we will use R to answer the questions:
+strains Cit+. Ultimately, we will use R to answer these questions:
 
 -   How many base pair changes are there between the Cit+ and Cit-
     strains?
 -   What are the base pair changes between strains?
+
 
 ## How VCF files are generated
 
@@ -97,13 +97,12 @@ Five steps are taken to transform FASTQ files to variant calls contained
 in VCF files and at each step, specialized non-R based bioinformatics
 tools that are used:
 
-```{=html}
-<center>
-```
-`<img src="../fig/variant_calling_workflow.png" alt="variant calling workflow. Sequence reads (FASTQ files), Quality control (FASTQ files), Alignment to Genome (SAM/BAM files), Alignment cleanup (BAM file ready for variant calling), Variant Calling (VCF file)" style="width: 250px;"/>`{=html}
-```{=html}
-</center>
-```
+<figure markdown>
+  ![image](figures/variant_calling_workflow.png){ width="250" }
+  <figcaption>Variant calling workflow</figcaption>
+</figure>
+
+
 ## How variant calls are stored in VCF files
 
 VCF files contain variants that were called against a reference genome.
@@ -112,7 +111,7 @@ open using programs like Excel and contain two sections: header and
 records.
 
 Below you will see the header (which describes the format), the time and
-date the file was created, the version of bcftools that was used, the
+date the file was created, the version of `bcftools` that was used, the
 command line parameters used, and some additional information:
 
     ##fileformat=VCFv4.2
@@ -163,30 +162,15 @@ Followed by information on each of the variations observed:
 The first few columns represent the information we have about a
 predicted variation.
 
-  -----------------------------------------------------------------------
-  column                        info
-  ----------------------------- -----------------------------------------
-  CHROM                         contig location where the variation
-                                occurs
-
-  POS                           position within the contig where the
-                                variation occurs
-
-  ID                            a `.` until we add annotation information
-
-  REF                           reference genotype (forward strand)
-
-  ALT                           sample genotype (forward strand)
-
-  QUAL                          Phred-scaled probability that the
-                                observed variant exists at this site
-                                (higher is better)
-
-  FILTER                        a `.` if no quality filters have been
-                                applied, PASS if a filter is passed, or
-                                the name of the filters this variant
-                                failed
-  -----------------------------------------------------------------------
+| Column | Information                                                                                                               |
+| ------ | ------------------------------------------------------------------------------------------------------------------------- |
+| CHROM  | Contig location where the variation occurs                                                                                |
+| POS    | Position within the contig where the variation occurs                                                                     |
+| ID     | A `.` until we add annotation information                                                                                 |
+| REF    | Reference genotype (forward strand)                                                                                       |
+| ALT    | Sample genotype (forward strand)                                                                                          |
+| QUAL   | Phred-scaled probability that the observed variant exists at this site (higher is better)                                 |
+| FILTER | A `.` if no quality filters have been applied, PASS if a filter is passed, or the name of the filters this variant failed |
 
 In an ideal world, the information in the `QUAL` column would be all we
 needed to filter out bad variant calls. However, in reality we need to
@@ -194,34 +178,19 @@ filter on multiple other metrics.
 
 The last two columns contain the genotypes and can be tricky to decode.
 
-  column    info
-  --------- ----------------------------------------------------------
-  FORMAT    lists in order the metrics presented in the final column
-  results   lists the values associated with those metrics in order
+| Column  | Information                                              |
+| ------- | -------------------------------------------------------- |
+| FORMAT  | Lists in order the metrics presented int he final column |
+| results | Lists the values associated with those metrics in order  |
 
 For our file, the metrics presented are GT:PL:GQ.
 
-  -----------------------------------------------------------------------
-  metric                        definition
-  ----------------------------- -----------------------------------------
-  AD, DP                        the depth per allele by sample and
-                                coverage
-
-  GT                            the genotype for the sample at this loci.
-                                For a diploid organism, the GT field
-                                indicates the two alleles carried by the
-                                sample, encoded by a 0 for the REF
-                                allele, 1 for the first ALT allele, 2 for
-                                the second ALT allele, etc. A 0/0 means
-                                homozygous reference, 0/1 is
-                                heterozygous, and 1/1 is homozygous for
-                                the alternate allele.
-
-  PL                            the likelihoods of the given genotypes
-
-  GQ                            the Phred-scaled confidence for the
-                                genotype
-  -----------------------------------------------------------------------
+| Metric | Definition                                                                                                                                                                                                                                                                                                                                   |
+| ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| AD, DP | The depth per allele by sample and coverage                                                                                                                                                                                                                                                                                                  |
+| GT     | The genotype for the sample at this loci. For a diploid organism, this field indicates the two alleles carried by the sample, encoded by a 0 for the REF allele, 1 for the first ALT allele, 2 for the second ALT allele, etc. A 0/0 means homozygous reference, 0/1 is heterozygous, and 1/1 is homozygous for the alternate allele. |
+| PL     | The likelihoods of the given genotypes.                                                                                                                                                                                                                                                                                                      |
+| GQ     | The Phred-scaled confidence for the genotype.                                                                                                                                                                                                                                                                                                |
 
 For more information on VCF files visit The Broad Institute's [VCF
 guide](https://gatk.broadinstitute.org/hc/en-us/articles/360035531692-VCF-Variant-Call-Format).
@@ -231,13 +200,11 @@ guide](https://gatk.broadinstitute.org/hc/en-us/articles/360035531692-VCF-Varian
 Tenaillon O, Barrick JE, Ribeck N, Deatherage DE, Blanchard JL, Dasgupta
 A, Wu GC, Wielgoss S, Cruveiller S, Médigue C, Schneider D, Lenski RE.
 Tempo and mode of genome evolution in a 50,000-generation experiment
-(2016) Nature. 536(7615): 165--170.
+(2016) Nature. 536(7615): 165–170. <br>
 [Paper](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4988878/),
-[Supplemental
-materials](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4988878/#) Data
-on NCBI SRA:
-<https://trace.ncbi.nlm.nih.gov/Traces/sra/?study=SRP064605> Data on
-EMBL-EBI ENA: <https://www.ebi.ac.uk/ena/data/view/PRJNA295606>
+[Supplemental materials](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4988878/#), 
+[Data on NCBI SRA](https://trace.ncbi.nlm.nih.gov/Traces/sra/?study=SRP064605), 
+[Data on EMBL-EBI ENA](https://www.ebi.ac.uk/ena/data/view/PRJNA295606)
 
 This episode was adapted from the Data Carpentry Genomic lessons:
 
