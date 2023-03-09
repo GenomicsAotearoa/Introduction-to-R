@@ -2,25 +2,25 @@
 
 !!! info 
 
-    keypoints:
+    === "Keypoints"
 
-    - Keep reporting and R software together in one document using R
-      Markdown.
-    - Control formatting using chunk options.
-    - "`knitr` can convert R Markdown documents to PDF and other formats."
+        - Keep reporting and R software together in one document using R
+          Markdown.
+        - Control formatting using chunk options.
+        - `knitr` can convert R Markdown documents to PDF and other formats.
     
-    objectives:
+    === "Objectives"
     
-    - Value of reproducible reports
-    - Basics of Markdown
-    - R code chunks
-    - Chunk options
-    - Inline R code
-    - Other output formats
+        - Value of reproducible reports
+        - Basics of Markdown
+        - R code chunks
+        - Chunk options
+        - Inline R code
+        - Other output formats
     
-    questions:
+    === "Questions"
 
-    - How can I integrate analyses and reports?
+        - How can I integrate analyses and reports?
 
 
 ## Data analysis reports
@@ -67,8 +67,9 @@ pages.
 Within R Studio, click File → New File → R Markdown and you'll get a
 dialog box like this:
 
-[]{.image .placeholder original-image-src="../fig/New_R_Markdown.png"
-original-image-title=""}
+<!-- Need to generate the image.
+![images]()
+-->
 
 You can stick with the default (HTML output), but give it a title.
 
@@ -78,12 +79,14 @@ The initial chunk of text contains instructions for R: you give the
 thing a title, author, and date, and tell it that you're going to want
 to produce html output (in other words, a web page).
 
-    ---
-    title: "Initial R Markdown document"
-    author: "Karl Broman"
-    date: "April 23, 2015"
-    output: html_document
-    ---
+```
+---
+title: "Initial R Markdown document"
+author: "Karl Broman"
+date: "April 23, 2015"
+output: html_document
+---
+```
 
 You can delete any of those fields if you don't want them included. The
 double-quotes aren't strictly *necessary* in this case. They're mostly
@@ -92,13 +95,12 @@ needed if you want to include a colon in the title.
 RStudio creates the document with some example text to get you started.
 Note below that there are chunks like
 
-```{=html}
 <pre>
 &#96;&#96;&#96;{r}
 summary(cars)
 &#96;&#96;&#96;
 </pre>
-```
+
 These are chunks of R code that will be executed by knitr and replaced
 by their results. More on this later.
 
@@ -167,13 +169,12 @@ it; click the question mark and you'll get a "Markdown Quick Reference"
 (with the Markdown syntax) as well to the RStudio documentation on R
 Markdown.
 
-> ## Challenge
->
-> Create a new R Markdown document. Delete all of the R code chunks and
-> write a bit of Markdown (some sections, some italicized text, and an
-> itemized list).
->
-> Convert the document to a webpage. {: .challenge}
+!!! question "Challenge"
+
+    Create a new R Markdown document. Delete all of the R code chunks and write a bit of Markdown (some sections, some italicized text, and an itemized list).
+
+    Convert the document to a webpage.
+
 
 ## A bit more Markdown
 
@@ -202,26 +203,25 @@ inserted in the final document.
 
 The main code chunks look like this:
 
-```{=html}
 <pre>
 &#96;&#96;&#96;{r load_data}
 gapminder <- read.csv("~/Desktop/gapminder.csv")
 &#96;&#96;&#96;
 </pre>
-```
-That is, you place a chunk of R code between `<code>`{=html}\`\`\`{r
-chunk_name}`</code>`{=html} and `<code>`{=html}\`\`\``</code>`{=html}.
+
+That is, you place a chunk of R code between <code>\`\`\`{r chunk_name}</code> and `<code>`{=html}\`\`\``</code>`{=html}.
 It's a good idea to give each chunk a name, as they will help you to fix
 errors and, if any graphs are produced, the file names are based on the
 name of the code chunk that produced them.
 
-> ## Challenge
->
-> Add code chunks to
->
-> -   Load the ggplot2 package
-> -   Read the gapminder data
-> -   Create a plot {: .challenge}
+!!! question "Challenge"
+
+    Add code chunks to
+
+    - Load the `ggplot2` package
+    - Read the `gapminder` data
+    - Create a plot
+
 
 ## How things get compiled
 
@@ -235,25 +235,7 @@ The Markdown and figure documents are then processed by the tool
 [pandoc](http://pandoc.org/), which converts the Markdown file into an
 html file, with the figures embedded.
 
-\`\`\`{r rmd_to_html_fig, fig.width=8, fig.height=3, fig.align="left",
-echo = FALSE} par(mar=rep(0, 4), bty="n", cex=1.5) plot(0, 0, type="n",
-xlab="", ylab="", xaxt="n", yaxt="n", xlim=c(0, 100), ylim=c(0, 100)) xw
-\<- 10 yh \<- 35 xm \<- 12 ym \<- 50 rect(xm-xw/2, ym-yh/2, xm+xw/2,
-ym+yh/2, lwd=2) text(xm, ym, ".Rmd")
-
-xm \<- 50 ym \<- 80 rect(xm-xw/2, ym-yh/2, xm+xw/2, ym+yh/2, lwd=2)
-text(xm, ym, ".md") xm \<- 50; ym \<- 25 for(i in c(2, 0, -2))
-rect(xm-xw/2+i, ym-yh/2+i, xm+xw/2+i, ym+yh/2+i, lwd=2, border="black",
-col="white") text(xm-2, ym-2, "figs/")
-
-xm \<- 100-12 ym \<- 50 rect(xm-xw/2, ym-yh/2, xm+xw/2, ym+yh/2, lwd=2)
-text(xm, ym, ".html")
-
-arrows(22, 50, 38, 50, lwd=2, col="slateblue", len=0.1) text((22+38)/2,
-60, "knitr", col="darkslateblue", cex=1.3)
-
-arrows(62, 50, 78, 50, lwd=2, col="slateblue", len=0.1) text((62+78)/2,
-60, "pandoc", col="darkslateblue", cex=1.3) \`\`\`
+![images](figures/knirt_pandoc_convert.png){ width="600" }
 
 ## Chunk options
 
@@ -270,25 +252,22 @@ treated.
 
 So you might write:
 
-```{=html}
 <pre>
 &#96;&#96;&#96;{r load_libraries, echo=FALSE, message=FALSE}
 library("dplyr")
 library("ggplot2")
 &#96;&#96;&#96;
 </pre>
-```
 Often there will be particular options that you'll want to use
 repeatedly; for this, you can set *global* chunk options, like so:
 
-```{=html}
 <pre>
 &#96;&#96;&#96;{r global_options, echo=FALSE}
 knitr::opts_chunk$set(fig.path="Figs/", message=FALSE, warning=FALSE,
                       echo=FALSE, results="hide", fig.width=11)
 &#96;&#96;&#96;
 </pre>
-```
+
 The `fig.path` option defines where the figures will be saved. The `/`
 here is really important; without it, the figures would be saved in the
 standard place but just with names that being with `Figs`.
@@ -297,20 +276,22 @@ If you have multiple R Markdown files in a common directory, you might
 want to use `fig.path` to define separate prefixes for the figure file
 names, like `fig.path="Figs/cleaning-"` and `fig.path="Figs/analysis-"`.
 
-> ## Challenge
->
-> Use chunk options to control the size of a figure and to hide the
-> code. {: .challenge}
+!!! question "Challenge"
+
+    Use chunk options to control the size of a figure and to hide the code.
+
 
 ## Inline R code
 
 You can make *every* number in your report reproducible. Use
-`<code>`{=html}\`r`</code>`{=html} and `<code>`{=html}\``</code>`{=html}
-for an in-line code chunk, like so: `<code>`{=html}\`r round(some_value,
-2)\``</code>`{=html}. The code will be executed and replaced with the
+<code>\`r</code> and <code>\`</code>
+for an in-line code chunk, like so: <code>\`r round(some_value,
+2)\`</code>. The code will be executed and replaced with the
 *value* of the result.
 
-Don't let these in-line chunks get split across lines.
+!!! bell "Lines"
+
+    Don't let these in-line chunks get split across lines.
 
 Perhaps precede the paragraph with a larger code chunk that does
 calculations and defines things, with `include=FALSE` for that larger
@@ -324,9 +305,9 @@ The
 function in the [broman](https://github.com/kbroman/broman) package
 handles this.
 
-> ## Challenge
->
-> Try out a bit of in-line R code. {: .challenge}
+!!! question "Challenge"
+
+    Try out a bit of in-line R code.
 
 ## Other output options
 
@@ -335,18 +316,17 @@ little triangle next to the "Knit HTML" button to get a drop-down menu.
 Or you could put `pdf_document` or `word_document` in the header of the
 file.
 
-> ## Tip: Creating PDF documents
->
-> Creating .pdf documents may require installation of some extra
-> software. If required this is detailed in an error message.
->
-> To install the required software to knit your report to a PDF, you can
-> run the following code:
->
->     install.packages('tinytex')
->     tinytex::install_tinytex()
->
-> {: .callout}
+!!! tip "Creating PDF documents"
+
+    Creating .pdf documents may require installation of some extra
+    software. If required this is detailed in an error message.
+    To install the required software to knit your report to a PDF, you can
+    run the following code:
+
+    ```r
+    install.packages('tinytex')
+    tinytex::install_tinytex()
+    ```
 
 ## Resources
 
