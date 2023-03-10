@@ -2,26 +2,22 @@
 
 !!! info 
 
-    keypoints:
+    === "Keypoints"
 
-    - Bioconductor is an alternative package repository for bioinformatics
-      packages.
-    - Installing packages from Bioconductor requires a new method, since it
-      is not compatible with the `install.packages()` function used for
-      CRAN.
-    - Check Bioconductor to see if there is a package relevant to your
-      analysis before writing code yourself.
+        - Bioconductor is an alternative package repository for bioinformatics packages.
+        - Installing packages from Bioconductor requires a new method, since it is not compatible with the `install.packages()` function used for CRAN.
+        - Check Bioconductor to see if there is a package relevant to your analysis before writing code yourself.
 
-    objectives:
+    === "Objectives"
 
-    - Describe what the Bioconductor repository is and what it is used for
-    - Describe how Bioconductor differs from CRAN
-    - Search Bioconductor for relevant packages
-    - Install a package from Bioconductor
+        - Describe what the Bioconductor repository is and what it is used for
+        - Describe how Bioconductor differs from CRAN
+        - Search Bioconductor for relevant packages
+        - Install a package from Bioconductor
     
-    questions:
+    === "Questions"
     
-    - How do I use packages from the Bioconductor repository?
+        - How do I use packages from the Bioconductor repository?
 
 
 ## Installing packages from somewhere else besides CRAN?
@@ -52,9 +48,7 @@ through the steps (only 2!) to install a package to help with the VCF
 analysis we are working on, but you can use the same approach to install
 any of the many thousands of available packages.
 
-[screenshot of bioconductor homepage]{.image .placeholder
-original-image-src="../fig/bioconductor_website_screenshot.jpg"
-original-image-title="fig:"}
+![bioconductor_homepage](../figures/bioconductor_website_screenshot.jpg)
 
 ## First, install the `BiocManager` package
 
@@ -63,46 +57,39 @@ This package will allow us to use it to install packages from
 Bioconductor. You can think of Bioconductor kind of like an alternative
 app store for your phone, except instead of apps you are installing
 packages, and instead of your phone it's your local R package library.
+!!! r-project "r"
 
-`{r install-biocmanager, eval = FALSE} # install the BiocManager from CRAN using the base R install.packages() function install.packages("BiocManager")`
+    ```r
+    # Install the BiocManager from CRAN using the base R install.packages() function 
+    install.packages("BiocManager")
+    ```
 
 To check if this worked (and also so you can make a note of the version
 for reproducibility purposes), you can run `BiocManager::version()` and
 it should give you the version number.
 
-`{r check-bioconductor-version, eval = FALSE} # to make sure it worked, check the version BiocManager::version()`
 
 ## Second, install the vcfR package from Bioconductor using `BiocManager`
 
-> ## Head's Up: Installing vcfR may take a while due to numerous dependencies
->
-> Just be aware that installing packages that have many dependencies can
-> take a while.
->
-> {: .callout}
+!!! tip "Head's Up: Installing vcfR may take a while due to numerous dependencies"
 
-`{r install-vcfR, eval = FALSE} # install the vcfR package from bioconductor using BiocManager::install() BiocManager::install("vcfR")`
+    Just be aware that installing packages that have many dependencies can take a while.
+
+!!! r-project "r"
+
+    ```r
+    # install the vcfR package from Bioconductor 
+    BiocManager::install("vcfR")
+    ```
+
 Depending on your particular system, you may need to also allow it to
 install some dependencies or update installed packages in order to
 successfully complete the process.
 
-> ## Note: Installing packages from Bioconductor vs from CRAN
->
-> Some packages begin by being available only on Bioconductor, and then
-> later move to CRAN. `vcfR` is one such package, which originally was
-> only available from Bioconductor, but is currently available from
-> CRAN. The other thing to know is that `BiocManager::install()` will
-> also install packages from CRAN (it is a wrapper around
-> `install.packages()` that adds some extra features). There are other
-> benefits to using `BiocManager::install()` for Bioconductor packages,
-> many of which are outlined
-> [here](https://www.bioconductor.org/install/). In short, Bioconductor
-> packages have a release cycle that is different from CRAN and the
-> `install()` function is aware of that difference, so it helps to keep
-> package versions in line with one another in a way that doesn't
-> generally happen with the base R `install.packages()`.
->
-> {: .callout}
+!!! note "Installing packages from Bioconductor vs from CRAN"
+
+    Some packages begin by being available only on Bioconductor, and then later move to CRAN. `vcfR` is one such package, which originally was only available from Bioconductor, but is currently available from CRAN. The other thing to know is that `BiocManager::install()` will also install packages from CRAN (it is a wrapper around `install.packages()` that adds some extra features). There are other benefits to using `BiocManager::install()` for Bioconductor packages, many of which are outlined [here](https://www.bioconductor.org/install/). In short, Bioconductor packages have a release cycle that is different from CRAN and the `install()` function is aware of that difference, so it helps to keep package versions in line with one another in a way that doesn't generally happen with the base R `install.packages()`.
+
 
 ## Search for Bioconductor packages based on your analysis needs
 
@@ -113,18 +100,11 @@ dataset and not know exactly where to start with analyzing or
 visualizing it. The Bioconductor package search view can be a great way
 to browse through the packages that are available.
 
-[screenshot of bioconductor search]{.image .placeholder
-original-image-src="../fig/bioconductor_search.jpg"
-original-image-title="fig:"}
+![bioconductor_search](../figures/bioconductor_search.jpg)
 
-> ## Tip: Searching for packages on the Bioconductor website
->
-> There are several thousand packages available through the Bioconductor
-> website. It can be a bit of a challenge to find what you want, but one
-> helpful resource is the [package search
-> page](https://bioconductor.org/packages/release/BiocViews.html#___Software).
->
-> {: .callout}
+!!! tip "Searching for packages on the Bioconductor website"
+
+    There are several thousand packages available through the Bioconductor website. It can be a bit of a challenge to find what you want, but one helpful resource is the [package search page](https://bioconductor.org/packages/release/BiocViews.html#___Software).
 
 In bioinformatics, there are often many different tools that can be used
 in a particular instance. The authors of `vcfR` have [compiled some of
@@ -134,25 +114,17 @@ Bioconductor](https://bioconductor.org/packages/release/bioc/html/VariantAnnotat
 is called `VariantAnnotation` and may also be of interest to those
 working with vcf files in R.
 
-> ## Challenge
->
-> -   Use the `BiocManager::available()` function to see what packages
->     are available matching a search term.
-> -   Use the
->     [biocViews](https://bioconductor.org/packages/release/BiocViews.html#___Software)
->     interface to search for packages of interest.
->
-> You may or may not want to try installing the package, since not all
-> dependencies always install easily. However, this will at least let
-> you see what is available. {: .challenge}
+!!! question "Challenge"
 
-> ## Tip: Refreshing the RStudio package view after installing
->
-> If you install a package from Bioconductor, you may need to refresh
-> the RStudio package view to see it in your list. You can do this by
-> clicking the "Refresh" button in the Packages pane of RStudio.
->
-> {: .callout}
+    - Use the `BiocManager::available()` function to see what packages are available matching a search term.
+    - Use the [biocViews](https://bioconductor.org/packages/release/BiocViews.html#___Software) interface to search for packages of interest.
+
+    You may or may not want to try installing the package, since not all dependencies always install easily. However, this will at least let you see what is available.
+
+!!! tip "Refreshing the RStudio package view after installing"
+
+    If you install a package from Bioconductor, you may need to refresh the RStudio package view to see it in your list. You can do this by clicking the <kbd>Refresh</kbd> button in <kbd>Packages</kbd> pane of RStudio.
+
 
 ## Resources
 
