@@ -51,6 +51,19 @@ The idea of **mapping** is crucial in **ggplot**. One familiar example is to *ma
     
     When having doubts about whether a variable is [continuous or discrete](https://en.wikipedia.org/wiki/Continuous_or_discrete_variable), a quick way to check is to use the [`summary()`](https://www.geeksforgeeks.org/get-summary-of-results-produced-by-functions-in-r-programming-summary-function/) function. Continuous variables have descriptive statistics but not the discrete variables.
 
+!!! tip "Installing `ggplot` on your local machine"
+
+    Here, we do not need to install `ggplot` while working within NeSI's RStudio. However, if you would like to work on your own local R/RStudio, you can install this package (or any other packages) like so:
+
+    !!! r-project "r"
+
+        ```r
+        install.packages("ggplot2")
+        ```
+
+    **`ggplot2`** belongs to the [**`tidyverse`** framework](https://www.tidyverse.org/), a suite of packages that can help you with data import and manipulation.
+
+<!--
 ## Installing `tidyverse`
 
 **`ggplot2`** belongs to the [**`tidyverse`** framework](https://www.tidyverse.org/). Therefore, we will start with loading the package **`tidyverse`**. If **`tidyverse`** is not already installed, then we need to install first. If it is already installed, then we can skip the following step:
@@ -86,13 +99,27 @@ Now, let's load the `tidyverse` package:
 
 As we can see from above output **`ggplot2`** has been already loaded
 along with other packages as part of the **`tidyverse`** framework.
+-->
 
-## Loading the dataset
+## Loading `ggplot2` and the dataset
+
+Let's start by loading the required `ggplot2` package and importing the dataset we will be working with.
 
 !!! r-project "r"
 
     ```r
-    variants = read_csv("https://raw.githubusercontent.com/naupaka/vcfr-for-data-carpentry-draft/main/output/combined_tidy_vcf.csv")
+    # Load the ggplot2 package
+    library(ggplot2)
+
+    # Load the dataset
+    variants <- read.csv("combined_tidy_vcf.csv")
+    ```
+
+<!--
+!!! r-project "r"
+
+    ```r
+    variants <- read_csv("https://raw.githubusercontent.com/naupaka/vcfr-for-data-carpentry-draft/main/output/combined_tidy_vcf.csv")
     ```
 
 ??? success "Output"
@@ -110,12 +137,10 @@ along with other packages as part of the **`tidyverse`** framework.
     ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
     ```
 
-Explore the *structure* (types of columns and number of rows) of the
-dataset using [dplyr](https://dplyr.tidyverse.org/index.html)'s
-[`glimpse()`](https://dplyr.tidyverse.org/reference/glimpse.html) (for
-more info, see the [Data Wrangling and Analyses with
-Tidyverse](https://datacarpentry.org/genomics-r-intro/05-dplyr/)
-episode)
+Explore the *structure* (types of columns and number of rows) of the dataset using [dplyr](https://dplyr.tidyverse.org/index.html)'s [`glimpse()`](https://dplyr.tidyverse.org/reference/glimpse.html) (for more info, see the [Data Wrangling and Analyses with Tidyverse](https://datacarpentry.org/genomics-r-intro/05-dplyr/) episode)
+-->
+
+Explore the *structure* (types of columns and number of rows) of the dataset using `str()`.
 
 !!! r-project "r"
 
@@ -123,14 +148,74 @@ episode)
     str(variants)
     ```
 
+??? success "Output"
+
+    ```
+    'data.frame':	801 obs. of  29 variables:
+     $ sample_id    : chr  "SRR2584863" "SRR2584863" "SRR2584863" "SRR2584863" ...
+     $ CHROM        : chr  "CP000819.1" "CP000819.1" "CP000819.1" "CP000819.1" ...
+     $ POS          : int  9972 263235 281923 433359 473901 648692 1331794 1733343 2103887 2333538 ...
+     $ ID           : logi  NA NA NA NA NA NA ...
+     $ REF          : chr  "T" "G" "G" "CTTTTTTT" ...
+     $ ALT          : chr  "G" "T" "T" "CTTTTTTTT" ...
+     $ QUAL         : num  91 85 217 64 228 210 178 225 56 167 ...
+     $ FILTER       : logi  NA NA NA NA NA NA ...
+     $ INDEL        : logi  FALSE FALSE FALSE TRUE TRUE FALSE ...
+     $ IDV          : int  NA NA NA 12 9 NA NA NA 2 7 ...
+     $ IMF          : num  NA NA NA 1 0.9 ...
+     $ DP           : int  4 6 10 12 10 10 8 11 3 7 ...
+     $ VDB          : num  0.0257 0.0961 0.7741 0.4777 0.6595 ...
+     $ RPB          : num  NA 1 NA NA NA NA NA NA NA NA ...
+     $ MQB          : num  NA 1 NA NA NA NA NA NA NA NA ...
+     $ BQB          : num  NA 1 NA NA NA NA NA NA NA NA ...
+     $ MQSB         : num  NA NA 0.975 1 0.916 ...
+     $ SGB          : num  -0.556 -0.591 -0.662 -0.676 -0.662 ...
+     $ MQ0F         : num  0 0.167 0 0 0 ...
+     $ ICB          : logi  NA NA NA NA NA NA ...
+     $ HOB          : logi  NA NA NA NA NA NA ...
+     $ AC           : int  1 1 1 1 1 1 1 1 1 1 ...
+     $ AN           : int  1 1 1 1 1 1 1 1 1 1 ...
+     $ DP4          : chr  "0,0,0,4" "0,1,0,5" "0,0,4,5" "0,1,3,8" ...
+     $ MQ           : int  60 33 60 60 60 60 60 60 60 60 ...
+     $ Indiv        : chr  "/home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam" "/home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam" "/home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam" "/home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam" ...
+     $ gt_PL        : chr  "121,0" "112,0" "247,0" "91,0" ...
+     $ gt_GT        : int  1 1 1 1 1 1 1 1 1 1 ...
+     $ gt_GT_alleles: chr  "G" "T" "T" "CTTTTTTTT" ...
+    ```
+
 Alternatively, we can display the first a few rows (vertically) of the
-table using
-[`head()`](https://www.geeksforgeeks.org/get-the-first-parts-of-a-data-set-in-r-programming-head-function/):
+table using [`head()`](https://www.geeksforgeeks.org/get-the-first-parts-of-a-data-set-in-r-programming-head-function/):
 
 !!! r-project "r"
 
     ```r
     head(variants)
+    ```
+
+??? success "Output"
+
+    ```
+       sample_id      CHROM    POS ID      REF       ALT QUAL FILTER INDEL IDV IMF DP       VDB RPB
+    1 SRR2584863 CP000819.1   9972 NA        T         G   91     NA FALSE  NA  NA  4 0.0257451  NA
+    2 SRR2584863 CP000819.1 263235 NA        G         T   85     NA FALSE  NA  NA  6 0.0961330   1
+    3 SRR2584863 CP000819.1 281923 NA        G         T  217     NA FALSE  NA  NA 10 0.7740830  NA
+    4 SRR2584863 CP000819.1 433359 NA CTTTTTTT CTTTTTTTT   64     NA  TRUE  12 1.0 12 0.4777040  NA
+    5 SRR2584863 CP000819.1 473901 NA     CCGC    CCGCGC  228     NA  TRUE   9 0.9 10 0.6595050  NA
+    6 SRR2584863 CP000819.1 648692 NA        C         T  210     NA FALSE  NA  NA 10 0.2680140  NA
+      MQB BQB     MQSB       SGB     MQ0F ICB HOB AC AN     DP4 MQ
+    1  NA  NA       NA -0.556411 0.000000  NA  NA  1  1 0,0,0,4 60
+    2   1   1       NA -0.590765 0.166667  NA  NA  1  1 0,1,0,5 33
+    3  NA  NA 0.974597 -0.662043 0.000000  NA  NA  1  1 0,0,4,5 60
+    4  NA  NA 1.000000 -0.676189 0.000000  NA  NA  1  1 0,1,3,8 60
+    5  NA  NA 0.916482 -0.662043 0.000000  NA  NA  1  1 1,0,2,7 60
+    6  NA  NA 0.916482 -0.670168 0.000000  NA  NA  1  1 0,0,7,3 60
+                                                                   Indiv gt_PL gt_GT gt_GT_alleles
+    1 /home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam 121,0     1             G
+    2 /home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam 112,0     1             T
+    3 /home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam 247,0     1             T
+    4 /home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam  91,0     1     CTTTTTTTT
+    5 /home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam 255,0     1        CCGCGC
+    6 /home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam 240,0     1             T
     ```
 
 **`ggplot2`** functions like data in the **long** format, i.e., a column for every dimension (variable), and a row for every observation. Well-structured data will save you time when making figures with **`ggplot2`**
