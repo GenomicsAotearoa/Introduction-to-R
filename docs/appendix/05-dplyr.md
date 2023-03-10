@@ -821,7 +821,7 @@ for each sample:
     3 SRR2589044     9.3       9.5      3     16
     ```
 
-### Reshaping data frames
+## Reshaping data frames
 
 It can sometimes be useful to transform the "long" tidy format, into the
 wide format. This transformation can be done with the `pivot_wider()`
@@ -873,7 +873,7 @@ The opposite operation of `pivot_wider()` is taken care by
     2 CP000819.1 SRR2584866    10.6
     3 CP000819.1 SRR2589044     9.3
     ```
-### Resources
+## Resources
 
 -   [Handy dplyr
     cheatsheet](https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf)
