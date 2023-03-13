@@ -73,6 +73,10 @@ R:
     for which spreadsheet programs such as Excel have proven difficult to
     use, or where the size of the data set created issues? {: .discussion}
 
+## RStudio on Nesi
+
+Logging into the [NeSI Jupyter Interface](https://dinindusenanayake.github.io/ganesi_authesetup-login/1_jupyterlogin/). 
+
 ## Introducing RStudio Server
 
 In these lessons, we will be making use of a software called
