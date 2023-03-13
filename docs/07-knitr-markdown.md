@@ -330,19 +330,19 @@ cp /nesi/project/nesi02659/R4Genomics/*.Rmd ~/R4Genomics
 
 You will then see them in your RStudio `Files` tab, click to open.
 
-## Resources
+!!! earth-americas "Resources"
 
--   [Knitr in a knutshell tutorial](http://kbroman.org/knitr_knutshell)
--   [Dynamic Documents with R and
-    knitr](http://www.amazon.com/exec/obidos/ASIN/1482203537/7210-20)
-    (book)
--   [R Markdown documentation](http://rmarkdown.rstudio.com)
--   [R Markdown cheat
-    sheet](https://github.com/rstudio/cheatsheets/raw/master/rmarkdown-2.0.pdf)
-    (PDF)
--   [Getting started with R
-    Markdown](https://www.rstudio.com/resources/webinars/getting-started-with-r-markdown/)
--   [Reproducible
-    Reporting](https://www.rstudio.com/resources/webinars/reproducible-reporting/)
--   [Introducing
-    Bookdown](https://www.rstudio.com/resources/webinars/introducing-bookdown/)
+     -   [Knitr in a knutshell tutorial](http://kbroman.org/knitr_knutshell)
+     -   [Dynamic Documents with R and
+         knitr](http://www.amazon.com/exec/obidos/ASIN/1482203537/7210-20)
+         (book)
+     -   [R Markdown documentation](http://rmarkdown.rstudio.com)
+     -   [R Markdown cheat
+         sheet](https://github.com/rstudio/cheatsheets/raw/master/rmarkdown-2.0.pdf)
+         (PDF)
+     -   [Getting started with R
+         Markdown](https://www.rstudio.com/resources/webinars/getting-started-with-r-markdown/)
+     -   [Reproducible
+         Reporting](https://www.rstudio.com/resources/webinars/reproducible-reporting/)
+     -   [Introducing
+         Bookdown](https://www.rstudio.com/resources/webinars/introducing-bookdown/)

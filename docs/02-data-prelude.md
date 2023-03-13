@@ -201,20 +201,20 @@ For our file, the metrics presented are GT:PL:GQ.
 For more information on VCF files visit The Broad Institute's [VCF
 guide](https://gatk.broadinstitute.org/hc/en-us/articles/360035531692-VCF-Variant-Call-Format).
 
-## References
+!!! book "References"
 
-Tenaillon O, Barrick JE, Ribeck N, Deatherage DE, Blanchard JL, Dasgupta
-A, Wu GC, Wielgoss S, Cruveiller S, Médigue C, Schneider D, Lenski RE.
-Tempo and mode of genome evolution in a 50,000-generation experiment
-(2016) Nature. 536(7615): 165–170. <br>
-[Paper](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4988878/),
-[Supplemental materials](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4988878/#), 
-[Data on NCBI SRA](https://trace.ncbi.nlm.nih.gov/Traces/sra/?study=SRP064605), 
-[Data on EMBL-EBI ENA](https://www.ebi.ac.uk/ena/data/view/PRJNA295606)
-
-This episode was adapted from the Data Carpentry Genomic lessons:
-
--   [Project organization and management for
-    Genomics](https://datacarpentry.org/organization-genomics/data/)
--   [Data wrangling and processing for
-    genomics](https://datacarpentry.org/wrangling-genomics/04-variant_calling/index.html)
+    Tenaillon O, Barrick JE, Ribeck N, Deatherage DE, Blanchard JL, Dasgupta
+    A, Wu GC, Wielgoss S, Cruveiller S, Médigue C, Schneider D, Lenski RE.
+    Tempo and mode of genome evolution in a 50,000-generation experiment
+    (2016) Nature. 536(7615): 165–170. <br>
+    [Paper](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4988878/),
+    [Supplemental materials](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4988878/#), 
+    [Data on NCBI SRA](https://trace.ncbi.nlm.nih.gov/Traces/sra/?study=SRP064605), 
+    [Data on EMBL-EBI ENA](https://www.ebi.ac.uk/ena/data/view/PRJNA295606)
+    
+    This episode was adapted from the Data Carpentry Genomic lessons:
+    
+    -   [Project organization and management for
+        Genomics](https://datacarpentry.org/organization-genomics/data/)
+    -   [Data wrangling and processing for
+        genomics](https://datacarpentry.org/wrangling-genomics/04-variant_calling/index.html)
