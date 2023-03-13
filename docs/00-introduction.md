@@ -73,6 +73,10 @@ R:
     for which spreadsheet programs such as Excel have proven difficult to
     use, or where the size of the data set created issues? {: .discussion}
 
+## RStudio on Nesi
+
+Logging into the [NeSI Jupyter Interface](https://dinindusenanayake.github.io/ganesi_authesetup-login/1_jupyterlogin/). 
+
 ## Introducing RStudio Server
 
 In these lessons, we will be making use of a software called
@@ -92,73 +96,6 @@ standalone software.
 
 
 ![image](./figures/rstudio_session_default.png){width="700"}
-
-## Create an RStudio project
-
-One of the first benefits we will take advantage of in RStudio is
-something called an **RStudio Project**. An RStudio project allows you
-to more easily:
-
- -   Save data, files, variables, packages, etc. related to a specific
-     analysis project
- -   Restart work where you left off
- -   Collaborate, especially if you are using version control such as
-    [git](http://swcarpentry.github.io/git-novice/).
-
-!!! info ""
-
-
-    1.  To create a project, go to the **File** menu, and click **New Project**
-    
-        ![image](./figures/new_project_window.png){width-"400"}
-    
-    
-    2.  In the window that opens select **New Directory**, then **New
-        Project**. For "Directory name:" enter **dc_genomics_r**. For
-        "Create project as subdirectory of", click
-        `Browse...` and then click
-        `Choose` which will select your home
-        directory "\~".
-    
-    3.  Finally click `Create Project`. In the
-        "Files" tab of your output pane (more about the RStudio layout in a
-        moment), you should see an RStudio project file,
-        **dc_genomics_r.Rproj**. All RStudio projects end with the
-        "**.Rproj**" file extension.
-    
-
-!!! tip "Make your project more reproducible with renv"
-   
-    One of the most wonderful and also frustrating aspects of working with
-    R is managing packages. We will talk more about them, but packages
-    (e.g. ggplot2) are add-ons that extend what you can do with R.
-    Unfortunately it is very common that you may run into versions of R
-    and/or R packages that are not compatible. This may make it difficult
-    for someone to run your R script using their version of R or a given R
-    package, and/or make it more difficult to run their scripts on your
-    machine. [renv](https://rstudio.github.io/renv/) is an RStudio add-on
-    that will associate your packages and project so that your work is
-    more portable and reproducible. To turn on renv click on the
-    `Tools` menu and select
-    `Project Options`. Under **Enviornments**
-    check off "**Use renv with this project**" and follow any installation
-    instructions. {: .callout}
-
-## Creating your first R script
-
-Now that we are ready to start exploring R, we will want to keep a
-record of the commands we are using. To do this we can create an R
-script:
-
-Click the `File` menu and select
-`New File` and then `R
-Script`. Before we go any further, save your script by
-clicking the save/disk icon that is in the bar above the first line in
-the script editor, or click the `File` menu
-and select `save`. In the "Save File" window
-that opens, name your file **"genomics_r\_basics"**. The new script
-**genomics_r\_basics.R** should appear under "files" in the output pane.
-By convention, R scripts end with the file extension **.R**.
 
 ## Overview and customization of the RStudio layout
 
@@ -220,6 +157,69 @@ Options`.
     [Software Carpentry
     lesson](https://swcarpentry.github.io/r-novice-inflammation/05-cmdline/).
     
+## Create an RStudio project
+
+One of the first benefits we will take advantage of in RStudio is
+something called an **RStudio Project**. An RStudio project allows you
+to more easily:
+
+ -   Save data, files, variables, packages, etc. related to a specific
+     analysis project
+ -   Restart work where you left off
+ -   Collaborate, especially if you are using version control such as
+    [git](http://swcarpentry.github.io/git-novice/).
+
+!!! info ""
+
+
+    1.  To create a project, go to the **File** menu, and click **New Project**
+    
+        ![image](./figures/new_project_window.png){width-"400"}
+    
+    
+    2.  In the window that opens select **Existing Directory**  
+        Then select **Browse....**   
+        Choose and then click "~/R4Genomnics".  
+    
+    3.  Finally click `Create Project`. In the
+        "Files" tab of your output pane (more about the RStudio layout in a
+        moment), you should see an RStudio project file,
+        **R4Genomics.Rproj**. All RStudio projects end with the
+        "**.Rproj**" file extension.
+    
+
+!!! tip "Make your project more reproducible with renv"
+   
+    One of the most wonderful and also frustrating aspects of working with
+    R is managing packages. We will talk more about them, but packages
+    (e.g. ggplot2) are add-ons that extend what you can do with R.
+    Unfortunately it is very common that you may run into versions of R
+    and/or R packages that are not compatible. This may make it difficult
+    for someone to run your R script using their version of R or a given R
+    package, and/or make it more difficult to run their scripts on your
+    machine. [renv](https://rstudio.github.io/renv/) is an RStudio add-on
+    that will associate your packages and project so that your work is
+    more portable and reproducible. To turn on renv click on the
+    `Tools` menu and select
+    `Project Options`. Under **Enviornments**
+    check off "**Use renv with this project**" and follow any installation
+    instructions. {: .callout}
+
+## Creating your first R script
+
+Now that we are ready to start exploring R, we will want to keep a
+record of the commands we are using. To do this we can create an R
+script:
+
+Click the `File` menu and select
+`New File` and then `R
+Script`. Before we go any further, save your script by
+clicking the save/disk icon that is in the bar above the first line in
+the script editor, or click the `File` menu
+and select `save`. In the "Save File" window
+that opens, name your file **"genomics_r\_basics"**. The new script
+**genomics_r\_basics.R** should appear under "files" in the output pane.
+By convention, R scripts end with the file extension **.R**.
 
 ## Getting to work with R: navigating directories
 
@@ -241,7 +241,7 @@ the Source pane.
 In the console, we expect to see the following output :
 
 !!! solution ""
-    `[1] "/home/dcuser/dc_genomics_r"`
+    `[1] "/home/<USERID>/R4Genomics"`
 
 * Notice, at the Console, you will also see the instruction you executed above the output in blue.
 
@@ -253,7 +253,7 @@ include a comment on the purpose of commands you are learning, e.g.:
 
 !!! r-project
 
-    `# this `ommand shows the current working directory getwd()`
+    `# this command shows the current working directory getwd()`
 
 !!! question "Exercise : Work interactively in R"   
    
@@ -269,13 +269,13 @@ include a comment on the purpose of commands you are learning, e.g.:
          .challenge}
 
 For the purposes of this exercise we want you to be in the directory
-`"/home/dcuser/R_data"`. What if you weren't? You can set your home
+`"/home/<USERID>/R4Genomics"`. What if you weren't? You can set your home
 directory using the `setwd()` command. Enter this command in your
 script, but *don't run* this yet.
 
 !!! r-project
 
-    `# This `ets the working directory setwd()`
+    `# This sets the working directory setwd()`
 
 You may have guessed, you need to tell the `setwd()` command what
 directory you want to set as your working directory. To do so, inside of
@@ -288,7 +288,7 @@ this:
 
 !!! r-project
 
-    `# This `ets the working directory setwd("/home/dcuser/dc_genomics_r")`
+    `# This sets the working directory setwd("/home/<USERID>/R4Genomics")`
 
 When you run this command, the console repeats the command, but gives
 you no output. Instead, you see the blank R prompt: `>`.
@@ -335,6 +335,7 @@ understand what is happening in any R script.
             including on attached packages
         -   `date()` \# Gives the current date
         -   `Sys.time()` \# Gives the current time
+        -   `.libPaths()` \# Shows what libraries are available
         
         **Notice**: Commands are case sensitive! 
 
