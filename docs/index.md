@@ -10,8 +10,8 @@
 </center>
 
 
-<br>
-<center>
+* * * 
+
 
 | **Lesson**                                         | **Overview** | 
 |:---------------------------------------------------|:-------------|
@@ -23,11 +23,15 @@
 |[6. Producing reports with knitr](./07-knitr-markdown.md){ .md-button .md-button--primary } | Writing Reports|
 |[7. R-help](./08-r-help.md){ .md-button .md-button--primary } | More Resources|
 
-<br>
+* * * 
 
 | **Appendix** | **Description** |
 | ------------ | --------------- |
 |[Introduction to Bioconductor](./appendix/04-bioconductor-vcfr.md){ .md-button .md-button--primary } | Bioinformatics Resources|
 |[Data wrangling and analyses with Tidyverse](./appendix/05-dplyr.md){ .md-button .md-button--primary } | The Tidyverse for handling data|
 
-</center>
+
+
+
+!!! note "Attribution notice"
+    - The material used to prepare for this workshop was extracted from **Intro to R and RStudio for Genomics** maintained by Carpentries foundation  https://datacarpentry.org/genomics-r-intro/
