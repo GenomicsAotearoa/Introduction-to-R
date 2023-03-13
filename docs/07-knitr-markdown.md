@@ -325,18 +325,19 @@ file.
     run the following code:
 
     ```r
-    # this is already installed on NeSI
+    # these is already installed on NeSI
     # install.packages('tinytex')
     # tinytex::install_tinytex()
     ```
 ## Simple Examples
 
-Two simple examples of Markdowns with the data we have been using can be copied to your R4Genomics directory. Jump over to the terminal tab, bottom left, beside **consol** in your RStudio session. Note the use of the `*` as a wildcard, meaning the copy command will look for **ALL** `.Rmd` files in the directory. 
+Two simple examples of Markdowns with the data we have been using can be copied to your R4Genomics directory. Jump over to the **Terminal tab**, bottom left, beside **Consol** in your RStudio session. Note the use of the `*` as a wildcard, meaning the copy command will look for **ALL** `.Rmd` files in the directory. 
 
 ```bash
 cp /nesi/project/nesi02659/R4Genomics/*.Rmd ~/R4Genomics
 ```
-You will then see them in you RStudio `Files` tab, click to open.
+
+You will then see them in your RStudio `Files` tab, click to open.
 
 ## Resources
 
