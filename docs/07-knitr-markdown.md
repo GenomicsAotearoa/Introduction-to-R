@@ -331,7 +331,7 @@ file.
     ```
 ## Simple Examples
 
-Two simple examples of Markdowns with the data we have been using can be copied to your R4Genomics directory. Jump over to the terminal tab, bottom left, beside **consol** in your RStudio session.
+Two simple examples of Markdowns with the data we have been using can be copied to your R4Genomics directory. Jump over to the terminal tab, bottom left, beside **consol** in your RStudio session. Note the use of the `*` as a wildcard, meaning the copy command will look for **ALL** `.Rmd` files in the directory. 
 
 ```bash
 cp /nesi/project/nesi02659/R4Genomics/*.Rmd ~/R4Genomics
