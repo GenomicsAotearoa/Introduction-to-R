@@ -17,7 +17,10 @@
     
         - How do I get help using R and RStudio?
 
+
+<center>
 ![oreilly_book_cover](figures/oreilly_book_covers.png){width="600"}
+</center>
 
 No matter how much experience you have with R, you will find yourself
 needing help. There is no shame in researching how to do something in R,
