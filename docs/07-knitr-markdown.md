@@ -205,7 +205,7 @@ The main code chunks look like this:
 
 <pre>
 &#96;&#96;&#96;{r load_data}
-gapminder <- read.csv("~/Desktop/gapminder.csv")
+variants <- read.csv("combined_tidy_vcf.csv")
 &#96;&#96;&#96;
 </pre>
 
@@ -219,7 +219,7 @@ name of the code chunk that produced them.
     Add code chunks to
 
     - Load the `ggplot2` package
-    - Read the `gapminder` data
+    - Read the `variants` data
     - Create a plot
 
 
@@ -324,8 +324,9 @@ file.
     run the following code:
 
     ```r
-    install.packages('tinytex')
-    tinytex::install_tinytex()
+    # this is already installed on NeSI
+    # install.packages('tinytex')
+    # tinytex::install_tinytex()
     ```
 
 ## Resources
