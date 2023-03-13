@@ -117,8 +117,9 @@ to more easily:
         ![image](./figures/new_project_window.png){width-"400"}
     
     
-    2.  In the window that opens select **Existing Directory**, then **Browse....** 
-        `Choose` and then click "~/R4Genomnics".
+    2.  In the window that opens select **Existing Directory**  
+        Then select **Browse....**   
+        Choose and then click "~/R4Genomnics".  
     
     3.  Finally click `Create Project`. In the
         "Files" tab of your output pane (more about the RStudio layout in a
