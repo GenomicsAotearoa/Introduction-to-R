@@ -210,7 +210,7 @@ variants <- read.csv("combined_tidy_vcf.csv")
 &#96;&#96;&#96;
 </pre>
 
-That is, you place a chunk of R code between <code>\`\`\`{r chunk_name}</code> and `<code>`{=html}\`\`\``</code>`{=html}.
+That is, you place a chunk of R code between <code>\`\`\`{r chunk_name}</code> and <code>\`\`\`</code>.
 It's a good idea to give each chunk a name, as they will help you to fix
 errors and, if any graphs are produced, the file names are based on the
 name of the code chunk that produced them.
@@ -286,8 +286,7 @@ names, like `fig.path="Figs/cleaning-"` and `fig.path="Figs/analysis-"`.
 
 You can make *every* number in your report reproducible. Use
 <code>\`r</code> and <code>\`</code>
-for an in-line code chunk, like so: <code>\`r round(some_value,
-2)\`</code>. The code will be executed and replaced with the
+for an in-line code chunk, like so: <code>\`r nrow(variants)\`</code>. The code will be executed and replaced with the
 *value* of the result.
 
 !!! bell "Lines"
@@ -297,14 +296,6 @@ for an in-line code chunk, like so: <code>\`r round(some_value,
 Perhaps precede the paragraph with a larger code chunk that does
 calculations and defines things, with `include=FALSE` for that larger
 chunk (which is the same as `echo=FALSE` and `results="hide"`).
-
-I'm very particular about rounding in such situations. I may want `2.0`,
-but `round(2.03, 1)` will give just `2`.
-
-The
-[`myround`](https://github.com/kbroman/broman/blob/master/R/myround.R)
-function in the [broman](https://github.com/kbroman/broman) package
-handles this.
 
 !!! question "Challenge"
 
