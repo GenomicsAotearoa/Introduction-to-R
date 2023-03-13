@@ -114,6 +114,8 @@ Below you will see the header (which describes the format), the time and
 date the file was created, the version of `bcftools` that was used, the
 command line parameters used, and some additional information:
 
+!!! quote ""
+    ```
     ##fileformat=VCFv4.2
     ##FILTER=<ID=PASS,Description="All filters passed">
     ##bcftoolsVersion=1.8+htslib-1.8
@@ -142,9 +144,12 @@ command line parameters used, and some additional information:
     ##INFO=<ID=MQ,Number=1,Type=Integer,Description="Average mapping quality">
     ##bcftools_callVersion=1.8+htslib-1.8
     ##bcftools_callCommand=call --ploidy 1 -m -v -o results/bcf/SRR2584866_variants.vcf results/bcf/SRR2584866_raw.bcf; Date=Tue Oct  9 18:48:10 2018
+    ```
 
 Followed by information on each of the variations observed:
 
+!!! quote ""
+    ```
     #CHROM  POS     ID      REF     ALT     QUAL    FILTER  INFO    FORMAT  results/bam/SRR2584866.aligned.sorted.bam
     CP000819.1      1521    .       C       T       207     .       DP=9;VDB=0.993024;SGB=-0.662043;MQSB=0.974597;MQ0F=0;AC=1;AN=1;DP4=0,0,4,5;MQ=60
     CP000819.1      1612    .       A       G       225     .       DP=13;VDB=0.52194;SGB=-0.676189;MQSB=0.950952;MQ0F=0;AC=1;AN=1;DP4=0,0,6,5;MQ=60
@@ -158,7 +163,8 @@ Followed by information on each of the variations observed:
     CP000819.1      56613   .       C       G       183     .       DP=12;VDB=0.879703;SGB=-0.676189;MQSB=1;MQ0F=0;AC=1;AN=1;DP4=0,0,8,3;MQ=60      GT:PL
     CP000819.1      62118   .       A       G       225     .       DP=19;VDB=0.414981;SGB=-0.691153;MQSB=0.906029;MQ0F=0;AC=1;AN=1;DP4=0,0,8,10;MQ=59
     CP000819.1      64042   .       G       A       225     .       DP=18;VDB=0.451328;SGB=-0.689466;MQSB=1;MQ0F=0;AC=1;AN=1;DP4=0,0,7,9;MQ=60      GT:PL
-
+    ```
+    
 The first few columns represent the information we have about a
 predicted variation.
 
