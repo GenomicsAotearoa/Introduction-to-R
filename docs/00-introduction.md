@@ -97,6 +97,66 @@ standalone software.
 
 ![image](./figures/rstudio_session_default.png){width="700"}
 
+## Overview and customization of the RStudio layout
+
+Here are the major windows (or panes) of the RStudio environment:
+
+![images](./figures/rstudio_session_4pane_layout.png)
+
+!!! quote ""
+
+    -   **Source**: This pane is where you will write/view R scripts. Some
+        outputs (such as if you view a dataset using `View()`) will appear
+        as a tab here.
+    -   **Console/Terminal/Jobs**: This is actually where you see the
+        execution of commands. This is the same display you would see if you
+        were using R at the command line without RStudio. You can work
+        interactively (i.e. enter R commands here), but for the most part we
+        will run a script (or lines in a script) in the source pane and
+        watch their execution and output here. The "Terminal" tab give you
+        access to the BASH terminal (the Linux operating system, unrelated
+        to R). RStudio also allows you to run jobs (analyses) in the
+        background. This is useful if some analysis will take a while to
+        run. You can see the status of those jobs in the background.
+    -   **Environment/History**: Here, RStudio will show you what datasets
+        and objects (variables) you have created and which are defined in
+        memory. You can also see some properties of objects/datasets such as
+        their type and dimensions. The "History" tab contains a history of
+        the R commands you've executed R.
+    -   **Files/Plots/Packages/Help/Viewer**: This multipurpose pane will
+        show you the contents of directories on your computer. You can also
+        use the "Files" tab to navigate and set the working directory. The
+        "Plots" tab will show the output of any plots generated. In
+        "Packages" you will see what packages are actively loaded, or you
+        can attach installed packages. "Help" will display help files for R
+        functions and packages. "Viewer" will allow you to view local web
+        content (e.g. HTML outputs).
+
+!!! tip "Uploads and downloads in the cloud"
+
+    In the "Files" tab you can select a file and download it from your
+    cloud instance (click the "more" button) to your local computer.
+    Uploads are also possible. {: .callout}
+
+All of the panes in RStudio have configuration options. For example, you
+can minimize/maximize a pane, or by moving your mouse in the space
+between panes you can resize as needed. The most important customization
+options for pane layout are in the `View`
+menu. Other options such as font sizes, colors/themes, and more are in
+the `Tools` menu under `Global
+Options`.
+
+!!! bell "You are working with R"
+
+    
+    Although we won't be working with R at the terminal, there are lots of
+    reasons to. For example, once you have written an RScript, you can run
+    it at any Linux or Windows terminal without the need to start up
+    RStudio. We don't want you to get confused - RStudio runs R, but R is
+    not RStudio. For more on running an R Script at the terminal see this
+    [Software Carpentry
+    lesson](https://swcarpentry.github.io/r-novice-inflammation/05-cmdline/).
+    
 ## Create an RStudio project
 
 One of the first benefits we will take advantage of in RStudio is
@@ -160,67 +220,6 @@ and select `save`. In the "Save File" window
 that opens, name your file **"genomics_r\_basics"**. The new script
 **genomics_r\_basics.R** should appear under "files" in the output pane.
 By convention, R scripts end with the file extension **.R**.
-
-## Overview and customization of the RStudio layout
-
-Here are the major windows (or panes) of the RStudio environment:
-
-![images](./figures/rstudio_session_4pane_layout.png)
-
-!!! quote ""
-
-    -   **Source**: This pane is where you will write/view R scripts. Some
-        outputs (such as if you view a dataset using `View()`) will appear
-        as a tab here.
-    -   **Console/Terminal/Jobs**: This is actually where you see the
-        execution of commands. This is the same display you would see if you
-        were using R at the command line without RStudio. You can work
-        interactively (i.e. enter R commands here), but for the most part we
-        will run a script (or lines in a script) in the source pane and
-        watch their execution and output here. The "Terminal" tab give you
-        access to the BASH terminal (the Linux operating system, unrelated
-        to R). RStudio also allows you to run jobs (analyses) in the
-        background. This is useful if some analysis will take a while to
-        run. You can see the status of those jobs in the background.
-    -   **Environment/History**: Here, RStudio will show you what datasets
-        and objects (variables) you have created and which are defined in
-        memory. You can also see some properties of objects/datasets such as
-        their type and dimensions. The "History" tab contains a history of
-        the R commands you've executed R.
-    -   **Files/Plots/Packages/Help/Viewer**: This multipurpose pane will
-        show you the contents of directories on your computer. You can also
-        use the "Files" tab to navigate and set the working directory. The
-        "Plots" tab will show the output of any plots generated. In
-        "Packages" you will see what packages are actively loaded, or you
-        can attach installed packages. "Help" will display help files for R
-        functions and packages. "Viewer" will allow you to view local web
-        content (e.g. HTML outputs).
-
-!!! tip "Uploads and downloads in the cloud"
-
-    In the "Files" tab you can select a file and download it from your
-    cloud instance (click the "more" button) to your local computer.
-    Uploads are also possible. {: .callout}
-
-All of the panes in RStudio have configuration options. For example, you
-can minimize/maximize a pane, or by moving your mouse in the space
-between panes you can resize as needed. The most important customization
-options for pane layout are in the `View`
-menu. Other options such as font sizes, colors/themes, and more are in
-the `Tools` menu under `Global
-Options`.
-
-!!! bell "You are working with R"
-
-    
-    Although we won't be working with R at the terminal, there are lots of
-    reasons to. For example, once you have written an RScript, you can run
-    it at any Linux or Windows terminal without the need to start up
-    RStudio. We don't want you to get confused - RStudio runs R, but R is
-    not RStudio. For more on running an R Script at the terminal see this
-    [Software Carpentry
-    lesson](https://swcarpentry.github.io/r-novice-inflammation/05-cmdline/).
-    
 
 ## Getting to work with R: navigating directories
 
