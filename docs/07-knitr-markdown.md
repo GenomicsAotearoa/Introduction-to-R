@@ -17,6 +17,7 @@
         - Chunk options
         - Inline R code
         - Other output formats
+        - Simple Examples
     
     === "Questions"
 
@@ -328,6 +329,14 @@ file.
     # install.packages('tinytex')
     # tinytex::install_tinytex()
     ```
+## Simple Examples
+
+Two simple examples of Markdowns with the data we have been using can be copied to your R4Genomics directory. Jump over to the terminal tab, bottom left, beside **consol** in your RStudio session.
+
+```bash
+cp /nesi/project/nesi02659/R4Genomics/*.Rmd ~/R4Genomics
+```
+You will then see them in you RStudio `Files` tab, click to open.
 
 ## Resources
 
