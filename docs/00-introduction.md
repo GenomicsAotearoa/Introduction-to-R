@@ -117,17 +117,13 @@ to more easily:
         ![image](./figures/new_project_window.png){width-"400"}
     
     
-    2.  In the window that opens select **New Directory**, then **New
-        Project**. For "Directory name:" enter **dc_genomics_r**. For
-        "Create project as subdirectory of", click
-        `Browse...` and then click
-        `Choose` which will select your home
-        directory "\~".
+    2.  In the window that opens select **Existing Directory**, then **Browse....** 
+        `Choose` and then click "~/R4Genomnics".
     
     3.  Finally click `Create Project`. In the
         "Files" tab of your output pane (more about the RStudio layout in a
         moment), you should see an RStudio project file,
-        **dc_genomics_r.Rproj**. All RStudio projects end with the
+        **R4Genomics.Rproj**. All RStudio projects end with the
         "**.Rproj**" file extension.
     
 
@@ -245,7 +241,7 @@ the Source pane.
 In the console, we expect to see the following output :
 
 !!! solution ""
-    `[1] "/home/dcuser/dc_genomics_r"`
+    `[1] "/home/<USERID>/R4Genomics"`
 
 * Notice, at the Console, you will also see the instruction you executed above the output in blue.
 
@@ -257,7 +253,7 @@ include a comment on the purpose of commands you are learning, e.g.:
 
 !!! r-project
 
-    `# this `ommand shows the current working directory getwd()`
+    `# this command shows the current working directory getwd()`
 
 !!! question "Exercise : Work interactively in R"   
    
@@ -273,13 +269,13 @@ include a comment on the purpose of commands you are learning, e.g.:
          .challenge}
 
 For the purposes of this exercise we want you to be in the directory
-`"/home/dcuser/R_data"`. What if you weren't? You can set your home
+`"/home/<USERID>/R4Genomics"`. What if you weren't? You can set your home
 directory using the `setwd()` command. Enter this command in your
 script, but *don't run* this yet.
 
 !!! r-project
 
-    `# This `ets the working directory setwd()`
+    `# This sets the working directory setwd()`
 
 You may have guessed, you need to tell the `setwd()` command what
 directory you want to set as your working directory. To do so, inside of
@@ -292,7 +288,7 @@ this:
 
 !!! r-project
 
-    `# This `ets the working directory setwd("/home/dcuser/dc_genomics_r")`
+    `# This sets the working directory setwd("/home/<USERID>/R4Genomics")`
 
 When you run this command, the console repeats the command, but gives
 you no output. Instead, you see the blank R prompt: `>`.
@@ -339,6 +335,7 @@ understand what is happening in any R script.
             including on attached packages
         -   `date()` \# Gives the current date
         -   `Sys.time()` \# Gives the current time
+        -   `.libPaths()` \# Shows what libraries are available
         
         **Notice**: Commands are case sensitive! 
 
