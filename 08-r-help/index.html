@@ -1,0 +1,489 @@
+
+<!DOCTYPE html>
+
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="Genomics Aotearoa" name="author"/>
+<link href="https://genomicsaotearoa.github.io/Introduction-to-R/08-r-help/" rel="canonical"/>
+<link href="../07-knitr-markdown/" rel="prev"/>
+<link href="../appendix/04-bioconductor-vcfr/" rel="next"/>
+<link href="../theme_figures/nesi_ga.png" rel="icon"/>
+<meta content="mkdocs-1.4.2, mkdocs-material-9.1.2" name="generator"/>
+<title>Getting help with R - Introduction to R</title>
+<link href="../assets/stylesheets/main.7bf56d0a.min.css" rel="stylesheet"/>
+<link href="../assets/stylesheets/palette.a0c5b2b5.min.css" rel="stylesheet"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Mukta:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
+<style>:root{--md-text-font:"Mukta";--md-code-font:"Roboto Mono"}</style>
+<link href="../stylesheets/extra.css" rel="stylesheet"/>
+<script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+<link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            
+                .gscrollbar-fixer { padding-right: 15px; }
+                .gdesc-inner { font-size: 0.75rem; }
+                body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+                body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+                body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}
+                </style><script src="../assets/javascripts/glightbox.min.js"></script></head>
+<body data-md-color-accent="" data-md-color-primary="indigo" data-md-color-scheme="default" dir="ltr">
+<script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#getting-help-with-r">
+          Skip to content
+        </a>
+</div>
+<div data-md-component="announce">
+</div>
+<header class="md-header md-header--shadow" data-md-component="header">
+<nav aria-label="Header" class="md-header__inner md-grid">
+<a aria-label="Introduction to R" class="md-header__button md-logo" data-md-component="logo" href=".." title="Introduction to R">
+<img alt="logo" src="../theme_figures/nesi_ga.png"/>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis">
+            Introduction to R
+          </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis">
+            
+              Getting help with R
+            
+          </span>
+</div>
+</div>
+</div>
+<form class="md-header__option" data-md-component="palette">
+<input aria-label="Switch to light mode" class="md-option" data-md-color-accent="" data-md-color-media="(prefers-color-scheme)" data-md-color-primary="indigo" data-md-color-scheme="default" id="__palette_1" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_3" hidden="" title="Switch to light mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9h-1.9M20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69m-9.15 3.96h2.3L12 9l-1.15 3.65Z"></path></svg>
+</label>
+<input aria-label="Switch to dark mode" class="md-option" data-md-color-accent="" data-md-color-media="(prefers-color-scheme: light)" data-md-color-primary="indigo" data-md-color-scheme="default" id="__palette_2" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_1" hidden="" title="Switch to dark mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"></path></svg>
+</label>
+<input aria-label="Switch to system preference" class="md-option" data-md-color-accent="" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-primary="indigo" data-md-color-scheme="slate" id="__palette_3" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_2" hidden="" title="Switch to system preference">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"></path></svg>
+</label>
+</form>
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="Search" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="Search" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"></path></svg>
+</label>
+<nav aria-label="Search" class="md-search__options">
+<button aria-label="Clear" class="md-search__icon md-icon" tabindex="-1" title="Clear" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"></path></svg>
+</button>
+</nav>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
+            Initializing search
+          </div>
+<ol class="md-search-result__list" role="presentation"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="md-header__source">
+<a class="md-source" data-md-component="source" href="https://github.com/GenomicsAotearoa/Introduction-to-R" title="Go to repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"></path></svg>
+</div>
+<div class="md-source__repository">
+    GenomicsAotearoa/Introduction-to-R
+  </div>
+</a>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Navigation" class="md-nav md-nav--primary" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="Introduction to R" class="md-nav__button md-logo" data-md-component="logo" href=".." title="Introduction to R">
+<img alt="logo" src="../theme_figures/nesi_ga.png"/>
+</a>
+    Introduction to R
+  </label>
+<div class="md-nav__source">
+<a class="md-source" data-md-component="source" href="https://github.com/GenomicsAotearoa/Introduction-to-R" title="Go to repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"></path></svg>
+</div>
+<div class="md-source__repository">
+    GenomicsAotearoa/Introduction-to-R
+  </div>
+</a>
+</div>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="..">
+        Home
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../00-introduction/">
+        Introducing R and RStudio IDE
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../01-r-basics/">
+        R Basics
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../02-data-prelude/">
+        Introduction to the example dataset and file type
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../03-basics-factors-dataframes/">
+        R Basics continued - factors and data frames
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../06-data-visualization/">
+        Data Visualization with ggplot2
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../07-knitr-markdown/">
+        Producing Reports With knitr
+      </a>
+</li>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+          Getting help with R
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
+        Getting help with R
+      </a>
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#finding-help-on-stackoverflow-and-biostars">
+    Finding help on Stackoverflow and Biostars
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#help-people-help-you">
+    Help people help you
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#final-faqs-on-r">
+    Final FAQs on R
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--section md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_9" type="checkbox"/>
+<label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+          Appendix
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_9_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_9">
+<span class="md-nav__icon md-icon"></span>
+          Appendix
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../appendix/04-bioconductor-vcfr/">
+        Using packages from Bioconductor
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../appendix/05-dplyr/">
+        Data Wrangling and Analyses with Tidyverse
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#finding-help-on-stackoverflow-and-biostars">
+    Finding help on Stackoverflow and Biostars
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#help-people-help-you">
+    Help people help you
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#final-faqs-on-r">
+    Final FAQs on R
+  </a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h1 id="getting-help-with-r">Getting help with R<a class="headerlink" href="#getting-help-with-r" title="Permanent link">¶</a></h1>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><input id="__tabbed_1_3" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">Keypoints</label><label for="__tabbed_1_2">Objectives</label><label for="__tabbed_1_3">Questions</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<ul>
+<li>R provides thousands of functions for analyzing data, and provides several way to get help</li>
+<li>Using R will mean searching for online help, and there are tips and resources on how to search effectively</li>
+</ul>
+</div>
+<div class="tabbed-block">
+<ul>
+<li>Locate help for an R function using <code>?</code>, <code>??</code>, and <code>args()</code></li>
+<li>Check the version of R</li>
+<li>Be able to ask effective questions when searching for help on forums or using web searches</li>
+</ul>
+</div>
+<div class="tabbed-block">
+<ul>
+<li>How do I get help using R and RStudio?</li>
+</ul>
+</div>
+</div>
+</input></input></input></div>
+</div>
+<p><center>
+<a class="glightbox" data-desc-position="bottom" data-height="auto" data-width="100%" href="../figures/oreilly_book_covers.png"><img alt="oreilly_book_cover" src="../figures/oreilly_book_covers.png" width="600"/></a>
+</center></p>
+<p>No matter how much experience you have with R, you will find yourself
+needing help. There is no shame in researching how to do something in R,
+and most people will find themselves looking up how to do the same
+things that they "should know how to do" over and over again. Here are
+some tips to make this process as helpful and efficient as possible.</p>
+<blockquote>
+<p>"Never memorize something that you can look up" — A. Einstein</p>
+</blockquote>
+<h2 id="finding-help-on-stackoverflow-and-biostars">Finding help on Stackoverflow and Biostars<a class="headerlink" href="#finding-help-on-stackoverflow-and-biostars" title="Permanent link">¶</a></h2>
+<p>Two popular websites will be of great help with many R problems. For
+<strong>general</strong> <strong>R questions</strong>, <a href="https://stackoverflow.com/">Stack
+Overflow</a> is probably the most popular
+online community for developers. If you start your question "How to do X
+in R" results from Stack Overflow are usually near the top of the list.
+For <strong>bioinformatics specific questions</strong>,
+<a href="https://www.biostars.org/">Biostars</a> is a popular online forum.</p>
+<div class="admonition tip">
+<p class="admonition-title">Asking for help using online forums</p>
+<ul>
+<li>When searching for R help, look for answers with the <a href="https://stackoverflow.com/questions/tagged/r">r</a> tag.</li>
+<li>Get an account; not required to view answers but to required to post</li>
+<li>Put in effort to check thoroughly before you post a question; folks get annoyed if you ask a very common question that has been answered multiple times</li>
+<li>Be careful. While forums are very helpful, you can't know for sure if the advice you are getting is correct</li>
+<li>See the <a href="http://blog.revolutionanalytics.com/2014/01/how-to-ask-for-r-help.html">How to ask for R help</a> blog post for more useful tips</li>
+</ul>
+</div>
+<h2 id="help-people-help-you">Help people help you<a class="headerlink" href="#help-people-help-you" title="Permanent link">¶</a></h2>
+<p>Often, in order to duplicate the issue you are having, someone may need
+to see the data you are working with or verify the versions of R or R
+packages you are using. The following R functions will help with this:</p>
+<p>You can <strong>check the version of R</strong> you are working with using the
+<code>sessionInfo()</code> function. Actually, it is good to save this information
+as part of your notes on any analysis you are doing. When you run the
+same script that has worked fine a dozen times before, looking back at
+these notes will remind you that you upgraded R and forget to check your
+script.</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="nf">sessionInfo</span><span class="p">()</span>
+</code></pre></div>
+</div>
+<div class="admonition success">
+<p class="admonition-title">Output</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a>R version 3.2.3 (2015-12-10)
+<a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a>Platform: x86_64-pc-linux-gnu (64-bit)
+<a href="#__codelineno-1-3" id="__codelineno-1-3" name="__codelineno-1-3"></a>Running under: Ubuntu 14.04.3 LTS
+<a href="#__codelineno-1-4" id="__codelineno-1-4" name="__codelineno-1-4"></a>
+<a href="#__codelineno-1-5" id="__codelineno-1-5" name="__codelineno-1-5"></a>locale:
+<a href="#__codelineno-1-6" id="__codelineno-1-6" name="__codelineno-1-6"></a>[1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C               LC_TIME=en_US.UTF-8
+<a href="#__codelineno-1-7" id="__codelineno-1-7" name="__codelineno-1-7"></a>[4] LC_COLLATE=en_US.UTF-8     LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8
+<a href="#__codelineno-1-8" id="__codelineno-1-8" name="__codelineno-1-8"></a>[7] LC_PAPER=en_US.UTF-8       LC_NAME=C                  LC_ADDRESS=C
+<a href="#__codelineno-1-9" id="__codelineno-1-9" name="__codelineno-1-9"></a>[10] LC_TELEPHONE=C             LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C
+<a href="#__codelineno-1-10" id="__codelineno-1-10" name="__codelineno-1-10"></a>
+<a href="#__codelineno-1-11" id="__codelineno-1-11" name="__codelineno-1-11"></a>attached base packages:
+<a href="#__codelineno-1-12" id="__codelineno-1-12" name="__codelineno-1-12"></a>[1] stats     graphics  grDevices utils     datasets  methods   base
+<a href="#__codelineno-1-13" id="__codelineno-1-13" name="__codelineno-1-13"></a>
+<a href="#__codelineno-1-14" id="__codelineno-1-14" name="__codelineno-1-14"></a>loaded via a namespace (and not attached):
+<a href="#__codelineno-1-15" id="__codelineno-1-15" name="__codelineno-1-15"></a>[1] tools_3.2.3     packrat_0.4.9-1
+</code></pre></div>
+</div>
+<p>Many times, there may be some issues with your data and the way it is
+formatted. In that case, you may want to share that data with someone
+else. However, you may not need to share the whole dataset; looking at a
+subset of your 50,000 row, 10,000 column dataframe may be TMI (too much
+information)! You can take an object you have in memory such as
+dataframe (if you don't know what this means yet, we will get to it!)
+and save it to a file. In our example we will use the <code>dput()</code> function
+on the <code>iris</code> dataframe which is an example dataset that is installed in
+R:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="nf">dput</span><span class="p">(</span><span class="nf">head</span><span class="p">(</span><span class="n">iris</span><span class="p">))</span><span class="w"> </span>
+<a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a>
+<a href="#__codelineno-2-3" id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="c1"># iris is an example data.frame that comes with R</span>
+<a href="#__codelineno-2-4" id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="c1"># the `head()` function just takes the first 6 lines of the iris dataset</span>
+</code></pre></div>
+</div>
+<p>This generates some output (below) which you will be better able to
+interpret after covering the other R lessons. This info would be helpful
+in understanding how the data is formatted and possibly revealing
+problematic issues.</p>
+<div class="admonition success">
+<p class="admonition-title">Output</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a>structure(list(Sepal.Length = c(5.1, 4.9, 4.7, 4.6, 5, 5.4), 
+<a href="#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a>    Sepal.Width = c(3.5, 3, 3.2, 3.1, 3.6, 3.9), Petal.Length = c(1.4, 
+<a href="#__codelineno-3-3" id="__codelineno-3-3" name="__codelineno-3-3"></a>    1.4, 1.3, 1.5, 1.4, 1.7), Petal.Width = c(0.2, 0.2, 0.2, 
+<a href="#__codelineno-3-4" id="__codelineno-3-4" name="__codelineno-3-4"></a>    0.2, 0.2, 0.4), Species = structure(c(1L, 1L, 1L, 1L, 1L, 
+<a href="#__codelineno-3-5" id="__codelineno-3-5" name="__codelineno-3-5"></a>    1L), levels = c("setosa", "versicolor", "virginica"), class = "factor")), row.names = c(NA, 
+<a href="#__codelineno-3-6" id="__codelineno-3-6" name="__codelineno-3-6"></a>6L), class = "data.frame")
+</code></pre></div>
+</div>
+<p>Alternatively, you can also save objects in R memory to a file by
+specifying the name of the object, in this case the <code>iris</code> data frame,
+and passing a filename to the <code>file=</code> argument.</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="nf">saveRDS</span><span class="p">(</span><span class="n">iris</span><span class="p">,</span><span class="w"> </span><span class="n">file</span><span class="o">=</span><span class="s">"iris.rds"</span><span class="p">)</span><span class="w"> </span>
+<a href="#__codelineno-4-2" id="__codelineno-4-2" name="__codelineno-4-2"></a>
+<a href="#__codelineno-4-3" id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="c1"># By convention, we use the .rds file extension</span>
+</code></pre></div>
+</div>
+<h2 id="final-faqs-on-r">Final FAQs on R<a class="headerlink" href="#final-faqs-on-r" title="Permanent link">¶</a></h2>
+<p>Finally, here are a few pieces of introductory R knowledge that are too
+good to pass up. While we won't return to them in this course, we put
+them here because they come up commonly:</p>
+<p><strong>Do I need to click Run every time I want to run a script?</strong></p>
+<ul>
+<li>
+<p>No. In fact, the most common shortcut key allows you to run a
+    command (or any lines of the script that are highlighted):</p>
+<ul>
+<li>Windows execution shortcut:
+    <kbd>Ctrl</kbd>+<kbd>Enter</kbd></li>
+<li>Mac execution shortcut:
+    <kbd>Cmd(⌘)</kbd>+<kbd>Enter</kbd></li>
+</ul>
+<p>To see a complete list of shortcuts, click on the
+<kbd>Tools</kbd> menu and select
+<kbd>Keyboard Shortcuts Help</kbd></p>
+</li>
+</ul>
+<p><strong>What's with the brackets in R console output?</strong> 
+- R returns an index with your result. When your result contains multiple values, the number tells you what ordinal number begins the line, for example:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="m">1</span><span class="o">:</span><span class="m">101</span><span class="w"> </span><span class="c1"># generates the sequence of numbers from 1 to 101</span>
+</code></pre></div>
+</div>
+<div class="admonition success">
+<p class="admonition-title">Output</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a>  [1]   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20  21  22
+<a href="#__codelineno-6-2" id="__codelineno-6-2" name="__codelineno-6-2"></a> [23]  23  24  25  26  27  28  29  30  31  32  33  34  35  36  37  38  39  40  41  42  43  44
+<a href="#__codelineno-6-3" id="__codelineno-6-3" name="__codelineno-6-3"></a> [45]  45  46  47  48  49  50  51  52  53  54  55  56  57  58  59  60  61  62  63  64  65  66
+<a href="#__codelineno-6-4" id="__codelineno-6-4" name="__codelineno-6-4"></a> [67]  67  68  69  70  71  72  73  74  75  76  77  78  79  80  81  82  83  84  85  86  87  88
+<a href="#__codelineno-6-5" id="__codelineno-6-5" name="__codelineno-6-5"></a> [89]  89  90  91  92  93  94  95  96  97  98  99 100 101
+</code></pre></div>
+</div>
+<p>In the output above, <code>[89]</code> indicates that the first value on that line
+is the 89<sup>th</sup> item in your result</p>
+<p><strong>Can I run my R script without RStudio?</strong></p>
+<ul>
+<li>Yes, remember - RStudio is running R. You get to use lots of the
+    enhancements RStudio provides, but R works independent of RStudio.
+    See <a href="https://support.rstudio.com/hc/en-us/articles/218012917-How-to-run-R-scripts-from-the-command-line">these
+    tips</a>
+    for running your commands at the command line</li>
+</ul>
+<p><strong>Where else can I learn about RStudio?</strong> 
+- Check out the <kbd>Help</kbd> menu, especially "Cheatsheets" section</p>
+</article>
+</div>
+</div>
+<a class="md-top md-icon" data-md-component="top" hidden="" href="#">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"></path></svg>
+            Back to top
+          </a>
+</main>
+<footer class="md-footer">
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+      Material for MkDocs
+    </a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+<script id="__config" type="application/json">{"base": "..", "features": ["navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top"], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+<script src="../assets/javascripts/bundle.fc8c2696.min.js"></script>
+<script src="../javascripts/mathjax.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script>document$.subscribe(() => {const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});})</script></body>
+</html>
