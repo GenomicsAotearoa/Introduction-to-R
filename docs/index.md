@@ -33,8 +33,8 @@
 
 | **Appendix** | **Description** |
 | ------------ | --------------- |
-|[Introduction to Bioconductor](./appendix/04-bioconductor-vcfr.md){ .md-button .md-button--primary } | Bioinformatics Resources|
-|[Data wrangling and analyses with Tidyverse](./appendix/05-dplyr.md){ .md-button .md-button--primary } | The Tidyverse for handling data|
+|[Introduction to Bioconductor](./appendix/04-bioconductor-vcfr.md){ .md-button } | Bioinformatics Resources|
+|[Data wrangling and analyses with Tidyverse](./appendix/05-dplyr.md){ .md-button } | The Tidyverse for handling data|
 
 
 </div>
