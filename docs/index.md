@@ -13,7 +13,9 @@
 * * * 
 
 
-| **Lesson**                                         | **Overview** | 
+<div class="center-table" markdown>
+
+| **Lesson**                                        | **Overview** | 
 |:---------------------------------------------------|:-------------|
 |[1. Introduction](./00-introduction.md){ .md-button .md-button--primary } | General overview of R |
 |[2. R Basics](./01-r-basics.md){ .md-button .md-button--primary } | In the beginning....|
@@ -23,8 +25,11 @@
 |[6. Producing reports with knitr](./07-knitr-markdown.md){ .md-button .md-button--primary } | Writing Reports|
 |[7. R-help](./08-r-help.md){ .md-button .md-button--primary } | More Resources|
 
+</div>
+
 
 * * * 
+<div class="center-table" markdown>
 
 | **Appendix** | **Description** |
 | ------------ | --------------- |
@@ -32,7 +37,7 @@
 |[Data wrangling and analyses with Tidyverse](./appendix/05-dplyr.md){ .md-button .md-button--primary } | The Tidyverse for handling data|
 
 
-
+</div>
 
 !!! note "Attribution notice"
     - The material used to prepare for this workshop was extracted from **Intro to R and RStudio for Genomics** maintained by Carpentries foundation  https://datacarpentry.org/genomics-r-intro/

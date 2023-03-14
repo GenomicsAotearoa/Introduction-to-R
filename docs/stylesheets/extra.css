@@ -353,3 +353,17 @@
   -webkit-mask-image: var(--md-admonition-icon--earth-americas);
           mask-image: var(--md-admonition-icon--earth-americas);
 }
+
+.md-typeset__table {
+   min-width: 85%;
+}
+
+.md-typeset table:not([class]) {
+    display: table;
+}
+.center-table {
+  text-align: center;
+}
+.md-typeset .center-table :is(td,th):not([align]) {
+  text-align: initial; /* Reset alignment for table cells */
+}
