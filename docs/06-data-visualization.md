@@ -119,7 +119,7 @@ Let's start by loading the required `ggplot2` package and importing the dataset 
 !!! r-project "r"
 
     ```r
-    variants <- read_csv("https://raw.githubusercontent.com/naupaka/vcfr-for-data-carpentry-draft/main/output/combined_tidy_vcf.csv")
+    variants <- read_csv("~/R4Genomics/combined_tidy_vcf.csv")
     ```
 
 ??? success "Output"
