@@ -1176,7 +1176,7 @@ to a .csv file using the `write.csv()` function:
 !!! r-project "r"
 
     ```r
-    write.csv(SRR2584863_variants, file = "../data/SRR2584863_variants.csv")
+    write.csv(SRR2584863_variants, file = "SRR2584863_variants.csv")
     ```
 
 The `write.csv()` function has some additional arguments listed in the
