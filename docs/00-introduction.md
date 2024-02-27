@@ -241,7 +241,7 @@ the Source pane.
 In the console, we expect to see the following output :
 
 !!! solution ""
-    `[1] "/home/<USERID>/R4Genomics"`
+    `[1] "/home/shared/<USERID>"`
 
 * Notice, at the Console, you will also see the instruction you executed above the output in blue.
 
@@ -269,7 +269,7 @@ include a comment on the purpose of commands you are learning, e.g.:
          .challenge}
 
 For the purposes of this exercise we want you to be in the directory
-`"/home/<USERID>/R4Genomics"`. What if you weren't? You can set your home
+`"/home/shared/<USERID>/R4Genomics"`. What if you weren't? You can set your home
 directory using the `setwd()` command. Enter this command in your
 script, but *don't run* this yet.
 
@@ -288,7 +288,7 @@ this:
 
 !!! r-project
 
-    `# This sets the working directory setwd("/home/<USERID>/R4Genomics")`
+    `# This sets the working directory setwd("/home/shared/<USERID>/R4Genomics")`
 
 When you run this command, the console repeats the command, but gives
 you no output. Instead, you see the blank R prompt: `>`.

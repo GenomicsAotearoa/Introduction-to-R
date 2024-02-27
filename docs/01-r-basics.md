@@ -4,9 +4,9 @@
 
     === "Keypoints"
 
-        - Effectively using R is a journey of months or years. Still you don't
+        - Effectively using R is a journey of months or years. Still, you don't
           have to be an expert to use R and you can start using and analyzing
-          your data with with about a day's worth of training
+          your data with with about a day's worth of training.
         - It is important to understand how data are organized by R in a given
           object type and how the mode of that type (e.g. numeric, character,
           logical, etc.) will determine how R will operate on that data.

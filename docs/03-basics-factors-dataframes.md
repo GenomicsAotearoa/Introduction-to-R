@@ -150,7 +150,7 @@ function called `read.csv()`.
         they can do.
 
 Now, let's read in the file `combined_tidy_vcf.csv` which will be
-located in `/home/$USER/R4Genomics/`. Call this data `variants`. The first
+located in `/home/shared/$USER/R4Genomics/`. Call this data `variants`. The first
 argument to pass to our `read.csv()` function is the file path for our
 data. The file path must be in quotes and now is a good time to remember
 to use tab autocompletion. **If you use tab autocompletion you avoid
@@ -161,7 +161,7 @@ typos and errors in file paths.** Use it!
     ```r
     # Read in a CSV file and save it as 'variants'
 
-    variants <- read.csv("/home/<USERID>/R4Genomics/combined_tidy_vcf.csv")
+    variants <- read.csv("/home/shared/<USERID>/R4Genomics/combined_tidy_vcf.csv")
     ```
 
 One of the first things you should notice is that in the Environment
