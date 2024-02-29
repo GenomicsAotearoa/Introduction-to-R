@@ -1,9 +1,9 @@
 # R Basics continued - factors and data frames  
 
 
-!!! info
+!!! info "Learning outcomes"
 
-    === "Keypoints"
+    === "Key points"
     
         - It is easy to import data into R from tabular formats including Excel.
           However, you still need to check that R has imported and interpreted
@@ -188,54 +188,54 @@ functions can tell us:
     summary(variants)
     ```
 
-??? success "Output"
+    ??? success "Output"
 
-    ```
-     sample_id            CHROM                POS             ID              REF           
-    Length:801         Length:801         Min.   :   1521   Mode:logical   Length:801        
-    Class :character   Class :character   1st Qu.:1115970   NA's:801       Class :character  
-    Mode  :character   Mode  :character   Median :2290361                  Mode  :character  
-                                          Mean   :2243682                                    
-                                          3rd Qu.:3317082                                    
-                                          Max.   :4629225                                    
-                                                                                             
-        ALT                 QUAL          FILTER          INDEL              IDV              IMF        
-    Length:801         Min.   :  4.385   Mode:logical   Mode :logical   Min.   : 2.000   Min.   :0.5714  
-    Class :character   1st Qu.:139.000   NA's:801       FALSE:700       1st Qu.: 7.000   1st Qu.:0.8824  
-    Mode  :character   Median :195.000                  TRUE :101       Median : 9.000   Median :1.0000  
-                       Mean   :172.276                                  Mean   : 9.396   Mean   :0.9219  
-                       3rd Qu.:225.000                                  3rd Qu.:11.000   3rd Qu.:1.0000  
-                       Max.   :228.000                                  Max.   :20.000   Max.   :1.0000  
-                                                                        NA's   :700      NA's   :700     
-          DP             VDB                 RPB              MQB              BQB        
-    Min.   : 2.00   Min.   :0.0005387   Min.   :0.0000   Min.   :0.0000   Min.   :0.1153  
-    1st Qu.: 7.00   1st Qu.:0.2180410   1st Qu.:0.3776   1st Qu.:0.1070   1st Qu.:0.6963  
-    Median :10.00   Median :0.4827410   Median :0.8663   Median :0.2872   Median :0.8615  
-    Mean   :10.57   Mean   :0.4926291   Mean   :0.6970   Mean   :0.5330   Mean   :0.7784  
-    3rd Qu.:13.00   3rd Qu.:0.7598940   3rd Qu.:1.0000   3rd Qu.:1.0000   3rd Qu.:1.0000  
-    Max.   :79.00   Max.   :0.9997130   Max.   :1.0000   Max.   :1.0000   Max.   :1.0000  
-                                        NA's   :773      NA's   :773      NA's   :773     
-         MQSB              SGB               MQ0F           ICB            HOB                AC   
-    Min.   :0.01348   Min.   :-0.6931   Min.   :0.00000   Mode:logical   Mode:logical   Min.   :1  
-    1st Qu.:0.95494   1st Qu.:-0.6762   1st Qu.:0.00000   NA's:801       NA's:801       1st Qu.:1  
-    Median :1.00000   Median :-0.6620   Median :0.00000                                 Median :1  
-    Mean   :0.96428   Mean   :-0.6444   Mean   :0.01127                                 Mean   :1  
-    3rd Qu.:1.00000   3rd Qu.:-0.6364   3rd Qu.:0.00000                                 3rd Qu.:1  
-    Max.   :1.01283   Max.   :-0.4536   Max.   :0.66667                                 Max.   :1  
-    NA's   :48                                                                                     
-          AN        DP4                  MQ           Indiv              gt_PL               gt_GT  
-    Min.   :1   Length:801         Min.   :10.00   Length:801         Length:801         Min.   :1  
-    1st Qu.:1   Class :character   1st Qu.:60.00   Class :character   Class :character   1st Qu.:1  
-    Median :1   Mode  :character   Median :60.00   Mode  :character   Mode  :character   Median :1  
-    Mean   :1                      Mean   :58.19                                         Mean   :1  
-    3rd Qu.:1                      3rd Qu.:60.00                                         3rd Qu.:1  
-    Max.   :1                      Max.   :60.00                                         Max.   :1  
-                                                                                                    
-    gt_GT_alleles     
-    Length:801        
-    Class :character  
-    Mode  :character
-    ```
+        ```
+         sample_id            CHROM                POS             ID              REF           
+        Length:801         Length:801         Min.   :   1521   Mode:logical   Length:801        
+        Class :character   Class :character   1st Qu.:1115970   NA's:801       Class :character  
+        Mode  :character   Mode  :character   Median :2290361                  Mode  :character  
+                                              Mean   :2243682                                    
+                                              3rd Qu.:3317082                                    
+                                              Max.   :4629225                                    
+
+            ALT                 QUAL          FILTER          INDEL              IDV              IMF        
+        Length:801         Min.   :  4.385   Mode:logical   Mode :logical   Min.   : 2.000   Min.   :0.5714  
+        Class :character   1st Qu.:139.000   NA's:801       FALSE:700       1st Qu.: 7.000   1st Qu.:0.8824  
+        Mode  :character   Median :195.000                  TRUE :101       Median : 9.000   Median :1.0000  
+                           Mean   :172.276                                  Mean   : 9.396   Mean   :0.9219  
+                           3rd Qu.:225.000                                  3rd Qu.:11.000   3rd Qu.:1.0000  
+                           Max.   :228.000                                  Max.   :20.000   Max.   :1.0000  
+                                                                            NA's   :700      NA's   :700     
+              DP             VDB                 RPB              MQB              BQB        
+        Min.   : 2.00   Min.   :0.0005387   Min.   :0.0000   Min.   :0.0000   Min.   :0.1153  
+        1st Qu.: 7.00   1st Qu.:0.2180410   1st Qu.:0.3776   1st Qu.:0.1070   1st Qu.:0.6963  
+        Median :10.00   Median :0.4827410   Median :0.8663   Median :0.2872   Median :0.8615  
+        Mean   :10.57   Mean   :0.4926291   Mean   :0.6970   Mean   :0.5330   Mean   :0.7784  
+        3rd Qu.:13.00   3rd Qu.:0.7598940   3rd Qu.:1.0000   3rd Qu.:1.0000   3rd Qu.:1.0000  
+        Max.   :79.00   Max.   :0.9997130   Max.   :1.0000   Max.   :1.0000   Max.   :1.0000  
+                                            NA's   :773      NA's   :773      NA's   :773     
+             MQSB              SGB               MQ0F           ICB            HOB                AC   
+        Min.   :0.01348   Min.   :-0.6931   Min.   :0.00000   Mode:logical   Mode:logical   Min.   :1  
+        1st Qu.:0.95494   1st Qu.:-0.6762   1st Qu.:0.00000   NA's:801       NA's:801       1st Qu.:1  
+        Median :1.00000   Median :-0.6620   Median :0.00000                                 Median :1  
+        Mean   :0.96428   Mean   :-0.6444   Mean   :0.01127                                 Mean   :1  
+        3rd Qu.:1.00000   3rd Qu.:-0.6364   3rd Qu.:0.00000                                 3rd Qu.:1  
+        Max.   :1.01283   Max.   :-0.4536   Max.   :0.66667                                 Max.   :1  
+        NA's   :48                                                                                     
+              AN        DP4                  MQ           Indiv              gt_PL               gt_GT  
+        Min.   :1   Length:801         Min.   :10.00   Length:801         Length:801         Min.   :1  
+        1st Qu.:1   Class :character   1st Qu.:60.00   Class :character   Class :character   1st Qu.:1  
+        Median :1   Mode  :character   Median :60.00   Mode  :character   Mode  :character   Median :1  
+        Mean   :1                      Mean   :58.19                                         Mean   :1  
+        3rd Qu.:1                      3rd Qu.:60.00                                         3rd Qu.:1  
+        Max.   :1                      Max.   :60.00                                         Max.   :1  
+
+        gt_GT_alleles     
+        Length:801        
+        Class :character  
+        Mode  :character
+        ```
 
 Our data frame had 29 variables, so we get 29 fields that summarize the data.
 The `QUAL`, `IMF`, and `VDB` variables (and several others) are
@@ -251,7 +251,7 @@ new data frame using the `data.frame()` function.
     ```r
     # Put the first three columns of variants into a new data frame called subset
 
-    subset <- data.frame(variants[, c(1:3, 6)])
+    subset_variants <- variants[, c(1:3, 6)]
     ```
 
 Now, let's use the `str()` (structure) function to look a little more
@@ -262,20 +262,20 @@ closely at how data frames work:
     ```r
     # Get the structure of a data frame
 
-    str(subset)
+    str(subset_variants)
     ```
 
-??? success "Output"
+    ??? success "Output"
 
-    ```
-    'data.frame':	801 obs. of  4 variables:
-     $ sample_id: chr  "SRR2584863" "SRR2584863" "SRR2584863" "SRR2584863" ...
-     $ CHROM    : chr  "CP000819.1" "CP000819.1" "CP000819.1" "CP000819.1" ...
-     $ POS      : int  9972 263235 281923 433359 473901 648692 1331794 1733343 2103887 2333538 ...
-     $ ALT      : chr  "G" "T" "T" "CTTTTTTTT" ...
-    ```
+        ```
+        'data.frame':	801 obs. of  4 variables:
+         $ sample_id: chr  "SRR2584863" "SRR2584863" "SRR2584863" "SRR2584863" ...
+         $ CHROM    : chr  "CP000819.1" "CP000819.1" "CP000819.1" "CP000819.1" ...
+         $ POS      : int  9972 263235 281923 433359 473901 648692 1331794 1733343 2103887 2333538 ...
+         $ ALT      : chr  "G" "T" "T" "CTTTTTTTT" ...
+        ```
 
-Ok, thats a lot up unpack! Some things to notice.
+Ok, that is a lot up unpack! Some things to notice.
 
 - The object type `data.frame` is displayed in the first row along with its
   dimensions, in this case 801 observations (rows) and 4 variables (columns).
@@ -300,7 +300,7 @@ factors. Let's take a look at just the alternate alleles
     ```r
     # Extract the "ALT" column to a new object
 
-    alt_alleles <- subset$ALT
+    alt_alleles <- subset_variants$ALT
     ```
 
 Let's look at the first few items in our factor using `head()`:
@@ -324,10 +324,10 @@ indexing skills from the last episode.
 !!! r-project "r"
 
     ```r
-    snps <- c(alt_alleles[alt_alleles=="A"],
-              alt_alleles[alt_alleles=="T"],
-              alt_alleles[alt_alleles=="G"],
-              alt_alleles[alt_alleles=="C"])
+    alt_snps <- c(alt_alleles[alt_alleles=="A"],
+                  alt_alleles[alt_alleles=="T"],
+                  alt_alleles[alt_alleles=="G"],
+                  alt_alleles[alt_alleles=="C"])
     ```
 
 This leaves us with a vector of the 701 alternative alleles which were
@@ -339,7 +339,7 @@ character vector as it is right now:
 !!! r-project "r"
 
     ```r
-    plot(snps)
+    plot(alt_snps)
     ```
 
 ??? success "Output"
@@ -360,7 +360,7 @@ new object to avoid confusion using the `factor()` function:
 !!! r-project "r"
 
     ```r
-    factor_snps <- factor(snps)
+    factor_alt_snps <- factor(alt_snps)
     ```
 
 Let's learn a little more about this new type of vector:
@@ -368,7 +368,7 @@ Let's learn a little more about this new type of vector:
 !!! r-project "r"
 
     ```r
-    str(factor_snps)
+    str(factor_alt_snps)
     ```
 
 ??? success "Output"
@@ -396,7 +396,7 @@ We can see how many items in our vector fall into each category:
 !!! r-project "r"
 
     ```r
-    summary(factor_snps)
+    summary(factor_alt_snps)
     ```
 
 ??? success "Output"
@@ -426,7 +426,7 @@ variants had each possible SNP we could generate a plot:
 !!! r-project "r"
 
     ```r
-    plot(factor_snps)
+    plot(factor_alt_snps)
     ```
 
 ??? success "Output"
@@ -446,7 +446,7 @@ enforce an order on our factors:
 !!! r-project "r"
 
     ```r
-    ordered_factor_snps <- factor(factor_snps, levels = names(sort(table(factor_snps))))
+    ordered_factor_snps <- factor(factor_alt_snps, levels = names(sort(table(factor_alt_snps))))
     ```
 
 Let's deconstruct this from the inside out (you can try each of these
@@ -830,12 +830,7 @@ a new object name:
                                            Max.   :1                     
     ```
 
-## Coercing values in data frames
-
-!!! tip "Coercion isn't limited to data frames"
-
-    While we are going to address coercion in the context of data frames
-    most of these methods apply to other data structures, such as vectors
+## Coercing values
 
 Sometimes, it is possible that R will misinterpret the type of data represented
 in a data frame, or store that data in a mode which prevents you from
@@ -963,7 +958,8 @@ tried using `as.numeric()` on `snp_chromosomes_2`
 ??? success "Output"
 
     ```
-    Warning: NAs introduced by coercion
+    Warning message:
+    NAs introduced by coercion
     ```
 
 If we check, we will see that an `NA` value (R's default value for
@@ -982,48 +978,29 @@ missing data) has been introduced.
     ```
 
 Trouble can really start when we try to coerce a factor. For example,
-when we try to coerce the `sample_id` column in our data frame into a
-numeric mode look at the result: 
-<-- sample_id is not a factor. I've no idea why they did that. -->
+when we try to coerce the `factor_alt_snps` into a numeric mode look at the 
+result: 
 
 !!! r-project "r"
 
     ```r
-    as.numeric(variants$sample_id)
+    as.numeric(factor_alt_snps)
     ```
 
 ??? success "Output"
 
     ```
-    [1] NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA
-    [31] NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA
-    [61] NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA
-    [91] NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA
-    [121] NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA
-    [151] NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA
-    [181] NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA
-    [211] NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA
-    [241] NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA
-    [271] NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA
-    [301] NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA
-    [331] NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA
-    [361] NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA
-    [391] NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA
-    [421] NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA
-    [451] NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA
-    [481] NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA
-    [511] NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA
-    [541] NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA
-    [571] NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA
-    [601] NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA
-    [631] NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA
-    [661] NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA
-    [691] NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA
-    [721] NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA
-    [751] NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA
-    [781] NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA
-    Warning message:
-    NAs introduced by coercion 
+      [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+     [66] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+    [131] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+    [196] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4
+    [261] 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4
+    [326] 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4
+    [391] 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+    [456] 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+    [521] 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+    [586] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+    [651] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
     ```
 
 Strangely, it works! Almost. Instead of giving an error message, R
@@ -1039,13 +1016,13 @@ expression like this one:
 !!! r-project "r"
 
     ```r
-    # Make the 'REF' column a character type column
+    # Make the 'sample_id' column a factor type column
 
-    variants$REF <- as.character(variants$REF)
+    variants$sample_id <- as.factor(variants$sample_id)
 
     # check the type of the column
 
-    typeof(variants$REF)
+    typeof(variants$sample_id)
     ```
 
 ??? success "Output"
@@ -1055,21 +1032,22 @@ expression like this one:
     ```
 
 
-## StringsAsFactors = ?
+## Lesson summary: Data coercion
 
 Lets summarize this section on coercion with a few take home messages.
 
 - When you explicitly coerce one data type into another (this is known as
-**explicit coercion**), be careful to check the result. Ideally, you should try to see if its possible to avoid steps in your analysis that force you to
-coerce.
+  **explicit coercion**), be careful to check the result. Ideally, you should 
+  try to see if its possible to avoid steps in your analysis that force you to
+  coerce.
 - R will sometimes coerce without you asking for it. This is called
-(appropriately) **implicit coercion**. For example when we tried to create
-a vector with multiple data types, R chose one type through implicit
-coercion.
+  (appropriately) **implicit coercion**. For example when we tried to create
+  a vector with multiple data types, R chose one type through implicit
+  coercion.
 - Check the structure (`str()`) of your data frames before working with them!
 
 
-!!! tip "Coercion isn't limited to data frames"
+!!! tip "`StringsAsFactors`"
 
     Prior to R 4.0 when importing a data frame using any one of the `read.table()`
     functions such as `read.csv()` , the argument `StringsAsFactors` was by
@@ -1077,7 +1055,7 @@ coercion.
     set to true TRUE. Setting it to FALSE will treat any non-numeric column to
     a character type. `read.csv()` documentation, you will also see you can
     explicitly type your columns using the `colClasses` argument. Other R packages
-    (such as the Tidyverse "readr") don't have this particular conversion issue,
+    (such as the Tidyverse `readr`) don't have this particular conversion issue,
     but many packages will still try to guess a data type.
 
 
@@ -1142,29 +1120,50 @@ You can sort a data frame using the `order()` function:
             [1] 79 46 41 29 29 27
             ```
 
-You can rename columns:
+!!! tip "These functions work on vectors too!"
+
+    When using these functions (i.e. `mean()`, `min()`, `max()`, and `order()`),
+    replace the input with a vector and it will do the same job! For example:
+
+    !!! r-project "r"
+
+        ```r
+        # Minimum position of a SNP
+        min(snp_positions)
+
+        # Decreasing order of SNPs by positions
+        snp_positions[order(snp_positions, decreasing = TRUE)]
+        ```
+
+        !!! success "Output"
+
+            ```
+            [1] 8762685
+            [1] 154039662  67545785  66560624   8762685
+            ```
+
+You can rename columns by logical subsetting or index:
 
 !!! r-project "r"
 
     ```r
+    # By logical subsetting
     colnames(variants)[colnames(variants) == "sample_id"] <- "strain"
 
-    # Check the column name (hint names are returned as a vector)
+    # By index
+    colnames(variants)[2] <- "chromosome"
 
+    # Check the column name (hint names are returned as a vector)
     colnames(variants)
     ```
 
 ??? success "Output"
 
     ```
-     [1] "strain"        "CHROM"         "POS"           "ID"           
-     [5] "REF"           "ALT"           "QUAL"          "FILTER"       
-     [9] "INDEL"         "IDV"           "IMF"           "DP"           
-    [13] "VDB"           "RPB"           "MQB"           "BQB"          
-    [17] "MQSB"          "SGB"           "MQ0F"          "ICB"          
-    [21] "HOB"           "AC"            "AN"            "DP4"          
-    [25] "MQ"            "Indiv"         "gt_PL"         "gt_GT"        
-    [29] "gt_GT_alleles"
+     [1] "strain"        "chromosome"    "POS"           "ID"            "REF"           "ALT"           "QUAL"          "FILTER"       
+     [9] "INDEL"         "IDV"           "IMF"           "DP"            "VDB"           "RPB"           "MQB"           "BQB"          
+    [17] "MQSB"          "SGB"           "MQ0F"          "ICB"           "HOB"           "AC"            "AN"            "DP4"          
+    [25] "MQ"            "Indiv"         "gt_PL"         "gt_GT"         "gt_GT_alleles"
     ```
 
 
@@ -1223,7 +1222,7 @@ import this file. We could have written this code and imported the Excel
 file without the RStudio import function, but now you can choose your
 preference.
 
-In this exercise, we will leave the title of the data frame as
+In this exercise, we will leave the name of the data frame as
 **Ecoli_metadata**, and there are no other options we need to adjust.
 Click the <KBD>Import</KBD> button to import the data.
 
@@ -1233,7 +1232,7 @@ frame:
 !!! r-project "r"
 
     ```r
-    head(Rcoli_metadata)
+    head(Ecoli_metadata)
     ```
 
 ??? success "Output"
@@ -1242,7 +1241,7 @@ frame:
     # A tibble: 6 × 7
       sample   generation clade   strain cit     run       genome_size
       <chr>         <dbl> <chr>   <chr>  <chr>   <chr>           <dbl>
-    1 REL606            0 NA      REL606 unknown <NA>             4.62
+    1 REL606            0 NA      REL606 unknown NA               4.62
     2 REL1166A       2000 unknown REL606 unknown SRR098028        4.63
     3 ZDB409         5000 unknown REL606 unknown SRR098281        4.6 
     4 ZDB429        10000 UC      REL606 unknown SRR098282        4.59
@@ -1324,7 +1323,7 @@ could coerce with `as.data.frame()`.
         !!! r-project "r"
 
             ```r
-            Ecoli_metadata[7,7]
+            Ecoli_metadata[7, 7]
             ```
         
         !!! success "Output"
@@ -1356,6 +1355,49 @@ could coerce with `as.data.frame()`.
 
             ```r
             colnames(Ecoli_metadata)[colnames(Ecoli_metadata) == "sample"] <- "sample_id"
+
+            # Check the column names
+            colnames(Ecoli_metadata)
+            ```
+
+        !!! success "Output"
+
+            ```
+            [1] "sample_id"   "generation"  "clade"       "strain"      "cit"         "run"         "genome_size"
+            ```
+        
+        G)
+
+        !!! r-project "r"
+
+            ```r
             Ecoli_metadata$genome_size_bp <- Ecoli_metadata$genome_size * 1000000
+
+            # Check the first few rows
+            head(Ecoli_metadata)
+            ```
+
+            !!! success "Output"
+
+                ```
+                # A tibble: 6 × 8
+                  sample_id generation clade   strain cit     run       genome_size genome_size_bp
+                  <chr>          <dbl> <chr>   <chr>  <chr>   <chr>           <dbl>          <dbl>
+                1 REL606             0 NA      REL606 unknown NA               4.62        4620000
+                2 REL1166A        2000 unknown REL606 unknown SRR098028        4.63        4630000
+                3 ZDB409          5000 unknown REL606 unknown SRR098281        4.6         4600000
+                4 ZDB429         10000 UC      REL606 unknown SRR098282        4.59        4590000
+                5 ZDB446         15000 UC      REL606 unknown SRR098283        4.66        4660000
+                6 ZDB458         20000 (C1,C2) REL606 unknown SRR098284        4.63        4630000
+                ```
+
+        H)
+
+        !!! r-project "r"
+
+            ```r            
             write.csv(Ecoli_metadata, file = "exercise_solution.csv")
             ```
+
+            Check the Files tab on the bottom-right panel to see if the file is 
+            there.
