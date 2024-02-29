@@ -1,8 +1,8 @@
 # Introduction to the example dataset and file type
 
-!!! info 
+!!! info "Learning outcomes"
 
-    === "Keypoints"
+    === "Key points"
 
         - The dataset comes from a real world experiment in *E. coli*.
         - Publicly available FASTQ files can be downloaded from NCBI SRA.
