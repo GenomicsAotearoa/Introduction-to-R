@@ -111,8 +111,8 @@ Let's start by loading the required `ggplot2` package and importing the dataset 
     # Load the ggplot2 package
     library(ggplot2)
 
-    # Load the dataset
-    variants <- read.csv("combined_tidy_vcf.csv")
+    # Load the dataset (for a fresh start)
+    variants <- read.csv("/home/shared/<USERID>/R4Genomics/combined_tidy_vcf.csv")
     ```
 
 <!--
@@ -230,7 +230,7 @@ To build a ggplot, we will use the following basic template that can be used for
     ggplot(data = <DATA>, mapping = aes(<MAPPINGS>)) +  <GEOM_FUNCTION>()
     ```
     
--   use the `ggplot()` function and bind the plot to a specific data
+-   Use the `ggplot()` function and bind the plot to a specific data
     frame using the `data` argument
 
 !!! r-project "r"
@@ -239,7 +239,7 @@ To build a ggplot, we will use the following basic template that can be used for
     ggplot(data = variants)
     ```
 
--   define a mapping (using the aesthetic (`aes`) function), by
+-   Define a mapping (using the aesthetic (`aes`) function), by
     selecting the variables to be plotted and specifying how to present
     them in the graph, e.g. as x and y positions or characteristics such
     as size, shape, color, etc.
@@ -250,7 +250,7 @@ To build a ggplot, we will use the following basic template that can be used for
     ggplot(data = variants, aes(x = POS, y = DP))
     ```
 
--   add 'geoms' -- graphical representations of the data in the plot
+-   Add 'geoms' &ndash; graphical representations of the data in the plot
     (points, lines, bars). **`ggplot2`** offers many different geoms; we
     will use some common ones today, including:
     -   [`geom_point()`](https://ggplot2.tidyverse.org/reference/geom_point.html)
@@ -333,8 +333,6 @@ For instance, we can add transparency (`alpha`) to avoid over-plotting:
 
 We can also add colors for all the points:
 
-\`\`\`{r adding-colors, purl=FALSE}
-
 !!! r-project "r"
 
     ```r
@@ -353,12 +351,11 @@ Or to color each species in the plot differently, you could use a vector as an i
 Notice that we can change the geom layer and colors will be still
 determined by **`sample_id`**
 
-<!-- redundant? -->
 !!! r-project "r"
 
     ```r
     ggplot(data = variants, aes(x = POS, y = DP, color = sample_id)) +
-      geom_point(alpha = 0.5)
+      geom_line(alpha = 0.5)
     ```
 
 To make our plot more readable, we can add axis labels:
@@ -402,6 +399,18 @@ dimension of $6 \times 4$ inches:
 If we check the *current working directory*, there should be a newly
 created file called `depth.pdf` with the above plot.
 
+!!! tip "Saving a plot using different units"
+
+    By default, `ggsave()` measures lengths in inches. To change that, we can 
+    use the `units =` arguments. This argument will take `in`, `cm`, `mm`, and 
+    `px`.
+
+!!! tip "Saving a plot to a different format"
+
+    The example above writes the plot to a PDF. We can also save it to other 
+    formats such as `jpeg`, `tiff`, `bmp`, `png`, etc. by modifying the suffix
+    (i.e. file extension).
+
 !!! question "Challenge"
 
     Use what you just learned to create a scatter plot of mapping quality (`MQ`) over position (`POS`) with the samples showing in different colors. Make sure to give your plot relevant axis labels.
@@ -427,7 +436,7 @@ To further customize the plot, we can change the default font format:
       labs(x = "Base Pair Position",        
            y = "Read Depth (DP)") +   
       ggtitle("Read Depth vs. Position") +   
-      theme(text = element_text(family = "Bookman"))
+      theme(text = element_text(family = "mono"))
     ```
 
 
@@ -597,16 +606,16 @@ of interest for biologists (although not covered in this lesson) that
 are worth exploring, such as
 
 -   [`geom_tile()`](https://ggplot2.tidyverse.org/reference/geom_tile.html),
-    for heatmaps,
+    for heatmaps
 -   [`geom_jitter()`](https://ggplot2.tidyverse.org/reference/geom_jitter.html),
-    for strip charts, and
+    for strip charts
 -   [`geom_violin()`](https://ggplot2.tidyverse.org/reference/geom_violin.html),
     for violin plots
 
 
 !!! earth-americas "Resources"
 
-     - [ggplot2: Elegant Graphics for Data Analysis](https://www.amazon.com/gp/product/331924275X/) ([online version](https://ggplot2-book.org/))
-     - [The Grammar of Graphics (Statistics and Computing)](https://www.amazon.com/Grammar-Graphics-Statistics-Computing/dp/0387245448/)
-     - [Data Visualization: A Practical Introduction](https://www.amazon.com/gp/product/0691181624/) ([online version](https://socviz.co/))
-     - [The R Graph Gallery](https://r-graph-gallery.com/) ([the book](https://bookdown.org/content/b298e479-b1ab-49fa-b83d-a57c2b034d49/))
+    - [ggplot2: Elegant Graphics for Data Analysis](https://www.amazon.com/gp/product/331924275X/) ([online version](https://ggplot2-book.org/))
+    - [The Grammar of Graphics (Statistics and Computing)](https://www.amazon.com/Grammar-Graphics-Statistics-Computing/dp/0387245448/)
+    - [Data Visualization: A Practical Introduction](https://www.amazon.com/gp/product/0691181624/) ([online version](https://socviz.co/))
+    - [The R Graph Gallery](https://r-graph-gallery.com/) ([the book](https://bookdown.org/content/b298e479-b1ab-49fa-b83d-a57c2b034d49/))
