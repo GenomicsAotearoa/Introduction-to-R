@@ -4,25 +4,18 @@
 
     === "Key points"
 
-        - Effectively using R is a journey of months or years. Still, you don't
-          have to be an expert to use R and you can start using and analyzing
-          your data with with about a day's worth of training.
-        - It is important to understand how data are organized by R in a given
-          object type and how the mode of that type (e.g. numeric, character,
-          logical, etc.) will determine how R will operate on that data.
-        - Working with vectors effectively prepares you for understanding how
-          data are organized in R.
+        - Effectively using R is a journey of months or years. Still, you don't have to be an expert to use R, and you can start using and analyzing your data with about a day's worth of training.
+        - It is important to understand how R organizes data in a given object type and how the mode of that type (e.g. numeric, character, logical, etc.) will determine how R will operate on that data.
+        - Working with vectors effectively prepares you to understand how R organizes data.
 
     === "Objectives"
 
-        - Be able to create the most common R objects including vectors
-        - Understand that vectors have modes, which correspond to the type of
-          data they contain
+        - Be able to create the most common R objects, such as vectors
+        - Understand that vectors have modes, which correspond to the type of data they contain
         - Be able to use arithmetic operators on R objects
-        - Be able to retrieve (subset), name, or replace, values from a vector
+        - Be able to retrieve (subset), name, or replace values from a vector
         - Be able to use logical operators in a subsetting operation
-        - Understand that lists can hold data of more than one mode and can be
-          indexed
+        - Understand that lists can hold data of more than one mode and can be indexed
 
     === "Questions"
 
@@ -33,17 +26,7 @@
 
 ## "The fantastic world of R awaits you" OR "Nobody wants to learn how to use R"
 
-Before we begin this lesson, we want you to be clear on the goal of the
-workshop and these lessons. We believe that every learner can **achieve
-competency with R**. You have reached competency when you find that you
-are able to **use R to handle common analysis challenges in a reasonable
-amount of time** (which includes time needed to look at learning
-materials, search for answers online, and ask colleagues for help). As
-you spend more time using R (there is no substitute for regular use and
-practice) you will find yourself gaining competency and even expertise.
-The more familiar you get, the more complex the analyses you will be
-able to carry out, with less frustration, and in less time - the
-fantastic world of R awaits you!
+Before we begin this lesson, we want you to be clear on the goal of the workshop and these lessons. We believe that every learner can **achieve competency with R**. You have reached competency when you find that you are able to **use R to handle common analysis challenges in a reasonable amount of time** (which includes the time needed to look at learning materials, search for answers online, and ask colleagues for help). As you spend more time using R (there is no substitute for regular use and practice), you will gain competency and expertise. The more familiar you get, the more complex the analyses you will be able to carry out, with less frustration and in less time - the fantastic world of R awaits you!
 
 
 ## What these lessons will not teach you
@@ -64,7 +47,7 @@ the additional learning materials in the tip box below.
   the "apply" family of functions (which are super useful, read more
   [here](https://www.r-bloggers.com/r-tutorial-on-the-apply-family-of-functions/))
 * How to do basic string manipulations (e.g. finding patterns in text
-  using grep, replacing text)
+  using `grep()`, and replacing text using `gsub()`)
 * How to plot using the default R graphic tools (we *will* cover plot
   creation, but will do so using the popular plotting package
   `ggplot2`)
@@ -109,14 +92,14 @@ the additional learning materials in the tip box below.
 What might be called a variable in many languages is called an
 **object** in R.
 
-**To create an object you need:**
+**To create an object, you need:**
 
--   a name (e.g. `a`)
--   a value (e.g. `1`)
--   the assignment operator (`<-`)
+-   A name (e.g. `a`)
+-   A value (e.g. `1`)
+-   The assignment operator (`<-`)
 
-In your script, `genomics_r_basics.R`, using the R assignment
-operator `<-`, assign `1` to the object `a` as shown. Remember to leave
+In your script, `genomics_r_basics.R`, use the R assignment
+operator `<-` to assign `1` to the object `a` as shown. Remember to leave
 a comment in the line above (using the `#`) to explain what you are
 doing:
 
@@ -129,17 +112,17 @@ doing:
     ```
 
 Next, run this line of code in your script. You can run a line of code
-by hitting the `Run` button that is just above the first line of your
-script in the header of the Source pane or you can use the appropriate shortcut:
+by hitting the `Run` button that is above the first line of your
+script in the header of the 'Source' pane or you can use the appropriate shortcut:
 
 - Windows execution shortcut: <kbd>Ctrl</kbd> + <kbd>Enter</kbd>
 - Mac execution shortcut: <kbd>Cmd(⌘)</kbd> + <kbd>Enter</kbd>
 
-To run multiple lines of code, you can highlight all the line you wish to run
+To run multiple lines of code, highlight all the line you wish to run
 and then hit Run or use the shortcut key combo listed above.
-In the RStudio 'Console' you should see:
+In the RStudio 'Console', you should see:
 
-??? success ""
+!!! success ""
 
     ```
     a <- 1
@@ -175,7 +158,7 @@ created in R.
         ```r
         human_chr_number <- 23
         gene_name <- 'pten'
-        ensemble_url <- 'ftp://ftp.ensemblgenomes.org/pub/bacteria/release-39/fasta/bacteria_5_collection/escherichia_coli_b_str_rel606/'
+        ensemble_url <- "ftp://ftp.ensemblgenomes.org/pub/bacteria/release-39/fasta/bacteria_5_collection/escherichia_coli_b_str_rel606/"
         human_diploid_chr_num <-  2 * human_chr_number
         ```
 
@@ -190,40 +173,30 @@ Here are some important details about naming objects in R
   in your object name (e.g. `!` `@` `#` `.` `,` etc.). Also, object names 
   cannot begin with a number.
 - **Use short, easy-to-understand names**<br>
-  You should avoid naming your objects using single letters (e.g. `n`, `p`, 
+  Avoid naming your objects using single letters (e.g. `n`, `p`, 
   etc.). This is mostly to encourage you to use names that would make sense to 
   anyone reading your code (a colleague, or even yourself a year from now). 
   Also, avoiding excessively long names will make your code more readable.
 - **Avoid commonly used names**<br>
-  There are several names that may already have a definition in the R language 
+  Several names may already have a definition in the R language 
   (e.g. `mean`, `min`, `max`). One clue that a name already has meaning is that 
   if you start typing a name in RStudio and it gets a colored highlight or 
-  RStudio gives you a suggested autocompletion you have chosen a name that has 
+  RStudio gives you a suggested autocompletion, you have chosen a name that has 
   a reserved meaning.
 - **Use the recommended assignment operator**<br>
   In R, we use `<-` as the preferred assignment operator. `=` works too, but is 
   most commonly used in passing arguments to functions (more on functions 
-  later). There is a shortcut for the R assignment operator:
+  later). Shortcuts for the R assignment operator are:
     - Windows execution shortcut: <kbd>Alt</kbd> + <kbd>-</kbd>
     - Mac execution shortcut: <kbd>Option</kbd> + <kbd>-</kbd>
     
-There are a few more suggestions about naming and style you may want to learn
-more about as you write more R code. There are several "style guides" that
+There are a few more suggestions about naming and style you can learn more about as you write more R code. Several "style guides"
 have advice, and one to start with is the [tidyverse R 
 style guide](http://style.tidyverse.org/index.html).
 
-!!! tip "Pay attention to warnings in the script console"
+!!! tip "Pay attention to warnings in the 'Source' panel"
     
-    If you enter a line of code in your script that contains an error, RStudio
-    may give you an error message and underline this mistake. Sometimes these
-    messages are easy to understand, but often the messages may need some figuring
-    out. Paying attention to these warnings will help you avoid mistakes. In the example below, our object name has a space, which
-    is not allowed in R. The error message does not say this directly,
-    but R is "not sure"
-    about how to assign the name to <br>
-    `human_ chr_number`<br>
-    when the object name we want is<br>
-    `human_chr_number`
+    If you enter a line of code in your script that contains an error, RStudio may give you an error message and underline this mistake. Sometimes, these messages are easy to understand, but often, the messages may need some figuring out. Paying attention to these warnings will help you avoid mistakes. In the example below, our object name has a space, which is not allowed in R. The error message does not say this directly, but R is "not sure" about how to assign the number to `human_ chr_number` when the object name we want is `human_chr_number`
     
     ![images](./figures/rstudio_script_warning.png){width="700"}
 
@@ -246,13 +219,19 @@ You can also remove an object from R's memory entirely. The `rm()` function will
 !!! r-project "r"
 
     ```r
-    # delete the object 'gene_name'
+    # Delete the object 'gene_name'
     rm(gene_name)
     ```
 
 If you run a line of code that has only an object name, R will normally
 display the contents of that object. In this case, we are told the
 object no longer exists.
+
+!!! r-project "r"
+
+    ```r
+    gene_name
+    ```
 
 !!! failure "Error"
 
@@ -274,32 +253,30 @@ most common modes you will encounter in R are:
 
 | Mode (abbreviation) | Type of data                                                                                                                                                                                                                                  |
 | ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Numeric (num)       | Numbers such as floating point (i.e. decimals, e.g. 1.0, 0.5, 3.14). <br> There are also more specific numeric types (dbl - Double, int - Integer). These differences are not relevant for most beginners and pertain to how these value are stored in memory |
-| Character (chr)     | A sequence of letters/numbers in single `''` or double `""` quotes                                                                                                                                                                               |
-| Logical (logi)      | Boolean values `TRUE` or `FALSE`                                                                                                                                                                                                                |
+| Numeric (`num`)       | Numbers such as floating point (i.e. decimals, e.g. 1.0, 0.5, 3.14). <br> There are also more specific numeric types (`dbl` - Double, `int` - Integer). These differences are not relevant for most beginners and pertain to how these value are stored in memory |
+| Character (`chr`)     | A sequence of letters/numbers in single `''` or double `""` quotes                                                                                                                                                                               |
+| Logical (`logi`)      | Boolean values `TRUE` or `FALSE`                                                                                                                                                                                                                |
 
 There are a few other modes (i.e. "complex", "raw" etc.) but these are
 the three we will work with in this lesson.
 
-Data types are familiar in many programming languages, but also in
-natural language where we refer to them as the parts of speech,
+Data types are common across many programming languages, but also in
+natural language, where we refer to them as the parts of speech,
 e.g. nouns, verbs, adverbs, etc. Once you know if a word - perhaps an
 unfamiliar one - is a noun, you can probably guess you can count it and
 make it plural if there is more than one (e.g. 1
 [Tuatara](https://en.wikipedia.org/wiki/Tuatara), or 2 Tuataras). If
-something is a adjective, you can usually change it into an adverb by
+something is an adjective, you can usually change it into an adverb by
 adding "-ly"
-(e.g. [jejune](https://www.merriam-webster.com/dictionary/jejune) vs.
+(e.g., [jejune](https://www.merriam-webster.com/dictionary/jejune) vs.
 jejunely). Depending on the context, you may need to decide if a word is
-in one category or another (e.g "cut" may be a noun when it's on your
-finger, or a verb when you are preparing vegetables). These concepts
+in one category or another (e.g "cut" may be (1) a noun when it's on your
+finger or (2) a verb when you are preparing vegetables). These concepts
 have important analogies when working with R objects.
 
 !!! question "Exercise: Create objects and check their modes"
   
-    Create the following objects in R, then use the `mode()` function to
-    verify their modes. Try to guess what the mode will be before you look
-    at the solution
+    Create the following objects in R, then verify their modes using the `mode()` function. Try to guess what the mode will be before you look at the solution.
   
     1.  `chromosome_name <- 'chr02'`
     2.  `od_600_value <- 0.47`
@@ -327,9 +304,9 @@ have important analogies when working with R objects.
 
 Notice from the solution that even if a series of numbers is given as a
 value R will consider them to be in the "character" mode if they are
-enclosed as single or double quotes. Also, notice that you cannot take a
-string of alphanumeric characters (e.g. Earhart) and assign as a value
-for an object. In this case, R looks for an object named `Earhart` but
+enclosed with single or double quotes. Also, notice that you cannot take a
+string of alphanumeric characters (i.e., Earhart) and assign it as a value
+for an object. In this case, R looks for an object named `Earhart`, but
 since there is no object, no assignment can be made. If `Earhart` did
 exist, then the mode of `pilot` would be whatever the mode of `Earhart`
 was originally. If we want to create an object called `pilot` that was
@@ -345,9 +322,8 @@ the **name** "Earhart", we need to enclose `Earhart` in quotation marks.
 
 ### Mathematical and functional operations on objects
 
-Once an object exists (which by definition also means it has a mode), R
-can appropriately manipulate that object. For example, objects of the
-numeric modes can be added, multiplied, divided, etc. R provides several
+Once an object exists (which, by definition, also means it has a mode), R
+can manipulate that object using appropriate methods. For example, objects of the numeric modes can be added, multiplied, divided, etc. R provides several
 mathematical (arithmetic) operators including:
 
 | Operator    | Description                                                  |
@@ -380,19 +356,19 @@ and importantly, can be used on any object that evaluates to
     human_chr_number * 2
     ```
 
-??? question "Exercise: Compute the golden ratio"
+!!! question "Exercise: Compute the golden ratio"
 
-    One approximation of the golden ratio (φ) can be found by taking the sum of 
+    One approximation of the golden ratio ($\phi$) can be found by taking the sum of 
     1 and the square root of 5, and dividing by 2 as in the example above.
 
     $$
-    \frac{1 + \sqrt{5}}{2}
+    \phi = \frac{1 + \sqrt{5}}{2}
     $$
 
     Compute the golden ratio to 3 digits of precision using the `sqrt()` and `round()`
     functions. 
     
-    Hint: Remember the `round()` function can take 2 arguments.
+    Hint: Remember the `round()` function can take **two** arguments.
 
     ??? success "Solution"
 
@@ -405,7 +381,7 @@ and importantly, can be used on any object that evaluates to
 
 ## Vectors
 
-Vectors are probably the most used commonly used object type in R. **A vector is a collection of values that are all of the same type (numbers, characters, etc.)**. One of the most common ways to create a vector is to use the `c()` function - the "concatenate" or "combine" function. Inside the function you may enter one or more values; for multiple values, separate each value with a comma:
+Vectors are probably the most commonly used object type in R. **A vector is a collection of values that are all of the same type (numbers, characters, etc.)**. One of the most common ways to create a vector is to use the `c()` function &mdash; the "concatenate" or "combine" function. Inside the function you may enter one or more values; for multiple values, separate each value with a comma:
 
 !!! r-project "r"
 
@@ -428,7 +404,7 @@ function that gives both of these pieces of information is the `str()`
     str(snp_genes)
     ```
 
-Vectors are quite important in R. Another data type that we will work
+Vectors are very important in R. Another data type that we will work
 with later in this lesson, data frames, are collections of vectors. What
 we learn here about vectors will pay off even more when we start working
 with data frames.
@@ -449,10 +425,10 @@ Let's create a few more vectors to play around with:
     snp_positions <- c(8762685, 66560624, 67545785, 154039662)
     ```
 
-Once we have vectors, one thing we may want to do is specifically retrieve one
+Once we have vectors, one thing we may want to do is retrieve one
 or more values from our vector. To do so, we use **bracket notation**. We type
 the name of the vector followed by square brackets. In those square brackets
-we place the index (e.g. a number) in that bracket as follows:
+we place the index (i.e., a number that corresponds to the position of the value in the vector) in that bracket as follows:
 
 !!! r-project "r"
 
@@ -474,8 +450,8 @@ retrieve a range of numbers:
     ```
 
 If you want to retrieve several (but not necessarily sequential) items from
-a vector, you pass a **vector of indices**; a vector that has the numbered
-positions you wish to retrieve.
+a vector, you pass a **vector of indices** (i.e., a vector that has the numbered
+positions of the elements you wish to retrieve).
 
 !!! r-project "r"
 
@@ -488,7 +464,7 @@ positions you wish to retrieve.
 There are additional (and perhaps less commonly used) ways of subsetting
 a vector (see [these
 examples](https://thomasleeper.com/Rcourse/Tutorials/vectorindexing.html)).
-Also, several of these subsetting expressions can be combined:
+Several of these subsetting expressions can be combined:
 
 !!! r-project "r"
 
@@ -577,6 +553,10 @@ bracket notation:
         [1] "OXTR"   "ACTN3"  "AR"     "OPRM1"  "CYP1A1" NA       "APOA5" 
         ```
 
+!!! tip "Filling in the blanks"
+
+    Notice in the example above that there is an `NA` in the 6th position of the vector? Recall that R keeps track of every element in vectors by numeric indexing. This means that when we added a 7th element where there is no 6th element, R fills it with `NA` which functionally means "missing value" or "Not Available".
+
 !!! question "Exercise: Examining and subsetting vectors"
 
     Answer the following question to test your knowledge of vectors
@@ -623,8 +603,7 @@ logical operator:
         ```
 
 In the square brackets you place the name of the vector followed by the
-comparison operator and (in this case) a numeric value. Some of the most
-common logical operators you will use in R are:
+comparison operator and (in this case) a numeric value. Some common logical operators in R are:
 
 | Operator | Description              |
 | -------- | ------------------------ |
@@ -638,7 +617,7 @@ common logical operators you will use in R are:
 | `a | b`  | a or b                   |
 | `a & b`  | a and b                  |
 
-#### The magic of programming
+**:magic_wand: The magic of programming**
 
 The reason why the expression `snp_positions[snp_positions > 100000000]` works 
 can be better understood if you examine what the expression 
@@ -656,7 +635,7 @@ can be better understood if you examine what the expression
         [1] FALSE FALSE FALSE  TRUE
         ```
 
-The output above is a logical vector, the 4th element of which is TRUE. When you pass a logical vector as an index, R will return the true values:
+The output above is a logical vector where the 4th element is `TRUE`. When you pass a logical vector as an index, R will return values that are or evaluate to `TRUE`:
 
 !!! r-project "r"
     
@@ -713,8 +692,7 @@ we can use an object that can take on whatever value we need. So for example:
         [1] 154039662
         ```
 
-Ultimately, it’s putting together flexible, reusable code like this that gets at 
-the “magic” of programming!
+Ultimately, it’s putting together flexible, reusable code like this that gets at the “magic” of programming!
 
 
 ### A few final vector tricks
@@ -742,7 +720,7 @@ any `NA` value:
         ```
 
 Sometimes, you may wish to find out if a specific value (or several values) is 
-present a vector. You can do this using the comparison operator `%in%`, 
+present in a vector. You can do this using the comparison operator `%in%`  
 which will return `TRUE` for any value in the vector you are searching:
 
 !!! r-project "r"
@@ -774,14 +752,14 @@ complex data storage:
   Remember that vectors can only contain data of one mode.
 - Lists can be **nested**<br>
   This means that a list can contain other lists. Vectors, on the other hand, 
-  are flat (i.e. all values of a vector is laid out on a single level)
+  are flat (i.e., all values of a vector is laid out on a single level)
 
 Due to their flexibility, many complex analyses store data/return results using lists.
 
 !!! info "Attribution"
 
     Some of the content here was adapted from an excellent 
-    [tutorial](https://r4ds.had.co.nz/vectors.html#lists), which we highly
+    [tutorial](https://r4ds.had.co.nz/vectors.html#lists) which we highly
     recommend you read.
 
 
@@ -807,7 +785,7 @@ Let's begin by creating a list using existing vectors created
 
 !!! info "Copy-pasting code"
     
-    Make sure to highlight, copy, paste, then run all 4 lines of the 
+    Make sure to highlight, copy, paste, then run all lines of the 
     "Create a list" code block.
 
 We can see how R prints a list by calling it.
@@ -892,18 +870,12 @@ of data stored in the list using `str()`.
             [1]   8762685  66560624  67545785 154039662
             ```
 
-    Notice that the items are not named and simply given a numeric index within 
-    double square brackets `[[1]]`. In fact, you can create a list with a 
-    mixture of named and unnamed items. While this is still a valid way to 
-    create lists, it is not very user-friendly as we have no way of telling what
-    information is stored in each of the items. Ideally, you should assign names
-    to each item in the list when creating it to easily identify the kinds of 
-    information stored within it.
+    Notice that the items are not named and are simply given a numeric index within double square brackets `[[1]]`. In fact, you can create a list with a mixture of named and unnamed items. While this is still a valid way to create lists, it is not very user-friendly as we have no way of telling what information is stored in each of the items. Ideally, you should assign names to each item in the list when creating it to easily identify the kinds of information stored within it.
 
 !!! bell "Importance of correct symbols for adding items to lists"
 
     Notice that we have used the assignment operator `<-` to create 
-    `snps_list`, and the equal symbol `=` to add vectors to each item in the 
+    `snps_list` and the equal symbol `=` to add vectors to each item in the 
     list. When creating a vector, you can use either symbol to achieve the same 
     goal. However, when creating lists, the distinction between symbols is 
     ***NOT*** a stylistic choice and will affect the output. We can see what 
@@ -1012,6 +984,8 @@ just added.
 To replace items in a list, we refer to the item, then assign it something 
 else. Let's say we want the `DE_genes` to be in numeric, instead of logical 
 mode.
+
+<!-- 15:50 01/03/2024 JSB -->
 
 !!! r-project "r"
 
