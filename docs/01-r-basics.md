@@ -985,8 +985,6 @@ To replace items in a list, we refer to the item, then assign it something
 else. Let's say we want the `DE_genes` to be in numeric, instead of logical 
 mode.
 
-<!-- 15:50 01/03/2024 JSB -->
-
 !!! r-project "r"
 
     ```r
@@ -1084,10 +1082,30 @@ index or name. The following code will subset the items `genes`,
          $ sig_threshold : num 0.05
         ```
 
-!!! bell "Reminder"
+!!! tip "List bracket notation"
 
-    Be mindful that when subsetting a list using single square brackets `[]`, 
-    the result is always a list!
+    When subsetting a list using single square brackets `[]`, the result is 
+    always a list. To access the vector directly, we need to use double square
+    brackets `[[]]`. For example:
+
+    !!! r-project "r"
+
+        ```r
+        # Return the vector in a list
+        snps_list["chromosomes"]
+
+        # Return the vector directly
+        snps_list[["chromosomes"]]
+        ``` 
+
+        ??? success "Output"
+
+            ```
+            $chromosomes
+            [1] "3"  "11" "X"  "6"
+
+            [1] "3"  "11" "X"  "6"
+            ```
 
 To remove objects in a list, we first refer to it, then assign it as `NULL`.
 
@@ -1115,7 +1133,7 @@ Et voilà! The numeric vector `sig_threshold` is no longer a part of
 
 ### Nested list
 
-A defining feature of lists is that it can be nested (i.e. lists can be stored inside of a list). This property allows the storage of data that are structured hierarchically or in a tree-like fashion (i.e. dendrograms). It is also useful for storing different types of data in an organised manner (e.g. a list of model values with a nested list that contains sample information or metadata). You will undoubtedly encounter complex nested list structures in your R journey. The majority of the time, we are only concerned with referring to or subsetting nested lists. With that in mind, let's start with creating a nested list followed by an example on subsetting.
+A defining feature of lists is that it can be nested (i.e., lists can be stored inside of a list). This property allows the storage of data that are structured hierarchically or in a tree-like fashion (i.e., dendrograms). It is also useful for storing different types of data in an organised manner (e.g., a list of model values with a nested list that contains sample information or metadata). You will undoubtedly encounter complex nested list structures in your R journey. The majority of the time, we are only concerned with referring to or subsetting nested lists. With that in mind, let's start with creating a nested list followed by an example on subsetting.
 
 !!! r-project "r"
 
@@ -1251,8 +1269,13 @@ object's name or index, and how it is structured (parent-child hierarchy).
     ??? success "Solution"
 
         ```r
+        # Answer (a)
         snps <- c(snps, "rs662799")
+
+        # Answer (b)
         snp_chromosomes <- c(snp_chromosomes, "11") # Did you use quotes?
+
+        # Answer (c)
         snp_positions <- c(snp_positions, 116792991)
         ```
 
@@ -1276,13 +1299,18 @@ object's name or index, and how it is structured (parent-child hierarchy).
     ??? success "Solution"
 
         ```r
+        # Answer (a)
         snp_genes <- snp_genes[-5]
+        # or use logical subsetting
+        snp_genes <- snp_genes[snp_genes != "CYP1A1"]
+
+        # Answer (c)
         snp_genes <- c(snp_genes, NA, NA)
         ```
 
 !!! question "Exercise 4"
 
-    Using indexing, create a new vector named combined that contains:
+    Using indexing, create a new vector named `combined` that contains:
 
     - The the 1st value in `snp_genes`
     - The 1st value in `snps`
@@ -1302,7 +1330,7 @@ object's name or index, and how it is structured (parent-child hierarchy).
 
 !!! question "Exercise 5"
 
-    What type of data is combined?
+    What type of data is `combined`?
 
     ??? success "Solution"
 
