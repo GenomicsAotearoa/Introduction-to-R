@@ -2,20 +2,20 @@
 
 !!! info 
 
-    === "Keypoints"
+    === "Key points"
 
-        - ggplot2 is a powerful tool for high-quality plots
-        - ggplot2 provides a flexiable and readable grammar to build plots
+        - `ggplot2` is a powerful tool for high-quality plots
+        - `ggplot2` provides a flexible and readable grammar to build plots
     
     === "Objectives"
 
         - Describe the role of data, aesthetics, and geoms in ggplot functions.
         - Choose the correct aesthetics and alter the geom parameters for a
-          scatter plot, histogram, or box plot.
+          scatter plot, bar plot, histogram, or box plot.
         - Layer multiple geometries in a single plot.
         - Customize plot scales, titles, themes, and fonts.
         - Apply a facet to a plot.
-        - Apply additional ggplot2-compatible plotting libraries.
+        - Apply additional `ggplot2`-compatible plotting libraries.
         - Save a ggplot to a file.
         - List several resources for getting help with ggplot.
         - List several resources for creating informative scientific plots.
@@ -27,33 +27,53 @@
         - What is the process of creating a publication-quality plots with
           ggplot in R?
 
-<!--
-    \`\`\`{r, echo = FALSE, eval = TRUE, purl = FALSE} \## silently read in
-    CSV file from FigShare
-
-    # variants \<- read.csv("https://ndownloader.figshare.com/files/14632895")
-
-    variants =
-    read.csv("https://raw.githubusercontent.com/naupaka/vcfr-for-data-carpentry-draft/main/output/combined_tidy_vcf.csv")
--->
 
 ## Introduction to **`ggplot2`**
 
 ![images](https://ggplot2.tidyverse.org/logo.png){ align="right" }
 
-**`ggplot2`** is a plotting package that makes it simple to create complex plots from data in a data frame. It provides a more programmatic interface for specifying what variables to plot, how they are displayed, and general visual properties. Therefore, we only need minimal changes if the underlying data change or if we decide to change from a bar plot to a scatter plot. This helps in creating publication-quality plots with minimal amounts of adjustments and tweaking.
+**`ggplot2`** is a plotting package that makes it simple to create complex plots 
+from data in a data frame. It provides a more programmatic interface for 
+specifying what variables to plot, how they are displayed, and general visual 
+properties. Therefore, we only need minimal changes if the underlying data 
+change or if we decide to change from a bar plot to a scatter plot. This helps 
+in creating publication-quality plots with minimal adjustments and tweaking.
 
-The **gg** in "**ggplot**" stands for "<b>G</b>rammar of <b>G</b>raphics," which is an elegant yet powerful way to describe the making of scientific plots. In short, the grammar of graphics breaks down every plot into a few components, namely, a dataset, a set of geoms (visual marks that represent the data points), and a coordinate system. You can imagine this is a grammar that gives unique names to each component appearing in a plot and conveys specific information about data. With **ggplot**, graphics are built step by step by adding new elements.
+The **gg** in "**ggplot**" stands for "<b>G</b>rammar of <b>G</b>raphics," 
+which is an elegant yet powerful way to describe the making of scientific plots.
+In short, the grammar of graphics breaks down every plot into a few components, 
+namely, a dataset, a set of geoms (or *geometric objects*; visual marks that 
+represent the data points), and a coordinate system. You can imagine this is a 
+grammar that gives unique names to each component appearing in a plot and 
+conveys specific information about data. With **ggplot**, graphics are built 
+step-by-step by adding new elements.
 
-The idea of **mapping** is crucial in **ggplot**. One familiar example is to *map* the value of one variable in a dataset to $x$ and the other to $y$. However, we often encounter datasets that include multiple (more than two) variables. In this case, **ggplot** allows you to *map* those other variables to visual marks such as **color** and **shape** (**aesthetics** or `aes`). One thing you may want to remember is the difference between **discrete** and **continuous** variables. Some aesthetics, such as the shape of dots, do not accept continuous variables. If forced to do so, R will give an error. This is easy to understand; we cannot create a continuum of shapes for a variable, unlike, say, color.
+The idea of **mapping** is crucial in **ggplot**. One familiar example is to 
+*map* the value of one variable in a dataset to $x$ and the other to $y$. 
+However, we often encounter datasets that include more than two variables. 
+In this case, **ggplot** allows you to *map* those other variables to visual 
+marks such as **color** and **shape**. Along with the mapped coordinates 
+$x$ and $y$, these visual marks constitute the **aesthetics** of the figure 
+(specified using `aes()`). One thing you may want to remember is the difference 
+between **discrete** and **continuous** variables. Some aesthetics, 
+such as the shape of dots, do not accept continuous variables. 
+If forced to do so, R will give an error. This is easy to understand; 
+we cannot create a continuum of shapes for a variable, unlike, say, color.
 
 !!! tip "Checking continuous/discrete variables"
     
-    When having doubts about whether a variable is [continuous or discrete](https://en.wikipedia.org/wiki/Continuous_or_discrete_variable), a quick way to check is to use the [`summary()`](https://www.geeksforgeeks.org/get-summary-of-results-produced-by-functions-in-r-programming-summary-function/) function. Continuous variables have descriptive statistics but not the discrete variables.
+    When having doubts about whether a variable is [continuous or 
+    discrete](https://en.wikipedia.org/wiki/Continuous_or_discrete_variable), 
+    a quick way to check is to use the [`summary()`](https://www.geeksforgeeks.org/get-summary-of-results-produced-by-functions-in-r-programming-summary-function/) 
+    function. Continuous variables have descriptive statistics 
+    (e.g., max, min, mean) but not the discrete variables.
 
 !!! tip "Installing `ggplot` on your local machine"
 
-    Here, we do not need to install `ggplot` while working within NeSI's RStudio. However, if you would like to work on your own local R/RStudio, you can install this package (or any other packages) like so:
+    Here, we do not need to install `ggplot` while working within 
+    NeSI's RStudio. However, if you would like to work on 
+    your own local R/RStudio, you can install this package (or any other 
+    packages) like so:
 
     !!! r-project "r"
 
@@ -61,7 +81,9 @@ The idea of **mapping** is crucial in **ggplot**. One familiar example is to *ma
         install.packages("ggplot2")
         ```
 
-    **`ggplot2`** belongs to the [**`tidyverse`** framework](https://www.tidyverse.org/), a suite of packages that can help you with data import and manipulation.
+    **`ggplot2`** belongs to the [**`tidyverse`** 
+    framework](https://www.tidyverse.org/), a suite of packages that 
+    can help you with data import and manipulation.
 
 <!--
 ## Installing `tidyverse`
