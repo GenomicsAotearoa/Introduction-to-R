@@ -125,7 +125,8 @@ along with other packages as part of the **`tidyverse`** framework.
 
 ## Loading `ggplot2` and the dataset
 
-Let's start by loading the required `ggplot2` package and importing the dataset we will be working with.
+Let's start by loading the required `ggplot2` package and importing the dataset 
+we will be working with.
 
 !!! r-project "r"
 
@@ -162,7 +163,8 @@ Let's start by loading the required `ggplot2` package and importing the dataset 
 Explore the *structure* (types of columns and number of rows) of the dataset using [dplyr](https://dplyr.tidyverse.org/index.html)'s [`glimpse()`](https://dplyr.tidyverse.org/reference/glimpse.html) (for more info, see the [Data Wrangling and Analyses with Tidyverse](https://datacarpentry.org/genomics-r-intro/05-dplyr/) episode)
 -->
 
-Explore the *structure* (types of columns and number of rows) of the dataset using `str()`.
+Explore the *structure* (types of columns and number of rows) of the dataset 
+using `str()`.
 
 !!! r-project "r"
 
@@ -170,40 +172,40 @@ Explore the *structure* (types of columns and number of rows) of the dataset usi
     str(variants)
     ```
 
-??? success "Output"
+    ??? success "Output"
 
-    ```
-    'data.frame':	801 obs. of  29 variables:
-     $ sample_id    : chr  "SRR2584863" "SRR2584863" "SRR2584863" "SRR2584863" ...
-     $ CHROM        : chr  "CP000819.1" "CP000819.1" "CP000819.1" "CP000819.1" ...
-     $ POS          : int  9972 263235 281923 433359 473901 648692 1331794 1733343 2103887 2333538 ...
-     $ ID           : logi  NA NA NA NA NA NA ...
-     $ REF          : chr  "T" "G" "G" "CTTTTTTT" ...
-     $ ALT          : chr  "G" "T" "T" "CTTTTTTTT" ...
-     $ QUAL         : num  91 85 217 64 228 210 178 225 56 167 ...
-     $ FILTER       : logi  NA NA NA NA NA NA ...
-     $ INDEL        : logi  FALSE FALSE FALSE TRUE TRUE FALSE ...
-     $ IDV          : int  NA NA NA 12 9 NA NA NA 2 7 ...
-     $ IMF          : num  NA NA NA 1 0.9 ...
-     $ DP           : int  4 6 10 12 10 10 8 11 3 7 ...
-     $ VDB          : num  0.0257 0.0961 0.7741 0.4777 0.6595 ...
-     $ RPB          : num  NA 1 NA NA NA NA NA NA NA NA ...
-     $ MQB          : num  NA 1 NA NA NA NA NA NA NA NA ...
-     $ BQB          : num  NA 1 NA NA NA NA NA NA NA NA ...
-     $ MQSB         : num  NA NA 0.975 1 0.916 ...
-     $ SGB          : num  -0.556 -0.591 -0.662 -0.676 -0.662 ...
-     $ MQ0F         : num  0 0.167 0 0 0 ...
-     $ ICB          : logi  NA NA NA NA NA NA ...
-     $ HOB          : logi  NA NA NA NA NA NA ...
-     $ AC           : int  1 1 1 1 1 1 1 1 1 1 ...
-     $ AN           : int  1 1 1 1 1 1 1 1 1 1 ...
-     $ DP4          : chr  "0,0,0,4" "0,1,0,5" "0,0,4,5" "0,1,3,8" ...
-     $ MQ           : int  60 33 60 60 60 60 60 60 60 60 ...
-     $ Indiv        : chr  "/home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam" "/home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam" "/home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam" "/home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam" ...
-     $ gt_PL        : chr  "121,0" "112,0" "247,0" "91,0" ...
-     $ gt_GT        : int  1 1 1 1 1 1 1 1 1 1 ...
-     $ gt_GT_alleles: chr  "G" "T" "T" "CTTTTTTTT" ...
-    ```
+        ```
+        'data.frame':	801 obs. of  29 variables:
+         $ sample_id    : chr  "SRR2584863" "SRR2584863" "SRR2584863" "SRR2584863" ...
+         $ CHROM        : chr  "CP000819.1" "CP000819.1" "CP000819.1" "CP000819.1" ...
+         $ POS          : int  9972 263235 281923 433359 473901 648692 1331794 1733343 2103887 2333538 ...
+         $ ID           : logi  NA NA NA NA NA NA ...
+         $ REF          : chr  "T" "G" "G" "CTTTTTTT" ...
+         $ ALT          : chr  "G" "T" "T" "CTTTTTTTT" ...
+         $ QUAL         : num  91 85 217 64 228 210 178 225 56 167 ...
+         $ FILTER       : logi  NA NA NA NA NA NA ...
+         $ INDEL        : logi  FALSE FALSE FALSE TRUE TRUE FALSE ...
+         $ IDV          : int  NA NA NA 12 9 NA NA NA 2 7 ...
+         $ IMF          : num  NA NA NA 1 0.9 ...
+         $ DP           : int  4 6 10 12 10 10 8 11 3 7 ...
+         $ VDB          : num  0.0257 0.0961 0.7741 0.4777 0.6595 ...
+         $ RPB          : num  NA 1 NA NA NA NA NA NA NA NA ...
+         $ MQB          : num  NA 1 NA NA NA NA NA NA NA NA ...
+         $ BQB          : num  NA 1 NA NA NA NA NA NA NA NA ...
+         $ MQSB         : num  NA NA 0.975 1 0.916 ...
+         $ SGB          : num  -0.556 -0.591 -0.662 -0.676 -0.662 ...
+         $ MQ0F         : num  0 0.167 0 0 0 ...
+         $ ICB          : logi  NA NA NA NA NA NA ...
+         $ HOB          : logi  NA NA NA NA NA NA ...
+         $ AC           : int  1 1 1 1 1 1 1 1 1 1 ...
+         $ AN           : int  1 1 1 1 1 1 1 1 1 1 ...
+         $ DP4          : chr  "0,0,0,4" "0,1,0,5" "0,0,4,5" "0,1,3,8" ...
+         $ MQ           : int  60 33 60 60 60 60 60 60 60 60 ...
+         $ Indiv        : chr  "/home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam" "/home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam" "/home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam" "/home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam" ...
+         $ gt_PL        : chr  "121,0" "112,0" "247,0" "91,0" ...
+         $ gt_GT        : int  1 1 1 1 1 1 1 1 1 1 ...
+         $ gt_GT_alleles: chr  "G" "T" "T" "CTTTTTTTT" ...
+        ```
 
 Alternatively, we can display the first a few rows (vertically) of the
 table using [`head()`](https://www.geeksforgeeks.org/get-the-first-parts-of-a-data-set-in-r-programming-head-function/):
@@ -214,43 +216,46 @@ table using [`head()`](https://www.geeksforgeeks.org/get-the-first-parts-of-a-da
     head(variants)
     ```
 
-??? success "Output"
+    ??? success "Output"
 
-    ```
-       sample_id      CHROM    POS ID      REF       ALT QUAL FILTER INDEL IDV IMF DP       VDB RPB
-    1 SRR2584863 CP000819.1   9972 NA        T         G   91     NA FALSE  NA  NA  4 0.0257451  NA
-    2 SRR2584863 CP000819.1 263235 NA        G         T   85     NA FALSE  NA  NA  6 0.0961330   1
-    3 SRR2584863 CP000819.1 281923 NA        G         T  217     NA FALSE  NA  NA 10 0.7740830  NA
-    4 SRR2584863 CP000819.1 433359 NA CTTTTTTT CTTTTTTTT   64     NA  TRUE  12 1.0 12 0.4777040  NA
-    5 SRR2584863 CP000819.1 473901 NA     CCGC    CCGCGC  228     NA  TRUE   9 0.9 10 0.6595050  NA
-    6 SRR2584863 CP000819.1 648692 NA        C         T  210     NA FALSE  NA  NA 10 0.2680140  NA
-      MQB BQB     MQSB       SGB     MQ0F ICB HOB AC AN     DP4 MQ
-    1  NA  NA       NA -0.556411 0.000000  NA  NA  1  1 0,0,0,4 60
-    2   1   1       NA -0.590765 0.166667  NA  NA  1  1 0,1,0,5 33
-    3  NA  NA 0.974597 -0.662043 0.000000  NA  NA  1  1 0,0,4,5 60
-    4  NA  NA 1.000000 -0.676189 0.000000  NA  NA  1  1 0,1,3,8 60
-    5  NA  NA 0.916482 -0.662043 0.000000  NA  NA  1  1 1,0,2,7 60
-    6  NA  NA 0.916482 -0.670168 0.000000  NA  NA  1  1 0,0,7,3 60
-                                                                   Indiv gt_PL gt_GT gt_GT_alleles
-    1 /home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam 121,0     1             G
-    2 /home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam 112,0     1             T
-    3 /home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam 247,0     1             T
-    4 /home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam  91,0     1     CTTTTTTTT
-    5 /home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam 255,0     1        CCGCGC
-    6 /home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam 240,0     1             T
-    ```
+        ```
+           sample_id      CHROM    POS ID      REF       ALT QUAL FILTER INDEL IDV IMF DP       VDB RPB
+        1 SRR2584863 CP000819.1   9972 NA        T         G   91     NA FALSE  NA  NA  4 0.0257451  NA
+        2 SRR2584863 CP000819.1 263235 NA        G         T   85     NA FALSE  NA  NA  6 0.0961330   1
+        3 SRR2584863 CP000819.1 281923 NA        G         T  217     NA FALSE  NA  NA 10 0.7740830  NA
+        4 SRR2584863 CP000819.1 433359 NA CTTTTTTT CTTTTTTTT   64     NA  TRUE  12 1.0 12 0.4777040  NA
+        5 SRR2584863 CP000819.1 473901 NA     CCGC    CCGCGC  228     NA  TRUE   9 0.9 10 0.6595050  NA
+        6 SRR2584863 CP000819.1 648692 NA        C         T  210     NA FALSE  NA  NA 10 0.2680140  NA
+          MQB BQB     MQSB       SGB     MQ0F ICB HOB AC AN     DP4 MQ
+        1  NA  NA       NA -0.556411 0.000000  NA  NA  1  1 0,0,0,4 60
+        2   1   1       NA -0.590765 0.166667  NA  NA  1  1 0,1,0,5 33
+        3  NA  NA 0.974597 -0.662043 0.000000  NA  NA  1  1 0,0,4,5 60
+        4  NA  NA 1.000000 -0.676189 0.000000  NA  NA  1  1 0,1,3,8 60
+        5  NA  NA 0.916482 -0.662043 0.000000  NA  NA  1  1 1,0,2,7 60
+        6  NA  NA 0.916482 -0.670168 0.000000  NA  NA  1  1 0,0,7,3 60
+                                                                       Indiv gt_PL gt_GT gt_GT_alleles
+        1 /home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam 121,0     1             G
+        2 /home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam 112,0     1             T
+        3 /home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam 247,0     1             T
+        4 /home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam  91,0     1     CTTTTTTTT
+        5 /home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam 255,0     1        CCGCGC
+        6 /home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam 240,0     1             T
+        ```
 
-**`ggplot2`** functions like data in the **long** format, i.e., a column for every dimension (variable), and a row for every observation. Well-structured data will save you time when making figures with **`ggplot2`**
+**`ggplot2`** functions like data in the **long** format, i.e., a column for 
+every dimension (variable), and a row for every observation. Well-structured 
+data will save you time when making figures with **`ggplot2`**.
 
-**`ggplot2`** graphics are built step-by-step by adding new elements. Adding layers in this fashion allows for extensive flexibility and customization of plots, and more equally important the readability of the code.
+**`ggplot2`** graphics are built step-by-step by adding new elements. Adding 
+layers in this fashion allows for extensive flexibility and customization of 
+plots, and more equally important the readability of the code.
 
-To build a ggplot, we will use the following basic template that can be used for different types of plots:
+To build a ggplot, we will use the following basic template that can be used for 
+different types of plots:
 
-!!! r-project "r"
-
-    ```r
-    ggplot(data = <DATA>, mapping = aes(<MAPPINGS>)) +  <GEOM_FUNCTION>()
-    ```
+```r
+ggplot(data = <DATA>, mapping = aes(<MAPPINGS>)) + <GEOM_FUNCTION>()
+```
     
 -   Use the `ggplot()` function and bind the plot to a specific data
     frame using the `data` argument
@@ -263,7 +268,7 @@ To build a ggplot, we will use the following basic template that can be used for
 
 -   Define a mapping (using the aesthetic (`aes`) function), by
     selecting the variables to be plotted and specifying how to present
-    them in the graph, e.g. as x and y positions or characteristics such
+    them in the graph, e.g., as x and y positions or characteristics such
     as size, shape, color, etc.
 
 !!! r-project "r"
@@ -312,9 +317,19 @@ plots, so the above plot can also be generated with code like this:
 
 !!! info "Notes"
 
-    - Anything you put in the [`ggplot()`](https://ggplot2.tidyverse.org/reference/ggplot.html) function can be seen by any geom layers that you add (i.e., these are universal plot settings). This includes the x- and y-axis mapping you set up in [`aes()`](https://ggplot2.tidyverse.org/reference/aes.html).
-    - You can also specify mappings for a given geom independently of the mappings defined globally in the [`ggplot()`](https://ggplot2.tidyverse.org/reference/ggplot.html) function.
-    - The `+` sign used to add new layers must be placed at the end of the line containing the *previous* layer. If, instead, the `+` sign is added at the beginning of the line containing the new layer, **`ggplot2`** will not add the new layer and will return an error message.
+    - Anything you put in the 
+      [`ggplot()`](https://ggplot2.tidyverse.org/reference/ggplot.html) 
+      function can be seen by any geom layers that you add (i.e., these are 
+      universal plot settings). This includes the x- and y-axis mapping you 
+      set up in [`aes()`](https://ggplot2.tidyverse.org/reference/aes.html).
+    - You can also specify mappings for a given geom independently of the 
+      mappings defined globally in the 
+      [`ggplot()`](https://ggplot2.tidyverse.org/reference/ggplot.html) 
+      function.
+    - The `+` sign used to add new layers must be placed at the end of the line 
+      containing the *previous* layer. If, instead, the `+` sign is added at the 
+      beginning of the line containing the new layer, **`ggplot2`** will not add 
+      the new layer and will return an error message.
 
     !!! r-project "r"
     
@@ -361,7 +376,10 @@ We can also add colors for all the points:
     ggplot(data = variants, aes(x = POS, y = DP)) + 
       geom_point(alpha = 0.5, color = "blue")
     ```
-Or to color each species in the plot differently, you could use a vector as an input to the argument **color**. **`ggplot2`** will provide a different color corresponding to different values in the vector. Here is an example where we color with **`sample_id`**:
+Or to color each species in the plot differently, you could use a vector as an 
+input to the argument `color`. **`ggplot2`** will provide a different color 
+corresponding to different values in the vector. Here is an example where we 
+color with **`sample_id`**:
 
 !!! r-project "r"
 
@@ -404,13 +422,30 @@ To add a *main* title to the plot, we use
       ggtitle("Read Depth vs. Position")
     ```
 
-Now the figure is complete and ready to be exported and saved to a file.
+!!! tip "Using `labs()` for plot labels"
+
+    We can also use 
+    [`labs()`](https://ggplot2.tidyverse.org/reference/labs.html?q=labs#null) to
+    create/modify labels beyond `x` and `y`, such as title, subtitle, caption, 
+    etc. For example:
+
+    !!! r-project "r"
+
+        ```r
+        ggplot(data = variants, aes(x = POS, y = DP, color = sample_id)) +
+          geom_point(alpha = 0.5) +
+          labs(x = "Base Pair Position",
+               y = "Read Depth (DP)",
+               title = "Read Depth vs. Position")
+        ```
+
+Now the figure is complete, we can export and save it to a file.
 This can be achieved easily using
 [`ggsave()`](https://ggplot2.tidyverse.org/reference/ggsave.html), which
 can write, by default, the most recent generated figure into different
 formats (e.g., `jpeg`, `png`, `pdf`) according to the file extension.
 So, for example, to create a pdf version of the above figure with a
-dimension of $6 \times 4$ inches:
+dimension of 6 $\times$ 4 inches:
 
 !!! r-project "r"
 
@@ -421,17 +456,19 @@ dimension of $6 \times 4$ inches:
 If we check the *current working directory*, there should be a newly
 created file called `depth.pdf` with the above plot.
 
-!!! tip "Saving a plot using different units"
+!!! tip "Saving a plot using different units and formats"
 
-    By default, `ggsave()` measures lengths in inches. To change that, we can 
-    use the `units =` arguments. This argument will take `in`, `cm`, `mm`, and 
-    `px`.
+    === "Size units"
 
-!!! tip "Saving a plot to a different format"
+        By default, `ggsave()` measures lengths in inches. To change that, we 
+        can use the `units =` arguments. This argument will take `in`, `cm`,
+        `mm`, and `px`.
 
-    The example above writes the plot to a PDF. We can also save it to other 
-    formats such as `jpeg`, `tiff`, `bmp`, `png`, etc. by modifying the suffix
-    (i.e. file extension).
+    === "File formats"
+
+        The example above writes the plot to a PDF. We can also save it to other 
+        formats such as `jpeg`, `tiff`, `bmp`, `png`, etc. by modifying the 
+        suffix (i.e. file extension).
 
 !!! question "Challenge"
 
