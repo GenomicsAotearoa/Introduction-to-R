@@ -634,6 +634,20 @@ variants is about 10 reads.
               theme_bw()
             ```
 
+## Box plot
+
+A box plot helps us to visualise the spread of grouped data. Let's take a look
+at the spread of read depth in different samples and whether or not the spread
+looks different if it is an indel.
+
+!!! r-project "r"
+
+    ```r
+    ggplot(data = variants, aes(x = sample_id, y = DP, fill = INDEL)) +
+      geom_boxplot(alpha = 0.5) +
+      theme_bw()
+    ```
+
 ## **`ggplot2`** themes
 
 In addition to
