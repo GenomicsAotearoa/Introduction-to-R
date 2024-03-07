@@ -568,11 +568,11 @@ Additionally, you can remove the grid:
               facet_grid(sample_id ~ .)
             ```
 
-## Barplots
+## Bar charts
 
-We can create barplots using the
+We can create bar charts using the
 [`geom_bar`](https://ggplot2.tidyverse.org/reference/geom_bar.html)
-geom. Let's make a barplot showing the number of variants for each
+geom. Let's make a bar chart showing the number of variants for each
 sample that are indels.
 
 !!! r-project "r"
@@ -587,7 +587,7 @@ sample that are indels.
 
     Since we already have the `sample_id` labels on the individual plot facets, we don’t need the legend. Use the help file for geom_bar and any other online resources you want to use to remove the legend from the plot.
 
-    ??? success "Output"
+    ??? success "Solution"
     
         !!! r-project "r"
 
