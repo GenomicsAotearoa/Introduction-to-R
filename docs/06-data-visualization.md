@@ -11,7 +11,7 @@
 
         - Describe the role of data, aesthetics, and geoms in ggplot functions.
         - Choose the correct aesthetics and alter the geom parameters for a
-          scatter plot, bar plot, histogram, or box plot.
+          scatter plot, bar chart, density, or box plot.
         - Layer multiple geometries in a single plot.
         - Customize plot scales, titles, themes, and fonts.
         - Apply a facet to a plot.
