@@ -553,8 +553,8 @@ Additionally, you can remove the grid:
 !!! question "Challenge"
 
     Use what you just learned to create a scatter plot of PHRED scaled
-    quality (`QUAL`) over position (`POS`) with the samples showing in
-    different colors. Make sure to give your plot relevant axis labels.
+    quality (`QUAL`) over position (`POS`) with the points colored and faceted 
+    based on samples. Make sure to give your plot relevant axis labels.
 
     ??? success "Solution"
     
@@ -563,7 +563,8 @@ Additionally, you can remove the grid:
             ```r
             ggplot(data = variants, aes(x = POS, y = QUAL, color = sample_id)) + 
               geom_point() + 
-              labs(x = "Base Pair Position", y = "PHRED-sacled Quality (QUAL)") + 
+              labs(x = "Base Pair Position", 
+                   y = "PHRED-sacled Quality (QUAL)") + 
               facet_grid(sample_id ~ .)
             ```
 
