@@ -597,6 +597,10 @@ sample that are indels.
               facet_grid(sample_id ~ .)
             ```
 
+Notice that we did not need to map a variable to `y` in the aesthetics. This is
+because `geom_bar()` recognises, by default, that it should be counting the 
+number of observations that are indels (`TRUE`) or not (`FALSE`). Take a look at
+the help page for `geom_bar()` to find out how this behaviour is controlled.
 
 ## Density
 
@@ -617,9 +621,10 @@ variants is about 10 reads.
 
 !!! question "Challenge"
 
-    Use geom_density to plot the distribution of DP with a different fill for each sample. Use a white background for the plot.
+    Use `geom_density()` to plot the distribution of DP with a different fill 
+    for each sample. Use a white background for the plot.
 
-    ??? success "Output"
+    ??? success "Solution"
     
         !!! r-project "r"
 
@@ -628,7 +633,6 @@ variants is about 10 reads.
               geom_density(alpha = 0.5) +
               theme_bw()
             ```
-
 
 ## **`ggplot2`** themes
 
