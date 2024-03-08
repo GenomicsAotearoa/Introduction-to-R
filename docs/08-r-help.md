@@ -2,7 +2,7 @@
 
 !!! info 
 
-    === "Keypoints"
+    === "Key points"
 
         - R provides thousands of functions for analyzing data, and provides several way to get help
         - Using R will mean searching for online help, and there are tips and resources on how to search effectively
@@ -55,10 +55,10 @@ Often, in order to duplicate the issue you are having, someone may need
 to see the data you are working with or verify the versions of R or R
 packages you are using. The following R functions will help with this:
 
-You can **check the version of R** you are working with using the
-`sessionInfo()` function. Actually, it is good to save this information
-as part of your notes on any analysis you are doing. When you run the
-same script that has worked fine a dozen times before, looking back at
+You can **check the version of R** (and any loaded packages) you are working 
+with using the `sessionInfo()` function. Actually, it is good to save this 
+information as part of your notes on any analysis you are doing. When you run 
+the same script that has worked fine a dozen times before, looking back at
 these notes will remind you that you upgraded R and forget to check your
 script.
 
@@ -91,12 +91,11 @@ script.
 Many times, there may be some issues with your data and the way it is
 formatted. In that case, you may want to share that data with someone
 else. However, you may not need to share the whole dataset; looking at a
-subset of your 50,000 row, 10,000 column dataframe may be TMI (too much
-information)! You can take an object you have in memory such as
-dataframe (if you don't know what this means yet, we will get to it!)
-and save it to a file. In our example we will use the `dput()` function
-on the `iris` dataframe which is an example dataset that is installed in
-R:
+subset of your 50,000 row, 10,000 column data frame may be TMI (too much
+information)! You can take an object you have in memory such as a
+data frame and save it to a file. In our example we will use the `dput()` 
+function on the `iris` data frame which is an example dataset that is installed 
+in R:
 
 !!! r-project "r"
 
@@ -163,15 +162,15 @@ them here because they come up commonly:
     1:101 # generates the sequence of numbers from 1 to 101
     ```
 
-!!! success "Output"
-
-    ```
-      [1]   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20  21  22
-     [23]  23  24  25  26  27  28  29  30  31  32  33  34  35  36  37  38  39  40  41  42  43  44
-     [45]  45  46  47  48  49  50  51  52  53  54  55  56  57  58  59  60  61  62  63  64  65  66
-     [67]  67  68  69  70  71  72  73  74  75  76  77  78  79  80  81  82  83  84  85  86  87  88
-     [89]  89  90  91  92  93  94  95  96  97  98  99 100 101
-    ```
+    !!! success "Output"
+    
+        ```
+          [1]   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20  21  22
+         [23]  23  24  25  26  27  28  29  30  31  32  33  34  35  36  37  38  39  40  41  42  43  44
+         [45]  45  46  47  48  49  50  51  52  53  54  55  56  57  58  59  60  61  62  63  64  65  66
+         [67]  67  68  69  70  71  72  73  74  75  76  77  78  79  80  81  82  83  84  85  86  87  88
+         [89]  89  90  91  92  93  94  95  96  97  98  99 100 101
+        ```
 
 In the output above, `[89]` indicates that the first value on that line
 is the 89th item in your result
