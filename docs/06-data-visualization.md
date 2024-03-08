@@ -13,7 +13,7 @@
         - Choose the correct aesthetics and alter the geom parameters for a
           scatter plot, bar chart, density, or box plot.
         - Layer multiple geometries in a single plot.
-        - Customize plot scales, titles, themes, and fonts.
+        - Customize plot titles, themes, and fonts.
         - Apply a facet to a plot.
         - Apply additional `ggplot2`-compatible plotting libraries.
         - Save a ggplot to a file.
