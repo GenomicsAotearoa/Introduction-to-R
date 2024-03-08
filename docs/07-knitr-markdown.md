@@ -2,7 +2,7 @@
 
 !!! info 
 
-    === "Keypoints"
+    === "Key points"
 
         - Keep reporting and R software together in one document using R
           Markdown.
@@ -51,14 +51,14 @@ can just re-compile the report and get the new or corrected results
 (versus having to reconstruct figures, paste them into a Word document,
 and further hand-edit various detailed results).
 
-The key tool for R is [knitr](http://yihui.name/knitr/), which allows
+The key tool for R is [`knitr`](http://yihui.name/knitr/), which allows
 you to create a document that is a mixture of text and some chunks of
-code. When the document is processed by knitr, chunks of R code will be
+code. When the document is processed by `knitr`, chunks of R code will be
 executed, and graphs or other results inserted.
 
 This sort of idea has been called "literate programming".
 
-knitr allows you to mix basically any sort of text with any sort of
+`knitr` allows you to mix basically any sort of text with any sort of
 code, but we recommend that you use R Markdown, which mixes Markdown
 with R. Markdown is a light-weight mark-up language for creating web
 pages.
@@ -68,9 +68,7 @@ pages.
 Within R Studio, click File → New File → R Markdown and you'll get a
 dialog box like this:
 
-<!-- Need to generate the image.
-![images]()
--->
+![Alt text](figures/open_new_Rmd.png)
 
 You can stick with the default (HTML output), but give it a title.
 
@@ -185,7 +183,7 @@ You can make a hyperlink like this:
 You can include an image file like this:
 `![caption](http://url/for/file)`
 
-You can do subscripts (e.g., F~2~) with `F~2` and superscripts (e.g.,
+You can do subscripts (e.g., F~2~) with `F~2~` and superscripts (e.g.,
 F^2^) with `F^2^`.
 
 If you know how to write equations in
