@@ -89,13 +89,12 @@ strains Cit+. Ultimately, we will use R to answer these questions:
 ## How VCF files are generated
 
 Publicly accessible sequencing files in FASTQ formats can be downloaded
-from NCBI SRA. However, at FASTQ files contain unaligned sequences of
-varying quality, and requires clean up and alignment steps for variants
-to be called from the reference genome.
+from NCBI SRA. However, FASTQ files contain unaligned sequences of
+varying quality, and require clean up and alignment steps before variants
+can be called from the reference genome.
 
-Five steps are taken to transform FASTQ files to variant calls contained
-in VCF files and at each step, specialized non-R based bioinformatics
-tools that are used:
+There are five steps we must take to transform raw FASTQ files into variant calls (VCF files). At each of the five steps we will be using specialized, non-R based bioinformatics tools:
+
 
 <figure markdown>
   ![image](figures/variant_calling_workflow.png){ width="250" }
