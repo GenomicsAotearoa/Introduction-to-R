@@ -81,10 +81,6 @@ R:
 
 <!-- Consult Matt and Dini on this section -->
 
-## RStudio on Nesi
-
-Logging into the [NeSI Jupyter Interface](https://dinindusenanayake.github.io/ganesi_authesetup-login/1_jupyterlogin/). 
-
 
 ## Introducing RStudio Server
 
