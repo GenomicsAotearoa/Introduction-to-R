@@ -162,6 +162,13 @@ typos and errors in file paths.** Use it!
     variants <- read.csv("/home/shared/<USERID>/R4Genomics/combined_tidy_vcf.csv")
     ```
 
+    ??? tip "What if you want to access this file on your personal computer?"
+        ```r
+        # Read the csv directly from our github repository
+
+        variants <- read.csv('https://raw.githubusercontent.com/GenomicsAotearoa/Introduction-to-R/refs/heads/main/combined_tidy_vcf.csv')
+        ```
+
 One of the first things you should notice is that in the Environment
 window, you have the `variants` object, listed as 801 obs.
 (observations/rows) of 29 variables (columns). Double-clicking on the
