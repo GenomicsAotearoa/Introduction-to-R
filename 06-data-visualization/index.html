@@ -1,0 +1,1504 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Genomics Aotearoa">
+      
+      
+        <link rel="canonical" href="https://genomicsaotearoa.github.io/Introduction-to-R/06-data-visualization/">
+      
+      
+        <link rel="prev" href="../03-basics-factors-dataframes/">
+      
+      
+        <link rel="next" href="../07-knitr-markdown/">
+      
+      
+      <link rel="icon" href="../theme_figures/nesi_ga.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.16">
+    
+    
+      
+        <title>Data Visualization with ggplot2 - Introduction to R</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Mukta";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#data-visualization-with-ggplot2" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Introduction to R" class="md-header__button md-logo" aria-label="Introduction to R" data-md-component="logo">
+      
+  <img src="../theme_figures/nesi_ga.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Introduction to R
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Data Visualization with ggplot2
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/GenomicsAotearoa/Introduction-to-R" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GenomicsAotearoa/Introduction-to-R
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Introduction to R" class="md-nav__button md-logo" aria-label="Introduction to R" data-md-component="logo">
+      
+  <img src="../theme_figures/nesi_ga.png" alt="logo">
+
+    </a>
+    Introduction to R
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/GenomicsAotearoa/Introduction-to-R" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GenomicsAotearoa/Introduction-to-R
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../00-introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introducing R and RStudio IDE
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-r-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    R Basics
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-data-prelude/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction to the example dataset and file type
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-basics-factors-dataframes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    R Basics continued - factors and data frames
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Data Visualization with ggplot2
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data Visualization with ggplot2
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction-to-ggplot2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction to ggplot2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#loading-ggplot2-and-the-dataset" class="md-nav__link">
+    <span class="md-ellipsis">
+      Loading ggplot2 and the dataset
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#building-your-plots-iteratively" class="md-nav__link">
+    <span class="md-ellipsis">
+      Building your plots iteratively
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#faceting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Faceting
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bar-charts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bar charts
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#density" class="md-nav__link">
+    <span class="md-ellipsis">
+      Density
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#box-plot" class="md-nav__link">
+    <span class="md-ellipsis">
+      Box plot
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ggplot2-themes" class="md-nav__link">
+    <span class="md-ellipsis">
+      ggplot2 themes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#more-ggplot2-plots" class="md-nav__link">
+    <span class="md-ellipsis">
+      More ggplot2 Plots
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-knitr-markdown/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Producing Reports With knitr
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-r-help/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Getting help with R
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Appendix
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            Appendix
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix/04-bioconductor-vcfr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Using packages from Bioconductor
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix/05-dplyr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data Wrangling and Analyses with Tidyverse
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction-to-ggplot2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction to ggplot2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#loading-ggplot2-and-the-dataset" class="md-nav__link">
+    <span class="md-ellipsis">
+      Loading ggplot2 and the dataset
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#building-your-plots-iteratively" class="md-nav__link">
+    <span class="md-ellipsis">
+      Building your plots iteratively
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#faceting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Faceting
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bar-charts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bar charts
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#density" class="md-nav__link">
+    <span class="md-ellipsis">
+      Density
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#box-plot" class="md-nav__link">
+    <span class="md-ellipsis">
+      Box plot
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ggplot2-themes" class="md-nav__link">
+    <span class="md-ellipsis">
+      ggplot2 themes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#more-ggplot2-plots" class="md-nav__link">
+    <span class="md-ellipsis">
+      More ggplot2 Plots
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="data-visualization-with-ggplot2">Data Visualization with ggplot2<a class="headerlink" href="#data-visualization-with-ggplot2" title="Permanent link">&para;</a></h1>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Key points</label><label for="__tabbed_1_2">Objectives</label><label for="__tabbed_1_3">Questions</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<ul>
+<li><code>ggplot2</code> is a powerful tool for high-quality plots</li>
+<li><code>ggplot2</code> provides a flexible and readable grammar to build plots</li>
+</ul>
+</div>
+<div class="tabbed-block">
+<ul>
+<li>Describe the role of data, aesthetics, and geoms in ggplot functions.</li>
+<li>Choose the correct aesthetics and alter the geom parameters for a
+  scatter plot, bar chart, density, or box plot.</li>
+<li>Layer multiple geometries in a single plot.</li>
+<li>Customize plot titles, themes, and fonts.</li>
+<li>Apply a facet to a plot.</li>
+<li>Apply additional <code>ggplot2</code>-compatible plotting libraries.</li>
+<li>Save a ggplot to a file.</li>
+<li>List several resources for getting help with ggplot.</li>
+<li>List several resources for creating informative scientific plots.</li>
+</ul>
+</div>
+<div class="tabbed-block">
+<ul>
+<li>What is ggplot2?</li>
+<li>What is mapping, and what is aesthetics?</li>
+<li>What is the process of creating a publication-quality plots with
+  ggplot in R?</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<h2 id="introduction-to-ggplot2">Introduction to <strong><code>ggplot2</code></strong><a class="headerlink" href="#introduction-to-ggplot2" title="Permanent link">&para;</a></h2>
+<p><a class="glightbox" href="https://ggplot2.tidyverse.org/logo.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img align="right" alt="images" src="https://ggplot2.tidyverse.org/logo.png" /></a></p>
+<p><strong><code>ggplot2</code></strong> is a plotting package that makes it simple to create complex plots 
+from data in a data frame. It provides a more programmatic interface for 
+specifying what variables to plot, how they are displayed, and general visual 
+properties. Therefore, we only need minimal changes if the underlying data 
+change or if we decide to change from a bar plot to a scatter plot. This helps 
+in creating publication-quality plots with minimal adjustments and tweaking.</p>
+<p>The <strong>gg</strong> in "<strong>ggplot</strong>" stands for "<b>G</b>rammar of <b>G</b>raphics," 
+which is an elegant yet powerful way to describe the making of scientific plots.
+In short, the grammar of graphics breaks down every plot into a few components, 
+namely, a dataset, a set of geoms (or <em>geometric objects</em>; visual marks that 
+represent the data points), and a coordinate system. You can imagine this is a 
+grammar that gives unique names to each component appearing in a plot and 
+conveys specific information about data. With <strong>ggplot</strong>, graphics are built 
+step-by-step by adding new elements.</p>
+<p>The idea of <strong>mapping</strong> is crucial in <strong>ggplot</strong>. One familiar example is to 
+<em>map</em> the value of one variable in a dataset to <span class="arithmatex">\(x\)</span> and the other to <span class="arithmatex">\(y\)</span>. 
+However, we often encounter datasets that include more than two variables. 
+In this case, <strong>ggplot</strong> allows you to <em>map</em> those other variables to visual 
+marks such as <strong>color</strong> and <strong>shape</strong>. Along with the mapped coordinates 
+<span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span>, these visual marks constitute the <strong>aesthetics</strong> of the figure 
+(specified using <code>aes()</code>). One thing you may want to remember is the difference 
+between <strong>discrete</strong> and <strong>continuous</strong> variables. Some aesthetics, 
+such as the shape of dots, do not accept continuous variables. 
+If forced to do so, R will give an error. This is easy to understand; 
+we cannot create a continuum of shapes for a variable, unlike, say, color.</p>
+<div class="admonition tip">
+<p class="admonition-title">Checking continuous/discrete variables</p>
+<p>When having doubts about whether a variable is <a href="https://en.wikipedia.org/wiki/Continuous_or_discrete_variable">continuous or 
+discrete</a>, 
+a quick way to check is to use the <a href="https://www.geeksforgeeks.org/get-summary-of-results-produced-by-functions-in-r-programming-summary-function/"><code>summary()</code></a> 
+function. Continuous variables have descriptive statistics 
+(e.g., max, min, mean) but not the discrete variables.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Installing <code>ggplot</code> on your local machine</p>
+<p>Here, we do not need to install <code>ggplot</code> while working within 
+NeSI's RStudio. However, if you would like to work on 
+your own local R/RStudio, you can install this package (or any other 
+packages) like so:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">install.packages</span><span class="p">(</span><span class="s">&quot;ggplot2&quot;</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<p><strong><code>ggplot2</code></strong> belongs to the <a href="https://www.tidyverse.org/"><strong><code>tidyverse</code></strong> 
+framework</a>, a suite of packages that 
+can help you with data import and manipulation.</p>
+</div>
+<!--
+## Installing `tidyverse`
+
+**`ggplot2`** belongs to the [**`tidyverse`** framework](https://www.tidyverse.org/). Therefore, we will start with loading the package **`tidyverse`**. If **`tidyverse`** is not already installed, then we need to install first. If it is already installed, then we can skip the following step:
+
+!!! r-project "r"
+
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># Installs the tidyverse package which includes ggplot2, dplyr, readr, tidyr, etc.</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nf">install.packages</span><span class="p">(</span><span class="s">&quot;tidyverse&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+Now, let's load the `tidyverse` package:
+
+!!! r-project "r"
+
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nf">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span>
+</code></pre></div>
+
+??? success "Output"
+
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>✔ ggplot2 3.4.1     ✔ purrr   1.0.1
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>✔ tibble  3.1.8     ✔ dplyr   1.1.0
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>✔ tidyr   1.3.0     ✔ stringr 1.5.0
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>✔ readr   2.1.4     ✔ forcats 1.0.0
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>✖ dplyr::filter() masks stats::filter()
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>✖ dplyr::lag()    masks stats::lag()
+</code></pre></div>
+
+As we can see from above output **`ggplot2`** has been already loaded
+along with other packages as part of the **`tidyverse`** framework.
+-->
+
+<h2 id="loading-ggplot2-and-the-dataset">Loading <code>ggplot2</code> and the dataset<a class="headerlink" href="#loading-ggplot2-and-the-dataset" title="Permanent link">&para;</a></h2>
+<p>Let's start by loading the required <code>ggplot2</code> package and importing the dataset 
+we will be working with.</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># Load the ggplot2 package</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nf">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="c1"># Load the dataset (for a fresh start)</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="n">variants</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="s">&quot;/home/shared/&lt;USERID&gt;/R4Genomics/combined_tidy_vcf.csv&quot;</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<!--
+!!! r-project "r"
+
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">variants</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read_csv</span><span class="p">(</span><span class="s">&quot;~/R4Genomics/combined_tidy_vcf.csv&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+??? success "Output"
+
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>Rows: 801 Columns: 29
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>── Column specification ────────────────────────────────────────────────────────
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>Delimiter: &quot;,&quot;
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>chr  (7): sample_id, CHROM, REF, ALT, DP4, Indiv, gt_GT_alleles
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>dbl (16): POS, QUAL, IDV, IMF, DP, VDB, RPB, MQB, BQB, MQSB, SGB, MQ0F, AC, ...
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>num  (1): gt_PL
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>lgl  (5): ID, FILTER, INDEL, ICB, HOB
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>ℹ Use `spec()` to retrieve the full column specification for this data.
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+</code></pre></div>
+
+Explore the *structure* (types of columns and number of rows) of the dataset using [dplyr](https://dplyr.tidyverse.org/index.html)'s [`glimpse()`](https://dplyr.tidyverse.org/reference/glimpse.html) (for more info, see the [Data Wrangling and Analyses with Tidyverse](https://datacarpentry.org/genomics-r-intro/05-dplyr/) episode)
+-->
+
+<p>Explore the <em>structure</em> (types of columns and number of rows) of the dataset 
+using <code>str()</code>.</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nf">str</span><span class="p">(</span><span class="n">variants</span><span class="p">)</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>&#39;data.frame&#39;:   801 obs. of  29 variables:
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a> $ sample_id    : chr  &quot;SRR2584863&quot; &quot;SRR2584863&quot; &quot;SRR2584863&quot; &quot;SRR2584863&quot; ...
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a> $ CHROM        : chr  &quot;CP000819.1&quot; &quot;CP000819.1&quot; &quot;CP000819.1&quot; &quot;CP000819.1&quot; ...
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a> $ POS          : int  9972 263235 281923 433359 473901 648692 1331794 1733343 2103887 2333538 ...
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a> $ ID           : logi  NA NA NA NA NA NA ...
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a> $ REF          : chr  &quot;T&quot; &quot;G&quot; &quot;G&quot; &quot;CTTTTTTT&quot; ...
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a> $ ALT          : chr  &quot;G&quot; &quot;T&quot; &quot;T&quot; &quot;CTTTTTTTT&quot; ...
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a> $ QUAL         : num  91 85 217 64 228 210 178 225 56 167 ...
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a> $ FILTER       : logi  NA NA NA NA NA NA ...
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a> $ INDEL        : logi  FALSE FALSE FALSE TRUE TRUE FALSE ...
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a> $ IDV          : int  NA NA NA 12 9 NA NA NA 2 7 ...
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a> $ IMF          : num  NA NA NA 1 0.9 ...
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a> $ DP           : int  4 6 10 12 10 10 8 11 3 7 ...
+<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a> $ VDB          : num  0.0257 0.0961 0.7741 0.4777 0.6595 ...
+<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a> $ RPB          : num  NA 1 NA NA NA NA NA NA NA NA ...
+<a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a> $ MQB          : num  NA 1 NA NA NA NA NA NA NA NA ...
+<a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a> $ BQB          : num  NA 1 NA NA NA NA NA NA NA NA ...
+<a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a> $ MQSB         : num  NA NA 0.975 1 0.916 ...
+<a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a> $ SGB          : num  -0.556 -0.591 -0.662 -0.676 -0.662 ...
+<a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a> $ MQ0F         : num  0 0.167 0 0 0 ...
+<a id="__codelineno-8-21" name="__codelineno-8-21" href="#__codelineno-8-21"></a> $ ICB          : logi  NA NA NA NA NA NA ...
+<a id="__codelineno-8-22" name="__codelineno-8-22" href="#__codelineno-8-22"></a> $ HOB          : logi  NA NA NA NA NA NA ...
+<a id="__codelineno-8-23" name="__codelineno-8-23" href="#__codelineno-8-23"></a> $ AC           : int  1 1 1 1 1 1 1 1 1 1 ...
+<a id="__codelineno-8-24" name="__codelineno-8-24" href="#__codelineno-8-24"></a> $ AN           : int  1 1 1 1 1 1 1 1 1 1 ...
+<a id="__codelineno-8-25" name="__codelineno-8-25" href="#__codelineno-8-25"></a> $ DP4          : chr  &quot;0,0,0,4&quot; &quot;0,1,0,5&quot; &quot;0,0,4,5&quot; &quot;0,1,3,8&quot; ...
+<a id="__codelineno-8-26" name="__codelineno-8-26" href="#__codelineno-8-26"></a> $ MQ           : int  60 33 60 60 60 60 60 60 60 60 ...
+<a id="__codelineno-8-27" name="__codelineno-8-27" href="#__codelineno-8-27"></a> $ Indiv        : chr  &quot;/home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam&quot; &quot;/home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam&quot; &quot;/home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam&quot; &quot;/home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam&quot; ...
+<a id="__codelineno-8-28" name="__codelineno-8-28" href="#__codelineno-8-28"></a> $ gt_PL        : chr  &quot;121,0&quot; &quot;112,0&quot; &quot;247,0&quot; &quot;91,0&quot; ...
+<a id="__codelineno-8-29" name="__codelineno-8-29" href="#__codelineno-8-29"></a> $ gt_GT        : int  1 1 1 1 1 1 1 1 1 1 ...
+<a id="__codelineno-8-30" name="__codelineno-8-30" href="#__codelineno-8-30"></a> $ gt_GT_alleles: chr  &quot;G&quot; &quot;T&quot; &quot;T&quot; &quot;CTTTTTTTT&quot; ...
+</code></pre></div>
+</details>
+</div>
+<p>Alternatively, we can display the first a few rows (vertically) of the
+table using <a href="https://www.geeksforgeeks.org/get-the-first-parts-of-a-data-set-in-r-programming-head-function/"><code>head()</code></a>:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nf">head</span><span class="p">(</span><span class="n">variants</span><span class="p">)</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>   sample_id      CHROM    POS ID      REF       ALT QUAL FILTER INDEL IDV IMF DP       VDB RPB
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>1 SRR2584863 CP000819.1   9972 NA        T         G   91     NA FALSE  NA  NA  4 0.0257451  NA
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>2 SRR2584863 CP000819.1 263235 NA        G         T   85     NA FALSE  NA  NA  6 0.0961330   1
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>3 SRR2584863 CP000819.1 281923 NA        G         T  217     NA FALSE  NA  NA 10 0.7740830  NA
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>4 SRR2584863 CP000819.1 433359 NA CTTTTTTT CTTTTTTTT   64     NA  TRUE  12 1.0 12 0.4777040  NA
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>5 SRR2584863 CP000819.1 473901 NA     CCGC    CCGCGC  228     NA  TRUE   9 0.9 10 0.6595050  NA
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>6 SRR2584863 CP000819.1 648692 NA        C         T  210     NA FALSE  NA  NA 10 0.2680140  NA
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>  MQB BQB     MQSB       SGB     MQ0F ICB HOB AC AN     DP4 MQ
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>1  NA  NA       NA -0.556411 0.000000  NA  NA  1  1 0,0,0,4 60
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>2   1   1       NA -0.590765 0.166667  NA  NA  1  1 0,1,0,5 33
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>3  NA  NA 0.974597 -0.662043 0.000000  NA  NA  1  1 0,0,4,5 60
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>4  NA  NA 1.000000 -0.676189 0.000000  NA  NA  1  1 0,1,3,8 60
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a>5  NA  NA 0.916482 -0.662043 0.000000  NA  NA  1  1 1,0,2,7 60
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a>6  NA  NA 0.916482 -0.670168 0.000000  NA  NA  1  1 0,0,7,3 60
+<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a>                                                               Indiv gt_PL gt_GT gt_GT_alleles
+<a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a>1 /home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam 121,0     1             G
+<a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a>2 /home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam 112,0     1             T
+<a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a>3 /home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam 247,0     1             T
+<a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a>4 /home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam  91,0     1     CTTTTTTTT
+<a id="__codelineno-10-20" name="__codelineno-10-20" href="#__codelineno-10-20"></a>5 /home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam 255,0     1        CCGCGC
+<a id="__codelineno-10-21" name="__codelineno-10-21" href="#__codelineno-10-21"></a>6 /home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam 240,0     1             T
+</code></pre></div>
+</details>
+</div>
+<p><strong><code>ggplot2</code></strong> functions like data in the <strong>long</strong> format, i.e., a column for 
+every dimension (variable), and a row for every observation. Well-structured 
+data will save you time when making figures with <strong><code>ggplot2</code></strong>.</p>
+<p><strong><code>ggplot2</code></strong> graphics are built step-by-step by adding new elements. Adding 
+layers in this fashion allows for extensive flexibility and customization of 
+plots, and more equally important the readability of the code.</p>
+<p>To build a ggplot, we will use the following basic template that can be used for 
+different types of plots:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nf">ggplot</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="n">DATA</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">mapping</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="o">&lt;</span><span class="n">MAPPINGS</span><span class="o">&gt;</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">&lt;</span><span class="n">GEOM_FUNCTION</span><span class="o">&gt;</span><span class="p">()</span>
+</code></pre></div>
+<ul>
+<li>Use the <code>ggplot()</code> function and bind the plot to a specific data
+    frame using the <code>data</code> argument</li>
+</ul>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nf">ggplot</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">variants</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<ul>
+<li>Define a mapping (using the aesthetic (<code>aes</code>) function), by
+    selecting the variables to be plotted and specifying how to present
+    them in the graph, e.g., as x and y positions or characteristics such
+    as size, shape, color, etc.</li>
+</ul>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nf">ggplot</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">variants</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">POS</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DP</span><span class="p">))</span>
+</code></pre></div>
+</div>
+<ul>
+<li>Add 'geoms' &ndash; graphical representations of the data in the plot
+    (points, lines, bars). <strong><code>ggplot2</code></strong> offers many different geoms; we
+    will use some common ones today, including:<ul>
+<li><a href="https://ggplot2.tidyverse.org/reference/geom_point.html"><code>geom_point()</code></a>
+    for scatter plots, dot plots, etc.</li>
+<li><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html"><code>geom_boxplot()</code></a>
+    for, well, boxplots!</li>
+<li><a href="https://ggplot2.tidyverse.org/reference/geom_path.html"><code>geom_line()</code></a>
+    for trend lines, time series, etc.</li>
+</ul>
+</li>
+</ul>
+<p>To add a geom to the plot use the <code>+</code> operator. Because we have two
+continuous variables, let's use
+<a href="https://ggplot2.tidyverse.org/reference/geom_point.html"><code>geom_point()</code></a>
+(i.e., a scatter plot) first:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nf">ggplot</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">variants</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">POS</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DP</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">  </span><span class="nf">geom_point</span><span class="p">()</span>
+</code></pre></div>
+</div>
+<p>The <code>+</code> in the <strong><code>ggplot2</code></strong> package is particularly useful because it
+allows you to modify existing <code>ggplot</code> objects. This means you can
+easily set up plot templates and conveniently explore different types of
+plots, so the above plot can also be generated with code like this:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="c1"># Assign plot to a variable </span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="n">coverage_plot</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ggplot</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">variants</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">POS</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DP</span><span class="p">))</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="c1"># Draw the plot</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="n">coverage_plot</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="w">  </span><span class="nf">geom_point</span><span class="p">()</span>
+</code></pre></div>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Notes</p>
+<ul>
+<li>Anything you put in the 
+  <a href="https://ggplot2.tidyverse.org/reference/ggplot.html"><code>ggplot()</code></a> 
+  function can be seen by any geom layers that you add (i.e., these are 
+  universal plot settings). This includes the x- and y-axis mapping you 
+  set up in <a href="https://ggplot2.tidyverse.org/reference/aes.html"><code>aes()</code></a>.</li>
+<li>You can also specify mappings for a given geom independently of the 
+  mappings defined globally in the 
+  <a href="https://ggplot2.tidyverse.org/reference/ggplot.html"><code>ggplot()</code></a> 
+  function.</li>
+<li>The <code>+</code> sign used to add new layers must be placed at the end of the line 
+  containing the <em>previous</em> layer. If, instead, the <code>+</code> sign is added at the 
+  beginning of the line containing the new layer, <strong><code>ggplot2</code></strong> will not add 
+  the new layer and will return an error message.</li>
+</ul>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="c1"># This is the correct syntax for adding layers</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="n">coverage_plot</span><span class="w"> </span><span class="o">+</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="w">  </span><span class="nf">geom_point</span><span class="p">()</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="c1"># This will not add the new layer and will return an error message</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="n">coverage_plot</span>
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="w">  </span><span class="o">+</span><span class="w"> </span><span class="nf">geom_point</span><span class="p">()</span>
+</code></pre></div>
+</div>
+</div>
+<h2 id="building-your-plots-iteratively">Building your plots iteratively<a class="headerlink" href="#building-your-plots-iteratively" title="Permanent link">&para;</a></h2>
+<p>Building plots with <strong><code>ggplot2</code></strong> is typically an iterative process. We
+start by defining the dataset we'll use, lay out the axes, and choose a
+geom:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="nf">ggplot</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">variants</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">POS</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DP</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="w">  </span><span class="nf">geom_point</span><span class="p">()</span>
+</code></pre></div>
+</div>
+<p>Then, we start modifying this plot to extract more information from it.
+For instance, we can add transparency (<code>alpha</code>) to avoid over-plotting:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="nf">ggplot</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">variants</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">POS</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DP</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="w">  </span><span class="nf">geom_point</span><span class="p">(</span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<p>We can also add colors for all the points:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="nf">ggplot</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">variants</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">POS</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DP</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="w">  </span><span class="nf">geom_point</span><span class="p">(</span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;blue&quot;</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<p>Or to color each species in the plot differently, you could use a vector as an 
+input to the argument <code>color</code>. <strong><code>ggplot2</code></strong> will provide a different color 
+corresponding to different values in the vector. Here is an example where we 
+color with <strong><code>sample_id</code></strong>:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="nf">ggplot</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">variants</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">POS</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DP</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sample_id</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="w">  </span><span class="nf">geom_point</span><span class="p">(</span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<p>Notice that we can change the geom layer and colors will be still
+determined by <strong><code>sample_id</code></strong></p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="nf">ggplot</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">variants</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">POS</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DP</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sample_id</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="w">  </span><span class="nf">geom_line</span><span class="p">(</span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<p>To make our plot more readable, we can add axis labels:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="nf">ggplot</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">variants</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">POS</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DP</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sample_id</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="w">  </span><span class="nf">geom_point</span><span class="p">(</span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="w">  </span><span class="nf">labs</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Base Pair Position&quot;</span><span class="p">,</span>
+<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="w">       </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Read Depth (DP)&quot;</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<p>To add a <em>main</em> title to the plot, we use
+<a href="https://ggplot2.tidyverse.org/reference/labs.html"><code>ggtitle()</code></a>:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="nf">ggplot</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">variants</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">POS</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DP</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sample_id</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="w">  </span><span class="nf">geom_point</span><span class="p">(</span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="w">  </span><span class="nf">labs</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Base Pair Position&quot;</span><span class="p">,</span>
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="w">       </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Read Depth (DP)&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="w">  </span><span class="nf">ggtitle</span><span class="p">(</span><span class="s">&quot;Read Depth vs. Position&quot;</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Using <code>labs()</code> for plot labels</p>
+<p>We can also use 
+<a href="https://ggplot2.tidyverse.org/reference/labs.html?q=labs#null"><code>labs()</code></a> to
+create/modify labels beyond <code>x</code> and <code>y</code>, such as title, subtitle, caption, 
+etc. For example:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="nf">ggplot</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">variants</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">POS</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DP</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sample_id</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="w">  </span><span class="nf">geom_point</span><span class="p">(</span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="w">  </span><span class="nf">labs</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Base Pair Position&quot;</span><span class="p">,</span>
+<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="w">       </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Read Depth (DP)&quot;</span><span class="p">,</span>
+<a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a><span class="w">       </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Read Depth vs. Position&quot;</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+<p>Now the figure is complete, we can export and save it to a file.
+This can be achieved easily using
+<a href="https://ggplot2.tidyverse.org/reference/ggsave.html"><code>ggsave()</code></a>, which
+can write, by default, the most recent generated figure into different
+formats (e.g., <code>jpeg</code>, <code>png</code>, <code>pdf</code>) according to the file extension.
+So, for example, to create a pdf version of the above figure with a
+dimension of 6 <span class="arithmatex">\(\times\)</span> 4 inches:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="nf">ggsave</span><span class="p">(</span><span class="s">&quot;depth.pdf&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">6</span><span class="p">,</span><span class="w"> </span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<p>If we check the <em>current working directory</em>, there should be a newly
+created file called <code>depth.pdf</code> with the above plot.</p>
+<div class="admonition tip">
+<p class="admonition-title">Saving a plot using different units and formats</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Size units</label><label for="__tabbed_2_2">File formats</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>By default, <code>ggsave()</code> measures lengths in inches. To change that, we 
+can use the <code>units =</code> arguments. This argument will take <code>in</code>, <code>cm</code>,
+<code>mm</code>, and <code>px</code>.</p>
+</div>
+<div class="tabbed-block">
+<p>The example above writes the plot to a PDF. We can also save it to other 
+formats such as <code>jpeg</code>, <code>tiff</code>, <code>bmp</code>, <code>png</code>, etc. by modifying the 
+suffix (i.e. file extension).</p>
+</div>
+</div>
+</div>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Challenge</p>
+<p>Use what you just learned to create a scatter plot of mapping quality (<code>MQ</code>) over position (<code>POS</code>) with the samples showing in different colors. Make sure to give your plot relevant axis labels.</p>
+<details class="success">
+<summary>Output</summary>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="nf">ggplot</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">variants</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">POS</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MQ</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sample_id</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">   </span>
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="w">  </span><span class="nf">geom_point</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">   </span>
+<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="w">  </span><span class="nf">labs</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Base Pair Position&quot;</span><span class="p">,</span><span class="w">        </span>
+<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a><span class="w">       </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Mapping Quality (MQ)&quot;</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</details>
+</div>
+<p>To further customize the plot, we can change the default font format:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="nf">ggplot</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">variants</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">POS</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DP</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sample_id</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">   </span>
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="w">  </span><span class="nf">geom_point</span><span class="p">(</span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">   </span>
+<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="w">  </span><span class="nf">labs</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Base Pair Position&quot;</span><span class="p">,</span><span class="w">        </span>
+<a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a><span class="w">       </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Read Depth (DP)&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">   </span>
+<a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a><span class="w">  </span><span class="nf">ggtitle</span><span class="p">(</span><span class="s">&quot;Read Depth vs. Position&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">   </span>
+<a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a><span class="w">  </span><span class="nf">theme</span><span class="p">(</span><span class="n">text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_text</span><span class="p">(</span><span class="n">family</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;mono&quot;</span><span class="p">))</span>
+</code></pre></div>
+</div>
+<h2 id="faceting">Faceting<a class="headerlink" href="#faceting" title="Permanent link">&para;</a></h2>
+<p><strong><code>ggplot2</code></strong> has a special technique called <em>faceting</em> that allows the
+user to split one plot into multiple plots (panels) based on a factor
+(variable) included in the dataset. We will use it to split our mapping
+quality plot into three panels, one for each sample.</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="nf">ggplot</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">variants</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">POS</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MQ</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sample_id</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">  </span>
+<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="w">  </span><span class="nf">geom_point</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">  </span>
+<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a><span class="w">  </span><span class="nf">labs</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Base Pair Position&quot;</span><span class="p">,</span><span class="w">       </span>
+<a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a><span class="w">       </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Mapping Quality (MQ)&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">  </span>
+<a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a><span class="w">  </span><span class="nf">facet_grid</span><span class="p">(</span><span class="n">.</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">sample_id</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<p>This looks okay, but it would be easier to read if the plot facets were
+stacked vertically rather than horizontally. The <code>facet_grid</code> geometry
+allows you to explicitly specify how you want your plots to be arranged
+via formula notation (<code>rows ~ columns</code>; the dot (<code>.</code>) indicates every
+other variable in the data i.e., no faceting on that side of the
+formula).</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="nf">ggplot</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">variants</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">POS</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MQ</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sample_id</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">  </span>
+<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="w">  </span><span class="nf">geom_point</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">  </span>
+<a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a><span class="w">  </span><span class="nf">labs</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Base Pair Position&quot;</span><span class="p">,</span><span class="w">       </span>
+<a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a><span class="w">       </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Mapping Quality (MQ)&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">  </span>
+<a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a><span class="w">  </span><span class="nf">facet_grid</span><span class="p">(</span><span class="n">sample_id</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">.</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<p>Usually plots with white background look more readable when printed. We
+can set the background to white using the function
+<a href="https://ggplot2.tidyverse.org/reference/ggtheme.html"><code>theme_bw()</code></a>.
+Additionally, you can remove the grid:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="nf">ggplot</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">variants</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">POS</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MQ</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sample_id</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">   </span>
+<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="w">  </span><span class="nf">geom_point</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">   </span>
+<a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a><span class="w">  </span><span class="nf">labs</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Base Pair Position&quot;</span><span class="p">,</span><span class="w">        </span>
+<a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a><span class="w">       </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Mapping Quality (MQ)&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">   </span>
+<a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a><span class="w">  </span><span class="nf">facet_grid</span><span class="p">(</span><span class="n">sample_id</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">.</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">   </span>
+<a id="__codelineno-30-6" name="__codelineno-30-6" href="#__codelineno-30-6"></a><span class="w">  </span><span class="nf">theme_bw</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">   </span>
+<a id="__codelineno-30-7" name="__codelineno-30-7" href="#__codelineno-30-7"></a><span class="w">  </span><span class="nf">theme</span><span class="p">(</span><span class="n">panel.grid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">element_blank</span><span class="p">())</span>
+</code></pre></div>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Challenge</p>
+<p>Use what you just learned to create a scatter plot of PHRED scaled
+quality (<code>QUAL</code>) over position (<code>POS</code>) with the points colored and faceted 
+based on samples. Make sure to give your plot relevant axis labels.</p>
+<details class="success">
+<summary>Solution</summary>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="nf">ggplot</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">variants</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">POS</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">QUAL</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sample_id</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a><span class="w">  </span><span class="nf">geom_point</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="w">  </span><span class="nf">labs</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Base Pair Position&quot;</span><span class="p">,</span><span class="w"> </span>
+<a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a><span class="w">       </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;PHRED-sacled Quality (QUAL)&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>
+<a id="__codelineno-31-5" name="__codelineno-31-5" href="#__codelineno-31-5"></a><span class="w">  </span><span class="nf">facet_grid</span><span class="p">(</span><span class="n">sample_id</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">.</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</details>
+</div>
+<h2 id="bar-charts">Bar charts<a class="headerlink" href="#bar-charts" title="Permanent link">&para;</a></h2>
+<p>We can create bar charts using the
+<a href="https://ggplot2.tidyverse.org/reference/geom_bar.html"><code>geom_bar</code></a>
+geom. Let's make a bar chart showing the number of variants for each
+sample that are indels.</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="nf">ggplot</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">variants</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">INDEL</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sample_id</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">   </span>
+<a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a><span class="w">  </span><span class="nf">geom_bar</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">   </span>
+<a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a><span class="w">  </span><span class="nf">facet_grid</span><span class="p">(</span><span class="n">sample_id</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">.</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Challenge</p>
+<p>Since we already have the <code>sample_id</code> labels on the individual plot facets, we don’t need the legend. Use the help file for geom_bar and any other online resources you want to use to remove the legend from the plot.</p>
+<details class="success">
+<summary>Solution</summary>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="nf">ggplot</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">variants</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">INDEL</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sample_id</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a><span class="w">  </span><span class="nf">geom_bar</span><span class="p">(</span><span class="n">show.legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">F</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a><span class="w">  </span><span class="nf">facet_grid</span><span class="p">(</span><span class="n">sample_id</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">.</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</details>
+</div>
+<p>Notice that we did not need to map a variable to <code>y</code> in the aesthetics. This is
+because <code>geom_bar()</code> recognises, by default, that it should be counting the 
+number of observations that are indels (<code>TRUE</code>) or not (<code>FALSE</code>). Take a look at
+the help page for <code>geom_bar()</code> to find out how this behaviour is controlled.</p>
+<h2 id="density">Density<a class="headerlink" href="#density" title="Permanent link">&para;</a></h2>
+<p>We can create density plots using the
+<a href="https://ggplot2.tidyverse.org/reference/geom_density.html"><code>geom_density</code></a>
+geom that shows the distribution of of a variable in the dataset. Let's
+plot the distribution of <code>DP</code></p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="nf">ggplot</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">variants</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DP</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">   </span>
+<a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a><span class="w">  </span><span class="nf">geom_density</span><span class="p">()</span>
+</code></pre></div>
+</div>
+<p>This plot tells us that the most of frequent <code>DP</code> (read depth) for the
+variants is about 10 reads.</p>
+<div class="admonition question">
+<p class="admonition-title">Challenge</p>
+<p>Use <code>geom_density()</code> to plot the distribution of DP with a different fill 
+for each sample. Use a white background for the plot.</p>
+<details class="success">
+<summary>Solution</summary>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="nf">ggplot</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">variants</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DP</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sample_id</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a><span class="w">  </span><span class="nf">geom_density</span><span class="p">(</span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a><span class="w">  </span><span class="nf">theme_bw</span><span class="p">()</span>
+</code></pre></div>
+</div>
+</details>
+</div>
+<h2 id="box-plot">Box plot<a class="headerlink" href="#box-plot" title="Permanent link">&para;</a></h2>
+<p>A box plot helps us to visualise the spread of grouped data. Let's take a look
+at the spread of read depth in different samples and whether or not the spread
+looks different if it is an indel.</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="nf">ggplot</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">variants</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sample_id</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DP</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">INDEL</span><span class="p">))</span><span class="w"> </span><span class="o">+</span>
+<a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a><span class="w">  </span><span class="nf">geom_boxplot</span><span class="p">(</span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<a id="__codelineno-36-3" name="__codelineno-36-3" href="#__codelineno-36-3"></a><span class="w">  </span><span class="nf">theme_bw</span><span class="p">()</span>
+</code></pre></div>
+</div>
+<h2 id="ggplot2-themes"><strong><code>ggplot2</code></strong> themes<a class="headerlink" href="#ggplot2-themes" title="Permanent link">&para;</a></h2>
+<p>In addition to
+<a href="https://ggplot2.tidyverse.org/reference/ggtheme.html"><code>theme_bw()</code></a>,
+which changes the plot background to white, <strong><code>ggplot2</code></strong> comes with
+several other themes which can be useful to quickly change the look of
+your visualization. The complete list of themes is available at
+<a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">https://ggplot2.tidyverse.org/reference/ggtheme.html</a>.
+<code>theme_minimal()</code> and <code>theme_light()</code> are popular, and <code>theme_void()</code>
+can be useful as a starting point to create a new hand-crafted theme.</p>
+<p>The <a href="https://jrnold.github.io/ggthemes/reference/index.html">ggthemes</a>
+package provides a wide variety of options (including Microsoft Excel,
+<a href="https://jrnold.github.io/ggthemes/reference/theme_excel.html">old</a> and
+<a href="https://jrnold.github.io/ggthemes/reference/theme_excel_new.html">new</a>).
+The <a href="https://exts.ggplot2.tidyverse.org/"><strong><code>ggplot2</code></strong> extensions
+website</a> provides a list of
+packages that extend the capabilities of <strong><code>ggplot2</code></strong>, including
+additional themes.</p>
+<div class="admonition question">
+<p class="admonition-title">Challenge</p>
+<p>With all of this information in hand, please take another five minutes to either improve one of the plots generated in this exercise or create a beautiful graph of your own. Use the RStudio <a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-visualization.pdf"><strong><code>ggplot2</code></strong> cheat sheet</a> for inspiration. Here are some ideas:</p>
+<ul>
+<li>See if you can change the size or shape of the plotting symbol.</li>
+<li>Can you find a way to change the name of the legend? What about its labels?</li>
+<li>Try using a different color palette (see the <a href="http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/">Cookbook for R</a>).</li>
+</ul>
+</div>
+<h2 id="more-ggplot2-plots">More <strong><code>ggplot2</code></strong> Plots<a class="headerlink" href="#more-ggplot2-plots" title="Permanent link">&para;</a></h2>
+<p><strong><code>ggplot2</code></strong> offers many more informative and beautiful plots (<code>geoms</code>)
+of interest for biologists (although not covered in this lesson) that
+are worth exploring, such as</p>
+<ul>
+<li><a href="https://ggplot2.tidyverse.org/reference/geom_tile.html"><code>geom_tile()</code></a>,
+    for heatmaps</li>
+<li><a href="https://ggplot2.tidyverse.org/reference/geom_jitter.html"><code>geom_jitter()</code></a>,
+    for strip charts</li>
+<li><a href="https://ggplot2.tidyverse.org/reference/geom_violin.html"><code>geom_violin()</code></a>,
+    for violin plots</li>
+</ul>
+<div class="admonition earth-americas">
+<p class="admonition-title">Resources</p>
+<ul>
+<li><a href="https://www.amazon.com/gp/product/331924275X/">ggplot2: Elegant Graphics for Data Analysis</a> (<a href="https://ggplot2-book.org/">online version</a>)</li>
+<li><a href="https://www.amazon.com/Grammar-Graphics-Statistics-Computing/dp/0387245448/">The Grammar of Graphics (Statistics and Computing)</a></li>
+<li><a href="https://www.amazon.com/gp/product/0691181624/">Data Visualization: A Practical Introduction</a> (<a href="https://socviz.co/">online version</a>)</li>
+<li><a href="https://r-graph-gallery.com/">The R Graph Gallery</a> (<a href="https://bookdown.org/content/b298e479-b1ab-49fa-b83d-a57c2b034d49/">the book</a>)</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.50899def.min.js"></script>
+      
+        <script src="../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>

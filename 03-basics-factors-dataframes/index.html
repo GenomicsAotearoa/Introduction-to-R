@@ -1,0 +1,2140 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Genomics Aotearoa">
+      
+      
+        <link rel="canonical" href="https://genomicsaotearoa.github.io/Introduction-to-R/03-basics-factors-dataframes/">
+      
+      
+        <link rel="prev" href="../02-data-prelude/">
+      
+      
+        <link rel="next" href="../06-data-visualization/">
+      
+      
+      <link rel="icon" href="../theme_figures/nesi_ga.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.16">
+    
+    
+      
+        <title>R Basics continued - factors and data frames - Introduction to R</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Mukta";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#r-basics-continued-factors-and-data-frames" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Introduction to R" class="md-header__button md-logo" aria-label="Introduction to R" data-md-component="logo">
+      
+  <img src="../theme_figures/nesi_ga.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Introduction to R
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              R Basics continued - factors and data frames
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/GenomicsAotearoa/Introduction-to-R" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GenomicsAotearoa/Introduction-to-R
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Introduction to R" class="md-nav__button md-logo" aria-label="Introduction to R" data-md-component="logo">
+      
+  <img src="../theme_figures/nesi_ga.png" alt="logo">
+
+    </a>
+    Introduction to R
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/GenomicsAotearoa/Introduction-to-R" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GenomicsAotearoa/Introduction-to-R
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../00-introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introducing R and RStudio IDE
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-r-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    R Basics
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-data-prelude/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction to the example dataset and file type
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    R Basics continued - factors and data frames
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    R Basics continued - factors and data frames
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#working-with-spreadsheets-tabular-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Working with spreadsheets (tabular data)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Working with spreadsheets (tabular data)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#importing-tabular-data-into-r" class="md-nav__link">
+    <span class="md-ellipsis">
+      Importing tabular data into R
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summarizing-and-determining-the-structure-of-a-data-frame" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summarizing and determining the structure of a data frame.
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subsetting-data-frames" class="md-nav__link">
+    <span class="md-ellipsis">
+      Subsetting data frames
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introducing-factors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introducing factors
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Introducing factors">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#plotting-and-ordering-factors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Plotting and ordering factors
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#coercing-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      Coercing values
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Coercing values">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lesson-summary-data-coercion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lesson summary: Data coercion
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-frame-bonus-material-math-sorting-renaming" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data frame bonus material: math, sorting, renaming
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#saving-your-data-frame-to-a-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      Saving your data frame to a file
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#importing-data-from-excel" class="md-nav__link">
+    <span class="md-ellipsis">
+      Importing data from Excel
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-data-visualization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data Visualization with ggplot2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-knitr-markdown/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Producing Reports With knitr
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-r-help/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Getting help with R
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Appendix
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            Appendix
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix/04-bioconductor-vcfr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Using packages from Bioconductor
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix/05-dplyr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data Wrangling and Analyses with Tidyverse
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#working-with-spreadsheets-tabular-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Working with spreadsheets (tabular data)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Working with spreadsheets (tabular data)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#importing-tabular-data-into-r" class="md-nav__link">
+    <span class="md-ellipsis">
+      Importing tabular data into R
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summarizing-and-determining-the-structure-of-a-data-frame" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summarizing and determining the structure of a data frame.
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subsetting-data-frames" class="md-nav__link">
+    <span class="md-ellipsis">
+      Subsetting data frames
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introducing-factors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introducing factors
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Introducing factors">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#plotting-and-ordering-factors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Plotting and ordering factors
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#coercing-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      Coercing values
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Coercing values">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lesson-summary-data-coercion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lesson summary: Data coercion
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-frame-bonus-material-math-sorting-renaming" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data frame bonus material: math, sorting, renaming
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#saving-your-data-frame-to-a-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      Saving your data frame to a file
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#importing-data-from-excel" class="md-nav__link">
+    <span class="md-ellipsis">
+      Importing data from Excel
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="r-basics-continued-factors-and-data-frames">R Basics continued - factors and data frames<a class="headerlink" href="#r-basics-continued-factors-and-data-frames" title="Permanent link">&para;</a></h1>
+<div class="admonition info">
+<p class="admonition-title">Learning outcomes</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Key points</label><label for="__tabbed_1_2">Objectives</label><label for="__tabbed_1_3">Questions</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<ul>
+<li>It is easy to import data into R from tabular formats including Excel.
+  However, you still need to check that R has imported and interpreted
+  your data correctly</li>
+<li>There are best practices for organizing your data (keeping it tidy)
+  and R is great for this</li>
+<li>Base R has many useful functions for manipulating your data, but all
+  of R's capabilities are greatly enhanced by software packages
+  developed by the community</li>
+</ul>
+</div>
+<div class="tabbed-block">
+<ul>
+<li>Understand the basic principle of tidy datasets</li>
+<li>Be able to load a tabular dataset using base R functions</li>
+<li>Be able to determine the structure of a data frame including its
+  dimensions and the datatypes of variables</li>
+<li>Be able to subset/retrieve values from a data frame</li>
+<li>Understand how R may coerce data into different modes</li>
+<li>Be able to change the mode of an object</li>
+<li>Understand that R uses factors to store and manipulate categorical
+  data</li>
+<li>Be able to manipulate a factor, including subsetting and reordering</li>
+<li>Be able to apply an arithmetic function to a data frame</li>
+<li>Be able to coerce the class of an object (including variables in a
+  data frame)</li>
+<li>Be able to import data from Excel</li>
+<li>Be able to save a data frame as a delimited file</li>
+</ul>
+</div>
+<div class="tabbed-block">
+<ul>
+<li>How do I get started with tabular data (e.g., spreadsheets) in R?</li>
+<li>What are some best practices for reading data into R?</li>
+<li>How do I save tabular data generated in R?</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<h2 id="working-with-spreadsheets-tabular-data">Working with spreadsheets (tabular data)<a class="headerlink" href="#working-with-spreadsheets-tabular-data" title="Permanent link">&para;</a></h2>
+<p>A substantial amount of the data we work with in genomics will be
+tabular data, this is data arranged in rows and columns - also known as
+spreadsheets. We could write a whole lesson on how to work with
+spreadsheets effectively (<a href="https://datacarpentry.org/organization-genomics/">actually we
+did</a>). For our
+purposes, we want to remind you of a few principles before we work with
+our first set of example data:</p>
+<p><strong>1) Keep raw data separate from analyzed data</strong></p>
+<p>This is principle number one because if you can't tell which files are
+the original raw data, you risk making some serious mistakes
+(e.g., drawing conclusion from data which have been manipulated in some
+unknown way).</p>
+<p><strong>2) Keep spreadsheet data Tidy</strong></p>
+<p>The simplest principle of <strong>Tidy data</strong> is that we have one row in our
+spreadsheet for each observation or sample, and one column for every
+variable that we measure or report on. As simple as this sounds, it's
+very easily violated. Most data scientists agree that significant
+amounts of their time is spent tidying data for analysis. Read more
+about data organization in <a href="https://datacarpentry.org/organization-genomics/">our
+lesson</a> and in <a href="https://www.jstatsoft.org/article/view/v059i10">this
+paper</a>.</p>
+<p><strong>3) Trust but verify</strong></p>
+<p>Finally, while you don't need to be paranoid about data, you should have
+a plan for how you will prepare it for analysis. <strong>This a focus of this
+lesson.</strong> You probably already have a lot of intuition, expectations,
+assumptions about your data - the range of values you expect, how many
+values should have been recorded, etc. Of course, as the data get larger
+our human ability to keep track will start to fail (and yes, it can fail
+for small data sets too). R will help you to examine your data so that
+you can have greater confidence in your analysis and its
+reproducibility.</p>
+<div class="admonition tip">
+<p class="admonition-title">Keeping your raw data separate</p>
+<p>When you work with data in R, you are not changing the original file
+you loaded that data from. This is different from (for example)
+working with a spreadsheet program where changing the value of the
+cell leaves you one "save"-click away from overwriting the original
+file. You have to purposely use a writing function
+(e.g., <code>write.csv()</code>) to save data loaded into R. In that case, be sure
+to save the manipulated data into a new file. More on this later in
+the lesson.</p>
+</div>
+<h3 id="importing-tabular-data-into-r">Importing tabular data into R<a class="headerlink" href="#importing-tabular-data-into-r" title="Permanent link">&para;</a></h3>
+<p>There are several ways to import data into R. For our purpose here, we
+will focus on using the tools every R installation comes with (so called
+"base" R) to import a comma-delimited file containing the results of our
+variant calling workflow. We will need to load the sheet using a
+function called <code>read.csv()</code>.</p>
+<div class="admonition question">
+<p class="admonition-title">Exercise: Review the arguments of the <code>read.csv()</code> function</p>
+<p><strong>Before using the <code>read.csv()</code> function, use R's help feature to
+answer the following questions</strong>.</p>
+<p><em>Hint</em>: Entering '?' before the function name and then running that
+line will bring up the help documentation. Also, when reading this
+particular help be careful to pay attention to the 'read.csv'
+expression under the 'Usage' heading. Other answers will be in the
+'Arguments' heading.</p>
+<p>A)  What is the default parameter for 'header' in the <code>read.csv()</code>
+    function?</p>
+<p>B)  What argument would you have to change to read a file that was
+    delimited by semicolons (;) rather than commas?</p>
+<p>C)  What argument would you have to change to read file in which
+    numbers used commas for decimal separation (i.e., 1,00)?</p>
+<p>D)  What argument would you have to change to read in only the first
+    10,000 rows of a very large file?</p>
+<details class="success">
+<summary>Solution</summary>
+<p>A)  The <code>read.csv()</code> function has the argument 'header' set to <code>TRUE</code>
+    by default. This means the function always assumes the first row
+    is header information, (i.e., column names)</p>
+<p>B)  The <code>read.csv()</code> function has the argument 'sep' set to ",".
+    This means the function assumes commas are used as delimiters,
+    as you would expect. Changing this parameter (e.g., <code>sep=";"</code>)
+    would tell R to interpret semicolons as delimiters.</p>
+<p>C)  Although it is not listed in the <code>read.csv()</code> usage,
+    <code>read.csv()</code> is a "version" of the function <code>read.table()</code> and
+    accepts all its arguments. If you set <code>dec=","</code> you could change
+    the decimal operator. We'd probably assume the delimiter is some
+    other character.</p>
+<p>D)  You can set <code>nrow</code> to a numeric value (e.g., <code>nrow=10000</code>) to
+    choose how many rows of a file you read in. This may be useful
+    for very large files where not all the data is needed to test
+    some data cleaning steps you are applying.</p>
+<p>Hopefully, this exercise gets you thinking about using the provided
+help documentation in R. There are many arguments that exist, but
+which we wont have time to cover. </p>
+</details>
+</div>
+<p>Now, let's read in the file <code>combined_tidy_vcf.csv</code> which will be
+located in <code>/home/shared/$USER/R4Genomics/</code>. Call/assign this data <code>variants</code>. 
+The first argument to pass to our <code>read.csv()</code> function is the file path for our
+data. The file path must be in quotes and now is a good time to remember
+to use tab autocompletion. <strong>If you use tab autocompletion you avoid
+typos and errors in file paths.</strong> Use it!</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Read in a CSV file and save it as &#39;variants&#39;</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">variants</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="s">&quot;/home/shared/&lt;USERID&gt;/R4Genomics/combined_tidy_vcf.csv&quot;</span><span class="p">)</span>
+</code></pre></div>
+<details class="tip">
+<summary>What if you want to access this file on your personal computer?</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># Read the csv directly from our github repository</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">variants</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="s">&#39;https://raw.githubusercontent.com/GenomicsAotearoa/Introduction-to-R/refs/heads/main/combined_tidy_vcf.csv&#39;</span><span class="p">)</span>
+</code></pre></div>
+</details>
+</div>
+<p>One of the first things you should notice is that in the Environment
+window, you have the <code>variants</code> object, listed as 801 obs.
+(observations/rows) of 29 variables (columns). Double-clicking on the
+name of the object will open a view of the data in a new tab.</p>
+<p><a class="glightbox" href="../figures/rstudio_dataframeview.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="images" src="../figures/rstudio_dataframeview.png" width="1000" /></a></p>
+<h3 id="summarizing-and-determining-the-structure-of-a-data-frame">Summarizing and determining the structure of a data frame.<a class="headerlink" href="#summarizing-and-determining-the-structure-of-a-data-frame" title="Permanent link">&para;</a></h3>
+<p>A <strong>data frame is the standard way to store tabular data in R</strong>. A data
+frame could also be thought of as a collection of vectors, all of which
+have the same length. Using only two functions, we can learn a lot about
+out data frame including some summary statistics as well as the
+"structure" of the data frame. Let's examine what each of these
+functions can tell us:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Get summary statistics on a data frame</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nf">summary</span><span class="p">(</span><span class="n">variants</span><span class="p">)</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a> sample_id            CHROM                POS             ID              REF           
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>Length:801         Length:801         Min.   :   1521   Mode:logical   Length:801        
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>Class :character   Class :character   1st Qu.:1115970   NA&#39;s:801       Class :character  
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>Mode  :character   Mode  :character   Median :2290361                  Mode  :character  
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>                                      Mean   :2243682                                    
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>                                      3rd Qu.:3317082                                    
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>                                      Max.   :4629225                                    
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>    ALT                 QUAL          FILTER          INDEL              IDV              IMF        
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>Length:801         Min.   :  4.385   Mode:logical   Mode :logical   Min.   : 2.000   Min.   :0.5714  
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>Class :character   1st Qu.:139.000   NA&#39;s:801       FALSE:700       1st Qu.: 7.000   1st Qu.:0.8824  
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>Mode  :character   Median :195.000                  TRUE :101       Median : 9.000   Median :1.0000  
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>                   Mean   :172.276                                  Mean   : 9.396   Mean   :0.9219  
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>                   3rd Qu.:225.000                                  3rd Qu.:11.000   3rd Qu.:1.0000  
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>                   Max.   :228.000                                  Max.   :20.000   Max.   :1.0000  
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>                                                                    NA&#39;s   :700      NA&#39;s   :700     
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>      DP             VDB                 RPB              MQB              BQB        
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>Min.   : 2.00   Min.   :0.0005387   Min.   :0.0000   Min.   :0.0000   Min.   :0.1153  
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>1st Qu.: 7.00   1st Qu.:0.2180410   1st Qu.:0.3776   1st Qu.:0.1070   1st Qu.:0.6963  
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>Median :10.00   Median :0.4827410   Median :0.8663   Median :0.2872   Median :0.8615  
+<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>Mean   :10.57   Mean   :0.4926291   Mean   :0.6970   Mean   :0.5330   Mean   :0.7784  
+<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a>3rd Qu.:13.00   3rd Qu.:0.7598940   3rd Qu.:1.0000   3rd Qu.:1.0000   3rd Qu.:1.0000  
+<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a>Max.   :79.00   Max.   :0.9997130   Max.   :1.0000   Max.   :1.0000   Max.   :1.0000  
+<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a>                                    NA&#39;s   :773      NA&#39;s   :773      NA&#39;s   :773     
+<a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a>     MQSB              SGB               MQ0F           ICB            HOB                AC   
+<a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a>Min.   :0.01348   Min.   :-0.6931   Min.   :0.00000   Mode:logical   Mode:logical   Min.   :1  
+<a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a>1st Qu.:0.95494   1st Qu.:-0.6762   1st Qu.:0.00000   NA&#39;s:801       NA&#39;s:801       1st Qu.:1  
+<a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a>Median :1.00000   Median :-0.6620   Median :0.00000                                 Median :1  
+<a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a>Mean   :0.96428   Mean   :-0.6444   Mean   :0.01127                                 Mean   :1  
+<a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a>3rd Qu.:1.00000   3rd Qu.:-0.6364   3rd Qu.:0.00000                                 3rd Qu.:1  
+<a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a>Max.   :1.01283   Max.   :-0.4536   Max.   :0.66667                                 Max.   :1  
+<a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a>NA&#39;s   :48                                                                                     
+<a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a>      AN        DP4                  MQ           Indiv              gt_PL               gt_GT  
+<a id="__codelineno-3-34" name="__codelineno-3-34" href="#__codelineno-3-34"></a>Min.   :1   Length:801         Min.   :10.00   Length:801         Length:801         Min.   :1  
+<a id="__codelineno-3-35" name="__codelineno-3-35" href="#__codelineno-3-35"></a>1st Qu.:1   Class :character   1st Qu.:60.00   Class :character   Class :character   1st Qu.:1  
+<a id="__codelineno-3-36" name="__codelineno-3-36" href="#__codelineno-3-36"></a>Median :1   Mode  :character   Median :60.00   Mode  :character   Mode  :character   Median :1  
+<a id="__codelineno-3-37" name="__codelineno-3-37" href="#__codelineno-3-37"></a>Mean   :1                      Mean   :58.19                                         Mean   :1  
+<a id="__codelineno-3-38" name="__codelineno-3-38" href="#__codelineno-3-38"></a>3rd Qu.:1                      3rd Qu.:60.00                                         3rd Qu.:1  
+<a id="__codelineno-3-39" name="__codelineno-3-39" href="#__codelineno-3-39"></a>Max.   :1                      Max.   :60.00                                         Max.   :1  
+<a id="__codelineno-3-40" name="__codelineno-3-40" href="#__codelineno-3-40"></a>
+<a id="__codelineno-3-41" name="__codelineno-3-41" href="#__codelineno-3-41"></a>gt_GT_alleles     
+<a id="__codelineno-3-42" name="__codelineno-3-42" href="#__codelineno-3-42"></a>Length:801        
+<a id="__codelineno-3-43" name="__codelineno-3-43" href="#__codelineno-3-43"></a>Class :character  
+<a id="__codelineno-3-44" name="__codelineno-3-44" href="#__codelineno-3-44"></a>Mode  :character
+</code></pre></div>
+</details>
+</div>
+<p>Our data frame has 29 variables, so we get 29 fields that summarize the data.
+The <code>QUAL</code>, <code>IMF</code>, and <code>VDB</code> variables (and several others) are
+numerical data and so you get summary statistics on the minimum and maximum 
+values for these columns, as well as mean, median, and 1<sup>st</sup> and 3<sup>rd</sup> quantile. 
+Many of the other variables (e.g., <code>sample_id</code>) are treated as character data 
+(more on this in a bit). There is a lot to work with, so we will subset the 
+first three columns into a new data frame using the <code>data.frame()</code> function.</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># Put the first three columns of variants into a new data frame called subset_variants</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="n">subset_variants</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">variants</span><span class="p">[,</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">6</span><span class="p">)]</span>
+</code></pre></div>
+</div>
+<p>Now, let's use the <code>str()</code> (structure) function to look a little more
+closely at how data frames work:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># Get the structure of a data frame</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="nf">str</span><span class="p">(</span><span class="n">subset_variants</span><span class="p">)</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>&#39;data.frame&#39;:   801 obs. of  4 variables:
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a> $ sample_id: chr  &quot;SRR2584863&quot; &quot;SRR2584863&quot; &quot;SRR2584863&quot; &quot;SRR2584863&quot; ...
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a> $ CHROM    : chr  &quot;CP000819.1&quot; &quot;CP000819.1&quot; &quot;CP000819.1&quot; &quot;CP000819.1&quot; ...
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a> $ POS      : int  9972 263235 281923 433359 473901 648692 1331794 1733343 2103887 2333538 ...
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a> $ ALT      : chr  &quot;G&quot; &quot;T&quot; &quot;T&quot; &quot;CTTTTTTTT&quot; ...
+</code></pre></div>
+</details>
+</div>
+<p>Ok, that is a lot up unpack! Some things to notice.</p>
+<ul>
+<li>The object type <code>data.frame</code> is displayed in the first row along with its
+  dimensions, in this case 801 observations (rows) and 4 variables (columns).</li>
+<li>Each variable (column) has a name (e.g., <code>sample_id</code>). This is followed
+  by the object mode (e.g., chr, int, etc.). Notice that before each
+  variable name there is a <code>$</code> (this will be important later).</li>
+</ul>
+<h3 id="subsetting-data-frames">Subsetting data frames<a class="headerlink" href="#subsetting-data-frames" title="Permanent link">&para;</a></h3>
+<p>Next, we are going to talk about how you can get specific values from
+data frames.</p>
+<p>The first thing to remember is that a data frame is two-dimensional
+(rows and columns). Therefore, to select a specific value we will will
+once again use <code>[]</code> (bracket) notation, but we will specify more than
+one value (except in some cases where we are taking a range).</p>
+<div class="admonition question">
+<p class="admonition-title">Exercise: Subsetting a data frame</p>
+<p><strong>Try the following indices and functions and try to figure out what
+they return</strong></p>
+<p>a.  <code>variants[1, 1]</code></p>
+<p>b.  <code>variants[2, 4]</code></p>
+<p>c.  <code>variants[801, 29]</code></p>
+<p>d.  <code>variants[2,]</code></p>
+<p>e.  <code>variants[-1,]</code></p>
+<p>f.  <code>variants[1:4, 1]</code></p>
+<p>g.  <code>variants[1:10, c("REF","ALT")]</code></p>
+<p>h.  <code>variants[, c("sample_id")]</code></p>
+<p>i.  <code>head(variants)</code></p>
+<p>j.  <code>tail(variants)</code></p>
+<p>k.  <code>variants$sample_id</code></p>
+<p>l.  <code>variants[variants$REF == "A",]</code></p>
+<details class="success">
+<summary>Output</summary>
+<p>a.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>[1] &quot;SRR2584863&quot;
+</code></pre></div></p>
+<p>b.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>[1] NA
+</code></pre></div></p>
+<p>c.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>[1] &quot;T&quot;
+</code></pre></div></p>
+<p>d.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>    sample_id      CHROM    POS ID REF ALT QUAL FILTER INDEL IDV IMF DP      VDB RPB MQB BQB
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>2  SRR2584863 CP000819.1 263235 NA   G   T   85     NA FALSE  NA  NA  6 0.096133   1   1   1
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>    MQSB       SGB     MQ0F ICB HOB AC AN     DP4 MQ
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>2     NA -0.590765 0.166667  NA  NA  1  1 0,1,0,5 33
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>                                                               Indiv gt_PL gt_GT gt_GT_alleles
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>2 /home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam 112,0     1             T
+</code></pre></div></p>
+<p>e.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>   sample_id      CHROM     POS ID      REF       ALT QUAL FILTER INDEL IDV IMF
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>2 SRR2584863 CP000819.1  263235 NA        G         T   85     NA FALSE  NA  NA
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>3 SRR2584863 CP000819.1  281923 NA        G         T  217     NA FALSE  NA  NA
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>4 SRR2584863 CP000819.1  433359 NA CTTTTTTT CTTTTTTTT   64     NA  TRUE  12 1.0
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>5 SRR2584863 CP000819.1  473901 NA     CCGC    CCGCGC  228     NA  TRUE   9 0.9
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>6 SRR2584863 CP000819.1  648692 NA        C         T  210     NA FALSE  NA  NA
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>7 SRR2584863 CP000819.1 1331794 NA        C         A  178     NA FALSE  NA  NA
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>  DP      VDB RPB MQB BQB     MQSB       SGB     MQ0F ICB HOB AC AN     DP4 MQ
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>2  6 0.096133   1   1   1       NA -0.590765 0.166667  NA  NA  1  1 0,1,0,5 33
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>3 10 0.774083  NA  NA  NA 0.974597 -0.662043 0.000000  NA  NA  1  1 0,0,4,5 60
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>4 12 0.477704  NA  NA  NA 1.000000 -0.676189 0.000000  NA  NA  1  1 0,1,3,8 60
+<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>5 10 0.659505  NA  NA  NA 0.916482 -0.662043 0.000000  NA  NA  1  1 1,0,2,7 60
+<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>6 10 0.268014  NA  NA  NA 0.916482 -0.670168 0.000000  NA  NA  1  1 0,0,7,3 60
+<a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a>7  8 0.624078  NA  NA  NA 0.900802 -0.651104 0.000000  NA  NA  1  1 0,0,3,5 60
+<a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a>                                                               Indiv gt_PL
+<a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a>2 /home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam 112,0
+<a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a>3 /home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam 247,0
+<a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a>4 /home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam  91,0
+<a id="__codelineno-11-19" name="__codelineno-11-19" href="#__codelineno-11-19"></a>5 /home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam 255,0
+<a id="__codelineno-11-20" name="__codelineno-11-20" href="#__codelineno-11-20"></a>6 /home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam 240,0
+<a id="__codelineno-11-21" name="__codelineno-11-21" href="#__codelineno-11-21"></a>7 /home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam 208,0
+<a id="__codelineno-11-22" name="__codelineno-11-22" href="#__codelineno-11-22"></a>  gt_GT gt_GT_alleles
+<a id="__codelineno-11-23" name="__codelineno-11-23" href="#__codelineno-11-23"></a>2     1             T
+<a id="__codelineno-11-24" name="__codelineno-11-24" href="#__codelineno-11-24"></a>3     1             T
+<a id="__codelineno-11-25" name="__codelineno-11-25" href="#__codelineno-11-25"></a>4     1     CTTTTTTTT
+<a id="__codelineno-11-26" name="__codelineno-11-26" href="#__codelineno-11-26"></a>5     1        CCGCGC
+<a id="__codelineno-11-27" name="__codelineno-11-27" href="#__codelineno-11-27"></a>6     1             T
+<a id="__codelineno-11-28" name="__codelineno-11-28" href="#__codelineno-11-28"></a>7     1             A
+</code></pre></div></p>
+<p>f. 
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>[1] &quot;SRR2584863&quot; &quot;SRR2584863&quot; &quot;SRR2584863&quot; &quot;SRR2584863&quot;
+</code></pre></div></p>
+<p>g.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>                                REF
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>1                                 T
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>2                                 G
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>3                                 G
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>4                          CTTTTTTT
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>5                              CCGC
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>6                                 C
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>7                                 C
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>8                                 G
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>9  ACAGCCAGCCAGCCAGCCAGCCAGCCAGCCAG
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>10                               AT
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a>                                                        ALT
+<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>1                                                         G
+<a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a>2                                                         T
+<a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a>3                                                         T
+<a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a>4                                                 CTTTTTTTT
+<a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a>5                                                    CCGCGC
+<a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a>6                                                         T
+<a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a>7                                                         A
+<a id="__codelineno-13-20" name="__codelineno-13-20" href="#__codelineno-13-20"></a>8                                                         A
+<a id="__codelineno-13-21" name="__codelineno-13-21" href="#__codelineno-13-21"></a>9  ACAGCCAGCCAGCCAGCCAGCCAGCCAGCCAGCCAGCCAGCCAGCCAGCCAGCCAG
+<a id="__codelineno-13-22" name="__codelineno-13-22" href="#__codelineno-13-22"></a>10                                                      ATT
+</code></pre></div></p>
+<p>h.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>[1] &quot;SRR2584863&quot; &quot;SRR2584863&quot; &quot;SRR2584863&quot; &quot;SRR2584863&quot; &quot;SRR2584863&quot;
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>[6] &quot;SRR2584863&quot;
+</code></pre></div></p>
+<p>i.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>   sample_id      CHROM    POS ID      REF       ALT QUAL FILTER INDEL IDV IMF DP       VDB RPB
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>1 SRR2584863 CP000819.1   9972 NA        T         G   91     NA FALSE  NA  NA  4 0.0257451  NA
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>2 SRR2584863 CP000819.1 263235 NA        G         T   85     NA FALSE  NA  NA  6 0.0961330   1
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>3 SRR2584863 CP000819.1 281923 NA        G         T  217     NA FALSE  NA  NA 10 0.7740830  NA
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>4 SRR2584863 CP000819.1 433359 NA CTTTTTTT CTTTTTTTT   64     NA  TRUE  12 1.0 12 0.4777040  NA
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>5 SRR2584863 CP000819.1 473901 NA     CCGC    CCGCGC  228     NA  TRUE   9 0.9 10 0.6595050  NA
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>6 SRR2584863 CP000819.1 648692 NA        C         T  210     NA FALSE  NA  NA 10 0.2680140  NA
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>  MQB BQB     MQSB       SGB     MQ0F ICB HOB AC AN     DP4 MQ
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>1  NA  NA       NA -0.556411 0.000000  NA  NA  1  1 0,0,0,4 60
+<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a>2   1   1       NA -0.590765 0.166667  NA  NA  1  1 0,1,0,5 33
+<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a>3  NA  NA 0.974597 -0.662043 0.000000  NA  NA  1  1 0,0,4,5 60
+<a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a>4  NA  NA 1.000000 -0.676189 0.000000  NA  NA  1  1 0,1,3,8 60
+<a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a>5  NA  NA 0.916482 -0.662043 0.000000  NA  NA  1  1 1,0,2,7 60
+<a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a>6  NA  NA 0.916482 -0.670168 0.000000  NA  NA  1  1 0,0,7,3 60
+<a id="__codelineno-15-15" name="__codelineno-15-15" href="#__codelineno-15-15"></a>                                                               Indiv gt_PL gt_GT gt_GT_alleles
+<a id="__codelineno-15-16" name="__codelineno-15-16" href="#__codelineno-15-16"></a>1 /home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam 121,0     1             G
+<a id="__codelineno-15-17" name="__codelineno-15-17" href="#__codelineno-15-17"></a>2 /home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam 112,0     1             T
+<a id="__codelineno-15-18" name="__codelineno-15-18" href="#__codelineno-15-18"></a>3 /home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam 247,0     1             T
+<a id="__codelineno-15-19" name="__codelineno-15-19" href="#__codelineno-15-19"></a>4 /home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam  91,0     1     CTTTTTTTT
+<a id="__codelineno-15-20" name="__codelineno-15-20" href="#__codelineno-15-20"></a>5 /home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam 255,0     1        CCGCGC
+<a id="__codelineno-15-21" name="__codelineno-15-21" href="#__codelineno-15-21"></a>6 /home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam 240,0     1             T
+</code></pre></div></p>
+<p>j.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>     sample_id      CHROM     POS ID REF ALT QUAL FILTER INDEL IDV IMF DP
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>796 SRR2589044 CP000819.1 3444175 NA   G   T  184     NA FALSE  NA  NA  9
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>797 SRR2589044 CP000819.1 3481820 NA   A   G  225     NA FALSE  NA  NA 12
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>798 SRR2589044 CP000819.1 3893550 NA  AG AGG  101     NA  TRUE   4   1  4
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>799 SRR2589044 CP000819.1 3901455 NA   A  AC   70     NA  TRUE   3   1  3
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>800 SRR2589044 CP000819.1 4100183 NA   A   G  177     NA FALSE  NA  NA  8
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>801 SRR2589044 CP000819.1 4431393 NA TGG   T  225     NA  TRUE  10   1 10
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>          VDB RPB MQB BQB     MQSB       SGB MQ0F ICB HOB AC AN     DP4 MQ
+<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a>796 0.4714620  NA  NA  NA 0.992367 -0.651104    0  NA  NA  1  1 0,0,4,4 60
+<a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a>797 0.8707240  NA  NA  NA 1.000000 -0.680642    0  NA  NA  1  1 0,0,4,8 60
+<a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a>798 0.9182970  NA  NA  NA 1.000000 -0.556411    0  NA  NA  1  1 0,0,3,1 52
+<a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a>799 0.0221621  NA  NA  NA       NA -0.511536    0  NA  NA  1  1 0,0,3,0 60
+<a id="__codelineno-16-13" name="__codelineno-16-13" href="#__codelineno-16-13"></a>800 0.9272700  NA  NA  NA 0.900802 -0.651104    0  NA  NA  1  1 0,0,3,5 60
+<a id="__codelineno-16-14" name="__codelineno-16-14" href="#__codelineno-16-14"></a>801 0.7488140  NA  NA  NA 1.007750 -0.670168    0  NA  NA  1  1 0,0,4,6 60
+<a id="__codelineno-16-15" name="__codelineno-16-15" href="#__codelineno-16-15"></a>                                                                 Indiv gt_PL
+<a id="__codelineno-16-16" name="__codelineno-16-16" href="#__codelineno-16-16"></a>796 /home/dcuser/dc_workshop/results/bam/SRR2589044.aligned.sorted.bam 214,0
+<a id="__codelineno-16-17" name="__codelineno-16-17" href="#__codelineno-16-17"></a>797 /home/dcuser/dc_workshop/results/bam/SRR2589044.aligned.sorted.bam 255,0
+<a id="__codelineno-16-18" name="__codelineno-16-18" href="#__codelineno-16-18"></a>798 /home/dcuser/dc_workshop/results/bam/SRR2589044.aligned.sorted.bam 131,0
+<a id="__codelineno-16-19" name="__codelineno-16-19" href="#__codelineno-16-19"></a>799 /home/dcuser/dc_workshop/results/bam/SRR2589044.aligned.sorted.bam 100,0
+<a id="__codelineno-16-20" name="__codelineno-16-20" href="#__codelineno-16-20"></a>800 /home/dcuser/dc_workshop/results/bam/SRR2589044.aligned.sorted.bam 207,0
+<a id="__codelineno-16-21" name="__codelineno-16-21" href="#__codelineno-16-21"></a>801 /home/dcuser/dc_workshop/results/bam/SRR2589044.aligned.sorted.bam 255,0
+<a id="__codelineno-16-22" name="__codelineno-16-22" href="#__codelineno-16-22"></a>    gt_GT gt_GT_alleles
+<a id="__codelineno-16-23" name="__codelineno-16-23" href="#__codelineno-16-23"></a>796     1             T
+<a id="__codelineno-16-24" name="__codelineno-16-24" href="#__codelineno-16-24"></a>797     1             G
+<a id="__codelineno-16-25" name="__codelineno-16-25" href="#__codelineno-16-25"></a>798     1           AGG
+<a id="__codelineno-16-26" name="__codelineno-16-26" href="#__codelineno-16-26"></a>799     1            AC
+<a id="__codelineno-16-27" name="__codelineno-16-27" href="#__codelineno-16-27"></a>800     1             G
+<a id="__codelineno-16-28" name="__codelineno-16-28" href="#__codelineno-16-28"></a>801     1             T
+</code></pre></div></p>
+<p>k.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>[1] &quot;SRR2584863&quot; &quot;SRR2584863&quot; &quot;SRR2584863&quot; &quot;SRR2584863&quot; &quot;SRR2584863&quot;
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>[6] &quot;SRR2584863&quot;
+</code></pre></div></p>
+<p>l.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>    sample_id      CHROM     POS ID REF ALT QUAL FILTER INDEL IDV IMF DP
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>11 SRR2584863 CP000819.1 2407766 NA   A   C  104     NA FALSE  NA  NA  9
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>12 SRR2584863 CP000819.1 2446984 NA   A   C  225     NA FALSE  NA  NA 20
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>14 SRR2584863 CP000819.1 2665639 NA   A   T  225     NA FALSE  NA  NA 19
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>16 SRR2584863 CP000819.1 3339313 NA   A   C  211     NA FALSE  NA  NA 10
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>18 SRR2584863 CP000819.1 3481820 NA   A   G  200     NA FALSE  NA  NA  9
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>19 SRR2584863 CP000819.1 3488669 NA   A   C  225     NA FALSE  NA  NA 13
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>         VDB      RPB      MQB      BQB     MQSB       SGB     MQ0F ICB HOB AC
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a>11 0.0230738 0.900802 0.150134 0.750668 0.500000 -0.590765 0.333333  NA  NA  1
+<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a>12 0.0714027       NA       NA       NA 1.000000 -0.689466 0.000000  NA  NA  1
+<a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a>14 0.9960390       NA       NA       NA 1.000000 -0.690438 0.000000  NA  NA  1
+<a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a>16 0.4059360       NA       NA       NA 1.007750 -0.670168 0.000000  NA  NA  1
+<a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a>18 0.1070810       NA       NA       NA 0.974597 -0.662043 0.000000  NA  NA  1
+<a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a>19 0.0162706       NA       NA       NA 1.000000 -0.680642 0.000000  NA  NA  1
+<a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a>   AN      DP4 MQ
+<a id="__codelineno-18-16" name="__codelineno-18-16" href="#__codelineno-18-16"></a>11  1  3,0,3,2 25
+<a id="__codelineno-18-17" name="__codelineno-18-17" href="#__codelineno-18-17"></a>12  1 0,0,10,6 60
+<a id="__codelineno-18-18" name="__codelineno-18-18" href="#__codelineno-18-18"></a>14  1 0,0,12,5 60
+<a id="__codelineno-18-19" name="__codelineno-18-19" href="#__codelineno-18-19"></a>16  1  0,0,4,6 60
+<a id="__codelineno-18-20" name="__codelineno-18-20" href="#__codelineno-18-20"></a>18  1  0,0,4,5 60
+<a id="__codelineno-18-21" name="__codelineno-18-21" href="#__codelineno-18-21"></a>19  1  0,0,8,4 60
+<a id="__codelineno-18-22" name="__codelineno-18-22" href="#__codelineno-18-22"></a>                                                                Indiv gt_PL
+<a id="__codelineno-18-23" name="__codelineno-18-23" href="#__codelineno-18-23"></a>11 /home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam 131,0
+<a id="__codelineno-18-24" name="__codelineno-18-24" href="#__codelineno-18-24"></a>12 /home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam 255,0
+<a id="__codelineno-18-25" name="__codelineno-18-25" href="#__codelineno-18-25"></a>14 /home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam 255,0
+<a id="__codelineno-18-26" name="__codelineno-18-26" href="#__codelineno-18-26"></a>16 /home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam 241,0
+<a id="__codelineno-18-27" name="__codelineno-18-27" href="#__codelineno-18-27"></a>18 /home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam 230,0
+<a id="__codelineno-18-28" name="__codelineno-18-28" href="#__codelineno-18-28"></a>19 /home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam 255,0
+<a id="__codelineno-18-29" name="__codelineno-18-29" href="#__codelineno-18-29"></a>   gt_GT gt_GT_alleles
+<a id="__codelineno-18-30" name="__codelineno-18-30" href="#__codelineno-18-30"></a>11     1             C
+<a id="__codelineno-18-31" name="__codelineno-18-31" href="#__codelineno-18-31"></a>12     1             C
+<a id="__codelineno-18-32" name="__codelineno-18-32" href="#__codelineno-18-32"></a>14     1             T
+<a id="__codelineno-18-33" name="__codelineno-18-33" href="#__codelineno-18-33"></a>16     1             C
+<a id="__codelineno-18-34" name="__codelineno-18-34" href="#__codelineno-18-34"></a>18     1             G
+<a id="__codelineno-18-35" name="__codelineno-18-35" href="#__codelineno-18-35"></a>19     1             C
+</code></pre></div></p>
+</details>
+</div>
+<p>The subsetting notation is very similar to what we learned for vectors.
+The key differences include:</p>
+<ul>
+<li>Typically provide two values separated by commas: <code>data.frame[row, 
+    column]</code></li>
+<li>In cases where you are taking a continuous range of numbers use a
+    colon between the numbers (start:stop, inclusive)</li>
+<li>For a non continuous set of numbers, pass a vector using <code>c()</code></li>
+<li>Index using the name of a column(s) by passing them as vectors using
+    <code>c()</code></li>
+</ul>
+<p>Finally, in all of the subsetting exercises above, we printed values to
+the screen. You can create a new data frame object by assigning them to
+a new object name:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="c1"># Create a new data frame containing only observations from &quot;SRR2584863&quot;</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="n">SRR2584863_variants</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">variants</span><span class="p">[</span><span class="n">variants</span><span class="o">$</span><span class="n">sample_id</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;SRR2584863&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">]</span>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="c1"># Check the dimension of the data frame</span>
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="nf">dim</span><span class="p">(</span><span class="n">SRR2584863_variants</span><span class="p">)</span>
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="c1"># Get a summary of the data frame</span>
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="nf">summary</span><span class="p">(</span><span class="n">SRR2584863_variants</span><span class="p">)</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>[1] 25 29
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>  sample_id            CHROM                POS             ID         
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a> Length:25          Length:25          Min.   :   9972   Mode:logical  
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a> Class :character   Class :character   1st Qu.:1331794   NA&#39;s:25       
+<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a> Mode  :character   Mode  :character   Median :2618472                 
+<a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a>                                       Mean   :2464989                 
+<a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a>                                       3rd Qu.:3488669                 
+<a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a>                                       Max.   :4616538                 
+<a id="__codelineno-20-10" name="__codelineno-20-10" href="#__codelineno-20-10"></a>
+<a id="__codelineno-20-11" name="__codelineno-20-11" href="#__codelineno-20-11"></a>     REF                ALT                 QUAL         FILTER       
+<a id="__codelineno-20-12" name="__codelineno-20-12" href="#__codelineno-20-12"></a> Length:25          Length:25          Min.   : 31.89   Mode:logical  
+<a id="__codelineno-20-13" name="__codelineno-20-13" href="#__codelineno-20-13"></a> Class :character   Class :character   1st Qu.:104.00   NA&#39;s:25       
+<a id="__codelineno-20-14" name="__codelineno-20-14" href="#__codelineno-20-14"></a> Mode  :character   Mode  :character   Median :211.00                 
+<a id="__codelineno-20-15" name="__codelineno-20-15" href="#__codelineno-20-15"></a>                                       Mean   :172.97                 
+<a id="__codelineno-20-16" name="__codelineno-20-16" href="#__codelineno-20-16"></a>                                       3rd Qu.:225.00                 
+<a id="__codelineno-20-17" name="__codelineno-20-17" href="#__codelineno-20-17"></a>                                       Max.   :228.00                 
+<a id="__codelineno-20-18" name="__codelineno-20-18" href="#__codelineno-20-18"></a>
+<a id="__codelineno-20-19" name="__codelineno-20-19" href="#__codelineno-20-19"></a>   INDEL              IDV             IMF               DP      
+<a id="__codelineno-20-20" name="__codelineno-20-20" href="#__codelineno-20-20"></a> Mode :logical   Min.   : 2.00   Min.   :0.6667   Min.   : 2.0  
+<a id="__codelineno-20-21" name="__codelineno-20-21" href="#__codelineno-20-21"></a> FALSE:19        1st Qu.: 3.25   1st Qu.:0.9250   1st Qu.: 9.0  
+<a id="__codelineno-20-22" name="__codelineno-20-22" href="#__codelineno-20-22"></a> TRUE :6         Median : 8.00   Median :1.0000   Median :10.0  
+<a id="__codelineno-20-23" name="__codelineno-20-23" href="#__codelineno-20-23"></a>                 Mean   : 7.00   Mean   :0.9278   Mean   :10.4  
+<a id="__codelineno-20-24" name="__codelineno-20-24" href="#__codelineno-20-24"></a>                 3rd Qu.: 9.75   3rd Qu.:1.0000   3rd Qu.:12.0  
+<a id="__codelineno-20-25" name="__codelineno-20-25" href="#__codelineno-20-25"></a>                 Max.   :12.00   Max.   :1.0000   Max.   :20.0  
+<a id="__codelineno-20-26" name="__codelineno-20-26" href="#__codelineno-20-26"></a>                 NA&#39;s   :19      NA&#39;s   :19                     
+<a id="__codelineno-20-27" name="__codelineno-20-27" href="#__codelineno-20-27"></a>      VDB               RPB              MQB               BQB        
+<a id="__codelineno-20-28" name="__codelineno-20-28" href="#__codelineno-20-28"></a> Min.   :0.01627   Min.   :0.9008   Min.   :0.04979   Min.   :0.7507  
+<a id="__codelineno-20-29" name="__codelineno-20-29" href="#__codelineno-20-29"></a> 1st Qu.:0.07140   1st Qu.:0.9275   1st Qu.:0.09996   1st Qu.:0.7627  
+<a id="__codelineno-20-30" name="__codelineno-20-30" href="#__codelineno-20-30"></a> Median :0.37674   Median :0.9542   Median :0.15013   Median :0.7748  
+<a id="__codelineno-20-31" name="__codelineno-20-31" href="#__codelineno-20-31"></a> Mean   :0.40429   Mean   :0.9517   Mean   :0.39997   Mean   :0.8418  
+<a id="__codelineno-20-32" name="__codelineno-20-32" href="#__codelineno-20-32"></a> 3rd Qu.:0.65951   3rd Qu.:0.9771   3rd Qu.:0.57507   3rd Qu.:0.8874  
+<a id="__codelineno-20-33" name="__codelineno-20-33" href="#__codelineno-20-33"></a> Max.   :0.99604   Max.   :1.0000   Max.   :1.00000   Max.   :1.0000  
+<a id="__codelineno-20-34" name="__codelineno-20-34" href="#__codelineno-20-34"></a>                   NA&#39;s   :22       NA&#39;s   :22        NA&#39;s   :22      
+<a id="__codelineno-20-35" name="__codelineno-20-35" href="#__codelineno-20-35"></a>      MQSB             SGB               MQ0F           ICB         
+<a id="__codelineno-20-36" name="__codelineno-20-36" href="#__codelineno-20-36"></a> Min.   :0.5000   Min.   :-0.6904   Min.   :0.00000   Mode:logical  
+<a id="__codelineno-20-37" name="__codelineno-20-37" href="#__codelineno-20-37"></a> 1st Qu.:0.9599   1st Qu.:-0.6762   1st Qu.:0.00000   NA&#39;s:25       
+<a id="__codelineno-20-38" name="__codelineno-20-38" href="#__codelineno-20-38"></a> Median :0.9962   Median :-0.6620   Median :0.00000                 
+<a id="__codelineno-20-39" name="__codelineno-20-39" href="#__codelineno-20-39"></a> Mean   :0.9442   Mean   :-0.6341   Mean   :0.04667                 
+<a id="__codelineno-20-40" name="__codelineno-20-40" href="#__codelineno-20-40"></a> 3rd Qu.:1.0000   3rd Qu.:-0.6168   3rd Qu.:0.00000                 
+<a id="__codelineno-20-41" name="__codelineno-20-41" href="#__codelineno-20-41"></a> Max.   :1.0128   Max.   :-0.4536   Max.   :0.66667                 
+<a id="__codelineno-20-42" name="__codelineno-20-42" href="#__codelineno-20-42"></a> NA&#39;s   :3                                                          
+<a id="__codelineno-20-43" name="__codelineno-20-43" href="#__codelineno-20-43"></a>   HOB                AC          AN        DP4                  MQ       
+<a id="__codelineno-20-44" name="__codelineno-20-44" href="#__codelineno-20-44"></a> Mode:logical   Min.   :1   Min.   :1   Length:25          Min.   :10.00  
+<a id="__codelineno-20-45" name="__codelineno-20-45" href="#__codelineno-20-45"></a> NA&#39;s:25        1st Qu.:1   1st Qu.:1   Class :character   1st Qu.:60.00  
+<a id="__codelineno-20-46" name="__codelineno-20-46" href="#__codelineno-20-46"></a>                Median :1   Median :1   Mode  :character   Median :60.00  
+<a id="__codelineno-20-47" name="__codelineno-20-47" href="#__codelineno-20-47"></a>                Mean   :1   Mean   :1                      Mean   :55.52  
+<a id="__codelineno-20-48" name="__codelineno-20-48" href="#__codelineno-20-48"></a>                3rd Qu.:1   3rd Qu.:1                      3rd Qu.:60.00  
+<a id="__codelineno-20-49" name="__codelineno-20-49" href="#__codelineno-20-49"></a>                Max.   :1   Max.   :1                      Max.   :60.00  
+<a id="__codelineno-20-50" name="__codelineno-20-50" href="#__codelineno-20-50"></a>
+<a id="__codelineno-20-51" name="__codelineno-20-51" href="#__codelineno-20-51"></a>    Indiv              gt_PL               gt_GT   gt_GT_alleles     
+<a id="__codelineno-20-52" name="__codelineno-20-52" href="#__codelineno-20-52"></a> Length:25          Length:25          Min.   :1   Length:25         
+<a id="__codelineno-20-53" name="__codelineno-20-53" href="#__codelineno-20-53"></a> Class :character   Class :character   1st Qu.:1   Class :character  
+<a id="__codelineno-20-54" name="__codelineno-20-54" href="#__codelineno-20-54"></a> Mode  :character   Mode  :character   Median :1   Mode  :character  
+<a id="__codelineno-20-55" name="__codelineno-20-55" href="#__codelineno-20-55"></a>                                       Mean   :1                     
+<a id="__codelineno-20-56" name="__codelineno-20-56" href="#__codelineno-20-56"></a>                                       3rd Qu.:1                     
+<a id="__codelineno-20-57" name="__codelineno-20-57" href="#__codelineno-20-57"></a>                                       Max.   :1                     
+</code></pre></div>
+</details>
+</div>
+<h2 id="introducing-factors">Introducing factors<a class="headerlink" href="#introducing-factors" title="Permanent link">&para;</a></h2>
+<p>Factors are the final major data structure we will introduce in our Introduction 
+to R lessons. Factors can be thought of as vectors which are specialized for
+categorical data. Given R's specialization for statistics, this make sense since
+categorial and continuous variables are usually treated differently. Sometimes
+you may want to have data treated as a factor, but in other cases, this may be
+undesirable. Let's see the value of treating some of which are categorical in 
+nature as factors. Let's take a look at just the alternate alleles.</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="c1"># Extract the &quot;ALT&quot; column to a new object</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="n">alt_alleles</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">subset_variants</span><span class="o">$</span><span class="n">ALT</span>
+</code></pre></div>
+</div>
+<p>Let's look at the first few items in our factor using <code>head()</code>:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="nf">head</span><span class="p">(</span><span class="n">alt_alleles</span><span class="p">)</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>[1] &quot;G&quot;         &quot;T&quot;         &quot;T&quot;         &quot;CTTTTTTTT&quot; &quot;CCGCGC&quot;    &quot;T&quot;
+</code></pre></div>
+</details>
+</div>
+<p>There are 801 alleles (one for each row). To simplify, lets look at just
+the single-nucleotide alleles (SNPs). We can use some of the vector
+indexing skills from the last episode.</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="n">alt_snps</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">alt_alleles</span><span class="p">[</span><span class="n">alt_alleles</span><span class="o">==</span><span class="s">&quot;A&quot;</span><span class="p">],</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="w">              </span><span class="n">alt_alleles</span><span class="p">[</span><span class="n">alt_alleles</span><span class="o">==</span><span class="s">&quot;T&quot;</span><span class="p">],</span>
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="w">              </span><span class="n">alt_alleles</span><span class="p">[</span><span class="n">alt_alleles</span><span class="o">==</span><span class="s">&quot;G&quot;</span><span class="p">],</span>
+<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="w">              </span><span class="n">alt_alleles</span><span class="p">[</span><span class="n">alt_alleles</span><span class="o">==</span><span class="s">&quot;C&quot;</span><span class="p">])</span>
+</code></pre></div>
+</div>
+<p>This leaves us with a vector of the 701 alternative alleles which were
+single nucleotides. Right now, they are being treated a characters, but
+we could treat them as categories of SNP. Doing this will enable some
+nice features. For example, we can try to generate a plot of this
+character vector as it is right now:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="nf">plot</span><span class="p">(</span><span class="n">alt_snps</span><span class="p">)</span>
+</code></pre></div>
+<details class="failure">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>Error in plot.window(...) : need finite &#39;ylim&#39; values
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>In addition: Warning messages:
+<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a>1: In xy.coords(x, y, xlabel, ylabel, log) : NAs introduced by coercion
+<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a>2: In min(x) : no non-missing arguments to min; returning Inf
+<a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a>3: In max(x) : no non-missing arguments to max; returning -Inf
+</code></pre></div>
+</details>
+</div>
+<p>Whoops! Though the <code>plot()</code> function will do its best to give us a quick
+plot, it is unable to do so here. One way to fix this it to tell R to
+treat the SNPs as categories (i.e., a factor vector); we will create a
+new object to avoid confusion using the <code>factor()</code> function:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="n">factor_snps</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">factor</span><span class="p">(</span><span class="n">alt_snps</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<p>Let's learn a little more about this new type of vector:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="nf">str</span><span class="p">(</span><span class="n">factor_snps</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a> Factor w/ 4 levels &quot;A&quot;,&quot;C&quot;,&quot;G&quot;,&quot;T&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+</code></pre></div>
+</details>
+<p>What we get back are the categories ("A","C","G","T") in our factor;
+these are called "levels". <strong>Levels are the different categories
+contained in a factor</strong>. By default, R will organize the levels in a
+factor in alphabetical order. So the first level in this factor is "A".</p>
+<p>For the sake of efficiency, R stores the content of a factor as a vector
+of integers, which an integer is assigned to each of the possible
+levels. Recall levels are assigned in alphabetical order. In this case,
+the first item in our <code>factor_snps</code> object is "A", which happens to be
+the 1<sup>st</sup> level of our factor, ordered alphabetically. This explains the
+sequence of "1"s (<code>Factor w/ 4 levels"A","C","G","T": 1 1 1 1 1 1 1 1 1
+1 ...</code>), since "A" is the first level and the first few items in our
+factor are all "A"s.</p>
+<p>We can see how many items in our vector fall into each category:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="nf">summary</span><span class="p">(</span><span class="n">factor_snps</span><span class="p">)</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>  A   C   G   T 
+<a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>211 139 154 203
+</code></pre></div>
+</details>
+</div>
+<p>As you can imagine, this is already useful when you want to generate a
+tally.</p>
+<div class="admonition tip">
+<p class="admonition-title">Treating objects as categories without changing their mode</p>
+<p>You don't have to make an object a factor to get the benefits of
+treating an object as a factor. See what happens when you use the
+<code>as.factor()</code> function on <code>factor_snps</code>. To generate a tally, you can
+sometimes also use the <code>table()</code> function; though sometimes you may
+need to combine both (i.e., <code>table(as.factor(object))</code>)</p>
+</div>
+<h3 id="plotting-and-ordering-factors">Plotting and ordering factors<a class="headerlink" href="#plotting-and-ordering-factors" title="Permanent link">&para;</a></h3>
+<p>One of the most common uses for factors will be when you plot
+categorical values. For example, suppose we want to know how many of our
+variants had each possible SNP we could generate a plot:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="nf">plot</span><span class="p">(</span><span class="n">factor_snps</span><span class="p">)</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<p><a class="glightbox" href="../figures/factor_snps_barplot.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="images" src="../figures/factor_snps_barplot.png" width="600" /></a></p>
+</details>
+</div>
+<p>This isn't a particularly pretty example of a plot but it works. We'll
+be learning much more about creating nice, publication-quality graphics
+later in this workshop.</p>
+<p>If you recall, factors are ordered alphabetically. That might make
+sense, but categories (e.g., "red", "blue", "green") often do not have
+an intrinsic order. What if we wanted to order our plot according to the
+numerical value (i.e., in descending order of SNP frequency)? We can
+enforce an order on our factors:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="n">ordered_factor_snps</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">factor</span><span class="p">(</span>
+<a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a><span class="w">  </span><span class="n">factor_snps</span><span class="p">,</span><span class="w"> </span>
+<a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a><span class="w">  </span><span class="n">levels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">names</span><span class="p">(</span><span class="nf">sort</span><span class="p">(</span><span class="nf">table</span><span class="p">(</span><span class="n">factor_snps</span><span class="p">)))</span>
+<a id="__codelineno-33-4" name="__codelineno-33-4" href="#__codelineno-33-4"></a><span class="p">)</span>
+</code></pre></div>
+</div>
+<p>Let's deconstruct this from the <em>inside out</em> (you can try each of these
+commands to see why this works):</p>
+<ol>
+<li>We create a table of <code>factor_snps</code> to get the frequency of each SNP:
+    <code>table(factor_snps)</code></li>
+<li>We sort this table: <code>sort(table(factor_snps))</code>; use the
+    <code>decreasing =</code> parameter for this function if you wanted to change
+    from the default of FALSE</li>
+<li>Using the <code>names()</code> function gives us just the character names of the
+    table sorted by frequencies:<code>names(sort(table(factor_snps)))</code></li>
+<li>The <code>factor</code> function is what allows us to create a factor. We give
+    it the <code>factor_snps</code> object as input, and use the <code>levels=</code>
+    parameter to enforce the ordering of the levels.</li>
+</ol>
+<p>Now we see our plot has be reordered:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="nf">plot</span><span class="p">(</span><span class="n">ordered_factor_snps</span><span class="p">)</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<p><a class="glightbox" href="../figures/ordered_factor_snps_barplot.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="images" src="../figures/ordered_factor_snps_barplot.png" width="600" /></a></p>
+</details>
+</div>
+<p>Factors come in handy in many places when using R. Even using more
+sophisticated plotting packages such as <code>ggplot2</code> will sometimes require
+you to understand how to manipulate factors.</p>
+<div class="admonition tip">
+<p class="admonition-title">Packages in R &ndash; what are they and why do we use them?</p>
+<p>Packages are simply collections of functions and/or data that can be
+used to extend the capabilities of R beyond the core functionality
+that comes with it by default. There are useful R packages available
+that span all types of statistical analysis, data visualization, and
+more. The main place that R packages are installed from is a website
+called <a href="https://cran.r-project.org/">CRAN</a> (the Comprehensive R
+Archive Network). Many thousands of R packages are available there,
+and when you use the built-in R function <code>install.packages()</code>, it will
+look for a CRAN repository to install from. So, for example, to
+install <a href="https://www.tidyverse.org">tidyverse</a> packages such as
+<code>dplyr</code> and <code>ggplot2</code> (which you'll do in the next few lessons), you
+would use the following command:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="c1"># Install a package from CRAN</span>
+<a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a><span class="nf">install.packages</span><span class="p">(</span><span class="s">&quot;ggplot2&quot;</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</div>
+<h2 id="coercing-values">Coercing values<a class="headerlink" href="#coercing-values" title="Permanent link">&para;</a></h2>
+<p>Sometimes, it is possible that R will misinterpret the type of data represented
+in a data frame, or store that data in a mode which prevents you from
+operating on the data the way you wish. For example, a long list of gene names
+isn't usually thought of as a categorical variable, the way that your
+experimental condition (e.g., control, treatment) might be. More importantly,
+some R packages you use to analyze your data may expect characters as input,
+not factors. At other times (such as plotting or some statistical analyses) a
+factor may be more appropriate. Ultimately, you should know how to change the
+mode of an object.</p>
+<p>First, its very important to recognize that coercion happens in R all the time.
+This can be a good thing when R gets it right, or a bad thing when the result
+is not what you expect. Consider:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="n">snp_chromosomes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&#39;3&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;11&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;X&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;6&#39;</span><span class="p">)</span>
+<a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a><span class="nf">typeof</span><span class="p">(</span><span class="n">snp_chromosomes</span><span class="p">)</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>[1] &quot;character&quot;
+</code></pre></div>
+</details>
+</div>
+<p>Although there are several numbers in our vector, they are all in
+quotes, so we have explicitly told R to consider them as characters.
+However, even if we removed the quotes from the numbers, R would coerce
+everything into a character:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="n">snp_chromosomes_2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">11</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;X&#39;</span><span class="p">,</span><span class="w"> </span><span class="m">6</span><span class="p">)</span>
+<a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a><span class="nf">typeof</span><span class="p">(</span><span class="n">snp_chromosomes_2</span><span class="p">)</span>
+<a id="__codelineno-38-3" name="__codelineno-38-3" href="#__codelineno-38-3"></a><span class="n">snp_chromosomes_2</span><span class="p">[</span><span class="m">1</span><span class="p">]</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a>[1] &quot;character&quot;
+<a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a>[1] &quot;3&quot;
+</code></pre></div>
+</details>
+</div>
+<p>We can use the <code>as.</code> functions to explicitly coerce values from one form
+into another. Consider the following vector of characters, which all
+happen to be valid numbers:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="n">snp_positions_2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;8762685&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;66560624&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;67545785&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;154039662&quot;</span><span class="p">)</span>
+<a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a><span class="nf">typeof</span><span class="p">(</span><span class="n">snp_positions_2</span><span class="p">)</span>
+<a id="__codelineno-40-3" name="__codelineno-40-3" href="#__codelineno-40-3"></a><span class="n">snp_positions_2</span><span class="p">[</span><span class="m">1</span><span class="p">]</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a>[1] &quot;character&quot;
+<a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a>[1] &quot;8762685&quot;
+</code></pre></div>
+</details>
+</div>
+<p>Now we can coerce <code>snp_positions_2</code> into a numeric mode using
+<code>as.numeric()</code>:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a><span class="n">snp_positions_2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.numeric</span><span class="p">(</span><span class="n">snp_positions_2</span><span class="p">)</span>
+<a id="__codelineno-42-2" name="__codelineno-42-2" href="#__codelineno-42-2"></a><span class="nf">typeof</span><span class="p">(</span><span class="n">snp_positions_2</span><span class="p">)</span>
+<a id="__codelineno-42-3" name="__codelineno-42-3" href="#__codelineno-42-3"></a><span class="n">snp_positions_2</span><span class="p">[</span><span class="m">1</span><span class="p">]</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a>[1] &quot;double&quot;
+<a id="__codelineno-43-2" name="__codelineno-43-2" href="#__codelineno-43-2"></a>[1] 8762685
+</code></pre></div>
+</details>
+</div>
+<p>Sometimes coercion is straight forward, but what would happen if we
+tried using <code>as.numeric()</code> on <code>snp_chromosomes_2</code></p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a><span class="n">snp_chromosomes_2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.numeric</span><span class="p">(</span><span class="n">snp_chromosomes_2</span><span class="p">)</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a>Warning message:
+<a id="__codelineno-45-2" name="__codelineno-45-2" href="#__codelineno-45-2"></a>NAs introduced by coercion
+</code></pre></div>
+</details>
+</div>
+<p>If we check, we will see that an <code>NA</code> value (R's default value for
+missing data) has been introduced.</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a><span class="n">snp_chromosomes_2</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a>[1]  3 11 NA  6
+</code></pre></div>
+</details>
+</div>
+<p>Trouble can really start when we try to coerce a factor. For example,
+when we try to coerce the <code>factor_snps</code> into a numeric mode look at the 
+result: </p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a><span class="nf">as.numeric</span><span class="p">(</span><span class="n">factor_snps</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a>  [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+<a id="__codelineno-49-2" name="__codelineno-49-2" href="#__codelineno-49-2"></a> [28] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+<a id="__codelineno-49-3" name="__codelineno-49-3" href="#__codelineno-49-3"></a> [55] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+<a id="__codelineno-49-4" name="__codelineno-49-4" href="#__codelineno-49-4"></a> [82] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+<a id="__codelineno-49-5" name="__codelineno-49-5" href="#__codelineno-49-5"></a>[109] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+<a id="__codelineno-49-6" name="__codelineno-49-6" href="#__codelineno-49-6"></a>[136] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+<a id="__codelineno-49-7" name="__codelineno-49-7" href="#__codelineno-49-7"></a>[163] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+<a id="__codelineno-49-8" name="__codelineno-49-8" href="#__codelineno-49-8"></a>[190] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 4 4 4 4 4
+<a id="__codelineno-49-9" name="__codelineno-49-9" href="#__codelineno-49-9"></a>[217] 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4
+<a id="__codelineno-49-10" name="__codelineno-49-10" href="#__codelineno-49-10"></a>[244] 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4
+<a id="__codelineno-49-11" name="__codelineno-49-11" href="#__codelineno-49-11"></a>[271] 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4
+<a id="__codelineno-49-12" name="__codelineno-49-12" href="#__codelineno-49-12"></a>[298] 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4
+<a id="__codelineno-49-13" name="__codelineno-49-13" href="#__codelineno-49-13"></a>[325] 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4
+<a id="__codelineno-49-14" name="__codelineno-49-14" href="#__codelineno-49-14"></a>[352] 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4
+<a id="__codelineno-49-15" name="__codelineno-49-15" href="#__codelineno-49-15"></a>[379] 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4
+<a id="__codelineno-49-16" name="__codelineno-49-16" href="#__codelineno-49-16"></a>[406] 4 4 4 4 4 4 4 4 4 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+<a id="__codelineno-49-17" name="__codelineno-49-17" href="#__codelineno-49-17"></a>[433] 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+<a id="__codelineno-49-18" name="__codelineno-49-18" href="#__codelineno-49-18"></a>[460] 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+<a id="__codelineno-49-19" name="__codelineno-49-19" href="#__codelineno-49-19"></a>[487] 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+<a id="__codelineno-49-20" name="__codelineno-49-20" href="#__codelineno-49-20"></a>[514] 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+<a id="__codelineno-49-21" name="__codelineno-49-21" href="#__codelineno-49-21"></a>[541] 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+<a id="__codelineno-49-22" name="__codelineno-49-22" href="#__codelineno-49-22"></a>[568] 3 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+<a id="__codelineno-49-23" name="__codelineno-49-23" href="#__codelineno-49-23"></a>[595] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+<a id="__codelineno-49-24" name="__codelineno-49-24" href="#__codelineno-49-24"></a>[622] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+<a id="__codelineno-49-25" name="__codelineno-49-25" href="#__codelineno-49-25"></a>[649] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+<a id="__codelineno-49-26" name="__codelineno-49-26" href="#__codelineno-49-26"></a>[676] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+<a id="__codelineno-49-27" name="__codelineno-49-27" href="#__codelineno-49-27"></a>[703] 2 2 2 2 2 
+</code></pre></div>
+</details>
+<p>Strangely, it works! Almost. Instead of giving an error message, R
+returns numeric values, which in this case are the integers assigned to
+the levels in this factor. This kind of behavior can lead to
+hard-to-find bugs, for example when we do have numbers in a factor, and
+we get numbers from a coercion. If we don't look carefully, we may not
+notice a problem.</p>
+<p>If you need to coerce an entire column you can overwrite it using an
+expression like this one:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a><span class="c1"># Make the &#39;sample_id&#39; column a factor type column</span>
+<a id="__codelineno-50-2" name="__codelineno-50-2" href="#__codelineno-50-2"></a><span class="n">variants</span><span class="o">$</span><span class="n">sample_id</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.factor</span><span class="p">(</span><span class="n">variants</span><span class="o">$</span><span class="n">sample_id</span><span class="p">)</span>
+<a id="__codelineno-50-3" name="__codelineno-50-3" href="#__codelineno-50-3"></a>
+<a id="__codelineno-50-4" name="__codelineno-50-4" href="#__codelineno-50-4"></a><span class="c1"># check the structure of the column</span>
+<a id="__codelineno-50-5" name="__codelineno-50-5" href="#__codelineno-50-5"></a><span class="nf">str</span><span class="p">(</span><span class="n">variants</span><span class="o">$</span><span class="n">sample_id</span><span class="p">)</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a>Factor w/ 3 levels &quot;SRR2584863&quot;,&quot;SRR2584866&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
+</code></pre></div>
+</details>
+</div>
+<h3 id="lesson-summary-data-coercion">Lesson summary: Data coercion<a class="headerlink" href="#lesson-summary-data-coercion" title="Permanent link">&para;</a></h3>
+<p>Lets summarize this section on coercion with a few take home messages.</p>
+<ul>
+<li>When you explicitly coerce one data type into another (this is known as
+  <strong>explicit coercion</strong>), be careful to check the result. Ideally, you should 
+  try to see if its possible to avoid steps in your analysis that force you to
+  coerce.</li>
+<li>R will sometimes coerce without you asking for it. This is called
+  (appropriately) <strong>implicit coercion</strong>. For example when we tried to create
+  a vector with multiple data types, R chose one type through implicit
+  coercion.</li>
+<li>Check the structure (<code>str()</code>) of your data before working with them!</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title"><code>StringsAsFactors</code></p>
+<p>Prior to R 4.0 when importing a data frame using any one of the <code>read.table()</code>
+functions such as <code>read.csv()</code> , the argument <code>StringsAsFactors</code> was by
+default
+set to true TRUE. Setting it to FALSE will treat any non-numeric column to
+a character type. <code>read.csv()</code> documentation, you will also see you can
+explicitly type your columns using the <code>colClasses</code> argument. Other R packages
+(such as the Tidyverse <code>readr</code>) don't have this particular conversion issue,
+but many packages will still try to guess a data type.</p>
+</div>
+<h2 id="data-frame-bonus-material-math-sorting-renaming">Data frame bonus material: math, sorting, renaming<a class="headerlink" href="#data-frame-bonus-material-math-sorting-renaming" title="Permanent link">&para;</a></h2>
+<p>Here are a few operations that don't need much explanation, but which are good
+to know.</p>
+<p>There are lots of arithmetic functions you may want to apply to your data
+frame, covering those would be a course in itself (there is some starting
+material <a href="https://swcarpentry.github.io/r-novice-inflammation/15-supp-loops-in-depth/">here</a>).</p>
+<p>You can use functions like <code>mean()</code>, <code>min()</code>, <code>max()</code> on an
+individual column. Let's look at the "DP" or filtered depth. This value shows 
+the number of filtered reads that support each of the reported variants.</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a><span class="nf">max</span><span class="p">(</span><span class="n">variants</span><span class="o">$</span><span class="n">DP</span><span class="p">)</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a>[1] 79
+</code></pre></div>
+</details>
+</div>
+<p>You can sort a data frame using the <code>order()</code> function:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1" href="#__codelineno-54-1"></a><span class="n">sorted_by_DP</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">variants</span><span class="p">[</span><span class="nf">order</span><span class="p">(</span><span class="n">variants</span><span class="o">$</span><span class="n">DP</span><span class="p">),</span><span class="w"> </span><span class="p">]</span><span class="w"> </span>
+<a id="__codelineno-54-2" name="__codelineno-54-2" href="#__codelineno-54-2"></a><span class="nf">head</span><span class="p">(</span><span class="n">sorted_by_DP</span><span class="o">$</span><span class="n">DP</span><span class="p">)</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-55-1" name="__codelineno-55-1" href="#__codelineno-55-1"></a>[1] 2 2 2 2 2 2
+</code></pre></div>
+</details>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Exercise</p>
+<p>The <code>order()</code> function lists values in increasing order by default.
+Look at the documentation for this function and change <code>sorted_by_DP</code>
+to start with variants with the greatest filtered depth ("DP").</p>
+<details class="success">
+<summary>Solution</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-56-1" name="__codelineno-56-1" href="#__codelineno-56-1"></a><span class="n">sorted_by_DP</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">variants</span><span class="p">[</span><span class="nf">order</span><span class="p">(</span><span class="n">variants</span><span class="o">$</span><span class="n">DP</span><span class="p">,</span><span class="w"> </span><span class="n">decreasing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">),</span><span class="w"> </span><span class="p">]</span>
+<a id="__codelineno-56-2" name="__codelineno-56-2" href="#__codelineno-56-2"></a><span class="nf">head</span><span class="p">(</span><span class="n">sorted_by_DP</span><span class="o">$</span><span class="n">DP</span><span class="p">)</span>
+</code></pre></div>
+<div class="admonition success">
+<p class="admonition-title">Output</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-57-1" name="__codelineno-57-1" href="#__codelineno-57-1"></a>[1] 79 46 41 29 29 27
+</code></pre></div>
+</div>
+</details>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">These functions work on vectors too!</p>
+<p>When using these functions (i.e., <code>mean()</code>, <code>min()</code>, <code>max()</code>, and <code>order()</code>),
+replace the input with a vector and it will do the same job! For example:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-58-1" name="__codelineno-58-1" href="#__codelineno-58-1"></a><span class="c1"># Minimum position of a SNP</span>
+<a id="__codelineno-58-2" name="__codelineno-58-2" href="#__codelineno-58-2"></a><span class="nf">min</span><span class="p">(</span><span class="n">snp_positions</span><span class="p">)</span>
+<a id="__codelineno-58-3" name="__codelineno-58-3" href="#__codelineno-58-3"></a>
+<a id="__codelineno-58-4" name="__codelineno-58-4" href="#__codelineno-58-4"></a><span class="c1"># Decreasing order of SNPs by positions</span>
+<a id="__codelineno-58-5" name="__codelineno-58-5" href="#__codelineno-58-5"></a><span class="n">snp_positions</span><span class="p">[</span><span class="nf">order</span><span class="p">(</span><span class="n">snp_positions</span><span class="p">,</span><span class="w"> </span><span class="n">decreasing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)]</span>
+</code></pre></div>
+<div class="admonition success">
+<p class="admonition-title">Output</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-59-1" name="__codelineno-59-1" href="#__codelineno-59-1"></a>[1] 8762685
+<a id="__codelineno-59-2" name="__codelineno-59-2" href="#__codelineno-59-2"></a>[1] 154039662  67545785  66560624   8762685
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>You can rename columns by logical subsetting or index:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a><span class="c1"># By logical subsetting</span>
+<a id="__codelineno-60-2" name="__codelineno-60-2" href="#__codelineno-60-2"></a><span class="nf">colnames</span><span class="p">(</span><span class="n">variants</span><span class="p">)[</span><span class="nf">colnames</span><span class="p">(</span><span class="n">variants</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;sample_id&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;strain&quot;</span>
+<a id="__codelineno-60-3" name="__codelineno-60-3" href="#__codelineno-60-3"></a>
+<a id="__codelineno-60-4" name="__codelineno-60-4" href="#__codelineno-60-4"></a><span class="c1"># By index</span>
+<a id="__codelineno-60-5" name="__codelineno-60-5" href="#__codelineno-60-5"></a><span class="nf">colnames</span><span class="p">(</span><span class="n">variants</span><span class="p">)[</span><span class="m">2</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;chromosome&quot;</span>
+<a id="__codelineno-60-6" name="__codelineno-60-6" href="#__codelineno-60-6"></a>
+<a id="__codelineno-60-7" name="__codelineno-60-7" href="#__codelineno-60-7"></a><span class="c1"># Check the column name (hint names are returned as a vector)</span>
+<a id="__codelineno-60-8" name="__codelineno-60-8" href="#__codelineno-60-8"></a><span class="nf">colnames</span><span class="p">(</span><span class="n">variants</span><span class="p">)</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-61-1" name="__codelineno-61-1" href="#__codelineno-61-1"></a> [1] &quot;sample_id&quot;     &quot;CHROM&quot;         &quot;POS&quot;          
+<a id="__codelineno-61-2" name="__codelineno-61-2" href="#__codelineno-61-2"></a> [4] &quot;ID&quot;            &quot;REF&quot;           &quot;ALT&quot;          
+<a id="__codelineno-61-3" name="__codelineno-61-3" href="#__codelineno-61-3"></a> [7] &quot;QUAL&quot;          &quot;FILTER&quot;        &quot;INDEL&quot;        
+<a id="__codelineno-61-4" name="__codelineno-61-4" href="#__codelineno-61-4"></a>[10] &quot;IDV&quot;           &quot;IMF&quot;           &quot;DP&quot;           
+<a id="__codelineno-61-5" name="__codelineno-61-5" href="#__codelineno-61-5"></a>[13] &quot;VDB&quot;           &quot;RPB&quot;           &quot;MQB&quot;          
+<a id="__codelineno-61-6" name="__codelineno-61-6" href="#__codelineno-61-6"></a>[16] &quot;BQB&quot;           &quot;MQSB&quot;          &quot;SGB&quot;          
+<a id="__codelineno-61-7" name="__codelineno-61-7" href="#__codelineno-61-7"></a>[19] &quot;MQ0F&quot;          &quot;ICB&quot;           &quot;HOB&quot;          
+<a id="__codelineno-61-8" name="__codelineno-61-8" href="#__codelineno-61-8"></a>[22] &quot;AC&quot;            &quot;AN&quot;            &quot;DP4&quot;          
+<a id="__codelineno-61-9" name="__codelineno-61-9" href="#__codelineno-61-9"></a>[25] &quot;MQ&quot;            &quot;Indiv&quot;         &quot;gt_PL&quot;        
+<a id="__codelineno-61-10" name="__codelineno-61-10" href="#__codelineno-61-10"></a>[28] &quot;gt_GT&quot;         &quot;gt_GT_alleles&quot;
+</code></pre></div>
+</details>
+</div>
+<h2 id="saving-your-data-frame-to-a-file">Saving your data frame to a file<a class="headerlink" href="#saving-your-data-frame-to-a-file" title="Permanent link">&para;</a></h2>
+<p>We can save data to a file. We will save our <code>SRR2584863_variants</code> object
+to a <code>.csv</code> (comma-separated values) file using the <code>write.csv()</code> function:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-62-1" name="__codelineno-62-1" href="#__codelineno-62-1"></a><span class="nf">write.csv</span><span class="p">(</span><span class="n">SRR2584863_variants</span><span class="p">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;SRR2584863_variants.csv&quot;</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<p>The <code>write.csv()</code> function has some additional arguments listed in the
+help, but at a minimum you need to tell it what data frame to write to
+file, and give a path to a file name in quotes (if you only provide a
+file name, the file will be written in the current working directory).</p>
+<h2 id="importing-data-from-excel">Importing data from Excel<a class="headerlink" href="#importing-data-from-excel" title="Permanent link">&para;</a></h2>
+<p>Excel is one of the most common formats, so we need to discuss how to
+make these files play nicely with R. The simplest way to import data
+from Excel is to <strong>save your Excel file in <code>.csv</code> format</strong>. You can then
+import into R right away. Sometimes you may not be able to do this
+(imagine you have data in 300 Excel files, are you going to open and
+export all of them?).</p>
+<p>One common R package (a set of code with features you can download and
+add to your R installation) is the <a href="https://CRAN.R-project.org/package=readxl">readxl 
+package</a> which can open and
+import Excel files. Rather than addressing package installation this
+second (we'll discuss this soon!), we can take advantage of RStudio's
+import feature which integrates this package. </p>
+<div class="admonition bell">
+<p class="admonition-title"><code>readxl</code>-RStudio integration</p>
+<p>This feature is only available on RStudio version 1.0.44 or later.</p>
+</div>
+<p>First, in the RStudio menu go to <strong>File</strong>, select <strong>Import Dataset</strong>,
+and choose <strong>From Excel...</strong> (notice there are several other options you
+can explore).</p>
+<p><a class="glightbox" href="../figures/rstudio_import_menu.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="images" src="../figures/rstudio_import_menu.png" width="600" /></a></p>
+<p>Next, under <strong>File/Url:</strong> click the <KBD>Browse</KBD>
+button and navigate to the <strong>Ecoli_metadata.xlsx</strong> file located at
+<code>/home/dcuser/dc_sample_data/R</code>. You should now see a preview of the
+data to be imported:</p>
+<p><a class="glightbox" href="../figures/rstudio_import_screen.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="images" src="../figures/rstudio_import_screen.png" width="1200" /></a></p>
+<p>Notice that you have the option to change the data type of each variable
+by clicking arrow (drop-down menu) next to each column title. Under
+<strong>Import Options</strong> you may also rename the data, choose a different
+sheet to import, and choose how you will handle headers and skipped
+rows. Under <strong>Code Preview</strong> you can see the code that will be used to
+import this file. We could have written this code and imported the Excel
+file without the RStudio import function, but now you can choose your
+preference.</p>
+<p>In this exercise, we will leave the name of the data frame as
+<strong>Ecoli_metadata</strong>, and there are no other options we need to adjust.
+Click the <KBD>Import</KBD> button to import the data.</p>
+<p>Finally, let's check the first few lines of the <code>Ecoli_metadata</code> data
+frame:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-63-1" name="__codelineno-63-1" href="#__codelineno-63-1"></a><span class="nf">head</span><span class="p">(</span><span class="n">Ecoli_metadata</span><span class="p">)</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-64-1" name="__codelineno-64-1" href="#__codelineno-64-1"></a># A tibble: 6 × 7
+<a id="__codelineno-64-2" name="__codelineno-64-2" href="#__codelineno-64-2"></a>  sample   generation clade   strain cit     run       genome_size
+<a id="__codelineno-64-3" name="__codelineno-64-3" href="#__codelineno-64-3"></a>  &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;
+<a id="__codelineno-64-4" name="__codelineno-64-4" href="#__codelineno-64-4"></a>1 REL606            0 NA      REL606 unknown NA               4.62
+<a id="__codelineno-64-5" name="__codelineno-64-5" href="#__codelineno-64-5"></a>2 REL1166A       2000 unknown REL606 unknown SRR098028        4.63
+<a id="__codelineno-64-6" name="__codelineno-64-6" href="#__codelineno-64-6"></a>3 ZDB409         5000 unknown REL606 unknown SRR098281        4.6 
+<a id="__codelineno-64-7" name="__codelineno-64-7" href="#__codelineno-64-7"></a>4 ZDB429        10000 UC      REL606 unknown SRR098282        4.59
+<a id="__codelineno-64-8" name="__codelineno-64-8" href="#__codelineno-64-8"></a>5 ZDB446        15000 UC      REL606 unknown SRR098283        4.66
+<a id="__codelineno-64-9" name="__codelineno-64-9" href="#__codelineno-64-9"></a>6 ZDB458        20000 (C1,C2) REL606 unknown SRR098284        4.63
+</code></pre></div>
+</details>
+</div>
+<p>The type of this object is <strong>tibble</strong>, a type of data frame we will talk
+more about in the <a href="../appendix/05-dplyr/"><code>dplyr</code> section</a>. If you needed a true 
+R data frame you could coerce with <code>as.data.frame()</code>.</p>
+<div class="admonition question">
+<p class="admonition-title">Exercise: Putting it all together - data frames</p>
+<p><strong>Using the <code>Ecoli_metadata</code> data frame created above, answer the following questions</strong></p>
+<p>A)  What are the dimensions (# rows, # columns) of the data frame?</p>
+<p>B)  What are categories are there in the <code>cit</code> column? <em>hint</em>: treat column as factor</p>
+<p>C)  How many of each of the <code>cit</code> categories are there?</p>
+<p>D)  What is the genome size for the 7<sup>th</sup> observation in this data set?</p>
+<p>E)  What is the median value of the variable <code>genome_size</code>?</p>
+<p>F)  Rename the column <code>sample</code> to <code>sample_id</code>.</p>
+<p>G)  Create a new column named <code>genome_size_bp</code> and set it equal to the genome_size multiplied by 1,000,000.</p>
+<p>H)  Save the edited <code>Ecoli_metadata</code> data frame as "exercise_solution.csv" in your current working directory.</p>
+<details class="success">
+<summary>Solution</summary>
+<p>A)</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-65-1" name="__codelineno-65-1" href="#__codelineno-65-1"></a><span class="nf">dim</span><span class="p">(</span><span class="n">Ecoli_metadata</span><span class="p">)</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-66-1" name="__codelineno-66-1" href="#__codelineno-66-1"></a>[1] 30  7
+</code></pre></div>
+</details>
+</div>
+<p>B)</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-67-1" name="__codelineno-67-1" href="#__codelineno-67-1"></a><span class="nf">levels</span><span class="p">(</span><span class="nf">as.factor</span><span class="p">(</span><span class="n">Ecoli_metadata</span><span class="o">$</span><span class="n">cit</span><span class="p">))</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-68-1" name="__codelineno-68-1" href="#__codelineno-68-1"></a>[1] &quot;minus&quot;   &quot;plus&quot;    &quot;unknown&quot;
+</code></pre></div>
+</details>
+</div>
+<p>C)</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-69-1" name="__codelineno-69-1" href="#__codelineno-69-1"></a><span class="nf">table</span><span class="p">(</span><span class="nf">as.factor</span><span class="p">(</span><span class="n">Ecoli_metadata</span><span class="o">$</span><span class="n">cit</span><span class="p">))</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-70-1" name="__codelineno-70-1" href="#__codelineno-70-1"></a>minus    plus unknown 
+<a id="__codelineno-70-2" name="__codelineno-70-2" href="#__codelineno-70-2"></a>    9       9      12 
+</code></pre></div>
+</details>
+</div>
+<p>D)</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-71-1" name="__codelineno-71-1" href="#__codelineno-71-1"></a><span class="n">Ecoli_metadata</span><span class="p">[</span><span class="m">7</span><span class="p">,</span><span class="w"> </span><span class="m">7</span><span class="p">]</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-72-1" name="__codelineno-72-1" href="#__codelineno-72-1"></a># A tibble: 1 × 1
+<a id="__codelineno-72-2" name="__codelineno-72-2" href="#__codelineno-72-2"></a>  genome_size
+<a id="__codelineno-72-3" name="__codelineno-72-3" href="#__codelineno-72-3"></a>        &lt;dbl&gt;
+<a id="__codelineno-72-4" name="__codelineno-72-4" href="#__codelineno-72-4"></a>1        4.62 
+</code></pre></div>
+</details>
+</div>
+<p>E)</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-73-1" name="__codelineno-73-1" href="#__codelineno-73-1"></a><span class="nf">median</span><span class="p">(</span><span class="n">Ecoli_metadata</span><span class="o">$</span><span class="n">genome_size</span><span class="p">)</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-74-1" name="__codelineno-74-1" href="#__codelineno-74-1"></a>[1] 4.625
+</code></pre></div>
+</details>
+</div>
+<p>F)</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-75-1" name="__codelineno-75-1" href="#__codelineno-75-1"></a><span class="nf">colnames</span><span class="p">(</span><span class="n">Ecoli_metadata</span><span class="p">)[</span><span class="nf">colnames</span><span class="p">(</span><span class="n">Ecoli_metadata</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;sample&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;sample_id&quot;</span>
+<a id="__codelineno-75-2" name="__codelineno-75-2" href="#__codelineno-75-2"></a>
+<a id="__codelineno-75-3" name="__codelineno-75-3" href="#__codelineno-75-3"></a><span class="c1"># Check the column names</span>
+<a id="__codelineno-75-4" name="__codelineno-75-4" href="#__codelineno-75-4"></a><span class="nf">colnames</span><span class="p">(</span><span class="n">Ecoli_metadata</span><span class="p">)</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-76-1" name="__codelineno-76-1" href="#__codelineno-76-1"></a>[1] &quot;sample_id&quot;   &quot;generation&quot;  &quot;clade&quot;       &quot;strain&quot;     
+<a id="__codelineno-76-2" name="__codelineno-76-2" href="#__codelineno-76-2"></a>[5] &quot;cit&quot;         &quot;run&quot;         &quot;genome_size&quot;
+</code></pre></div>
+</details>
+</div>
+<p>G)</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-77-1" name="__codelineno-77-1" href="#__codelineno-77-1"></a><span class="n">Ecoli_metadata</span><span class="o">$</span><span class="n">genome_size_bp</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">Ecoli_metadata</span><span class="o">$</span><span class="n">genome_size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">1000000</span>
+<a id="__codelineno-77-2" name="__codelineno-77-2" href="#__codelineno-77-2"></a>
+<a id="__codelineno-77-3" name="__codelineno-77-3" href="#__codelineno-77-3"></a><span class="c1"># Check the first few rows</span>
+<a id="__codelineno-77-4" name="__codelineno-77-4" href="#__codelineno-77-4"></a><span class="nf">head</span><span class="p">(</span><span class="n">Ecoli_metadata</span><span class="p">)</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-78-1" name="__codelineno-78-1" href="#__codelineno-78-1"></a># A tibble: 6 × 8
+<a id="__codelineno-78-2" name="__codelineno-78-2" href="#__codelineno-78-2"></a>  sample_id generation clade   strain cit     run       genome_size genome_size_bp
+<a id="__codelineno-78-3" name="__codelineno-78-3" href="#__codelineno-78-3"></a>  &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;          &lt;dbl&gt;
+<a id="__codelineno-78-4" name="__codelineno-78-4" href="#__codelineno-78-4"></a>1 REL606             0 NA      REL606 unknown NA               4.62        4620000
+<a id="__codelineno-78-5" name="__codelineno-78-5" href="#__codelineno-78-5"></a>2 REL1166A        2000 unknown REL606 unknown SRR098028        4.63        4630000
+<a id="__codelineno-78-6" name="__codelineno-78-6" href="#__codelineno-78-6"></a>3 ZDB409          5000 unknown REL606 unknown SRR098281        4.6         4600000
+<a id="__codelineno-78-7" name="__codelineno-78-7" href="#__codelineno-78-7"></a>4 ZDB429         10000 UC      REL606 unknown SRR098282        4.59        4590000
+<a id="__codelineno-78-8" name="__codelineno-78-8" href="#__codelineno-78-8"></a>5 ZDB446         15000 UC      REL606 unknown SRR098283        4.66        4660000
+<a id="__codelineno-78-9" name="__codelineno-78-9" href="#__codelineno-78-9"></a>6 ZDB458         20000 (C1,C2) REL606 unknown SRR098284        4.63        4630000
+</code></pre></div>
+</details>
+</div>
+<p>H)</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-79-1" name="__codelineno-79-1" href="#__codelineno-79-1"></a><span class="nf">write.csv</span><span class="p">(</span><span class="n">Ecoli_metadata</span><span class="p">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;exercise_solution.csv&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>Check the Files tab on the bottom-right panel to see if the file is 
+there.</p>
+</div>
+</details>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.50899def.min.js"></script>
+      
+        <script src="../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>

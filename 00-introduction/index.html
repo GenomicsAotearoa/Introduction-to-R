@@ -1,0 +1,1370 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Genomics Aotearoa">
+      
+      
+        <link rel="canonical" href="https://genomicsaotearoa.github.io/Introduction-to-R/00-introduction/">
+      
+      
+        <link rel="prev" href="..">
+      
+      
+        <link rel="next" href="../01-r-basics/">
+      
+      
+      <link rel="icon" href="../theme_figures/nesi_ga.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.16">
+    
+    
+      
+        <title>Introducing R and RStudio IDE - Introduction to R</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Mukta";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#introducing-r-and-rstudio-ide" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Introduction to R" class="md-header__button md-logo" aria-label="Introduction to R" data-md-component="logo">
+      
+  <img src="../theme_figures/nesi_ga.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Introduction to R
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Introducing R and RStudio IDE
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/GenomicsAotearoa/Introduction-to-R" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GenomicsAotearoa/Introduction-to-R
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Introduction to R" class="md-nav__button md-logo" aria-label="Introduction to R" data-md-component="logo">
+      
+  <img src="../theme_figures/nesi_ga.png" alt="logo">
+
+    </a>
+    Introduction to R
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/GenomicsAotearoa/Introduction-to-R" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GenomicsAotearoa/Introduction-to-R
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Introducing R and RStudio IDE
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introducing R and RStudio IDE
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#getting-ready-to-use-r-for-the-first-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      Getting ready to use R for the first time
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-brief-history-of-r" class="md-nav__link">
+    <span class="md-ellipsis">
+      A Brief History of R
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advantages-of-using-r" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advantages of using R
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introducing-rstudio-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introducing RStudio Server
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#overview-and-customization-of-the-rstudio-layout" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview and customization of the RStudio layout
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-an-rstudio-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create an RStudio project
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-your-first-r-script" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating your first R script
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-to-work-with-r-navigating-directories" class="md-nav__link">
+    <span class="md-ellipsis">
+      Getting to work with R: Navigating directories
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-functions-in-r-without-needing-to-master-them" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using functions in R, without needing to master them
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-help-with-function-arguments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Getting help with function arguments
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rstudio-contextual-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      RStudio contextual help
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-r-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    R Basics
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-data-prelude/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction to the example dataset and file type
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-basics-factors-dataframes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    R Basics continued - factors and data frames
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-data-visualization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data Visualization with ggplot2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-knitr-markdown/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Producing Reports With knitr
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-r-help/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Getting help with R
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Appendix
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            Appendix
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix/04-bioconductor-vcfr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Using packages from Bioconductor
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix/05-dplyr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data Wrangling and Analyses with Tidyverse
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#getting-ready-to-use-r-for-the-first-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      Getting ready to use R for the first time
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-brief-history-of-r" class="md-nav__link">
+    <span class="md-ellipsis">
+      A Brief History of R
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advantages-of-using-r" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advantages of using R
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introducing-rstudio-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introducing RStudio Server
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#overview-and-customization-of-the-rstudio-layout" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview and customization of the RStudio layout
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-an-rstudio-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create an RStudio project
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-your-first-r-script" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating your first R script
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-to-work-with-r-navigating-directories" class="md-nav__link">
+    <span class="md-ellipsis">
+      Getting to work with R: Navigating directories
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-functions-in-r-without-needing-to-master-them" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using functions in R, without needing to master them
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-help-with-function-arguments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Getting help with function arguments
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rstudio-contextual-help" class="md-nav__link">
+    <span class="md-ellipsis">
+      RStudio contextual help
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="introducing-r-and-rstudio-ide">Introducing R and RStudio IDE<a class="headerlink" href="#introducing-r-and-rstudio-ide" title="Permanent link">&para;</a></h1>
+<div class="admonition info">
+<p class="admonition-title">Learning outcomes</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Key points</label><label for="__tabbed_1_2">Objectives</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<ul>
+<li>R is a powerful, popular open-source scripting language</li>
+<li>You can customize the layout of RStudio, and use the project feature
+  to manage the files and packages used in your analysis</li>
+<li>RStudio allows you to run R in an easy-to-use interface and makes it
+  easy to find help</li>
+</ul>
+</div>
+<div class="tabbed-block">
+<ul>
+<li>Know advantages of analyzing data in R</li>
+<li>Know advantages of using RStudio</li>
+<li>Create an RStudio project, and know the benefits of working within a 
+  project</li>
+<li>Be able to customize the RStudio layout</li>
+<li>Be able to locate and change the current working directory with 
+  <code>getwd()</code> and <code>setwd()</code></li>
+<li>Compose an R script file containing comments and commands</li>
+<li>Understand what an R function is</li>
+<li>Locate help for an R function using <code>?</code>, <code>??</code>, and <code>args()</code></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<h2 id="getting-ready-to-use-r-for-the-first-time">Getting ready to use R for the first time<a class="headerlink" href="#getting-ready-to-use-r-for-the-first-time" title="Permanent link">&para;</a></h2>
+<p>In this lesson we will take you through the very first things you need
+to get R working.</p>
+<h2 id="a-brief-history-of-r">A Brief History of R<a class="headerlink" href="#a-brief-history-of-r" title="Permanent link">&para;</a></h2>
+<p><a href="https://en.wikipedia.org/wiki/R_(programming_language)">R</a> has been
+around since 1995, and was created by Ross Ihaka and Robert Gentleman at
+the University of Auckland, New Zealand. R is based off the <a href="https://en.wikipedia.org/wiki/S_(programming_language)">S programming
+language</a>
+developed at Bell Labs and was developed to teach introductory statistics. 
+See this <a href="https://www.stat.auckland.ac.nz/~ihaka/downloads/Massey.pdf">slide 
+deck</a> 
+by Ross Ihaka for more info on the subject.</p>
+<h2 id="advantages-of-using-r">Advantages of using R<a class="headerlink" href="#advantages-of-using-r" title="Permanent link">&para;</a></h2>
+<p>At more than 20 years old, R is fairly mature and <a href="https://www.tiobe.com/tiobe-index/r/">growing in
+popularity</a>. However, programming
+isn't a popularity contest. Here are key advantages of analyzing data in
+R:</p>
+<div class="admonition quote">
+<ul>
+<li><strong>R is <a href="https://en.wikipedia.org/wiki/Open-source_software">open
+    source</a></strong>. This
+    means R is free - an advantage if you are at an institution where
+    you have to pay for your own 
+    <a href="https://en.wikipedia.org/wiki/MATLAB">MATLAB</a> or 
+    <a href="https://en.wikipedia.org/wiki/SAS_(software)">SAS</a> license. Open 
+    source, is important to your colleagues in parts of the world where 
+    expensive software in inaccessible. It also means that R is actively 
+    developed by a community 
+    (see <a href="https://www.r-project.org/">r-project.org</a>), and there are 
+    regular updates.</li>
+<li><strong>R is widely used</strong>. Ok, maybe programming is a popularity contest.
+    Because, R is used in many areas (not just bioinformatics), you are
+    more likely to find help online when you need it. Chances are,
+    almost any error message you run into, someone else has already
+    experienced.</li>
+<li><strong>R is powerful</strong>. R runs on multiple platforms
+    (Windows/MacOS/Linux). It can work with much larger datasets than
+    popular spreadsheet programs like Microsoft Excel, and because of
+    its scripting capabilities is far more reproducible. Also, there are
+    thousands of available software packages for science, including
+genomics and other areas of life science.</li>
+</ul>
+</div>
+<div class="admonition people-group">
+<p class="admonition-title">Discussion: Your experience</p>
+<p>What has motivated you to learn R? Have you had a research question
+for which spreadsheet programs such as Excel have proven difficult to
+use, or where the size of the data set created issues?</p>
+</div>
+<!-- Consult Matt and Dini on this section -->
+
+<h2 id="introducing-rstudio-server">Introducing RStudio Server<a class="headerlink" href="#introducing-rstudio-server" title="Permanent link">&para;</a></h2>
+<p>In these lessons, we will be making use of a software called
+<a href="https://www.rstudio.com/products/RStudio/">RStudio</a>, an <a href="https://en.wikipedia.org/wiki/Integrated_development_environment">Integrated
+Development Environment
+(IDE)</a>.
+RStudio, like most IDEs, provides a graphical interface to R, making it
+more user-friendly, and providing dozens of useful features. We will
+introduce additional benefits of using RStudio as you cover the lessons.
+In this case, we are specifically using <a href="https://www.rstudio.com/products/RStudio/#Server">RStudio
+Server</a>, a version of
+RStudio that can be accessed in your web browser. RStudio Server has the
+same features of the Desktop version of RStudio you could download as
+standalone software.</p>
+<p><a class="glightbox" href="../figures/rstudio_session_default.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image" src="../figures/rstudio_session_default.png" width="700" /></a></p>
+<h2 id="overview-and-customization-of-the-rstudio-layout">Overview and customization of the RStudio layout<a class="headerlink" href="#overview-and-customization-of-the-rstudio-layout" title="Permanent link">&para;</a></h2>
+<p>Here are the major windows (or panes) of the RStudio environment:</p>
+<p><a class="glightbox" href="../figures/rstudio_session_4pane_layout.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="images" src="../figures/rstudio_session_4pane_layout.png" /></a></p>
+<div class="admonition quote">
+<ul>
+<li><strong>Source</strong>: This pane is where you will write/view R scripts. Some
+    outputs (such as if you view a dataset using <code>View()</code>) will appear
+    as a tab here.</li>
+<li><strong>Console/Terminal/Jobs</strong>: This is actually where you see the
+    execution of commands. This is the same display you would see if you
+    were using R at the command line without RStudio. You can work
+    interactively (i.e. enter R commands here), but for the most part we
+    will run a script (or lines in a script) in the source pane and
+    watch their execution and output here. The "Terminal" tab give you
+    access to the BASH terminal (the Linux operating system, unrelated
+    to R). RStudio also allows you to run jobs (analyses) in the
+    background. This is useful if some analysis will take a while to
+    run. You can see the status of those jobs in the background.</li>
+<li><strong>Environment/History</strong>: Here, RStudio will show you what datasets
+    and objects (variables) you have created and which are defined in
+    memory. You can also see some properties of objects/datasets such as
+    their type and dimensions. The "History" tab contains a history of
+    the R commands you've executed R.</li>
+<li><strong>Files/Plots/Packages/Help/Viewer</strong>: This multi-purpose pane will
+    show you the contents of directories on your computer. You can also
+    use the "Files" tab to navigate and set the working directory. The
+    "Plots" tab will show the output of any plots generated. In
+    "Packages" you will see what packages are actively loaded, or you
+    can attach installed packages. "Help" will display help files for R
+    functions and packages. "Viewer" will allow you to view local web
+    content (e.g. HTML outputs).</li>
+</ul>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Uploads and downloads in the cloud</p>
+<p>In the "Files" tab you can select a file and download it from your
+cloud instance (click the "more" button) to your local computer.
+Uploads are also possible.</p>
+</div>
+<p>All of the panes in RStudio have configuration options. For example, you
+can minimize/maximize a pane, or by moving your mouse in the space
+between panes you can resize as needed. The most important customization
+options for pane layout are in the <code>View</code>
+menu. Other options such as font sizes, colors/themes, and more are in
+the <code>Tools</code> menu under <code>Global
+Options</code>.</p>
+<div class="admonition bell">
+<p class="admonition-title">You are working with R</p>
+<p>Although we won't be working with R at the terminal, there are lots of
+reasons to. For example, once you have written an RScript, you can run
+it at any Linux or Windows terminal without the need to start up
+RStudio. We don't want you to get confused - RStudio runs R, but R is
+not RStudio. For more on running an R Script at the terminal see this
+<a href="https://swcarpentry.github.io/r-novice-inflammation/05-cmdline/">Software Carpentry
+lesson</a>.</p>
+</div>
+<h2 id="create-an-rstudio-project">Create an RStudio project<a class="headerlink" href="#create-an-rstudio-project" title="Permanent link">&para;</a></h2>
+<p>One of the first benefits we will take advantage of in RStudio is
+something called an <strong>RStudio Project</strong>. An RStudio project allows you
+to more easily:</p>
+<ul>
+<li>Save data, files, variables, packages, etc. related to a specific
+     analysis project</li>
+<li>Restart work where you left off</li>
+<li>Collaborate, especially if you are using version control such as
+    <a href="http://swcarpentry.github.io/git-novice/">git</a></li>
+</ul>
+<div class="admonition info">
+<ol>
+<li>
+<p>To create a project, go to the <strong>File</strong> menu, and click <strong>New Project</strong></p>
+<p><a class="glightbox" href="../figures/new_project_window.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image" src="../figures/new_project_window.png" width-_400_="width-&quot;400&quot;" /></a></p>
+</li>
+<li>
+<p>In the window that opens select <strong>Existing Directory</strong><br />
+    Then select <strong>Browse...</strong> <br />
+    Choose and then click <code>~/R4Genomics</code>.</p>
+</li>
+<li>
+<p>Finally click <strong>Create Project</strong>. In the
+    "Files" tab of your output pane (more about the RStudio layout above), 
+    you should see an RStudio project file, <code>R4Genomics.Rproj</code>. All 
+    RStudio projects end with the <code>.Rproj</code> file extension.</p>
+</li>
+</ol>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Make your project more reproducible with renv</p>
+<p>One of the most wonderful and also frustrating aspects of working with
+R is managing packages. We will talk more about them, but packages
+(e.g. <code>ggplot2</code>) are add-ons that extend what you can do with R.
+Unfortunately it is very common that you may run into versions of R
+and/or R packages that are not compatible. This may make it difficult
+for someone to run your R script using their version of R or a given R
+package, and/or make it more difficult to run their scripts on your
+machine. <a href="https://rstudio.github.io/renv/">renv</a> is an RStudio add-on
+that will associate your packages and project so that your work is
+more portable and reproducible. To turn on renv click on the
+<strong>Tools</strong> menu and select
+<strong>Project Options</strong>. Under <strong>Enviornments</strong>
+check off "<strong>Use renv with this project</strong>" and follow any installation
+instructions.</p>
+</div>
+<h2 id="creating-your-first-r-script">Creating your first R script<a class="headerlink" href="#creating-your-first-r-script" title="Permanent link">&para;</a></h2>
+<p>Now that we are ready to start exploring R, we will want to keep a
+record of the commands we are using. To do this we can create an R
+script:</p>
+<ol>
+<li>Click the <strong>File</strong> menu and select <strong>New File</strong> and then <strong>R Script</strong>. </li>
+<li>Before we go any further, save your script by clicking the save/disk icon 
+   that is in the bar above the first line in the script editor, or click the 
+   <strong>File</strong> menu and select <strong>Save</strong>. </li>
+<li>In the <strong>Save File</strong> window that opens, name your file <code>genomics_r_basics</code>. 
+   The new script <code>genomics_r_basics.R</code> should appear under <strong>Files</strong> in the 
+   output pane. By convention, R scripts end with the file extension <code>.R</code>.</li>
+</ol>
+<h2 id="getting-to-work-with-r-navigating-directories">Getting to work with R: Navigating directories<a class="headerlink" href="#getting-to-work-with-r-navigating-directories" title="Permanent link">&para;</a></h2>
+<p>Now that we have covered the more aesthetic aspects of RStudio, we can
+get to work using some commands. We will write, execute, and save the
+commands we learn in our <code>genomics_r_basics.R</code> script that is loaded
+in the Source pane. First, lets see what directory we are in. To do so,
+type the following command into the script:</p>
+<div class="admonition r-project">
+<p class="admonition-title">R-project</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">getwd</span><span class="p">()</span>
+</code></pre></div>
+</div>
+<p>To execute this command, make sure your cursor is on the same line the
+command is written. Then click the <code>Run</code>
+button that is just above the first line of your script in the header of
+the Source pane.</p>
+<p>In the console, we expect to see the following output:</p>
+<div class="admonition success">
+<p class="admonition-title">Output</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>[1] &quot;/home/shared/&lt;USERID&gt;&quot;
+</code></pre></div>
+</div>
+<ul>
+<li>Notice, at the Console, the instruction you executed above the output in blue.</li>
+</ul>
+<p>Since we will be learning several commands, we may already want to keep
+some short notes in our script to explain the purpose of the command.
+Entering a <code>#</code> before any line in an R script turns that line into a
+comment, which R will not try to interpret as code. Edit your script to
+include a comment on the purpose of commands you are learning, e.g.:</p>
+<div class="admonition r-project">
+<p class="admonition-title">R-project</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># this command shows the current working directory getwd()</span>
+</code></pre></div>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Exercise : Work interactively in R</p>
+<p>What happens when you try to enter the <code>getwd()</code> command in the Console 
+pane?</p>
+<details class="success">
+<summary>Solution</summary>
+<p>You will get the same output you did as when you ran <code>getwd()</code> from
+the source. You can run any command in the Console, however,
+executing it from the source script will make it easier for us to
+record what we have done, and ultimately run an entire script,
+instead of entering commands one-by-one.</p>
+</details>
+</div>
+<p>For the purposes of this exercise we want you to be in the directory
+<code>"/home/shared/&lt;USERID&gt;/R4Genomics"</code>. What if you weren't? You can set your home
+directory using the <code>setwd()</code> command. Enter this command in your
+script, but <strong><em>don't run</em></strong> this yet.</p>
+<div class="admonition r-project">
+<p class="admonition-title">R-project</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># This sets the working directory</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nf">setwd</span><span class="p">()</span>
+</code></pre></div>
+</div>
+<p>You may have guessed, you need to tell the <code>setwd()</code> command what directory you 
+want to set as your working directory. To do so, inside of the parentheses, open
+a set of quotes <code>""</code>. Inside the quotes enter a <code>/</code> which is the root directory for 
+Linux. Next, use the <code>Tab</code> key, to take advantage of RStudio's 
+tab-autocompletion method, to select <code>home</code>, <code>shared</code>, your <code>&lt;USERID&gt;</code> and 
+<code>R4Genomics</code> directory. The path in your script should look like this:</p>
+<div class="admonition r-project">
+<p class="admonition-title">R-project</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># This sets the working directory </span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nf">setwd</span><span class="p">(</span><span class="s">&quot;/home/shared/&lt;USERID&gt;/R4Genomics&quot;</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<p>When you run this command, the console repeats the command, but gives
+you no output. Instead, you see the blank R prompt: <code>&gt;</code>.
+Congratulations! Although it seems small, knowing what your working
+directory is and being able to set your working directory is the first
+step to analyzing your data.</p>
+<div class="admonition tip">
+<p class="admonition-title">Never use <code>setwd()</code></p>
+<p>Wait, what was the last 2 minutes about? Well, setting your working
+directory is something you need to do, you need to be very careful
+about using this as a step in your script. For example, what if your
+script is being on a computer that has a different directory
+structure? The top-level path in a Unix file system is root <code>/</code>, but
+on Windows it is likely <code>C:\</code>. This is one of several ways you might
+cause a script to break because a file path is configured differently
+than your script anticipates. R packages like
+<a href="https://cran.r-project.org/package=here"><code>here</code></a> and the function
+<a href="https://www.rdocumentation.org/packages/base/versions/3.4.3/topics/file.path"><code>file.path()</code></a>
+allow you to specify file paths that are operating system independent. See 
+Jenny Bryan's <a href="https://www.tidyverse.org/articles/2017/12/workflow-vs-script/">blog
+post</a>
+for this and other R tips.</p>
+</div>
+<h2 id="using-functions-in-r-without-needing-to-master-them">Using functions in R, without needing to master them<a class="headerlink" href="#using-functions-in-r-without-needing-to-master-them" title="Permanent link">&para;</a></h2>
+<p>A function in R (or any computing language) is a short program that
+takes some input and returns some output. Functions may seem like an
+advanced topic (and they are), but you have already used at least one
+function in R. <code>getwd()</code> is a function! The next sections will help you
+understand what is happening in any R script.</p>
+<div class="admonition question">
+<p class="admonition-title">Exercise: What do these functions do?</p>
+<p>Try the following functions by writing them in your script. See if you
+can guess what they do, and make sure to add comments to your script
+about your assumed purpose. </p>
+<ul>
+<li><code>dir()</code></li>
+<li><code>sessionInfo()</code></li>
+<li><code>date()</code></li>
+<li><code>Sys.time()</code></li>
+<li><code>.libPaths()</code></li>
+</ul>
+<details class="success">
+<summary>Solution</summary>
+<ul>
+<li><code>dir()</code> lists files in the working directory</li>
+<li><code>sessionInfo()</code> gives the version of R and additional info
+    including on attached packages</li>
+<li><code>date()</code> gives the current date</li>
+<li><code>Sys.time()</code> gives the current time</li>
+<li><code>.libPaths()</code> shows what libraries are available</li>
+</ul>
+<p><strong>Notice</strong>: Commands are case sensitive! </p>
+</details>
+</div>
+<p>You have hopefully noticed a pattern: an R function has three key
+properties:</p>
+<ul>
+<li>Functions have a name (e.g. <code>dir</code>, <code>getwd</code>); note that functions are case 
+  sensitive!</li>
+<li>Following the name, functions have a pair of <code>()</code></li>
+<li>Inside the parentheses, a function may take 0 or more arguments</li>
+</ul>
+<p>An argument may be a specific input for your function and/or may modify
+the function's behavior. For example the function <code>round()</code> will round a
+number with a decimal:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># This will round a number to the nearest integer</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="nf">round</span><span class="p">(</span><span class="m">3.14</span><span class="p">)</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>[1] 3
+</code></pre></div>
+</details>
+</div>
+<h2 id="getting-help-with-function-arguments">Getting help with function arguments<a class="headerlink" href="#getting-help-with-function-arguments" title="Permanent link">&para;</a></h2>
+<p>What if you wanted to round to one significant digit? <code>round()</code> can do
+this, but you may first need to read the help to find out how. To see
+the help (in R sometimes also called a "vignette") enter a <code>?</code> in front
+of the function name:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="o">?</span><span class="nf">round</span><span class="p">()</span>
+</code></pre></div>
+</div>
+<p>The "Help" tab will show you information (often, too much information).
+You will slowly learn how to read and make sense of help files. Checking
+the "Usage" or "Examples" headings is often a good place to look first.
+If you look under "Arguments," we also see what arguments we can pass to
+this function to modify its behavior. You can also see a function's
+argument using the <code>args()</code> function:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nf">args</span><span class="p">(</span><span class="n">round</span><span class="p">)</span>
+</code></pre></div>
+<div class="admonition success">
+<p class="admonition-title">Output</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>function (x, digits = 0) 
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>NULL
+</code></pre></div>
+</div>
+</div>
+<p><code>round()</code> takes two arguments, <code>x</code>, which is the number to be rounded,
+and a <code>digits</code> argument. The <code>=</code> sign indicates that a default (in this
+case 0) is already set. Since <code>x</code> is not set, <code>round()</code> requires we
+provide it, in contrast to <code>digits</code> where R will use the default value 0
+unless you explicitly provide a different value. We can explicitly set
+the digits argument when we call the function:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nf">round</span><span class="p">(</span><span class="m">3.14159</span><span class="p">,</span><span class="w"> </span><span class="n">digits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span>
+</code></pre></div>
+<div class="admonition success">
+<p class="admonition-title">Output</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>[1] 3.14
+</code></pre></div>
+</div>
+</div>
+<p>Or, R accepts what we call "positional arguments", if you pass a
+function arguments separated by commas, R assumes that they are in the
+order you saw when we used <code>args()</code>. In the case below that means that
+<code>x</code> is 3.14159 and digits is 2.</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nf">round</span><span class="p">(</span><span class="m">3.14159</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<p>Finally, what if you are using <code>?</code> to get help for a function in a
+package not installed on your system, such as when you are running a
+script which has dependencies.</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="o">?</span><span class="nf">geom_point</span><span class="p">()</span>
+</code></pre></div>
+</div>
+<p>The above will return an error:</p>
+<div class="admonition failure">
+<p class="admonition-title">Error</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>Error in .helpForCall(topicExpr, parent.frame()) :
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>   no methods for ‘geom_point’ and no documentation for it as a function
+</code></pre></div>
+</div>
+<p>Use two question marks (i.e. <code>??geom_point()</code>) and R will return results
+from a search of the documentation for packages you have installed on
+your computer in the "Help" tab. Finally, if you think there should be a
+function, for example a statistical test, but you aren't sure what it is
+called in R, or what functions may be available, use the <code>help.search()</code>
+function.</p>
+<div class="admonition question">
+<p class="admonition-title">Exercise: Searching for R functions</p>
+<p>Use <code>help.search()</code> to find R functions for the following statistical
+functions. Remember to put your search query in quotes inside the
+function's parentheses.</p>
+<ul>
+<li>Chi-Squared test</li>
+<li>Student t-test</li>
+<li>Mixed linear model</li>
+</ul>
+<details class="success solution">
+<summary>Success</summary>
+<p>While your search results may return several tests, we list a few
+you might find: </p>
+<ul>
+<li>Chi-Squared test: <code>stats::Chisquare</code> </li>
+<li>Student t-test: <code>stats::t.test</code> </li>
+<li>Mixed linear model: <code>stats::lm.glm</code></li>
+</ul>
+</details>
+</div>
+<p>We will discuss more on where to look for the libraries and packages
+that contain functions you want to use. For now, be aware that two
+important ones are: </p>
+<ul>
+<li><a href="https://cran.r-project.org/">CRAN</a>, the main repository for R</li>
+<li><a href="http://bioconductor.org/">Bioconductor</a>, a popular repository for 
+  bioinformatics-related R packages.</li>
+</ul>
+<h2 id="rstudio-contextual-help">RStudio contextual help<a class="headerlink" href="#rstudio-contextual-help" title="Permanent link">&para;</a></h2>
+<p>Here is one last bonus we will mention about RStudio. It's difficult to
+remember all of the arguments and definitions associated with a given
+function. When you start typing the name of a function and hit the
+<kbd>Tab</kbd> key, RStudio will display functions and
+associated help:</p>
+<p><a class="glightbox" href="../figures/studio_contexthelp1.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="images" src="../figures/studio_contexthelp1.png" /></a></p>
+<p>Once you type a function, hitting the <kbd>Tab</kbd> inside the parentheses will
+show you the function's arguments and provide additional help for each of these 
+arguments.</p>
+<p><a class="glightbox" href="../figures/studio_contexthelp2.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="image" src="../figures/studio_contexthelp2.png" /></a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.50899def.min.js"></script>
+      
+        <script src="../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>

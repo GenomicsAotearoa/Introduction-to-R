@@ -1,0 +1,2344 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Genomics Aotearoa">
+      
+      
+        <link rel="canonical" href="https://genomicsaotearoa.github.io/Introduction-to-R/01-r-basics/">
+      
+      
+        <link rel="prev" href="../00-introduction/">
+      
+      
+        <link rel="next" href="../02-data-prelude/">
+      
+      
+      <link rel="icon" href="../theme_figures/nesi_ga.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.16">
+    
+    
+      
+        <title>R Basics - Introduction to R</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Mukta";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#r-basics" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Introduction to R" class="md-header__button md-logo" aria-label="Introduction to R" data-md-component="logo">
+      
+  <img src="../theme_figures/nesi_ga.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Introduction to R
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              R Basics
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/GenomicsAotearoa/Introduction-to-R" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GenomicsAotearoa/Introduction-to-R
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Introduction to R" class="md-nav__button md-logo" aria-label="Introduction to R" data-md-component="logo">
+      
+  <img src="../theme_figures/nesi_ga.png" alt="logo">
+
+    </a>
+    Introduction to R
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/GenomicsAotearoa/Introduction-to-R" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GenomicsAotearoa/Introduction-to-R
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../00-introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introducing R and RStudio IDE
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    R Basics
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    R Basics
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-fantastic-world-of-r-awaits-you-or-nobody-wants-to-learn-how-to-use-r" class="md-nav__link">
+    <span class="md-ellipsis">
+      "The fantastic world of R awaits you" OR "Nobody wants to learn how to use R"
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-these-lessons-will-not-teach-you" class="md-nav__link">
+    <span class="md-ellipsis">
+      What these lessons will not teach you
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#objects" class="md-nav__link">
+    <span class="md-ellipsis">
+      Objects
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Objects">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creating-objects-in-r" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating objects in R
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#naming-objects-in-r" class="md-nav__link">
+    <span class="md-ellipsis">
+      Naming objects in R
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reassigning-object-names-or-deleting-objects" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reassigning object names or deleting objects
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#understanding-object-data-types-modes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Understanding object data types (modes)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mathematical-and-functional-operations-on-objects" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mathematical and functional operations on objects
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vectors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Vectors
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Vectors">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creating-and-subsetting-vectors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating and subsetting vectors
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-to-removing-or-replacing-values-in-existing-vectors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adding to, removing, or replacing values in existing vectors
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logical-subsetting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Logical subsetting
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-few-final-vector-tricks" class="md-nav__link">
+    <span class="md-ellipsis">
+      A few final vector tricks
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lists" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lists
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Lists">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creating-lists" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating lists
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#refer-to-items-in-a-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      Refer to items in a list
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-or-replace-items-in-a-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add or replace items in a list
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subset-or-remove-objects-from-a-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      Subset or remove objects from a list
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nested-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      Nested list
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#review-exercises" class="md-nav__link">
+    <span class="md-ellipsis">
+      Review exercises
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-data-prelude/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction to the example dataset and file type
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-basics-factors-dataframes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    R Basics continued - factors and data frames
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-data-visualization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data Visualization with ggplot2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-knitr-markdown/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Producing Reports With knitr
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-r-help/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Getting help with R
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Appendix
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            Appendix
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix/04-bioconductor-vcfr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Using packages from Bioconductor
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix/05-dplyr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data Wrangling and Analyses with Tidyverse
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-fantastic-world-of-r-awaits-you-or-nobody-wants-to-learn-how-to-use-r" class="md-nav__link">
+    <span class="md-ellipsis">
+      "The fantastic world of R awaits you" OR "Nobody wants to learn how to use R"
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-these-lessons-will-not-teach-you" class="md-nav__link">
+    <span class="md-ellipsis">
+      What these lessons will not teach you
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#objects" class="md-nav__link">
+    <span class="md-ellipsis">
+      Objects
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Objects">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creating-objects-in-r" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating objects in R
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#naming-objects-in-r" class="md-nav__link">
+    <span class="md-ellipsis">
+      Naming objects in R
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reassigning-object-names-or-deleting-objects" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reassigning object names or deleting objects
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#understanding-object-data-types-modes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Understanding object data types (modes)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mathematical-and-functional-operations-on-objects" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mathematical and functional operations on objects
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vectors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Vectors
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Vectors">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creating-and-subsetting-vectors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating and subsetting vectors
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-to-removing-or-replacing-values-in-existing-vectors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adding to, removing, or replacing values in existing vectors
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logical-subsetting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Logical subsetting
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-few-final-vector-tricks" class="md-nav__link">
+    <span class="md-ellipsis">
+      A few final vector tricks
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lists" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lists
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Lists">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creating-lists" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating lists
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#refer-to-items-in-a-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      Refer to items in a list
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-or-replace-items-in-a-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add or replace items in a list
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subset-or-remove-objects-from-a-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      Subset or remove objects from a list
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nested-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      Nested list
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#review-exercises" class="md-nav__link">
+    <span class="md-ellipsis">
+      Review exercises
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="r-basics">R Basics<a class="headerlink" href="#r-basics" title="Permanent link">&para;</a></h1>
+<div class="admonition info">
+<p class="admonition-title">Learning objectives</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Key points</label><label for="__tabbed_1_2">Objectives</label><label for="__tabbed_1_3">Questions</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<ul>
+<li>Effectively using R is a journey of months or years. Still, you don't have to be an expert to use R, and you can start using and analyzing your data with about a day's worth of training.</li>
+<li>It is important to understand how R organizes data in a given object type and how the mode of that type (e.g. numeric, character, logical, etc.) will determine how R will operate on that data.</li>
+<li>Working with vectors effectively prepares you to understand how R organizes data.</li>
+</ul>
+</div>
+<div class="tabbed-block">
+<ul>
+<li>Be able to create the most common R objects, such as vectors</li>
+<li>Understand that vectors have modes, which correspond to the type of data they contain</li>
+<li>Be able to use arithmetic operators on R objects</li>
+<li>Be able to retrieve (subset), name, or replace values from a vector</li>
+<li>Be able to use logical operators in a subsetting operation</li>
+<li>Understand that lists can hold data of more than one mode and can be indexed</li>
+</ul>
+</div>
+<div class="tabbed-block">
+<ul>
+<li>What will these lessons not cover?</li>
+<li>What are the basic features of the R language?</li>
+<li>What are the most common objects in R?</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<h2 id="the-fantastic-world-of-r-awaits-you-or-nobody-wants-to-learn-how-to-use-r">"The fantastic world of R awaits you" OR "Nobody wants to learn how to use R"<a class="headerlink" href="#the-fantastic-world-of-r-awaits-you-or-nobody-wants-to-learn-how-to-use-r" title="Permanent link">&para;</a></h2>
+<p>Before we begin this lesson, we want you to be clear on the goal of the workshop and these lessons. We believe that every learner can <strong>achieve competency with R</strong>. You have reached competency when you find that you are able to <strong>use R to handle common analysis challenges in a reasonable amount of time</strong> (which includes the time needed to look at learning materials, search for answers online, and ask colleagues for help). As you spend more time using R (there is no substitute for regular use and practice), you will gain competency and expertise. The more familiar you get, the more complex the analyses you will be able to carry out, with less frustration and in less time - the fantastic world of R awaits you!</p>
+<h2 id="what-these-lessons-will-not-teach-you">What these lessons will not teach you<a class="headerlink" href="#what-these-lessons-will-not-teach-you" title="Permanent link">&para;</a></h2>
+<p>Nobody wants to learn how to use R. People want to learn how to use R to
+analyze their own research questions! Ok, maybe some folks learn R for
+R's sake, but these lessons assume that you want to start analyzing
+genomic data as soon as possible. Given this, there are many valuable
+pieces of information about R that we simply won't have time to cover.
+Hopefully, we will clear the hurdle of giving you just enough knowledge
+to be dangerous, which can be a high bar in R! We suggest you look into
+the additional learning materials in the tip box below.</p>
+<p><strong>Here are some R skills we will <em>not</em> cover in these lessons</strong></p>
+<ul>
+<li>How to create and work with R matrices</li>
+<li>How to create and work with loops and conditional statements, and
+  the "apply" family of functions (which are super useful, read more
+  <a href="https://www.r-bloggers.com/r-tutorial-on-the-apply-family-of-functions/">here</a>)</li>
+<li>How to do basic string manipulations (e.g. finding patterns in text
+  using <code>grep()</code>, and replacing text using <code>gsub()</code>)</li>
+<li>How to plot using the default R graphic tools (we <em>will</em> cover plot
+  creation, but will do so using the popular plotting package
+  <code>ggplot2</code>)</li>
+<li>How to use advanced R statistical functions</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Where to learn more</p>
+<p>The following are good resources for learning more about R. Some of
+them can be quite technical, but if you are a regular R user you may
+ultimately need this technical knowledge.</p>
+<ul>
+<li><a href="https://cran.r-project.org/doc/contrib/Paradis-rdebuts_en.pdf">R for Beginners</a>:
+By Emmanuel Paradis and a great starting point </li>
+<li><a href="https://cran.r-project.org/manuals.html">The R Manuals</a>: Maintained by the R
+project </li>
+<li><a href="https://cran.r-project.org/other-docs.html">R contributed documentation</a>: Also
+linked to the R project; importantly there are materials available in
+several languages </li>
+<li><a href="http://r4ds.had.co.nz/">R for Data Science</a>: A
+wonderful collection by noted R educators and developers Garrett
+Grolemund and Hadley Wickham </li>
+<li><a href="https://peerj.com/collections/50-practicaldatascistats/">Practical Data Science for Stats</a>: Not
+exclusively about R usage, but a nice collection of pre-prints on data
+science and applications for R </li>
+<li><a href="https://software-carpentry.org/lessons/">Programming in R Software Carpentry
+lesson</a>: There are several
+Software Carpentry lessons in R to choose from </li>
+</ul>
+</div>
+<h2 id="objects">Objects<a class="headerlink" href="#objects" title="Permanent link">&para;</a></h2>
+<h3 id="creating-objects-in-r">Creating objects in R<a class="headerlink" href="#creating-objects-in-r" title="Permanent link">&para;</a></h3>
+<div class="admonition bell">
+<p class="admonition-title">Reminder</p>
+<p>At this point you should be coding along in the
+<code>genomics_r_basics.R</code> script we created in the last episode.
+Writing your commands in the script (and commenting it) will make it
+easier to record what you did and why. </p>
+</div>
+<p>What might be called a variable in many languages is called an
+<strong>object</strong> in R.</p>
+<p><strong>To create an object, you need:</strong></p>
+<ul>
+<li>A name (e.g. <code>a</code>)</li>
+<li>A value (e.g. <code>1</code>)</li>
+<li>The assignment operator (<code>&lt;-</code>)</li>
+</ul>
+<p>In your script, <code>genomics_r_basics.R</code>, use the R assignment
+operator <code>&lt;-</code> to assign <code>1</code> to the object <code>a</code> as shown. Remember to leave
+a comment in the line above (using the <code>#</code>) to explain what you are
+doing:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># This line creates the object &#39;a&#39; and assigns it the value &#39;1&#39;</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">a</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">1</span>
+</code></pre></div>
+</div>
+<p>Next, run this line of code in your script. You can run a line of code
+by hitting the <code>Run</code> button that is above the first line of your
+script in the header of the 'Source' pane or you can use the appropriate shortcut:</p>
+<ul>
+<li>Windows execution shortcut: <kbd>Ctrl</kbd> + <kbd>Enter</kbd></li>
+<li>Mac execution shortcut: <kbd>Cmd(⌘)</kbd> + <kbd>Enter</kbd></li>
+</ul>
+<p>To run multiple lines of code, highlight all the line you wish to run
+and then hit Run or use the shortcut key combo listed above.
+In the RStudio 'Console', you should see:</p>
+<div class="admonition success">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>a &lt;- 1
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>&gt;
+</code></pre></div>
+</div>
+<p>The 'Console' will display lines of code run from a script and any outputs or
+status/warning/error messages (usually in red).
+In the 'Environment' window you will also get a table:</p>
+<table>
+<thead>
+<tr>
+<th>Values</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>a</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>The 'Environment' window allows you to keep track of the objects you have
+created in R.</p>
+<div class="admonition question">
+<p class="admonition-title">Exercise: Create some objects in R</p>
+<p>Create the following objects and give each object an appropriate name
+(your best guess at what name to use is fine):</p>
+<ol>
+<li>Create an object that has the value of number of pairs of human chromosomes</li>
+<li>Create an object that has a value of your favorite gene name</li>
+<li>Create an object that has this URL as its value: "<a href="ftp://ftp.ensemblgenomes.org/pub/bacteria/release-39/fasta/bacteria_5_collection/escherichia_coli_b_str_rel606/">ftp://ftp.ensemblgenomes.org/pub/bacteria/release-39/fasta/bacteria_5_collection/escherichia_coli_b_str_rel606/</a>"</li>
+<li>Create an object that has the value of the number of chromosomes in a
+diploid human cell</li>
+</ol>
+<details class="success">
+<summary>Solution</summary>
+<p>Here as some possible answers to the challenge:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">human_chr_number</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">23</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">gene_name</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&#39;pten&#39;</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">ensemble_url</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;ftp://ftp.ensemblgenomes.org/pub/bacteria/release-39/fasta/bacteria_5_collection/escherichia_coli_b_str_rel606/&quot;</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="n">human_diploid_chr_num</span><span class="w"> </span><span class="o">&lt;-</span><span class="w">  </span><span class="m">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">human_chr_number</span>
+</code></pre></div>
+</details>
+</div>
+<h3 id="naming-objects-in-r">Naming objects in R<a class="headerlink" href="#naming-objects-in-r" title="Permanent link">&para;</a></h3>
+<p>Here are some important details about naming objects in R</p>
+<ul>
+<li><strong>Avoid spaces and special characters</strong><br>
+  Object names cannot contain spaces or the minus sign (<code>-</code>). You can use 
+  <code>_</code> to make names more readable. You should avoid using special characters
+  in your object name (e.g. <code>!</code> <code>@</code> <code>#</code> <code>.</code> <code>,</code> etc.). Also, object names 
+  cannot begin with a number.</li>
+<li><strong>Use short, easy-to-understand names</strong><br>
+  Avoid naming your objects using single letters (e.g. <code>n</code>, <code>p</code>, 
+  etc.). This is mostly to encourage you to use names that would make sense to 
+  anyone reading your code (a colleague, or even yourself a year from now). 
+  Also, avoiding excessively long names will make your code more readable.</li>
+<li><strong>Avoid commonly used names</strong><br>
+  Several names may already have a definition in the R language 
+  (e.g. <code>mean</code>, <code>min</code>, <code>max</code>). One clue that a name already has meaning is that 
+  if you start typing a name in RStudio and it gets a colored highlight or 
+  RStudio gives you a suggested autocompletion, you have chosen a name that has 
+  a reserved meaning.</li>
+<li><strong>Use the recommended assignment operator</strong><br>
+  In R, we use <code>&lt;-</code> as the preferred assignment operator. <code>=</code> works too, but is 
+  most commonly used in passing arguments to functions (more on functions 
+  later). Shortcuts for the R assignment operator are:<ul>
+<li>Windows execution shortcut: <kbd>Alt</kbd> + <kbd>-</kbd></li>
+<li>Mac execution shortcut: <kbd>Option</kbd> + <kbd>-</kbd></li>
+</ul>
+</li>
+</ul>
+<p>There are a few more suggestions about naming and style you can learn more about as you write more R code. Several "style guides"
+have advice, and one to start with is the <a href="http://style.tidyverse.org/index.html">tidyverse R 
+style guide</a>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Pay attention to warnings in the 'Source' panel</p>
+<p>If you enter a line of code in your script that contains an error, RStudio may give you an error message and underline this mistake. Sometimes, these messages are easy to understand, but often, the messages may need some figuring out. Paying attention to these warnings will help you avoid mistakes. In the example below, our object name has a space, which is not allowed in R. The error message does not say this directly, but R is "not sure" about how to assign the number to <code>human_ chr_number</code> when the object name we want is <code>human_chr_number</code></p>
+<p><a class="glightbox" href="../figures/rstudio_script_warning.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="images" src="../figures/rstudio_script_warning.png" width="700" /></a></p>
+</div>
+<h3 id="reassigning-object-names-or-deleting-objects">Reassigning object names or deleting objects<a class="headerlink" href="#reassigning-object-names-or-deleting-objects" title="Permanent link">&para;</a></h3>
+<p>Once an object has a value, you can change that value by overwriting it. R will not give you a warning or error if you overwrite an object, which may or may not be a good thing depending on how you look at it.</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># gene_name has the value &#39;pten&#39; or whatever value you used in the challenge</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="c1"># We will now assign the new value &#39;tp53&#39;</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="n">gene_name</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&#39;tp53&#39;</span>
+</code></pre></div>
+</div>
+<p>You can also remove an object from R's memory entirely. The <code>rm()</code> function will delete the object.</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># Delete the object &#39;gene_name&#39;</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nf">rm</span><span class="p">(</span><span class="n">gene_name</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<p>If you run a line of code that has only an object name, R will normally
+display the contents of that object. In this case, we are told the
+object no longer exists.</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">gene_name</span>
+</code></pre></div>
+</div>
+<div class="admonition failure">
+<p class="admonition-title">Error</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>Error: object &#39;gene_name&#39; not found
+</code></pre></div>
+</div>
+<h3 id="understanding-object-data-types-modes">Understanding object data types (modes)<a class="headerlink" href="#understanding-object-data-types-modes" title="Permanent link">&para;</a></h3>
+<p>In R, <strong>every object has two properties</strong>:</p>
+<ul>
+<li><strong>Length</strong>: The number of distinct values are held in that object</li>
+<li><strong>Mode</strong>: The classification (type) of that object</li>
+</ul>
+<p>We will get to the "length" property later in the lesson. The <strong>"mode" 
+property corresponds to the type of data an object represents</strong>. The
+most common modes you will encounter in R are:</p>
+<table>
+<thead>
+<tr>
+<th>Mode (abbreviation)</th>
+<th>Type of data</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Numeric (<code>num</code>)</td>
+<td>Numbers such as floating point (i.e. decimals, e.g. 1.0, 0.5, 3.14). <br> There are also more specific numeric types (<code>dbl</code> - Double, <code>int</code> - Integer). These differences are not relevant for most beginners and pertain to how these value are stored in memory</td>
+</tr>
+<tr>
+<td>Character (<code>chr</code>)</td>
+<td>A sequence of letters/numbers in single <code>''</code> or double <code>""</code> quotes</td>
+</tr>
+<tr>
+<td>Logical (<code>logi</code>)</td>
+<td>Boolean values <code>TRUE</code> or <code>FALSE</code></td>
+</tr>
+</tbody>
+</table>
+<p>There are a few other modes (i.e. "complex", "raw" etc.) but these are
+the three we will work with in this lesson.</p>
+<p>Data types are common across many programming languages, but also in
+natural language, where we refer to them as the parts of speech,
+e.g. nouns, verbs, adverbs, etc. Once you know if a word - perhaps an
+unfamiliar one - is a noun, you can probably guess you can count it and
+make it plural if there is more than one (e.g. 1
+<a href="https://en.wikipedia.org/wiki/Tuatara">Tuatara</a>, or 2 Tuataras). If
+something is an adjective, you can usually change it into an adverb by
+adding "-ly"
+(e.g., <a href="https://www.merriam-webster.com/dictionary/jejune">jejune</a> vs.
+jejunely). Depending on the context, you may need to decide if a word is
+in one category or another (e.g "cut" may be (1) a noun when it's on your
+finger or (2) a verb when you are preparing vegetables). These concepts
+have important analogies when working with R objects.</p>
+<div class="admonition question">
+<p class="admonition-title">Exercise: Create objects and check their modes</p>
+<p>Create the following objects in R, then verify their modes using the <code>mode()</code> function. Try to guess what the mode will be before you look at the solution.</p>
+<ol>
+<li><code>chromosome_name &lt;- 'chr02'</code></li>
+<li><code>od_600_value &lt;- 0.47</code></li>
+<li><code>chr_position &lt;- '1001701'</code></li>
+<li><code>spock &lt;- TRUE</code></li>
+<li><code>pilot &lt;- Earhart</code></li>
+</ol>
+<details class="success">
+<summary>Solution</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nf">mode</span><span class="p">(</span><span class="n">chromosome_name</span><span class="p">)</span><span class="w"> </span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nf">mode</span><span class="p">(</span><span class="n">od_600_value</span><span class="p">)</span><span class="w"> </span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="nf">mode</span><span class="p">(</span><span class="n">chr_position</span><span class="p">)</span><span class="w"> </span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="nf">mode</span><span class="p">(</span><span class="n">spock</span><span class="p">)</span><span class="w"> </span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="nf">mode</span><span class="p">(</span><span class="n">pilot</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>[1] &quot;character&quot;
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>[1] &quot;numeric&quot;
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>[1] &quot;character&quot;
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>[1] &quot;logical&quot;
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>Error: object &#39;pilot&#39; not found
+</code></pre></div>
+</details>
+</div>
+<p>Notice from the solution that even if a series of numbers is given as a
+value R will consider them to be in the "character" mode if they are
+enclosed with single or double quotes. Also, notice that you cannot take a
+string of alphanumeric characters (i.e., Earhart) and assign it as a value
+for an object. In this case, R looks for an object named <code>Earhart</code>, but
+since there is no object, no assignment can be made. If <code>Earhart</code> did
+exist, then the mode of <code>pilot</code> would be whatever the mode of <code>Earhart</code>
+was originally. If we want to create an object called <code>pilot</code> that was
+the <strong>name</strong> "Earhart", we need to enclose <code>Earhart</code> in quotation marks.</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">pilot</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;Earhart&quot;</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="nf">mode</span><span class="p">(</span><span class="n">pilot</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<h3 id="mathematical-and-functional-operations-on-objects">Mathematical and functional operations on objects<a class="headerlink" href="#mathematical-and-functional-operations-on-objects" title="Permanent link">&para;</a></h3>
+<p>Once an object exists (which, by definition, also means it has a mode), R
+can manipulate that object using appropriate methods. For example, objects of the numeric modes can be added, multiplied, divided, etc. R provides several
+mathematical (arithmetic) operators including:</p>
+<table>
+<thead>
+<tr>
+<th>Operator</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>+</code></td>
+<td>Addition</td>
+</tr>
+<tr>
+<td><code>-</code></td>
+<td>Subtraction</td>
+</tr>
+<tr>
+<td><code>*</code></td>
+<td>Multiplication</td>
+</tr>
+<tr>
+<td><code>/</code></td>
+<td>Division</td>
+</tr>
+<tr>
+<td><code>^</code> or <code>**</code></td>
+<td>Exponentiation</td>
+</tr>
+<tr>
+<td><code>%/%</code></td>
+<td>Integer division (division where the remainder is discarded)</td>
+</tr>
+<tr>
+<td><code>%%</code></td>
+<td>Modulus (returns the remainder after division)</td>
+</tr>
+</tbody>
+</table>
+<p>These can be used with literal numbers:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="p">(</span><span class="m">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="m">5</span><span class="w"> </span><span class="o">**</span><span class="w"> </span><span class="m">0.5</span><span class="p">))</span><span class="o">/</span><span class="m">2</span>
+</code></pre></div>
+</div>
+<p>and importantly, can be used on any object that evaluates to
+(i.e. interpreted by R) a numeric object:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">human_chr_number</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">23</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="c1"># Multiply the object &#39;human_chr_number&#39; by 2</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="n">human_chr_number</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">2</span>
+</code></pre></div>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Exercise: Compute the golden ratio</p>
+<p>One approximation of the golden ratio (<span class="arithmatex">\(\phi\)</span>) can be found by taking the sum of 
+1 and the square root of 5, and dividing by 2 as in the example above.</p>
+<div class="arithmatex">\[
+\phi = \frac{1 + \sqrt{5}}{2}
+\]</div>
+<p>Compute the golden ratio to 3 digits of precision using the <code>sqrt()</code> and <code>round()</code>
+functions. </p>
+<p>Hint: Remember the <code>round()</code> function can take <strong>two</strong> arguments.</p>
+<details class="success">
+<summary>Solution</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nf">round</span><span class="p">((</span><span class="m">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">sqrt</span><span class="p">(</span><span class="m">5</span><span class="p">))</span><span class="o">/</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">digits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">)</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="c1"># Notice that you can place one function inside of another.</span>
+</code></pre></div>
+</details>
+</div>
+<h2 id="vectors">Vectors<a class="headerlink" href="#vectors" title="Permanent link">&para;</a></h2>
+<p>Vectors are probably the most commonly used object type in R. <strong>A vector is a collection of values that are all of the same type (numbers, characters, etc.)</strong>. One of the most common ways to create a vector is to use the <code>c()</code> function &mdash; the "concatenate" or "combine" function. Inside the function you may enter one or more values; for multiple values, separate each value with a comma:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1"># Create the SNP gene name vector</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="n">snp_genes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;OXTR&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;ACTN3&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;AR&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;OPRM1&quot;</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<p>Vectors always have a <strong>mode</strong> and a <strong>length</strong>. You can check these
+with the <code>mode()</code> and <code>length()</code> functions respectively. Another useful
+function that gives both of these pieces of information is the <code>str()</code>
+(structure) function.</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1"># Check the mode, length, and structure of &#39;snp_genes&#39; </span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="nf">mode</span><span class="p">(</span><span class="n">snp_genes</span><span class="p">)</span><span class="w"> </span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="nf">length</span><span class="p">(</span><span class="n">snp_genes</span><span class="p">)</span><span class="w"> </span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="nf">str</span><span class="p">(</span><span class="n">snp_genes</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<p>Vectors are very important in R. Another data type that we will work
+with later in this lesson, data frames, are collections of vectors. What
+we learn here about vectors will pay off even more when we start working
+with data frames.</p>
+<h3 id="creating-and-subsetting-vectors">Creating and subsetting vectors<a class="headerlink" href="#creating-and-subsetting-vectors" title="Permanent link">&para;</a></h3>
+<p>Let's create a few more vectors to play around with:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="c1"># Some interesting human SNPs</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="c1"># While accuracy is important, typos in the data won&#39;t hurt you here</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="n">snps</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;rs53576&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;rs1815739&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;rs6152&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;rs1799971&quot;</span><span class="p">)</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="n">snp_chromosomes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;3&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;11&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;X&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;6&quot;</span><span class="p">)</span><span class="w"> </span>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="n">snp_positions</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">8762685</span><span class="p">,</span><span class="w"> </span><span class="m">66560624</span><span class="p">,</span><span class="w"> </span><span class="m">67545785</span><span class="p">,</span><span class="w"> </span><span class="m">154039662</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<p>Once we have vectors, one thing we may want to do is retrieve one
+or more values from our vector. To do so, we use <strong>bracket notation</strong>. We type
+the name of the vector followed by square brackets. In those square brackets
+we place the index (i.e., a number that corresponds to the position of the value in the vector) in that bracket as follows:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="c1"># Get the 3rd value in the &#39;snps&#39; vector</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="n">snps</span><span class="p">[</span><span class="m">3</span><span class="p">]</span>
+</code></pre></div>
+</div>
+<p>In R, every item in your vector is indexed, starting from the first item
+(1) through to the final number of items in your vector. You can also
+retrieve a range of numbers:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="c1"># Get the 1st to 3rd value in the &#39;snps&#39; vector</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="n">snps</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">]</span>
+</code></pre></div>
+</div>
+<p>If you want to retrieve several (but not necessarily sequential) items from
+a vector, you pass a <strong>vector of indices</strong> (i.e., a vector that has the numbered
+positions of the elements you wish to retrieve).</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="c1"># Get the 1st, 3rd, and 4th value in the &#39;snps&#39; vector</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="n">snps</span><span class="p">[</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">)]</span>
+</code></pre></div>
+</div>
+<p>There are additional (and perhaps less commonly used) ways of subsetting
+a vector (see <a href="https://thomasleeper.com/Rcourse/Tutorials/vectorindexing.html">these
+examples</a>).
+Several of these subsetting expressions can be combined:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="c1"># Get the 1st through the 3rd value, and 4th value in the &#39;snps&#39; vector</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="c1"># Yes, this is a little silly in a vector of only 4 values.</span>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="n">snps</span><span class="p">[</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">)]</span>
+</code></pre></div>
+</div>
+<h3 id="adding-to-removing-or-replacing-values-in-existing-vectors">Adding to, removing, or replacing values in existing vectors<a class="headerlink" href="#adding-to-removing-or-replacing-values-in-existing-vectors" title="Permanent link">&para;</a></h3>
+<p>Once you have an existing vector, you may want to add a new item to it.
+To do so, you can use the <code>c()</code> function again to add your new value:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="c1"># Add the gene &quot;CYP1A1&quot; and &quot;APOA5&quot; to our &#39;snp_genes&#39; vector</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="c1"># Note: This overwrites our existing vector.</span>
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="n">snp_genes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">snp_genes</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;CYP1A1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;APOA5&quot;</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<p>We can verify that "snp_genes" contains the new gene entry</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="n">snp_genes</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>[1] &quot;OXTR&quot;   &quot;ACTN3&quot;  &quot;AR&quot;     &quot;OPRM1&quot;  &quot;CYP1A1&quot; &quot;APOA5&quot; 
+</code></pre></div>
+</details>
+</div>
+<p>Using a negative index will return a version of a vector with that
+index's value removed:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="n">snp_genes</span><span class="p">[</span><span class="m">-6</span><span class="p">]</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>[1] &quot;OXTR&quot;   &quot;ACTN3&quot;  &quot;AR&quot;     &quot;OPRM1&quot;  &quot;CYP1A1&quot;
+</code></pre></div>
+</details>
+</div>
+<p>We can remove that value from our vector by overwriting it with this
+expression:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="n">snp_genes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">snp_genes</span><span class="p">[</span><span class="m">-6</span><span class="p">]</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>
+<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="n">snp_genes</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>[1] &quot;OXTR&quot;   &quot;ACTN3&quot;  &quot;AR&quot;     &quot;OPRM1&quot;  &quot;CYP1A1&quot;
+</code></pre></div>
+</details>
+</div>
+<p>We can also explicitly rename or add a value to our index using
+bracket notation:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="n">snp_genes</span><span class="p">[</span><span class="m">7</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;APOA5&quot;</span>
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>
+<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="n">snp_genes</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>[1] &quot;OXTR&quot;   &quot;ACTN3&quot;  &quot;AR&quot;     &quot;OPRM1&quot;  &quot;CYP1A1&quot; NA       &quot;APOA5&quot; 
+</code></pre></div>
+</details>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Filling in the blanks</p>
+<p>Notice in the example above that there is an <code>NA</code> in the 6<sup>th</sup> position of the vector? Recall that R keeps track of every element in vectors by numeric indexing. This means that when we added a 7<sup>th</sup> element where there is no 6<sup>th</sup> element, R fills it with <code>NA</code> which functionally means "missing value" or "Not Available".</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Exercise: Examining and subsetting vectors</p>
+<p>Answer the following question to test your knowledge of vectors</p>
+<p>Which of the following are true of vectors in R?</p>
+<p>A) All vectors have a mode <strong>or</strong> a length <br>
+B) All vectors have a mode <strong>and</strong> a length <br>
+C) Vectors may have different lengths <br>
+D) Items within a vector may be of different modes <br>
+E) You can use the <code>c()</code> to add one or more items to an existing vector <br>
+F) You can use the <code>c()</code> to add a vector to an exiting vector</p>
+<details class="success">
+<summary>Solution</summary>
+<p>A) False - Vectors have both of these properties <br>
+B) True <br>
+C) True <br>
+D) False - Vectors have only one mode (e.g. numeric, character); 
+   all items in a vector must be of this mode. <br>
+E) True <br>
+F) True</p>
+</details>
+</div>
+<h3 id="logical-subsetting">Logical subsetting<a class="headerlink" href="#logical-subsetting" title="Permanent link">&para;</a></h3>
+<p>There is one last set of cool subsetting capabilities we want to
+introduce. It is possible within R to retrieve items in a vector based
+on a logical evaluation or numerical comparison. For example, let's say
+we wanted get all of the SNPs in our vector of SNP positions that were
+greater than 100,000,000. We could index using the <code>&gt;</code> (greater than)
+logical operator:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="n">snp_positions</span><span class="p">[</span><span class="n">snp_positions</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">100000000</span><span class="p">]</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>[1] 154039662
+</code></pre></div>
+</details>
+</div>
+<p>In the square brackets you place the name of the vector followed by the
+comparison operator and (in this case) a numeric value. Some common logical operators in R are:</p>
+<table>
+<thead>
+<tr>
+<th>Operator</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;</code></td>
+<td>Less than</td>
+</tr>
+<tr>
+<td><code>&lt;=</code></td>
+<td>Less than or equal to</td>
+</tr>
+<tr>
+<td><code>&gt;</code></td>
+<td>Greater than</td>
+</tr>
+<tr>
+<td><code>&gt;=</code></td>
+<td>Greater than or equal to</td>
+</tr>
+<tr>
+<td><code>==</code></td>
+<td>Exactly equal to</td>
+</tr>
+<tr>
+<td><code>!=</code></td>
+<td>Not equal to</td>
+</tr>
+<tr>
+<td><code>!x</code></td>
+<td>Not x</td>
+</tr>
+<tr>
+<td><code>a | b</code></td>
+<td>a or b</td>
+</tr>
+<tr>
+<td><code>a &amp; b</code></td>
+<td>a and b</td>
+</tr>
+</tbody>
+</table>
+<p><strong><img alt="🪄" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1fa84.svg" title=":magic_wand:" /> The magic of programming</strong></p>
+<p>The reason why the expression <code>snp_positions[snp_positions &gt; 100000000]</code> works 
+can be better understood if you examine what the expression 
+<code>snp_positions &gt; 100000000</code> evaluates to:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="n">snp_positions</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">100000000</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>[1] FALSE FALSE FALSE  TRUE
+</code></pre></div>
+</details>
+</div>
+<p>The output above is a logical vector where the 4<sup>th</sup> element is <code>TRUE</code>. When you pass a logical vector as an index, R will return values that are or evaluate to <code>TRUE</code>:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="n">snp_positions</span><span class="p">[</span><span class="nf">c</span><span class="p">(</span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)]</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>[1] 154039662
+</code></pre></div>
+</details>
+</div>
+<p>If you have never coded before, this type of situation starts to expose the 
+“magic” of programming. We mentioned before that in the bracket notation you 
+take your named vector followed by brackets which contain an index: 
+<strong><code>named_vector[index]</code></strong>. The “magic” is that the index needs to evaluate to a 
+number. So, even if it does not appear to be an integer (e.g. 1, 2, 3), 
+as long as R can <em>evaluate</em> it, we will get a result. That our expression 
+<code>snp_positions[snp_positions &gt; 100000000]</code> evaluates to a number can be seen in 
+the following situation. If you wanted to know which <strong>index</strong> (1, 2, 3, or 4) 
+in our vector of SNP positions was the one that was greater than 100,000,000?
+We can use the <code>which()</code> function to return the indices of any item that 
+evaluates as <code>TRUE</code> in our comparison:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="nf">which</span><span class="p">(</span><span class="n">snp_positions</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">100000000</span><span class="p">)</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>[1] 4
+</code></pre></div>
+</details>
+</div>
+<p><strong>Why this is important</strong></p>
+<p>Often in programming we will not know what inputs and values will be used when 
+our code is executed. Rather than put in a pre-determined value (e.g 100000000) 
+we can use an object that can take on whatever value we need. So for example:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="n">snp_marker_cutoff</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">100000000</span>
+<a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a><span class="n">snp_positions</span><span class="p">[</span><span class="n">snp_positions</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">snp_marker_cutoff</span><span class="p">]</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a>[1] 154039662
+</code></pre></div>
+</details>
+</div>
+<p>Ultimately, it’s putting together flexible, reusable code like this that gets at the “magic” of programming!</p>
+<h3 id="a-few-final-vector-tricks">A few final vector tricks<a class="headerlink" href="#a-few-final-vector-tricks" title="Permanent link">&para;</a></h3>
+<p>Finally, there are a few other common retrieve or replace operations you
+may want to know about. First, you can check to see if any of the values
+of your vector are missing (i.e. are <code>NA</code>, that stands for
+"Not Available"). Missing data will get a more detailed treatment later,
+but the <code>is.na()</code> function will return a logical vector, with <code>TRUE</code> for
+any <code>NA</code> value:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="c1"># Current value of &#39;snp_genes&#39; inspected using &#39;str()&#39;:</span>
+<a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a><span class="c1"># chr [1:7] &quot;OXTR&quot; &quot;ACTN3&quot; &quot;AR&quot; &quot;OPRM1&quot; &quot;CYP1A1&quot; NA &quot;APOA5&quot;</span>
+<a id="__codelineno-39-3" name="__codelineno-39-3" href="#__codelineno-39-3"></a>
+<a id="__codelineno-39-4" name="__codelineno-39-4" href="#__codelineno-39-4"></a><span class="nf">is.na</span><span class="p">(</span><span class="n">snp_genes</span><span class="p">)</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a>[1] FALSE FALSE FALSE FALSE FALSE  TRUE FALSE
+</code></pre></div>
+</details>
+</div>
+<p>Sometimes, you may wish to find out if a specific value (or several values) is 
+present in a vector. You can do this using the comparison operator <code>%in%</code><br />
+which will return <code>TRUE</code> for any value in the vector you are searching:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a><span class="c1"># Current value of &#39;snp_genes&#39; inspected using &#39;str()&#39;:</span>
+<a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a><span class="c1"># chr [1:7] &quot;OXTR&quot; &quot;ACTN3&quot; &quot;AR&quot; &quot;OPRM1&quot; &quot;CYP1A1&quot; NA &quot;APOA5&quot;</span>
+<a id="__codelineno-41-3" name="__codelineno-41-3" href="#__codelineno-41-3"></a>
+<a id="__codelineno-41-4" name="__codelineno-41-4" href="#__codelineno-41-4"></a><span class="c1"># Test to see if &quot;ACTN3&quot; or &quot;APO5A&quot; is in the snp_genes vector</span>
+<a id="__codelineno-41-5" name="__codelineno-41-5" href="#__codelineno-41-5"></a><span class="c1"># If you are looking for more than one value, you must pass this as a vector</span>
+<a id="__codelineno-41-6" name="__codelineno-41-6" href="#__codelineno-41-6"></a>
+<a id="__codelineno-41-7" name="__codelineno-41-7" href="#__codelineno-41-7"></a><span class="nf">c</span><span class="p">(</span><span class="s">&quot;ACTN3&quot;</span><span class="p">,</span><span class="s">&quot;APOA5&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="n">snp_genes</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a>[1] TRUE TRUE
+</code></pre></div>
+</details>
+</div>
+<h2 id="lists">Lists<a class="headerlink" href="#lists" title="Permanent link">&para;</a></h2>
+<p>Lists are another form of data structure in R. Although it resembles vectors, 
+two key properties differentiates them and make lists extremely useful for more 
+complex data storage:</p>
+<ul>
+<li>Lists can contain <strong>data of multiple modes</strong><br>
+  Remember that vectors can only contain data of one mode.</li>
+<li>Lists can be <strong>nested</strong><br>
+  This means that a list can contain other lists. Vectors, on the other hand, 
+  are flat (i.e., all values of a vector is laid out on a single level)</li>
+</ul>
+<p>Due to their flexibility, many complex analyses store data/return results using lists.</p>
+<div class="admonition info">
+<p class="admonition-title">Attribution</p>
+<p>Some of the content here was adapted from an excellent 
+<a href="https://r4ds.had.co.nz/vectors.html#lists">tutorial</a> which we highly
+recommend you read.</p>
+</div>
+<h3 id="creating-lists">Creating lists<a class="headerlink" href="#creating-lists" title="Permanent link">&para;</a></h3>
+<p>Let's begin by creating a list using existing vectors created 
+<a href="#creating-and-subsetting-vectors">prior</a>.</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a><span class="c1"># We will replace the vector &#39;snp_genes&#39; to its original values</span>
+<a id="__codelineno-43-2" name="__codelineno-43-2" href="#__codelineno-43-2"></a><span class="n">snp_genes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;OXTR&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;ACTN3&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;AR&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;OPRM1&quot;</span><span class="p">)</span>
+<a id="__codelineno-43-3" name="__codelineno-43-3" href="#__codelineno-43-3"></a>
+<a id="__codelineno-43-4" name="__codelineno-43-4" href="#__codelineno-43-4"></a><span class="c1"># Create a list</span>
+<a id="__codelineno-43-5" name="__codelineno-43-5" href="#__codelineno-43-5"></a><span class="n">snps_list</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span>
+<a id="__codelineno-43-6" name="__codelineno-43-6" href="#__codelineno-43-6"></a><span class="w">  </span><span class="n">genes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">snp_genes</span><span class="p">,</span>
+<a id="__codelineno-43-7" name="__codelineno-43-7" href="#__codelineno-43-7"></a><span class="w">  </span><span class="n">reference_snps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">snps</span><span class="p">,</span>
+<a id="__codelineno-43-8" name="__codelineno-43-8" href="#__codelineno-43-8"></a><span class="w">  </span><span class="n">chromosomes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">snp_chromosomes</span><span class="p">,</span>
+<a id="__codelineno-43-9" name="__codelineno-43-9" href="#__codelineno-43-9"></a><span class="w">  </span><span class="n">positions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">snp_positions</span>
+<a id="__codelineno-43-10" name="__codelineno-43-10" href="#__codelineno-43-10"></a><span class="p">)</span>
+</code></pre></div>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Copy-pasting code</p>
+<p>Make sure to highlight, copy, paste, then run all lines of the 
+"Create a list" code block.</p>
+</div>
+<p>We can see how R prints a list by calling it.</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a><span class="n">snps_list</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a>$genes
+<a id="__codelineno-45-2" name="__codelineno-45-2" href="#__codelineno-45-2"></a>[1] &quot;OXTR&quot;  &quot;ACTN3&quot; &quot;AR&quot;    &quot;OPRM1&quot;
+<a id="__codelineno-45-3" name="__codelineno-45-3" href="#__codelineno-45-3"></a>
+<a id="__codelineno-45-4" name="__codelineno-45-4" href="#__codelineno-45-4"></a>$reference_snps
+<a id="__codelineno-45-5" name="__codelineno-45-5" href="#__codelineno-45-5"></a>[1] &quot;rs53576&quot;   &quot;rs1815739&quot; &quot;rs6152&quot;    &quot;rs1799971&quot;
+<a id="__codelineno-45-6" name="__codelineno-45-6" href="#__codelineno-45-6"></a>
+<a id="__codelineno-45-7" name="__codelineno-45-7" href="#__codelineno-45-7"></a>$chromosomes
+<a id="__codelineno-45-8" name="__codelineno-45-8" href="#__codelineno-45-8"></a>[1] &quot;3&quot;  &quot;11&quot; &quot;X&quot;  &quot;6&quot; 
+<a id="__codelineno-45-9" name="__codelineno-45-9" href="#__codelineno-45-9"></a>
+<a id="__codelineno-45-10" name="__codelineno-45-10" href="#__codelineno-45-10"></a>$positions
+<a id="__codelineno-45-11" name="__codelineno-45-11" href="#__codelineno-45-11"></a>[1]   8762685  66560624  67545785 154039662
+</code></pre></div>
+</details>
+</div>
+<p>Here, we have a <em>named list</em> that contains the vectors <code>genes</code>, 
+<code>reference_snps</code>, <code>chromosomes</code>, and <code>positions</code>. We can also inspect the modes 
+of data stored in the list using <code>str()</code>.</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a><span class="nf">str</span><span class="p">(</span><span class="n">snps_list</span><span class="p">)</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a>List of 4
+<a id="__codelineno-47-2" name="__codelineno-47-2" href="#__codelineno-47-2"></a> $ genes         : chr [1:4] &quot;OXTR&quot; &quot;ACTN3&quot; &quot;AR&quot; &quot;OPRM1&quot;
+<a id="__codelineno-47-3" name="__codelineno-47-3" href="#__codelineno-47-3"></a> $ reference_snps: chr [1:4] &quot;rs53576&quot; &quot;rs1815739&quot; &quot;rs6152&quot; &quot;rs1799971&quot;
+<a id="__codelineno-47-4" name="__codelineno-47-4" href="#__codelineno-47-4"></a> $ chromosomes   : chr [1:4] &quot;3&quot; &quot;11&quot; &quot;X&quot; &quot;6&quot;
+<a id="__codelineno-47-5" name="__codelineno-47-5" href="#__codelineno-47-5"></a> $ positions     : num [1:4] 8.76e+06 6.66e+07 6.75e+07 1.54e+08
+</code></pre></div>
+</details>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Unnamed items in a list</p>
+<p>When we created our list, we assigned a name to each item within the list.
+However, this is not strictly necessary. Let's try it out and see what 
+happens:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a><span class="c1"># Create the list</span>
+<a id="__codelineno-48-2" name="__codelineno-48-2" href="#__codelineno-48-2"></a><span class="n">unnamed_snps_list</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span>
+<a id="__codelineno-48-3" name="__codelineno-48-3" href="#__codelineno-48-3"></a><span class="w">  </span><span class="n">snp_genes</span><span class="p">,</span>
+<a id="__codelineno-48-4" name="__codelineno-48-4" href="#__codelineno-48-4"></a><span class="w">  </span><span class="n">snps</span><span class="p">,</span>
+<a id="__codelineno-48-5" name="__codelineno-48-5" href="#__codelineno-48-5"></a><span class="w">  </span><span class="n">snp_chromosomes</span><span class="p">,</span>
+<a id="__codelineno-48-6" name="__codelineno-48-6" href="#__codelineno-48-6"></a><span class="w">  </span><span class="n">snp_positions</span>
+<a id="__codelineno-48-7" name="__codelineno-48-7" href="#__codelineno-48-7"></a><span class="p">)</span>
+<a id="__codelineno-48-8" name="__codelineno-48-8" href="#__codelineno-48-8"></a>
+<a id="__codelineno-48-9" name="__codelineno-48-9" href="#__codelineno-48-9"></a><span class="c1"># Call the list</span>
+<a id="__codelineno-48-10" name="__codelineno-48-10" href="#__codelineno-48-10"></a><span class="n">unnamed_snps_list</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a>[[1]]
+<a id="__codelineno-49-2" name="__codelineno-49-2" href="#__codelineno-49-2"></a>[1] &quot;OXTR&quot;  &quot;ACTN3&quot; &quot;AR&quot;    &quot;OPRM1&quot;
+<a id="__codelineno-49-3" name="__codelineno-49-3" href="#__codelineno-49-3"></a>
+<a id="__codelineno-49-4" name="__codelineno-49-4" href="#__codelineno-49-4"></a>[[2]]
+<a id="__codelineno-49-5" name="__codelineno-49-5" href="#__codelineno-49-5"></a>[1] &quot;rs53576&quot;   &quot;rs1815739&quot; &quot;rs6152&quot;    &quot;rs1799971&quot;
+<a id="__codelineno-49-6" name="__codelineno-49-6" href="#__codelineno-49-6"></a>
+<a id="__codelineno-49-7" name="__codelineno-49-7" href="#__codelineno-49-7"></a>[[3]]
+<a id="__codelineno-49-8" name="__codelineno-49-8" href="#__codelineno-49-8"></a>[1] &quot;3&quot;  &quot;11&quot; &quot;X&quot;  &quot;6&quot; 
+<a id="__codelineno-49-9" name="__codelineno-49-9" href="#__codelineno-49-9"></a>
+<a id="__codelineno-49-10" name="__codelineno-49-10" href="#__codelineno-49-10"></a>[[4]]
+<a id="__codelineno-49-11" name="__codelineno-49-11" href="#__codelineno-49-11"></a>[1]   8762685  66560624  67545785 154039662
+</code></pre></div>
+</details>
+</div>
+<p>Notice that the items are not named and are simply given a numeric index within double square brackets <code>[[1]]</code>. In fact, you can create a list with a mixture of named and unnamed items. While this is still a valid way to create lists, it is not very user-friendly as we have no way of telling what information is stored in each of the items. Ideally, you should assign names to each item in the list when creating it to easily identify the kinds of information stored within it.</p>
+</div>
+<div class="admonition bell">
+<p class="admonition-title">Importance of correct symbols for adding items to lists</p>
+<p>Notice that we have used the assignment operator <code>&lt;-</code> to create 
+<code>snps_list</code> and the equal symbol <code>=</code> to add vectors to each item in the 
+list. When creating a vector, you can use either symbol to achieve the same 
+goal. However, when creating lists, the distinction between symbols is 
+<strong><em>NOT</em></strong> a stylistic choice and will affect the output. We can see what 
+happens if we were to change the <code>=</code> operator to <code>&lt;-</code> within the brackets.</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a><span class="n">wrong_operator</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span>
+<a id="__codelineno-50-2" name="__codelineno-50-2" href="#__codelineno-50-2"></a><span class="w">  </span><span class="n">genes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">snp_genes</span><span class="p">,</span>
+<a id="__codelineno-50-3" name="__codelineno-50-3" href="#__codelineno-50-3"></a><span class="w">  </span><span class="n">reference_snps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">snps</span><span class="p">,</span>
+<a id="__codelineno-50-4" name="__codelineno-50-4" href="#__codelineno-50-4"></a><span class="w">  </span><span class="n">chromosomes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">snp_chromosomes</span><span class="p">,</span>
+<a id="__codelineno-50-5" name="__codelineno-50-5" href="#__codelineno-50-5"></a><span class="w">  </span><span class="n">positions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">snp_positions</span>
+<a id="__codelineno-50-6" name="__codelineno-50-6" href="#__codelineno-50-6"></a><span class="p">)</span>
+<a id="__codelineno-50-7" name="__codelineno-50-7" href="#__codelineno-50-7"></a>
+<a id="__codelineno-50-8" name="__codelineno-50-8" href="#__codelineno-50-8"></a><span class="c1"># Call the list</span>
+<a id="__codelineno-50-9" name="__codelineno-50-9" href="#__codelineno-50-9"></a><span class="n">wrong_operator</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a>[[1]]
+<a id="__codelineno-51-2" name="__codelineno-51-2" href="#__codelineno-51-2"></a>[1] &quot;OXTR&quot;  &quot;ACTN3&quot; &quot;AR&quot;    &quot;OPRM1&quot;
+<a id="__codelineno-51-3" name="__codelineno-51-3" href="#__codelineno-51-3"></a>
+<a id="__codelineno-51-4" name="__codelineno-51-4" href="#__codelineno-51-4"></a>$reference_snps
+<a id="__codelineno-51-5" name="__codelineno-51-5" href="#__codelineno-51-5"></a>[1] &quot;rs53576&quot;   &quot;rs1815739&quot; &quot;rs6152&quot;    &quot;rs1799971&quot;
+<a id="__codelineno-51-6" name="__codelineno-51-6" href="#__codelineno-51-6"></a>
+<a id="__codelineno-51-7" name="__codelineno-51-7" href="#__codelineno-51-7"></a>$chromosomes
+<a id="__codelineno-51-8" name="__codelineno-51-8" href="#__codelineno-51-8"></a>[1] &quot;3&quot;  &quot;11&quot; &quot;X&quot;  &quot;6&quot; 
+<a id="__codelineno-51-9" name="__codelineno-51-9" href="#__codelineno-51-9"></a>
+<a id="__codelineno-51-10" name="__codelineno-51-10" href="#__codelineno-51-10"></a>$positions
+<a id="__codelineno-51-11" name="__codelineno-51-11" href="#__codelineno-51-11"></a>[1]   8762685  66560624  67545785 154039662
+</code></pre></div>
+</details>
+</div>
+<p>We can observe two things: </p>
+<ul>
+<li>The name for the first list item <code>genes</code> is now simply 
+  a numeric index <code>[[1]]</code></li>
+<li>There is an additional object in the global environment called <code>genes</code></li>
+</ul>
+<p>Switching the assignment operator adds an unnamed item in the list, 
+and creates a vector object called <code>genes</code> in the global environment. 
+Make certain to use the correct operator when creating lists to avoid 
+unintentionally populating your working environment.</p>
+</div>
+<h3 id="refer-to-items-in-a-list">Refer to items in a list<a class="headerlink" href="#refer-to-items-in-a-list" title="Permanent link">&para;</a></h3>
+<p>In the examples above, we refer to values in a vector using their indices 
+(e.g. <code>vector[c(2, 3)]</code>). For the named list we created, we can refer to the 
+name of the items themselves. Commonly, this is done using the <code>$</code> like so: 
+<code>list_name$object_name</code>. For example, we can retrieve gene positions from 
+<code>snps_list</code>:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a><span class="n">snps_list</span><span class="o">$</span><span class="n">positions</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a>[1]   8762685  66560624  67545785 154039662
+</code></pre></div>
+</details>
+</div>
+<p>There are also ways to refer to objects in a list using square brackets <code>[]</code> 
+(like for vectors). However, this method is more complex. 
+<a href="https://r4ds.had.co.nz/vectors.html#lists-of-condiments">This section</a> of the 
+linked tutorial provides a good analogy on how the brackets are interpreted in 
+R in the context of lists.</p>
+<h3 id="add-or-replace-items-in-a-list">Add or replace items in a list<a class="headerlink" href="#add-or-replace-items-in-a-list" title="Permanent link">&para;</a></h3>
+<p>We can also add items to lists. Let's add a logical vector to the list.</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1" href="#__codelineno-54-1"></a><span class="c1"># Create logical vector</span>
+<a id="__codelineno-54-2" name="__codelineno-54-2" href="#__codelineno-54-2"></a><span class="n">snps_DE</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
+<a id="__codelineno-54-3" name="__codelineno-54-3" href="#__codelineno-54-3"></a>
+<a id="__codelineno-54-4" name="__codelineno-54-4" href="#__codelineno-54-4"></a><span class="c1"># Add to list</span>
+<a id="__codelineno-54-5" name="__codelineno-54-5" href="#__codelineno-54-5"></a><span class="n">snps_list</span><span class="o">$</span><span class="n">DE_genes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">snps_DE</span>
+<a id="__codelineno-54-6" name="__codelineno-54-6" href="#__codelineno-54-6"></a>
+<a id="__codelineno-54-7" name="__codelineno-54-7" href="#__codelineno-54-7"></a><span class="c1"># Inspect list</span>
+<a id="__codelineno-54-8" name="__codelineno-54-8" href="#__codelineno-54-8"></a><span class="nf">str</span><span class="p">(</span><span class="n">snps_list</span><span class="p">)</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-55-1" name="__codelineno-55-1" href="#__codelineno-55-1"></a>List of 5
+<a id="__codelineno-55-2" name="__codelineno-55-2" href="#__codelineno-55-2"></a> $ genes         : chr [1:4] &quot;OXTR&quot; &quot;ACTN3&quot; &quot;AR&quot; &quot;OPRM1&quot;
+<a id="__codelineno-55-3" name="__codelineno-55-3" href="#__codelineno-55-3"></a> $ reference_snps: chr [1:4] &quot;rs53576&quot; &quot;rs1815739&quot; &quot;rs6152&quot; &quot;rs1799971&quot;
+<a id="__codelineno-55-4" name="__codelineno-55-4" href="#__codelineno-55-4"></a> $ chromosomes   : chr [1:4] &quot;3&quot; &quot;11&quot; &quot;X&quot; &quot;6&quot;
+<a id="__codelineno-55-5" name="__codelineno-55-5" href="#__codelineno-55-5"></a> $ positions     : num [1:4] 8.76e+06 6.66e+07 6.75e+07 1.54e+08
+<a id="__codelineno-55-6" name="__codelineno-55-6" href="#__codelineno-55-6"></a> $ DE_genes      : logi [1:4] TRUE FALSE FALSE TRUE
+</code></pre></div>
+</details>
+</div>
+<p>Now, <code>snps_list</code> has 5 items, the last of which is a logical vector that we 
+just added.</p>
+<p>To replace items in a list, we refer to the item, then assign it something 
+else. Let's say we want the <code>DE_genes</code> to be in numeric, instead of logical 
+mode.</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-56-1" name="__codelineno-56-1" href="#__codelineno-56-1"></a><span class="c1"># Replace DE_genes with a character vector</span>
+<a id="__codelineno-56-2" name="__codelineno-56-2" href="#__codelineno-56-2"></a><span class="n">snps_list</span><span class="o">$</span><span class="n">DE_genes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.numeric</span><span class="p">(</span><span class="n">snps_DE</span><span class="p">)</span>
+<a id="__codelineno-56-3" name="__codelineno-56-3" href="#__codelineno-56-3"></a>
+<a id="__codelineno-56-4" name="__codelineno-56-4" href="#__codelineno-56-4"></a><span class="c1"># Inspect list</span>
+<a id="__codelineno-56-5" name="__codelineno-56-5" href="#__codelineno-56-5"></a><span class="nf">str</span><span class="p">(</span><span class="n">snps_list</span><span class="p">)</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-57-1" name="__codelineno-57-1" href="#__codelineno-57-1"></a>List of 5
+<a id="__codelineno-57-2" name="__codelineno-57-2" href="#__codelineno-57-2"></a> $ genes         : chr [1:4] &quot;OXTR&quot; &quot;ACTN3&quot; &quot;AR&quot; &quot;OPRM1&quot;
+<a id="__codelineno-57-3" name="__codelineno-57-3" href="#__codelineno-57-3"></a> $ reference_snps: chr [1:4] &quot;rs53576&quot; &quot;rs1815739&quot; &quot;rs6152&quot; &quot;rs1799971&quot;
+<a id="__codelineno-57-4" name="__codelineno-57-4" href="#__codelineno-57-4"></a> $ chromosomes   : chr [1:4] &quot;3&quot; &quot;11&quot; &quot;X&quot; &quot;6&quot;
+<a id="__codelineno-57-5" name="__codelineno-57-5" href="#__codelineno-57-5"></a> $ positions     : num [1:4] 8.76e+06 6.66e+07 6.75e+07 1.54e+08
+<a id="__codelineno-57-6" name="__codelineno-57-6" href="#__codelineno-57-6"></a> $ DE_genes      : num [1:4] 1 0 0 1
+</code></pre></div>
+</details>
+</div>
+<p>Notice that <code>DE_genes</code> has turned into numeric mode from its original logical 
+mode, where <code>TRUE</code> is <code>1</code> and <code>FALSE</code> is <code>0</code>.</p>
+<p>Up till now, we have made a list that contain items with a vector length of 4. 
+There is no requirement that all items in lists to must have the same length. 
+Lists can have any number of items of different lengths. For example, let's add 
+a single number into the list:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-58-1" name="__codelineno-58-1" href="#__codelineno-58-1"></a><span class="c1"># Add a number to the list</span>
+<a id="__codelineno-58-2" name="__codelineno-58-2" href="#__codelineno-58-2"></a><span class="n">snps_list</span><span class="o">$</span><span class="n">sig_threshold</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">0.05</span>
+<a id="__codelineno-58-3" name="__codelineno-58-3" href="#__codelineno-58-3"></a>
+<a id="__codelineno-58-4" name="__codelineno-58-4" href="#__codelineno-58-4"></a><span class="c1"># Inspect list</span>
+<a id="__codelineno-58-5" name="__codelineno-58-5" href="#__codelineno-58-5"></a><span class="nf">str</span><span class="p">(</span><span class="n">snps_list</span><span class="p">)</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-59-1" name="__codelineno-59-1" href="#__codelineno-59-1"></a>List of 6
+<a id="__codelineno-59-2" name="__codelineno-59-2" href="#__codelineno-59-2"></a> $ genes         : chr [1:4] &quot;OXTR&quot; &quot;ACTN3&quot; &quot;AR&quot; &quot;OPRM1&quot;
+<a id="__codelineno-59-3" name="__codelineno-59-3" href="#__codelineno-59-3"></a> $ reference_snps: chr [1:4] &quot;rs53576&quot; &quot;rs1815739&quot; &quot;rs6152&quot; &quot;rs1799971&quot;
+<a id="__codelineno-59-4" name="__codelineno-59-4" href="#__codelineno-59-4"></a> $ chromosomes   : chr [1:4] &quot;3&quot; &quot;11&quot; &quot;X&quot; &quot;6&quot;
+<a id="__codelineno-59-5" name="__codelineno-59-5" href="#__codelineno-59-5"></a> $ positions     : num [1:4] 8.76e+06 6.66e+07 6.75e+07 1.54e+08
+<a id="__codelineno-59-6" name="__codelineno-59-6" href="#__codelineno-59-6"></a> $ DE_genes      : num [1:4] 1 0 0 1
+<a id="__codelineno-59-7" name="__codelineno-59-7" href="#__codelineno-59-7"></a> $ sig_threshold : num 0.05
+</code></pre></div>
+</details>
+</div>
+<h3 id="subset-or-remove-objects-from-a-list">Subset or remove objects from a list<a class="headerlink" href="#subset-or-remove-objects-from-a-list" title="Permanent link">&para;</a></h3>
+<p>Single square brackets <code>[]</code> can be used to subset a list based on the item's 
+index or name. The following code will subset the items <code>genes</code>, 
+<code>reference_snps</code>, and <code>sig_threshold</code> from <code>snps_list</code>.</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a><span class="c1"># Method 1: Use index</span>
+<a id="__codelineno-60-2" name="__codelineno-60-2" href="#__codelineno-60-2"></a><span class="c1"># We know the index of genes (1), reference_snps (2) and sig_threshold (6). </span>
+<a id="__codelineno-60-3" name="__codelineno-60-3" href="#__codelineno-60-3"></a><span class="n">sub_snps_list</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">snps_list</span><span class="p">[</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">6</span><span class="p">)]</span>
+<a id="__codelineno-60-4" name="__codelineno-60-4" href="#__codelineno-60-4"></a>
+<a id="__codelineno-60-5" name="__codelineno-60-5" href="#__codelineno-60-5"></a><span class="c1"># Inspect list</span>
+<a id="__codelineno-60-6" name="__codelineno-60-6" href="#__codelineno-60-6"></a><span class="nf">str</span><span class="p">(</span><span class="n">sub_snps_list</span><span class="p">)</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-61-1" name="__codelineno-61-1" href="#__codelineno-61-1"></a>List of 3
+<a id="__codelineno-61-2" name="__codelineno-61-2" href="#__codelineno-61-2"></a> $ genes         : chr [1:4] &quot;OXTR&quot; &quot;ACTN3&quot; &quot;AR&quot; &quot;OPRM1&quot;
+<a id="__codelineno-61-3" name="__codelineno-61-3" href="#__codelineno-61-3"></a> $ reference_snps: chr [1:4] &quot;rs53576&quot; &quot;rs1815739&quot; &quot;rs6152&quot; &quot;rs1799971&quot;
+<a id="__codelineno-61-4" name="__codelineno-61-4" href="#__codelineno-61-4"></a> $ sig_threshold : num 0.05
+</code></pre></div>
+</details>
+</div>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-62-1" name="__codelineno-62-1" href="#__codelineno-62-1"></a><span class="c1"># Method 2: Use names</span>
+<a id="__codelineno-62-2" name="__codelineno-62-2" href="#__codelineno-62-2"></a><span class="n">sub_snps_list</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">snps_list</span><span class="p">[</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;genes&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;reference_snps&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;sig_threshold&quot;</span><span class="p">)]</span>
+<a id="__codelineno-62-3" name="__codelineno-62-3" href="#__codelineno-62-3"></a>
+<a id="__codelineno-62-4" name="__codelineno-62-4" href="#__codelineno-62-4"></a><span class="c1"># Inspect list</span>
+<a id="__codelineno-62-5" name="__codelineno-62-5" href="#__codelineno-62-5"></a><span class="nf">str</span><span class="p">(</span><span class="n">sub_snps_list</span><span class="p">)</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-63-1" name="__codelineno-63-1" href="#__codelineno-63-1"></a>List of 3
+<a id="__codelineno-63-2" name="__codelineno-63-2" href="#__codelineno-63-2"></a> $ genes         : chr [1:4] &quot;OXTR&quot; &quot;ACTN3&quot; &quot;AR&quot; &quot;OPRM1&quot;
+<a id="__codelineno-63-3" name="__codelineno-63-3" href="#__codelineno-63-3"></a> $ reference_snps: chr [1:4] &quot;rs53576&quot; &quot;rs1815739&quot; &quot;rs6152&quot; &quot;rs1799971&quot;
+<a id="__codelineno-63-4" name="__codelineno-63-4" href="#__codelineno-63-4"></a> $ sig_threshold : num 0.05
+</code></pre></div>
+</details>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">List bracket notation</p>
+<p>When subsetting a list using single square brackets <code>[]</code>, the result is 
+always a list. To access the vector directly, we need to use double square
+brackets <code>[[]]</code>. For example:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-64-1" name="__codelineno-64-1" href="#__codelineno-64-1"></a><span class="c1"># Return the vector in a list</span>
+<a id="__codelineno-64-2" name="__codelineno-64-2" href="#__codelineno-64-2"></a><span class="n">snps_list</span><span class="p">[</span><span class="s">&quot;chromosomes&quot;</span><span class="p">]</span>
+<a id="__codelineno-64-3" name="__codelineno-64-3" href="#__codelineno-64-3"></a>
+<a id="__codelineno-64-4" name="__codelineno-64-4" href="#__codelineno-64-4"></a><span class="c1"># Return the vector directly</span>
+<a id="__codelineno-64-5" name="__codelineno-64-5" href="#__codelineno-64-5"></a><span class="n">snps_list</span><span class="p">[[</span><span class="s">&quot;chromosomes&quot;</span><span class="p">]]</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-65-1" name="__codelineno-65-1" href="#__codelineno-65-1"></a>$chromosomes
+<a id="__codelineno-65-2" name="__codelineno-65-2" href="#__codelineno-65-2"></a>[1] &quot;3&quot;  &quot;11&quot; &quot;X&quot;  &quot;6&quot;
+<a id="__codelineno-65-3" name="__codelineno-65-3" href="#__codelineno-65-3"></a>
+<a id="__codelineno-65-4" name="__codelineno-65-4" href="#__codelineno-65-4"></a>[1] &quot;3&quot;  &quot;11&quot; &quot;X&quot;  &quot;6&quot;
+</code></pre></div>
+</details>
+</div>
+</div>
+<p>To remove objects in a list, we first refer to it, then assign it as <code>NULL</code>.</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-66-1" name="__codelineno-66-1" href="#__codelineno-66-1"></a><span class="c1"># Remove sig_threshold</span>
+<a id="__codelineno-66-2" name="__codelineno-66-2" href="#__codelineno-66-2"></a><span class="n">sub_snps_list</span><span class="o">$</span><span class="n">sig_threshold</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="kc">NULL</span>
+<a id="__codelineno-66-3" name="__codelineno-66-3" href="#__codelineno-66-3"></a>
+<a id="__codelineno-66-4" name="__codelineno-66-4" href="#__codelineno-66-4"></a><span class="c1"># Inspect list</span>
+<a id="__codelineno-66-5" name="__codelineno-66-5" href="#__codelineno-66-5"></a><span class="nf">str</span><span class="p">(</span><span class="n">sub_snps_list</span><span class="p">)</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-67-1" name="__codelineno-67-1" href="#__codelineno-67-1"></a>List of 2
+<a id="__codelineno-67-2" name="__codelineno-67-2" href="#__codelineno-67-2"></a> $ genes         : chr [1:4] &quot;OXTR&quot; &quot;ACTN3&quot; &quot;AR&quot; &quot;OPRM1&quot;
+<a id="__codelineno-67-3" name="__codelineno-67-3" href="#__codelineno-67-3"></a> $ reference_snps: chr [1:4] &quot;rs53576&quot; &quot;rs1815739&quot; &quot;rs6152&quot; &quot;rs1799971&quot;
+</code></pre></div>
+</details>
+</div>
+<p>Et voilà! The numeric vector <code>sig_threshold</code> is no longer a part of 
+<code>sub_snps_list</code>.</p>
+<h3 id="nested-list">Nested list<a class="headerlink" href="#nested-list" title="Permanent link">&para;</a></h3>
+<p>A defining feature of lists is that it can be nested (i.e., lists can be stored inside of a list). This property allows the storage of data that are structured hierarchically or in a tree-like fashion (i.e., dendrograms). It is also useful for storing different types of data in an organised manner (e.g., a list of model values with a nested list that contains sample information or metadata). You will undoubtedly encounter complex nested list structures in your R journey. The majority of the time, we are only concerned with referring to or subsetting nested lists. With that in mind, let's start with creating a nested list followed by an example on subsetting.</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-68-1" name="__codelineno-68-1" href="#__codelineno-68-1"></a><span class="c1"># Create nested list</span>
+<a id="__codelineno-68-2" name="__codelineno-68-2" href="#__codelineno-68-2"></a><span class="n">nested_snps_list</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span>
+<a id="__codelineno-68-3" name="__codelineno-68-3" href="#__codelineno-68-3"></a><span class="w">  </span><span class="n">gene</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">snp_genes</span><span class="p">,</span>
+<a id="__codelineno-68-4" name="__codelineno-68-4" href="#__codelineno-68-4"></a><span class="w">  </span><span class="n">snp_info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span>
+<a id="__codelineno-68-5" name="__codelineno-68-5" href="#__codelineno-68-5"></a><span class="w">    </span><span class="n">reference</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">snps</span><span class="p">,</span>
+<a id="__codelineno-68-6" name="__codelineno-68-6" href="#__codelineno-68-6"></a><span class="w">    </span><span class="n">chromosome</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">snp_chromosomes</span><span class="p">,</span>
+<a id="__codelineno-68-7" name="__codelineno-68-7" href="#__codelineno-68-7"></a><span class="w">    </span><span class="n">position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">snp_positions</span>
+<a id="__codelineno-68-8" name="__codelineno-68-8" href="#__codelineno-68-8"></a><span class="w">  </span><span class="p">),</span>
+<a id="__codelineno-68-9" name="__codelineno-68-9" href="#__codelineno-68-9"></a><span class="w">  </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span>
+<a id="__codelineno-68-10" name="__codelineno-68-10" href="#__codelineno-68-10"></a><span class="w">    </span><span class="n">DE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">snps_DE</span><span class="p">,</span>
+<a id="__codelineno-68-11" name="__codelineno-68-11" href="#__codelineno-68-11"></a><span class="w">    </span><span class="n">threshold</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.05</span>
+<a id="__codelineno-68-12" name="__codelineno-68-12" href="#__codelineno-68-12"></a><span class="w">  </span><span class="p">),</span>
+<a id="__codelineno-68-13" name="__codelineno-68-13" href="#__codelineno-68-13"></a><span class="w">  </span><span class="n">metadata</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span>
+<a id="__codelineno-68-14" name="__codelineno-68-14" href="#__codelineno-68-14"></a><span class="w">    </span><span class="n">sample_group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span>
+<a id="__codelineno-68-15" name="__codelineno-68-15" href="#__codelineno-68-15"></a><span class="w">      </span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;S1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;S2&quot;</span><span class="p">),</span>
+<a id="__codelineno-68-16" name="__codelineno-68-16" href="#__codelineno-68-16"></a><span class="w">      </span><span class="n">B</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;S3&quot;</span><span class="p">,</span>
+<a id="__codelineno-68-17" name="__codelineno-68-17" href="#__codelineno-68-17"></a><span class="w">      </span><span class="n">C</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;S4&quot;</span>
+<a id="__codelineno-68-18" name="__codelineno-68-18" href="#__codelineno-68-18"></a><span class="w">    </span><span class="p">)</span>
+<a id="__codelineno-68-19" name="__codelineno-68-19" href="#__codelineno-68-19"></a><span class="w">  </span><span class="p">)</span>
+<a id="__codelineno-68-20" name="__codelineno-68-20" href="#__codelineno-68-20"></a><span class="p">)</span>
+</code></pre></div>
+</div>
+<div class="admonition bell">
+<p class="admonition-title">Reminder</p>
+<p>Again, make sure to highlight, copy, paste, and run the entire code block!</p>
+</div>
+<p>Inspect the list structure:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-69-1" name="__codelineno-69-1" href="#__codelineno-69-1"></a><span class="nf">str</span><span class="p">(</span><span class="n">nested_snps_list</span><span class="p">)</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-70-1" name="__codelineno-70-1" href="#__codelineno-70-1"></a>List of 4
+<a id="__codelineno-70-2" name="__codelineno-70-2" href="#__codelineno-70-2"></a> $ gene    : chr [1:4] &quot;OXTR&quot; &quot;ACTN3&quot; &quot;AR&quot; &quot;OPRM1&quot;
+<a id="__codelineno-70-3" name="__codelineno-70-3" href="#__codelineno-70-3"></a> $ snp_info:List of 3
+<a id="__codelineno-70-4" name="__codelineno-70-4" href="#__codelineno-70-4"></a>  ..$ reference : chr [1:4] &quot;rs53576&quot; &quot;rs1815739&quot; &quot;rs6152&quot; &quot;rs1799971&quot;
+<a id="__codelineno-70-5" name="__codelineno-70-5" href="#__codelineno-70-5"></a>  ..$ chromosome: chr [1:4] &quot;3&quot; &quot;11&quot; &quot;X&quot; &quot;6&quot;
+<a id="__codelineno-70-6" name="__codelineno-70-6" href="#__codelineno-70-6"></a>  ..$ position  : num [1:4] 8.76e+06 6.66e+07 6.75e+07 1.54e+08
+<a id="__codelineno-70-7" name="__codelineno-70-7" href="#__codelineno-70-7"></a> $ result  :List of 2
+<a id="__codelineno-70-8" name="__codelineno-70-8" href="#__codelineno-70-8"></a>  ..$ DE       : logi [1:4] TRUE FALSE FALSE TRUE
+<a id="__codelineno-70-9" name="__codelineno-70-9" href="#__codelineno-70-9"></a>  ..$ threshold: num 0.05
+<a id="__codelineno-70-10" name="__codelineno-70-10" href="#__codelineno-70-10"></a> $ metadata:List of 1
+<a id="__codelineno-70-11" name="__codelineno-70-11" href="#__codelineno-70-11"></a>  ..$ sample_group:List of 3
+<a id="__codelineno-70-12" name="__codelineno-70-12" href="#__codelineno-70-12"></a>  .. ..$ A: chr [1:2] &quot;S1&quot; &quot;S2&quot;
+<a id="__codelineno-70-13" name="__codelineno-70-13" href="#__codelineno-70-13"></a>  .. ..$ B: chr &quot;S3&quot;
+<a id="__codelineno-70-14" name="__codelineno-70-14" href="#__codelineno-70-14"></a>  .. ..$ C: chr &quot;S4&quot;
+</code></pre></div>
+</details>
+</div>
+<p>Phew! There's quite a bit of information here! Let's break it down.</p>
+<ul>
+<li>We have created a list with 4 objects, each of which contain different 
+  objects and modes: list, character, numeric, and logical.</li>
+<li><code>snp_info</code> and <code>result</code> are nested lists with structures we have encountered 
+  before.<ul>
+<li>They each have vectors of varying modes.</li>
+<li><code>result</code> has vectors of varying lengths.</li>
+</ul>
+</li>
+<li>The nested list <code>metadata</code> is the <em>parent</em> of <code>sample_group</code>.<ul>
+<li><code>sample_group</code> has <em>children</em> <code>A</code>, <code>B</code>, and <code>C</code>, all of which are 
+  character vectors.</li>
+</ul>
+</li>
+</ul>
+<p>Now we can subset/retrieve some of the information in the nested list. As we 
+are working with named lists (and sub-lists), it is easier to use the <code>$</code> 
+method. Let's subset the <code>chromosome</code> vector</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-71-1" name="__codelineno-71-1" href="#__codelineno-71-1"></a><span class="n">nested_snps_list</span><span class="o">$</span><span class="n">snp_info</span><span class="o">$</span><span class="n">chromosome</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-72-1" name="__codelineno-72-1" href="#__codelineno-72-1"></a>[1] &quot;3&quot;  &quot;11&quot; &quot;X&quot;  &quot;6&quot; 
+</code></pre></div>
+</details>
+</div>
+<p>If you want to use the index and square brackets method:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-73-1" name="__codelineno-73-1" href="#__codelineno-73-1"></a><span class="n">nested_snps_list</span><span class="p">[[</span><span class="m">2</span><span class="p">]][[</span><span class="m">2</span><span class="p">]]</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-74-1" name="__codelineno-74-1" href="#__codelineno-74-1"></a>[1] &quot;3&quot;  &quot;11&quot; &quot;X&quot;  &quot;6&quot; 
+</code></pre></div>
+</details>
+</div>
+<p>You can read the above code as "the second item (here, a character vector) of 
+the second item (a list)"</p>
+<p>You can retrieve objects from deeply nested lists as long as you know the 
+object's name or index, and how it is structured (parent-child hierarchy).</p>
+<h2 id="review-exercises">Review exercises<a class="headerlink" href="#review-exercises" title="Permanent link">&para;</a></h2>
+<div class="admonition question">
+<p class="admonition-title">Exercise 1</p>
+<p>What data modes are the following vectors?</p>
+<p>a. <code>snps</code> <br>
+b. <code>snp_chromosomes</code> <br>
+c. <code>snp_positions</code></p>
+<details class="success">
+<summary>Solution</summary>
+<p>Use <code>mode()</code> to find out.</p>
+<p>a. Character <br>
+b. Character <br>
+c. Numeric</p>
+</details>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Exercise 2</p>
+<p>Add the following values to the specified vectors: </p>
+<p>a. To the <code>snps</code> vector add: “rs662799” <br>
+b. To the <code>snp_chromosomes</code> vector add: 11 <br>
+c. To the <code>snp_positions</code> vector add: 116792991</p>
+<details class="success">
+<summary>Solution</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-75-1" name="__codelineno-75-1" href="#__codelineno-75-1"></a><span class="c1"># Answer (a)</span>
+<a id="__codelineno-75-2" name="__codelineno-75-2" href="#__codelineno-75-2"></a><span class="n">snps</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">snps</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;rs662799&quot;</span><span class="p">)</span>
+<a id="__codelineno-75-3" name="__codelineno-75-3" href="#__codelineno-75-3"></a>
+<a id="__codelineno-75-4" name="__codelineno-75-4" href="#__codelineno-75-4"></a><span class="c1"># Answer (b)</span>
+<a id="__codelineno-75-5" name="__codelineno-75-5" href="#__codelineno-75-5"></a><span class="n">snp_chromosomes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">snp_chromosomes</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;11&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1"># Did you use quotes?</span>
+<a id="__codelineno-75-6" name="__codelineno-75-6" href="#__codelineno-75-6"></a>
+<a id="__codelineno-75-7" name="__codelineno-75-7" href="#__codelineno-75-7"></a><span class="c1"># Answer (c)</span>
+<a id="__codelineno-75-8" name="__codelineno-75-8" href="#__codelineno-75-8"></a><span class="n">snp_positions</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">snp_positions</span><span class="p">,</span><span class="w"> </span><span class="m">116792991</span><span class="p">)</span>
+</code></pre></div>
+</details>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Exercise 3</p>
+<p>Make the following change to the <code>snp_genes</code> vector:</p>
+<p>Hint: Your vector should look like this in ‘Environment’: <br>
+<code>chr [1:7] "OXTR" "ACTN3" "AR" "OPRM1" "CYP1A1" NA "APOA5"</code>. <br>
+If not recreate the vector by running this: <br></p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-76-1" name="__codelineno-76-1" href="#__codelineno-76-1"></a><span class="n">snp_genes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;OXTR&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;ACTN3&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;AR&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;OPRM1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;CYP1A1&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;APOA5&quot;</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<p>a. Create a new version of <code>snp_genes</code> that does not contain "CYP1A1" and then <br>
+b. Add 2 NA values to the end of <code>snp_genes</code></p>
+<details class="success">
+<summary>Solution</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-77-1" name="__codelineno-77-1" href="#__codelineno-77-1"></a><span class="c1"># Answer (a)</span>
+<a id="__codelineno-77-2" name="__codelineno-77-2" href="#__codelineno-77-2"></a><span class="n">snp_genes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">snp_genes</span><span class="p">[</span><span class="m">-5</span><span class="p">]</span>
+<a id="__codelineno-77-3" name="__codelineno-77-3" href="#__codelineno-77-3"></a><span class="c1"># or use logical subsetting</span>
+<a id="__codelineno-77-4" name="__codelineno-77-4" href="#__codelineno-77-4"></a><span class="n">snp_genes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">snp_genes</span><span class="p">[</span><span class="n">snp_genes</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s">&quot;CYP1A1&quot;</span><span class="p">]</span>
+<a id="__codelineno-77-5" name="__codelineno-77-5" href="#__codelineno-77-5"></a>
+<a id="__codelineno-77-6" name="__codelineno-77-6" href="#__codelineno-77-6"></a><span class="c1"># Answer (c)</span>
+<a id="__codelineno-77-7" name="__codelineno-77-7" href="#__codelineno-77-7"></a><span class="n">snp_genes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">snp_genes</span><span class="p">,</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span>
+</code></pre></div>
+</details>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Exercise 4</p>
+<p>Using indexing, create a new vector named <code>combined</code> that contains:</p>
+<ul>
+<li>The the 1<sup>st</sup> value in <code>snp_genes</code></li>
+<li>The 1<sup>st</sup> value in <code>snps</code></li>
+<li>The 1<sup>st</sup> value in <code>snp_chromosomes</code></li>
+<li>The 1<sup>st</sup> value in <code>snp_positions</code></li>
+</ul>
+<details class="success">
+<summary>Solution</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-78-1" name="__codelineno-78-1" href="#__codelineno-78-1"></a><span class="n">combined</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span>
+<a id="__codelineno-78-2" name="__codelineno-78-2" href="#__codelineno-78-2"></a><span class="w">  </span><span class="n">snp_genes</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w"> </span>
+<a id="__codelineno-78-3" name="__codelineno-78-3" href="#__codelineno-78-3"></a><span class="w">  </span><span class="n">snps</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w"> </span>
+<a id="__codelineno-78-4" name="__codelineno-78-4" href="#__codelineno-78-4"></a><span class="w">  </span><span class="n">snp_chromosomes</span><span class="p">[</span><span class="m">1</span><span class="p">],</span><span class="w"> </span>
+<a id="__codelineno-78-5" name="__codelineno-78-5" href="#__codelineno-78-5"></a><span class="w">  </span><span class="n">snp_positions</span><span class="p">[</span><span class="m">1</span><span class="p">]</span>
+<a id="__codelineno-78-6" name="__codelineno-78-6" href="#__codelineno-78-6"></a><span class="p">)</span>
+</code></pre></div>
+</details>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Exercise 5</p>
+<p>What type of data is <code>combined</code>?</p>
+<details class="success">
+<summary>Solution</summary>
+<p>It is a character vector. Use <code>typeof()</code> to find out.</p>
+</details>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.50899def.min.js"></script>
+      
+        <script src="../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>

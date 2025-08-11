@@ -1,0 +1,1666 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Genomics Aotearoa">
+      
+      
+        <link rel="canonical" href="https://genomicsaotearoa.github.io/Introduction-to-R/appendix/05-dplyr/">
+      
+      
+        <link rel="prev" href="../04-bioconductor-vcfr/">
+      
+      
+      
+      <link rel="icon" href="../../theme_figures/nesi_ga.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.16">
+    
+    
+      
+        <title>Data Wrangling and Analyses with Tidyverse - Introduction to R</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Mukta";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#data-wrangling-and-analyses-with-tidyverse" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Introduction to R" class="md-header__button md-logo" aria-label="Introduction to R" data-md-component="logo">
+      
+  <img src="../../theme_figures/nesi_ga.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Introduction to R
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Data Wrangling and Analyses with Tidyverse
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/GenomicsAotearoa/Introduction-to-R" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GenomicsAotearoa/Introduction-to-R
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Introduction to R" class="md-nav__button md-logo" aria-label="Introduction to R" data-md-component="logo">
+      
+  <img src="../../theme_figures/nesi_ga.png" alt="logo">
+
+    </a>
+    Introduction to R
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/GenomicsAotearoa/Introduction-to-R" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GenomicsAotearoa/Introduction-to-R
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../00-introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introducing R and RStudio IDE
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01-r-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    R Basics
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02-data-prelude/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction to the example dataset and file type
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03-basics-factors-dataframes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    R Basics continued - factors and data frames
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06-data-visualization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data Visualization with ggplot2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07-knitr-markdown/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Producing Reports With knitr
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../08-r-help/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Getting help with R
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Appendix
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            Appendix
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-bioconductor-vcfr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Using packages from Bioconductor
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Data Wrangling and Analyses with Tidyverse
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data Wrangling and Analyses with Tidyverse
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-dplyr" class="md-nav__link">
+    <span class="md-ellipsis">
+      What is dplyr?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#loading-csv-files-in-tidy-style" class="md-nav__link">
+    <span class="md-ellipsis">
+      Loading .csv files in tidy style
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#taking-a-quick-look-at-data-frames" class="md-nav__link">
+    <span class="md-ellipsis">
+      Taking a quick look at data frames
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#selecting-columns-and-filtering-rows" class="md-nav__link">
+    <span class="md-ellipsis">
+      Selecting columns and filtering rows
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pipes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pipes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mutate" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mutate
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#group_by-and-summarize-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      group_by() and summarize() functions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reshaping-data-frames" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reshaping data frames
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resources
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-dplyr" class="md-nav__link">
+    <span class="md-ellipsis">
+      What is dplyr?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#loading-csv-files-in-tidy-style" class="md-nav__link">
+    <span class="md-ellipsis">
+      Loading .csv files in tidy style
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#taking-a-quick-look-at-data-frames" class="md-nav__link">
+    <span class="md-ellipsis">
+      Taking a quick look at data frames
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#selecting-columns-and-filtering-rows" class="md-nav__link">
+    <span class="md-ellipsis">
+      Selecting columns and filtering rows
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pipes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pipes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mutate" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mutate
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#group_by-and-summarize-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      group_by() and summarize() functions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reshaping-data-frames" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reshaping data frames
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resources
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="data-wrangling-and-analyses-with-tidyverse">Data Wrangling and Analyses with Tidyverse<a class="headerlink" href="#data-wrangling-and-analyses-with-tidyverse" title="Permanent link">&para;</a></h1>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Key points</label><label for="__tabbed_1_2">Objectives</label><label for="__tabbed_1_3">Questions</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<ul>
+<li>Use the <code>dplyr</code> package to manipulate data frames.</li>
+<li>Use <code>glimpse()</code> to quickly look at your data frame.</li>
+<li>Use <code>select()</code> to choose variables from a data frame.</li>
+<li>Use <code>filter()</code> to choose data based on values.</li>
+<li>Use <code>mutate()</code> to create new variables.</li>
+<li>Use <code>group_by()</code> and <code>summarize()</code> to work with subsets of data.</li>
+</ul>
+</div>
+<div class="tabbed-block">
+<ul>
+<li>Describe what the <code>dplyr</code> package in R is used for.</li>
+<li>Apply common <code>dplyr</code> functions to manipulate data in R.</li>
+<li>Employ the 'pipe' operator to link together a sequence of functions.</li>
+<li>Employ the 'mutate' function to apply other chosen functions to existing columns and create new columns of data.</li>
+<li>Employ the 'split-apply-combine' concept to split the data into groups, apply analysis to each group, and combine the results.</li>
+</ul>
+</div>
+<div class="tabbed-block">
+<ul>
+<li>How can I manipulate data frames without repeating myself?</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<p>Bracket subsetting is handy, but it can be cumbersome and difficult to
+read, especially for complicated operations.</p>
+<p>Luckily, the <a href="https://cran.r-project.org/package=dplyr"><code>dplyr</code></a> package
+provides a number of very useful functions for manipulating data frames
+in a way that will reduce repetition, reduce the probability of making
+errors, and probably even save you some typing. As an added bonus, you
+might even find the <code>dplyr</code> grammar easier to read.</p>
+<p>Here we're going to cover some of the most commonly used functions as
+well as using pipes (<code>%&gt;%</code>) to combine them:</p>
+<ol>
+<li><code>glimpse()</code></li>
+<li><code>select()</code></li>
+<li><code>filter()</code></li>
+<li><code>group_by()</code></li>
+<li><code>summarize()</code></li>
+<li><code>mutate()</code></li>
+<li><code>pivot_longer</code> and <code>pivot_wider</code></li>
+</ol>
+<p>Packages in R are sets of additional functions that let you do more
+stuff in R. The functions we've been using, like <code>str()</code>, come built
+into R; packages give you access to more functions. You need to install
+a package and then load it to be able to use it.</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Installs dplyr package </span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nf">install.packages</span><span class="p">(</span><span class="s">&quot;dplyr&quot;</span><span class="p">)</span><span class="w"> </span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="c1"># Installs tidyr package </span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="nf">install.packages</span><span class="p">(</span><span class="s">&quot;tidyr&quot;</span><span class="p">)</span><span class="w"> </span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="c1"># Installs ggplot2 package </span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="nf">install.packages</span><span class="p">(</span><span class="s">&quot;ggplot2&quot;</span><span class="p">)</span><span class="w"> </span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="c1"># Install readr package`</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="nf">install.packages</span><span class="p">(</span><span class="s">&quot;readr&quot;</span><span class="p">)</span><span class="w"> </span>
+</code></pre></div>
+</div>
+<p>You might get asked to choose a CRAN mirror — this is asking you to
+choose a site to download the package from. The choice doesn't matter
+too much; I'd recommend choosing the RStudio mirror.</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># Loads in dplyr package to use </span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nf">library</span><span class="p">(</span><span class="s">&quot;dplyr&quot;</span><span class="p">)</span><span class="w">          </span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="c1"># Loads in tidyr package to use </span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="nf">library</span><span class="p">(</span><span class="s">&quot;tidyr&quot;</span><span class="p">)</span><span class="w">          </span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="c1"># Loads in ggplot2 package to use </span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="nf">library</span><span class="p">(</span><span class="s">&quot;ggplot2&quot;</span><span class="p">)</span><span class="w">          </span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="c1"># Load in readr package to use`</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="nf">library</span><span class="p">(</span><span class="s">&quot;readr&quot;</span><span class="p">)</span><span class="w">          </span>
+</code></pre></div>
+</div>
+<p>You only need to install a package once per computer, but you need to
+load it every time you open a new R session and want to use that
+package.</p>
+<div class="admonition tip">
+<p class="admonition-title">Installing packages</p>
+<p>It may be temping to install the <code>tidyverse</code> package, as it contains
+many useful collection of packages for this lesson and beyond.
+However, when teaching or following this lesson, we advise that
+participants install <code>dplyr</code>, <code>readr</code>, <code>ggplot2</code>, and <code>tidyr</code>
+individually as shown above. Otherwise, a substantial amount of the
+lesson will be spent waiting for the installation to complete.</p>
+</div>
+<h2 id="what-is-dplyr">What is dplyr?<a class="headerlink" href="#what-is-dplyr" title="Permanent link">&para;</a></h2>
+<p>The package <code>dplyr</code> tries to provide easy tools for the most common data 
+manipulation tasks. This package is also included in the <a href="https://www.tidyverse.org/"><code>tidyverse</code> 
+package</a>, which is a collection of eight different 
+packages (<code>dplyr</code>, <code>ggplot2</code>, <code>tibble</code>, <code>tidyr</code>, <code>readr</code>, <code>purrr</code>, <code>stringr</code>, 
+and <code>forcats</code>). It is built to work directly with data frames. The thinking 
+behind it was largely inspired by the package <code>plyr</code> which has been in use for 
+some time but suffered from being slow in some cases.<code>dplyr</code> addresses this by 
+porting much of the computation to C++. An additional feature is the ability to 
+work with data stored directly in an external database. The benefits of doing 
+this are that the data can be managed natively in a relational database, queries 
+can be conducted on that database, and only the results of the query returned.</p>
+<p>This addresses a common problem with R in that all operations are
+conducted in memory and thus the amount of data you can work with is
+limited by available memory. The database connections essentially remove
+that limitation in that you can have a database that is over 100s of GB,
+conduct queries on it directly and pull back just what you need for
+analysis in R.</p>
+<h2 id="loading-csv-files-in-tidy-style">Loading .csv files in tidy style<a class="headerlink" href="#loading-csv-files-in-tidy-style" title="Permanent link">&para;</a></h2>
+<p>Tidyverse's <code>readr</code> package provides its own unique way of loading
+<code>.csv</code> files in to R using <code>read_csv()</code>, which is similar to <code>read.csv()</code>.
+<code>read_csv()</code> allows users to load in their data faster, doesn't create
+row names, and allows you to access non-standard variable names (ie.
+variables that start with numbers of contain spaces), and outputs your
+data on the R console in a tidier way. In short, it's a much friendlier
+way of loading in potentially messy data.</p>
+<p>Now let's load our vcf .csv file using <code>read_csv()</code>:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">variants</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read_csv</span><span class="p">(</span><span class="s">&quot;combined_tidy_vcf.csv&quot;</span><span class="p">)</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Rows: 801 Columns: 29
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>── Column specification ────────────────────────────────────────────────────────────────────────
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>Delimiter: &quot;,&quot;
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>chr  (7): sample_id, CHROM, REF, ALT, DP4, Indiv, gt_GT_alleles
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>dbl (16): POS, QUAL, IDV, IMF, DP, VDB, RPB, MQB, BQB, MQSB, SGB, MQ0F, AC, AN, MQ, gt_GT
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>num  (1): gt_PL
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>lgl  (5): ID, FILTER, INDEL, ICB, HOB
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>ℹ Use `spec()` to retrieve the full column specification for this data.
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+</code></pre></div>
+</details>
+</div>
+<h2 id="taking-a-quick-look-at-data-frames">Taking a quick look at data frames<a class="headerlink" href="#taking-a-quick-look-at-data-frames" title="Permanent link">&para;</a></h2>
+<p>Similar to <code>str()</code>, which comes built into R, <code>glimpse()</code> is a <code>dplyr</code>
+function that (as the name suggests) gives a glimpse of the data frame.</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nf">glimpse</span><span class="p">(</span><span class="n">variants</span><span class="p">)</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>Rows: 801
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>Columns: 29
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>$ sample_id     &lt;chr&gt; &quot;SRR2584863&quot;, &quot;SRR2584863&quot;, &quot;SRR2584863&quot;, &quot;SRR2584863&quot;, &quot;SRR2584863&quot;, &quot;S…
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>$ CHROM         &lt;chr&gt; &quot;CP000819.1&quot;, &quot;CP000819.1&quot;, &quot;CP000819.1&quot;, &quot;CP000819.1&quot;, &quot;CP000819.1&quot;, &quot;C…
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>$ POS           &lt;dbl&gt; 9972, 263235, 281923, 433359, 473901, 648692, 1331794, 1733343, 2103887,…
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>$ ID            &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>$ REF           &lt;chr&gt; &quot;T&quot;, &quot;G&quot;, &quot;G&quot;, &quot;CTTTTTTT&quot;, &quot;CCGC&quot;, &quot;C&quot;, &quot;C&quot;, &quot;G&quot;, &quot;ACAGCCAGCCAGCCAGCCAGC…
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>$ ALT           &lt;chr&gt; &quot;G&quot;, &quot;T&quot;, &quot;T&quot;, &quot;CTTTTTTTT&quot;, &quot;CCGCGC&quot;, &quot;T&quot;, &quot;A&quot;, &quot;A&quot;, &quot;ACAGCCAGCCAGCCAGCC…
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>$ QUAL          &lt;dbl&gt; 91.0000, 85.0000, 217.0000, 64.0000, 228.0000, 210.0000, 178.0000, 225.0…
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>$ FILTER        &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>$ INDEL         &lt;lgl&gt; FALSE, FALSE, FALSE, TRUE, TRUE, FALSE, FALSE, FALSE, TRUE, TRUE, FALSE,…
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>$ IDV           &lt;dbl&gt; NA, NA, NA, 12, 9, NA, NA, NA, 2, 7, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>$ IMF           &lt;dbl&gt; NA, NA, NA, 1.000000, 0.900000, NA, NA, NA, 0.666667, 1.000000, NA, NA, …
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>$ DP            &lt;dbl&gt; 4, 6, 10, 12, 10, 10, 8, 11, 3, 7, 9, 20, 12, 19, 15, 10, 14, 9, 13, 2, …
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>$ VDB           &lt;dbl&gt; 0.0257451, 0.0961330, 0.7740830, 0.4777040, 0.6595050, 0.2680140, 0.6240…
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>$ RPB           &lt;dbl&gt; NA, 1.000000, NA, NA, NA, NA, NA, NA, NA, NA, 0.900802, NA, 0.954207, NA…
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>$ MQB           &lt;dbl&gt; NA, 1.0000000, NA, NA, NA, NA, NA, NA, NA, NA, 0.1501340, NA, 0.0497871,…
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>$ BQB           &lt;dbl&gt; NA, 1.000000, NA, NA, NA, NA, NA, NA, NA, NA, 0.750668, NA, 0.774755, NA…
+<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a>$ MQSB          &lt;dbl&gt; NA, NA, 0.974597, 1.000000, 0.916482, 0.916482, 0.900802, 1.007750, 1.00…
+<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a>$ SGB           &lt;dbl&gt; -0.556411, -0.590765, -0.662043, -0.676189, -0.662043, -0.670168, -0.651…
+<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a>$ MQ0F          &lt;dbl&gt; 0.000000, 0.166667, 0.000000, 0.000000, 0.000000, 0.000000, 0.000000, 0.…
+<a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a>$ ICB           &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …
+<a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a>$ HOB           &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …
+<a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a>$ AC            &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …
+<a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a>$ AN            &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …
+<a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a>$ DP4           &lt;chr&gt; &quot;0,0,0,4&quot;, &quot;0,1,0,5&quot;, &quot;0,0,4,5&quot;, &quot;0,1,3,8&quot;, &quot;1,0,2,7&quot;, &quot;0,0,7,3&quot;, &quot;0,0,3…
+<a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a>$ MQ            &lt;dbl&gt; 60, 33, 60, 60, 60, 60, 60, 60, 60, 60, 25, 60, 10, 60, 60, 60, 60, 60, …
+<a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a>$ Indiv         &lt;chr&gt; &quot;/home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam&quot;, &quot;/…
+<a id="__codelineno-5-29" name="__codelineno-5-29" href="#__codelineno-5-29"></a>$ gt_PL         &lt;dbl&gt; 1210, 1120, 2470, 910, 2550, 2400, 2080, 2550, 11128, 1940, 1310, 2550, …
+<a id="__codelineno-5-30" name="__codelineno-5-30" href="#__codelineno-5-30"></a>$ gt_GT         &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …
+<a id="__codelineno-5-31" name="__codelineno-5-31" href="#__codelineno-5-31"></a>$ gt_GT_alleles &lt;chr&gt; &quot;G&quot;, &quot;T&quot;, &quot;T&quot;, &quot;CTTTTTTTT&quot;, &quot;CCGCGC&quot;, &quot;T&quot;, &quot;A&quot;, &quot;A&quot;, &quot;ACAGCCAGCCAGCCAGCC…
+</code></pre></div>
+</details>
+</div>
+<p>In the above output, we can already gather some information about
+<code>variants</code>, such as the number of rows and columns, column names, type
+of vector in the columns, and the first few entries of each column.
+Although what we see is similar to outputs of <code>str()</code>, this method gives
+a cleaner visual output.</p>
+<h2 id="selecting-columns-and-filtering-rows">Selecting columns and filtering rows<a class="headerlink" href="#selecting-columns-and-filtering-rows" title="Permanent link">&para;</a></h2>
+<p>To select columns of a data frame, use <code>select()</code>. The first argument to
+this function is the data frame (<code>variants</code>), and the subsequent
+arguments are the columns to keep.</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nf">select</span><span class="p">(</span><span class="n">variants</span><span class="p">,</span><span class="w"> </span><span class="n">sample_id</span><span class="p">,</span><span class="w"> </span><span class="n">REF</span><span class="p">,</span><span class="w"> </span><span class="n">ALT</span><span class="p">,</span><span class="w"> </span><span class="n">DP</span><span class="p">)</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a># A tibble: 801 × 4
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>   sample_id  REF                              ALT                                            DP
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>   &lt;chr&gt;      &lt;chr&gt;                            &lt;chr&gt;                                       &lt;dbl&gt;
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a> 1 SRR2584863 T                                G                                               4
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a> 2 SRR2584863 G                                T                                               6
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a> 3 SRR2584863 G                                T                                              10
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a> 4 SRR2584863 CTTTTTTT                         CTTTTTTTT                                      12
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a> 5 SRR2584863 CCGC                             CCGCGC                                         10
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a> 6 SRR2584863 C                                T                                              10
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a> 7 SRR2584863 C                                A                                               8
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a> 8 SRR2584863 G                                A                                              11
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a> 9 SRR2584863 ACAGCCAGCCAGCCAGCCAGCCAGCCAGCCAG ACAGCCAGCCAGCCAGCCAGCCAGCCAGCCAGCCAGCCAGCC…     3
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>10 SRR2584863 AT                               ATT                                             7
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a># … with 791 more rows
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a># ℹ Use `print(n = ...)` to see more rows
+</code></pre></div>
+</details>
+</div>
+<p>To select all columns <em>except</em> certain ones, put a "-" in front of the
+variable to exclude it.</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nf">select</span><span class="p">(</span><span class="n">variants</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="n">CHROM</span><span class="p">)</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a># A tibble: 801 × 28
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>   sample_id      POS ID    REF   ALT    QUAL FILTER INDEL   IDV    IMF    DP    VDB   RPB   MQB
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>   &lt;chr&gt;        &lt;dbl&gt; &lt;lgl&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;lgl&gt;  &lt;lgl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a> 1 SRR2584863    9972 NA    T     G        91 NA     FALSE    NA NA         4 0.0257    NA    NA
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a> 2 SRR2584863  263235 NA    G     T        85 NA     FALSE    NA NA         6 0.0961     1     1
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a> 3 SRR2584863  281923 NA    G     T       217 NA     FALSE    NA NA        10 0.774     NA    NA
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a> 4 SRR2584863  433359 NA    CTTT… CTTT…    64 NA     TRUE     12  1        12 0.478     NA    NA
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a> 5 SRR2584863  473901 NA    CCGC  CCGC…   228 NA     TRUE      9  0.9      10 0.660     NA    NA
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a> 6 SRR2584863  648692 NA    C     T       210 NA     FALSE    NA NA        10 0.268     NA    NA
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a> 7 SRR2584863 1331794 NA    C     A       178 NA     FALSE    NA NA         8 0.624     NA    NA
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a> 8 SRR2584863 1733343 NA    G     A       225 NA     FALSE    NA NA        11 0.992     NA    NA
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a> 9 SRR2584863 2103887 NA    ACAG… ACAG…    56 NA     TRUE      2  0.667     3 0.902     NA    NA
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>10 SRR2584863 2333538 NA    AT    ATT     167 NA     TRUE      7  1         7 0.568     NA    NA
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a># … with 791 more rows, and 14 more variables: BQB &lt;dbl&gt;, MQSB &lt;dbl&gt;, SGB &lt;dbl&gt;, MQ0F &lt;dbl&gt;,
+<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a>#   ICB &lt;lgl&gt;, HOB &lt;lgl&gt;, AC &lt;dbl&gt;, AN &lt;dbl&gt;, DP4 &lt;chr&gt;, MQ &lt;dbl&gt;, Indiv &lt;chr&gt;, gt_PL &lt;dbl&gt;,
+<a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a>#   gt_GT &lt;dbl&gt;, gt_GT_alleles &lt;chr&gt;
+<a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a># ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names
+</code></pre></div>
+</details>
+</div>
+<p><code>dplyr</code> also provides useful functions to select columns based on their
+names. For instance, <code>ends_with()</code> allows you to select columns that
+ends with specific letters. For instance, if you wanted to select
+columns that end with the letter "B":</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nf">select</span><span class="p">(</span><span class="n">variants</span><span class="p">,</span><span class="w"> </span><span class="nf">ends_with</span><span class="p">(</span><span class="s">&quot;B&quot;</span><span class="p">))</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a># A tibble: 801 × 8
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>      VDB   RPB   MQB   BQB   MQSB    SGB ICB   HOB  
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;lgl&gt; &lt;lgl&gt;
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a> 1 0.0257    NA    NA    NA NA     -0.556 NA    NA   
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a> 2 0.0961     1     1     1 NA     -0.591 NA    NA   
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a> 3 0.774     NA    NA    NA  0.975 -0.662 NA    NA   
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a> 4 0.478     NA    NA    NA  1     -0.676 NA    NA   
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a> 5 0.660     NA    NA    NA  0.916 -0.662 NA    NA   
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a> 6 0.268     NA    NA    NA  0.916 -0.670 NA    NA   
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a> 7 0.624     NA    NA    NA  0.901 -0.651 NA    NA   
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a> 8 0.992     NA    NA    NA  1.01  -0.670 NA    NA   
+<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a> 9 0.902     NA    NA    NA  1     -0.454 NA    NA   
+<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>10 0.568     NA    NA    NA  1.01  -0.617 NA    NA   
+<a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a># … with 791 more rows
+<a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a># ℹ Use `print(n = ...)` to see more rows
+</code></pre></div>
+</details>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Challenge</p>
+<p>Create a table that contains all the columns with the letter "i" and
+column "POS", without columns "Indiv" and "FILTER". Hint: look at for
+a function called <code>contains()</code>, which can be found in the help
+documentation for ends with we just covered (<code>?ends_with</code>). Note that
+contains() is not case sensistive.</p>
+<details class="success">
+<summary>Solution</summary>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1"># First, we select &quot;POS&quot; and all columns with letter &quot;i&quot;. This will contain columns     Indiv and FILTER. </span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="n">variants_subset</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">select</span><span class="p">(</span><span class="n">variants</span><span class="p">,</span><span class="w"> </span><span class="n">POS</span><span class="p">,</span><span class="w"> </span><span class="nf">contains</span><span class="p">(</span><span class="s">&quot;i&quot;</span><span class="p">))</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="c1"># Next, we remove columns Indiv and FILTER</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="n">variants_result</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">select</span><span class="p">(</span><span class="n">variants_subset</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="n">Indiv</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="n">FILTER</span><span class="p">)</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="n">variants_result</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a># A tibble: 801 × 7
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>       POS sample_id  ID    INDEL   IDV    IMF ICB  
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>     &lt;dbl&gt; &lt;chr&gt;      &lt;lgl&gt; &lt;lgl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;lgl&gt;
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a> 1    9972 SRR2584863 NA    FALSE    NA NA     NA   
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a> 2  263235 SRR2584863 NA    FALSE    NA NA     NA   
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a> 3  281923 SRR2584863 NA    FALSE    NA NA     NA   
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a> 4  433359 SRR2584863 NA    TRUE     12  1     NA   
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a> 5  473901 SRR2584863 NA    TRUE      9  0.9   NA   
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a> 6  648692 SRR2584863 NA    FALSE    NA NA     NA   
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a> 7 1331794 SRR2584863 NA    FALSE    NA NA     NA   
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a> 8 1733343 SRR2584863 NA    FALSE    NA NA     NA   
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a> 9 2103887 SRR2584863 NA    TRUE      2  0.667 NA   
+<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>10 2333538 SRR2584863 NA    TRUE      7  1     NA   
+<a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a># … with 791 more rows
+<a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a># ℹ Use `print(n = ...)` to see more rows
+</code></pre></div>
+</details>
+</div>
+</details>
+<details class="success">
+<summary>Alternative solution</summary>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="n">variants_result</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">select</span><span class="p">(</span><span class="n">variants</span><span class="p">,</span><span class="w"> </span><span class="n">POS</span><span class="p">,</span><span class="w"> </span><span class="nf">contains</span><span class="p">(</span><span class="s">&quot;i&quot;</span><span class="p">),</span><span class="w"> </span><span class="o">-</span><span class="n">Indiv</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="n">FILTER</span><span class="p">)</span>
+</code></pre></div>
+</div>
+</details>
+</div>
+<p>To choose rows, use <code>filter()</code>:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="nf">filter</span><span class="p">(</span><span class="n">variants</span><span class="p">,</span><span class="w"> </span><span class="n">sample_id</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;SRR2584863&quot;</span><span class="p">)</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a># A tibble: 25 × 29
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>   sample_id  CHROM     POS ID    REF   ALT    QUAL FILTER INDEL   IDV    IMF    DP    VDB   RPB
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>   &lt;chr&gt;      &lt;chr&gt;   &lt;dbl&gt; &lt;lgl&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;lgl&gt;  &lt;lgl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a> 1 SRR2584863 CP000… 9.97e3 NA    T     G        91 NA     FALSE    NA NA         4 0.0257    NA
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a> 2 SRR2584863 CP000… 2.63e5 NA    G     T        85 NA     FALSE    NA NA         6 0.0961     1
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a> 3 SRR2584863 CP000… 2.82e5 NA    G     T       217 NA     FALSE    NA NA        10 0.774     NA
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a> 4 SRR2584863 CP000… 4.33e5 NA    CTTT… CTTT…    64 NA     TRUE     12  1        12 0.478     NA
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a> 5 SRR2584863 CP000… 4.74e5 NA    CCGC  CCGC…   228 NA     TRUE      9  0.9      10 0.660     NA
+<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a> 6 SRR2584863 CP000… 6.49e5 NA    C     T       210 NA     FALSE    NA NA        10 0.268     NA
+<a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a> 7 SRR2584863 CP000… 1.33e6 NA    C     A       178 NA     FALSE    NA NA         8 0.624     NA
+<a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a> 8 SRR2584863 CP000… 1.73e6 NA    G     A       225 NA     FALSE    NA NA        11 0.992     NA
+<a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a> 9 SRR2584863 CP000… 2.10e6 NA    ACAG… ACAG…    56 NA     TRUE      2  0.667     3 0.902     NA
+<a id="__codelineno-16-13" name="__codelineno-16-13" href="#__codelineno-16-13"></a>10 SRR2584863 CP000… 2.33e6 NA    AT    ATT     167 NA     TRUE      7  1         7 0.568     NA
+<a id="__codelineno-16-14" name="__codelineno-16-14" href="#__codelineno-16-14"></a># … with 15 more rows, and 15 more variables: MQB &lt;dbl&gt;, BQB &lt;dbl&gt;, MQSB &lt;dbl&gt;, SGB &lt;dbl&gt;,
+<a id="__codelineno-16-15" name="__codelineno-16-15" href="#__codelineno-16-15"></a>#   MQ0F &lt;dbl&gt;, ICB &lt;lgl&gt;, HOB &lt;lgl&gt;, AC &lt;dbl&gt;, AN &lt;dbl&gt;, DP4 &lt;chr&gt;, MQ &lt;dbl&gt;, Indiv &lt;chr&gt;,
+<a id="__codelineno-16-16" name="__codelineno-16-16" href="#__codelineno-16-16"></a>#   gt_PL &lt;dbl&gt;, gt_GT &lt;dbl&gt;, gt_GT_alleles &lt;chr&gt;
+<a id="__codelineno-16-17" name="__codelineno-16-17" href="#__codelineno-16-17"></a># ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names
+</code></pre></div>
+</details>
+</div>
+<p><code>filter()</code> will keep all the rows that match the conditions that are
+provided. Here are a few examples:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="c1"># Rows for which the reference genome has T or G</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="nf">filter</span><span class="p">(</span><span class="n">variants</span><span class="p">,</span><span class="w"> </span><span class="n">REF</span><span class="w"> </span><span class="o">%in%</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;T&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;G&quot;</span><span class="p">))</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="c1"># Rows that have TRUE in the column INDEL</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="nf">filter</span><span class="p">(</span><span class="n">variants</span><span class="p">,</span><span class="w"> </span><span class="n">INDEL</span><span class="p">)</span>
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="c1"># Rows that don&#39;t have missing data in the IDV column</span>
+<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a><span class="nf">filter</span><span class="p">(</span><span class="n">variants</span><span class="p">,</span><span class="w"> </span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">IDV</span><span class="p">))</span>
+</code></pre></div>
+</div>
+<p>We have a column titled "QUAL". This is a Phred-scaled confidence score
+that a polymorphism exists at this position given the sequencing data.
+Lower QUAL scores indicate low probability of a polymorphism existing at
+that site. <code>filter()</code> can be useful for selecting mutations that have a
+QUAL score above a certain threshold:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="c1"># Rows with QUAL values greater than or equal to 100</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="nf">filter</span><span class="p">(</span><span class="n">variants</span><span class="p">,</span><span class="w"> </span><span class="n">QUAL</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="m">100</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<p><code>filter()</code> allows you to combine multiple conditions. You can separate
+them using a <code>,</code> as arguments to the function, they will be combined
+using the <code>&amp;</code> (AND) logical operator. If you need to use the <code>|</code> (OR)
+logical operator, you can specify it explicitly:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="c1"># Using `,` as AND</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="nf">filter</span><span class="p">(</span><span class="n">variants</span><span class="p">,</span><span class="w"> </span><span class="n">sample_id</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;SRR2584863&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">QUAL</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="m">100</span><span class="p">)</span>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="c1"># Using `&amp;` as AND</span>
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="nf">filter</span><span class="p">(</span><span class="n">variants</span><span class="p">,</span><span class="w"> </span><span class="n">sample_id</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;SRR2584863&quot;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">QUAL</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="m">100</span><span class="p">)</span>
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="c1"># Using `|` logical operator</span>
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="nf">filter</span><span class="p">(</span><span class="n">variants</span><span class="p">,</span><span class="w"> </span><span class="n">sample_id</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;SRR2584863&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">MQ</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="m">50</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">QUAL</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="m">100</span><span class="p">))</span>
+</code></pre></div>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Challenge</p>
+<p>Select all the mutations that occurred between the positions 1e6 (one
+million) and 2e6 (inclusive) that have a QUAL greater than 200, and
+exclude INDEL mutations. Hint: to flip logical values such as TRUE to
+a FALSE, we can use to negation symbol <code>!</code>. (eg. <code>!TRUE == FALSE</code>).</p>
+<details class="success">
+<summary>Solution</summary>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="nf">filter</span><span class="p">(</span><span class="n">variants</span><span class="p">,</span><span class="w"> </span><span class="n">POS</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="m">1e6</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">POS</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="m">2e6</span><span class="p">,</span><span class="w"> </span><span class="n">QUAL</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">200</span><span class="p">,</span><span class="w"> </span><span class="o">!</span><span class="n">INDEL</span><span class="p">)</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a># A tibble: 77 × 29
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>   sampl…¹ CHROM    POS ID    REF   ALT    QUAL FILTER INDEL   IDV   IMF    DP   VDB   RPB   MQB
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>   &lt;chr&gt;   &lt;chr&gt;  &lt;dbl&gt; &lt;lgl&gt; &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt; &lt;lgl&gt;  &lt;lgl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a> 1 SRR258… CP00… 1.73e6 NA    G     A       225 NA     FALSE    NA    NA    11 0.992    NA    NA
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a> 2 SRR258… CP00… 1.00e6 NA    A     G       225 NA     FALSE    NA    NA    15 0.481    NA    NA
+<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a> 3 SRR258… CP00… 1.02e6 NA    A     G       225 NA     FALSE    NA    NA    12 0.242    NA    NA
+<a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a> 4 SRR258… CP00… 1.06e6 NA    C     T       225 NA     FALSE    NA    NA    17 0.346    NA    NA
+<a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a> 5 SRR258… CP00… 1.06e6 NA    A     G       206 NA     FALSE    NA    NA     9 0.630    NA    NA
+<a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a> 6 SRR258… CP00… 1.07e6 NA    G     T       225 NA     FALSE    NA    NA    11 0.349    NA    NA
+<a id="__codelineno-21-10" name="__codelineno-21-10" href="#__codelineno-21-10"></a> 7 SRR258… CP00… 1.07e6 NA    T     C       225 NA     FALSE    NA    NA    12 0.196    NA    NA
+<a id="__codelineno-21-11" name="__codelineno-21-11" href="#__codelineno-21-11"></a> 8 SRR258… CP00… 1.10e6 NA    C     T       225 NA     FALSE    NA    NA    15 0.454    NA    NAincluding
+<a id="__codelineno-21-12" name="__codelineno-21-12" href="#__codelineno-21-12"></a> 9 SRR258… CP00… 1.11e6 NA    C     T       212 NA     FALSE    NA    NA     9 0.179    NA    NA
+<a id="__codelineno-21-13" name="__codelineno-21-13" href="#__codelineno-21-13"></a>10 SRR258… CP00… 1.11e6 NA    A     G       225 NA     FALSE    NA    NA    14 0.909    NA    NA
+<a id="__codelineno-21-14" name="__codelineno-21-14" href="#__codelineno-21-14"></a># … with 67 more rows, 14 more variables: BQB &lt;dbl&gt;, MQSB &lt;dbl&gt;, SGB &lt;dbl&gt;, MQ0F &lt;dbl&gt;,
+<a id="__codelineno-21-15" name="__codelineno-21-15" href="#__codelineno-21-15"></a>#   ICB &lt;lgl&gt;, HOB &lt;lgl&gt;, AC &lt;dbl&gt;, AN &lt;dbl&gt;, DP4 &lt;chr&gt;, MQ &lt;dbl&gt;, Indiv &lt;chr&gt;, gt_PL &lt;dbl&gt;,
+<a id="__codelineno-21-16" name="__codelineno-21-16" href="#__codelineno-21-16"></a>#   gt_GT &lt;dbl&gt;, gt_GT_alleles &lt;chr&gt;, and abbreviated variable name ¹​sample_id
+<a id="__codelineno-21-17" name="__codelineno-21-17" href="#__codelineno-21-17"></a># ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names
+</code></pre></div>
+</details>
+</div>
+</details>
+</div>
+<h2 id="pipes">Pipes<a class="headerlink" href="#pipes" title="Permanent link">&para;</a></h2>
+<p>But what if you wanted to select and filter? We can do this with pipes. Pipes 
+let you take the output of one function and send it directly to the next, which 
+is useful when you need to many things to the same data set. It was possible to 
+do this before pipes were added to R, but it was much messier and more 
+difficult. Pipes in R look like <code>%&gt;%</code> and are made available via the <code>magrittr</code> 
+package, which is installed as part of <code>dplyr</code>. If you use RStudio, you can type 
+the pipe with <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>M</kbd> if you're using 
+a PC, or <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>M</kbd> if you're using a Mac.</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="n">variants</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">   </span>
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="w">  </span><span class="nf">filter</span><span class="p">(</span><span class="n">sample_id</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;SRR2584863&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">   </span>
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="w">  </span><span class="nf">select</span><span class="p">(</span><span class="n">REF</span><span class="p">,</span><span class="w"> </span><span class="n">ALT</span><span class="p">,</span><span class="w"> </span><span class="n">DP</span><span class="p">)</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a># A tibble: 25 × 3
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>   REF                              ALT                                                       DP
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a>   &lt;chr&gt;                            &lt;chr&gt;                                                  &lt;dbl&gt;
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a> 1 T                                G                                                          4
+<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a> 2 G                                T                                                          6
+<a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a> 3 G                                T                                                         10
+<a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a> 4 CTTTTTTT                         CTTTTTTTT                                                 12
+<a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a> 5 CCGC                             CCGCGC                                                    10
+<a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a> 6 C                                T                                                         10
+<a id="__codelineno-23-10" name="__codelineno-23-10" href="#__codelineno-23-10"></a> 7 C                                A                                                          8
+<a id="__codelineno-23-11" name="__codelineno-23-11" href="#__codelineno-23-11"></a> 8 G                                A                                                         11
+<a id="__codelineno-23-12" name="__codelineno-23-12" href="#__codelineno-23-12"></a> 9 ACAGCCAGCCAGCCAGCCAGCCAGCCAGCCAG ACAGCCAGCCAGCCAGCCAGCCAGCCAGCCAGCCAGCCAGCCAGCCAGCCAGC…     3
+<a id="__codelineno-23-13" name="__codelineno-23-13" href="#__codelineno-23-13"></a>10 AT                               ATT                                                        7
+<a id="__codelineno-23-14" name="__codelineno-23-14" href="#__codelineno-23-14"></a># … with 15 more rows
+<a id="__codelineno-23-15" name="__codelineno-23-15" href="#__codelineno-23-15"></a># ℹ Use `print(n = ...)` to see more rows
+</code></pre></div>
+</details>
+</div>
+<p>In the above code, we use the pipe to send the <code>variants</code> data set first
+through <code>filter()</code>, to keep rows where <code>sample_id</code> matches a particular
+sample, and then through <code>select()</code> to keep only the <code>REF</code>, <code>ALT</code>, and
+<code>DP</code> columns. Since <code>%&gt;%</code> takes the object on its left and passes it as
+the first argument to the function on its right, we don't need to
+explicitly include the data frame as an argument to the <code>filter()</code> and
+<code>select()</code> functions any more.</p>
+<p>Some may find it helpful to read the pipe like the phrase "<em>then</em>". For
+instance, in the above example, we took the data frame <code>variants</code>,
+<em>then</em> we <code>filter()</code>ed for rows where <code>sample_id</code> was SRR2584863, <em>then</em>
+we <code>select()</code>ed the <code>REF</code>, <code>ALT</code>, and <code>DP</code> columns, <em>then</em> we showed only
+the first six rows. The <strong><code>dplyr</code></strong> functions by themselves are somewhat
+simple, but by combining them into linear workflows with the pipe, we
+can accomplish more complex manipulations of data frames.</p>
+<p>If we want to create a new object with this smaller version of the data
+we can do so by assigning it a new name:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="n">SRR2584863_variants</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">variants</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">   </span>
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="w">  </span><span class="nf">filter</span><span class="p">(</span><span class="n">sample_id</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;SRR2584863&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">   </span>
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="w">  </span><span class="nf">select</span><span class="p">(</span><span class="n">REF</span><span class="p">,</span><span class="w"> </span><span class="n">ALT</span><span class="p">,</span><span class="w"> </span><span class="n">DP</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<p>This new object includes all of the data from this sample. Let's look at
+just the first six rows to confirm it's what we want:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="n">SRR2584863_variants</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a># A tibble: 25 × 3
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>   REF                              ALT                                                       DP
+<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a>   &lt;chr&gt;                            &lt;chr&gt;                                                  &lt;dbl&gt;
+<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a> 1 T                                G                                                          4
+<a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a> 2 G                                T                                                          6
+<a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a> 3 G                                T                                                         10
+<a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a> 4 CTTTTTTT                         CTTTTTTTT                                                 12
+<a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a> 5 CCGC                             CCGCGC                                                    10
+<a id="__codelineno-26-9" name="__codelineno-26-9" href="#__codelineno-26-9"></a> 6 C                                T                                                         10
+<a id="__codelineno-26-10" name="__codelineno-26-10" href="#__codelineno-26-10"></a> 7 C                                A                                                          8
+<a id="__codelineno-26-11" name="__codelineno-26-11" href="#__codelineno-26-11"></a> 8 G                                A                                                         11
+<a id="__codelineno-26-12" name="__codelineno-26-12" href="#__codelineno-26-12"></a> 9 ACAGCCAGCCAGCCAGCCAGCCAGCCAGCCAG ACAGCCAGCCAGCCAGCCAGCCAGCCAGCCAGCCAGCCAGCCAGCCAGCCAGC…     3
+<a id="__codelineno-26-13" name="__codelineno-26-13" href="#__codelineno-26-13"></a>10 AT                               ATT                                                        7
+<a id="__codelineno-26-14" name="__codelineno-26-14" href="#__codelineno-26-14"></a># … with 15 more rows
+<a id="__codelineno-26-15" name="__codelineno-26-15" href="#__codelineno-26-15"></a># ℹ Use `print(n = ...)` to see more rows
+</code></pre></div>
+</details>
+</div>
+<p>Similar to <code>head()</code> and <code>tail()</code> functions, we can also look at the
+first or last six rows using tidyverse function <code>slice()</code>. Slice is a
+more versatile function that allows users to specify a range to view:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="n">SRR2584863_variants</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="nf">slice</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">6</span><span class="p">)</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a># A tibble: 6 × 3
+<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>  REF      ALT          DP
+<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a>  &lt;chr&gt;    &lt;chr&gt;     &lt;dbl&gt;
+<a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a>1 T        G             4
+<a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a>2 G        T             6
+<a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a>3 G        T            10
+<a id="__codelineno-28-7" name="__codelineno-28-7" href="#__codelineno-28-7"></a>4 CTTTTTTT CTTTTTTTT    12
+<a id="__codelineno-28-8" name="__codelineno-28-8" href="#__codelineno-28-8"></a>5 CCGC     CCGCGC       10
+<a id="__codelineno-28-9" name="__codelineno-28-9" href="#__codelineno-28-9"></a>6 C        T            10
+</code></pre></div>
+</details>
+</div>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="n">SRR2584863_variants</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="nf">slice</span><span class="p">(</span><span class="m">10</span><span class="o">:</span><span class="m">25</span><span class="p">)</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a># A tibble: 16 × 3
+<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a>   REF   ALT      DP
+<a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a>   &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;
+<a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a> 1 AT    ATT       7
+<a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a> 2 A     C         9
+<a id="__codelineno-30-6" name="__codelineno-30-6" href="#__codelineno-30-6"></a> 3 A     C        20
+<a id="__codelineno-30-7" name="__codelineno-30-7" href="#__codelineno-30-7"></a> 4 G     T        12
+<a id="__codelineno-30-8" name="__codelineno-30-8" href="#__codelineno-30-8"></a> 5 A     T        19
+<a id="__codelineno-30-9" name="__codelineno-30-9" href="#__codelineno-30-9"></a> 6 G     A        15
+<a id="__codelineno-30-10" name="__codelineno-30-10" href="#__codelineno-30-10"></a> 7 A     C        10
+<a id="__codelineno-30-11" name="__codelineno-30-11" href="#__codelineno-30-11"></a> 8 C     A        14
+<a id="__codelineno-30-12" name="__codelineno-30-12" href="#__codelineno-30-12"></a> 9 A     G         9
+<a id="__codelineno-30-13" name="__codelineno-30-13" href="#__codelineno-30-13"></a>10 A     C        13
+<a id="__codelineno-30-14" name="__codelineno-30-14" href="#__codelineno-30-14"></a>11 A     AC        2
+<a id="__codelineno-30-15" name="__codelineno-30-15" href="#__codelineno-30-15"></a>12 G     T        10
+<a id="__codelineno-30-16" name="__codelineno-30-16" href="#__codelineno-30-16"></a>13 A     G        16
+<a id="__codelineno-30-17" name="__codelineno-30-17" href="#__codelineno-30-17"></a>14 A     C        11
+<a id="__codelineno-30-18" name="__codelineno-30-18" href="#__codelineno-30-18"></a>15 TGG   T        10
+<a id="__codelineno-30-19" name="__codelineno-30-19" href="#__codelineno-30-19"></a>16 A     C         9
+</code></pre></div>
+</details>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Exercise: Pipe and filter</p>
+<p>Starting with the <code>variants</code> data frame, use pipes to subset the data
+to include only observations from SRR2584863 sample, where the
+filtered depth (DP) is at least 10. Showing only 5<sup>th</sup> through 11<sup>th</sup> rows
+of columns <code>REF</code>, <code>ALT</code>, and <code>POS</code>.</p>
+<details class="success">
+<summary>Solution</summary>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="n">variants</span><span class="w"> </span><span class="o">%&gt;%</span>
+<a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a><span class="w">  </span><span class="nf">filter</span><span class="p">(</span><span class="n">sample_id</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;SRR2584863&quot;</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">DP</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="m">10</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+<a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="w">  </span><span class="nf">slice</span><span class="p">(</span><span class="m">5</span><span class="o">:</span><span class="m">11</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+<a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a><span class="w">  </span><span class="nf">select</span><span class="p">(</span><span class="n">sample_id</span><span class="p">,</span><span class="w"> </span><span class="n">DP</span><span class="p">,</span><span class="w"> </span><span class="n">REF</span><span class="p">,</span><span class="w"> </span><span class="n">ALT</span><span class="p">,</span><span class="w"> </span><span class="n">POS</span><span class="p">)</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a># A tibble: 7 × 5
+<a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a>  sample_id     DP REF   ALT       POS
+<a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a>  &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt;
+<a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a>1 SRR2584863    11 G     A     1733343
+<a id="__codelineno-32-5" name="__codelineno-32-5" href="#__codelineno-32-5"></a>2 SRR2584863    20 A     C     2446984
+<a id="__codelineno-32-6" name="__codelineno-32-6" href="#__codelineno-32-6"></a>3 SRR2584863    12 G     T     2618472
+<a id="__codelineno-32-7" name="__codelineno-32-7" href="#__codelineno-32-7"></a>4 SRR2584863    19 A     T     2665639
+<a id="__codelineno-32-8" name="__codelineno-32-8" href="#__codelineno-32-8"></a>5 SRR2584863    15 G     A     2999330
+<a id="__codelineno-32-9" name="__codelineno-32-9" href="#__codelineno-32-9"></a>6 SRR2584863    10 A     C     3339313
+<a id="__codelineno-32-10" name="__codelineno-32-10" href="#__codelineno-32-10"></a>7 SRR2584863    14 C     A     3401754
+</code></pre></div>
+</details>
+</div>
+</details>
+</div>
+<h2 id="mutate">Mutate<a class="headerlink" href="#mutate" title="Permanent link">&para;</a></h2>
+<p>Frequently you'll want to create new columns based on the values in
+existing columns, for example to do unit conversions or find the ratio
+of values in two columns. For this we'll use the <code>dplyr</code> function
+<code>mutate()</code>.</p>
+<p>For example, we can convert the polymorphism confidence value QUAL to a
+probability value according to the formula:</p>
+<div class="arithmatex">\[\textrm {Probability} = 1- 10 ^ {-\frac{\textrm{QUAL}}{10}}\]</div>
+<p>We can use <code>mutate()</code> to add a column (<code>POLPROB</code>) to our <code>variants</code> data
+frame that shows the probability of a polymorphism at that site given
+the data.</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="n">variants</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">   </span>
+<a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a><span class="w">  </span><span class="nf">mutate</span><span class="p">(</span><span class="n">POLPROB</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="m">10</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="o">-</span><span class="p">(</span><span class="n">QUAL</span><span class="o">/</span><span class="m">10</span><span class="p">)))</span>
+</code></pre></div>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Exercise</p>
+<p>There are a lot of columns in our data set, so let's just look at the
+<code>sample_id</code>, <code>POS</code>, <code>QUAL</code>, and <code>POLPROB</code> columns for now. Add a line
+to the above code to only show those columns.</p>
+<details class="success">
+<summary>Solution</summary>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="n">variants</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">   </span>
+<a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a><span class="w">  </span><span class="nf">mutate</span><span class="p">(</span><span class="n">POLPROB</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="m">10</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="o">-</span><span class="p">(</span><span class="n">QUAL</span><span class="o">/</span><span class="m">10</span><span class="p">)))</span><span class="w"> </span><span class="o">%&gt;%</span>
+<a id="__codelineno-34-3" name="__codelineno-34-3" href="#__codelineno-34-3"></a><span class="w">  </span><span class="nf">select</span><span class="p">(</span><span class="n">sample_id</span><span class="p">,</span><span class="w"> </span><span class="n">POS</span><span class="p">,</span><span class="w"> </span><span class="n">QUAL</span><span class="p">,</span><span class="w"> </span><span class="n">POLPROB</span><span class="p">)</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a># A tibble: 801 × 4
+<a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>   sample_id      POS  QUAL POLPROB
+<a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a>   &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
+<a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a> 1 SRR2584863    9972    91    1.00
+<a id="__codelineno-35-5" name="__codelineno-35-5" href="#__codelineno-35-5"></a> 2 SRR2584863  263235    85    1.00
+<a id="__codelineno-35-6" name="__codelineno-35-6" href="#__codelineno-35-6"></a> 3 SRR2584863  281923   217    1   
+<a id="__codelineno-35-7" name="__codelineno-35-7" href="#__codelineno-35-7"></a> 4 SRR2584863  433359    64    1.00
+<a id="__codelineno-35-8" name="__codelineno-35-8" href="#__codelineno-35-8"></a> 5 SRR2584863  473901   228    1   
+<a id="__codelineno-35-9" name="__codelineno-35-9" href="#__codelineno-35-9"></a> 6 SRR2584863  648692   210    1   
+<a id="__codelineno-35-10" name="__codelineno-35-10" href="#__codelineno-35-10"></a> 7 SRR2584863 1331794   178    1   
+<a id="__codelineno-35-11" name="__codelineno-35-11" href="#__codelineno-35-11"></a> 8 SRR2584863 1733343   225    1   
+<a id="__codelineno-35-12" name="__codelineno-35-12" href="#__codelineno-35-12"></a> 9 SRR2584863 2103887    56    1.00
+<a id="__codelineno-35-13" name="__codelineno-35-13" href="#__codelineno-35-13"></a>10 SRR2584863 2333538   167    1   
+<a id="__codelineno-35-14" name="__codelineno-35-14" href="#__codelineno-35-14"></a># … with 791 more rows
+<a id="__codelineno-35-15" name="__codelineno-35-15" href="#__codelineno-35-15"></a># ℹ Use `print(n = ...)` to see more rows
+</code></pre></div>
+</details>
+</div>
+</details>
+</div>
+<h2 id="group_by-and-summarize-functions"><code>group_by()</code> and <code>summarize()</code> functions<a class="headerlink" href="#group_by-and-summarize-functions" title="Permanent link">&para;</a></h2>
+<p>Many data analysis tasks can be approached using the
+"split-apply-combine" paradigm: split the data into groups, apply some
+analysis to each group, and then combine the results. <code>dplyr</code> makes this
+very easy through the use of the <code>group_by()</code> function, which splits the
+data into groups.</p>
+<p>We can use <code>group_by()</code> to tally the number of mutations detected in
+each sample using the function <code>tally()</code>:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="n">variants</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">   </span>
+<a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a><span class="w">  </span><span class="nf">group_by</span><span class="p">(</span><span class="n">sample_id</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">   </span>
+<a id="__codelineno-36-3" name="__codelineno-36-3" href="#__codelineno-36-3"></a><span class="w">  </span><span class="nf">tally</span><span class="p">()</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a># A tibble: 3 × 2
+<a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a>  sample_id      n
+<a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a>  &lt;chr&gt;      &lt;int&gt;
+<a id="__codelineno-37-4" name="__codelineno-37-4" href="#__codelineno-37-4"></a>1 SRR2584863    25
+<a id="__codelineno-37-5" name="__codelineno-37-5" href="#__codelineno-37-5"></a>2 SRR2584866   766
+<a id="__codelineno-37-6" name="__codelineno-37-6" href="#__codelineno-37-6"></a>3 SRR2589044    10
+</code></pre></div>
+</details>
+</div>
+<p>Since counting or tallying values is a common use case for <code>group_by()</code>,
+an alternative function was created to bypasses <code>group_by()</code> using the
+function <code>count()</code>:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="n">variants</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span>
+<a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a><span class="w">  </span><span class="nf">count</span><span class="p">(</span><span class="n">sample_id</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Challenge</p>
+<p>How many mutations are INDELs?</p>
+<details class="success">
+<summary>Solution</summary>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="n">variants</span><span class="w"> </span><span class="o">%&gt;%</span>
+<a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a><span class="w">  </span><span class="nf">count</span><span class="p">(</span><span class="n">INDEL</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<div class="admonition success">
+<p class="admonition-title">Output</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a># A tibble: 2 × 2
+<a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a>  INDEL     n
+<a id="__codelineno-40-3" name="__codelineno-40-3" href="#__codelineno-40-3"></a>  &lt;lgl&gt; &lt;int&gt;
+<a id="__codelineno-40-4" name="__codelineno-40-4" href="#__codelineno-40-4"></a>1 FALSE   700
+<a id="__codelineno-40-5" name="__codelineno-40-5" href="#__codelineno-40-5"></a>2 TRUE    101
+</code></pre></div>
+</div>
+</details>
+</div>
+<p>When the data is grouped, <code>summarize()</code> can be used to collapse each
+group into a single-row summary. <code>summarize()</code> does this by applying an
+aggregating or summary function to each group.</p>
+<p>It can be a bit tricky at first, but we can imagine physically splitting
+the data frame by groups and applying a certain function to summarize
+the data.</p>
+<p><a class="glightbox" href="../../figures/split_apply_combine.png" data-type="image" data-width="auto" data-height="auto" data-desc-position="bottom"><img alt="split_apply_combine" src="../../figures/split_apply_combine.png" width="500" /></a><sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup></p>
+<p>We can also apply many other functions to individual columns to get
+other summary statistics. For example, we can use built-in functions like
+<code>mean()</code>, <code>median()</code>, <code>min()</code>, and <code>max()</code>. These are called "built-in
+functions" because they come with R and don't require that you install
+any additional packages. By default, all <strong>R functions operating on
+vectors that contains missing data will return NA</strong>. It's a way to make
+sure that users know they have missing data, and make a conscious
+decision on how to deal with it. When dealing with simple statistics
+like the mean, the easiest way to ignore <code>NA</code> (the missing data) is to
+use <code>na.rm = TRUE</code> (<code>rm</code> stands for remove).</p>
+<p>So to view the mean, median, maximum, and minimum filtered depth (<code>DP</code>)
+for each sample:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a><span class="n">variants</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">   </span>
+<a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a><span class="w">  </span><span class="nf">group_by</span><span class="p">(</span><span class="n">sample_id</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w">   </span>
+<a id="__codelineno-41-3" name="__codelineno-41-3" href="#__codelineno-41-3"></a><span class="w">  </span><span class="nf">summarize</span><span class="p">(</span><span class="w">     </span>
+<a id="__codelineno-41-4" name="__codelineno-41-4" href="#__codelineno-41-4"></a><span class="w">    </span><span class="n">mean_DP</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">mean</span><span class="p">(</span><span class="n">DP</span><span class="p">),</span><span class="w">     </span>
+<a id="__codelineno-41-5" name="__codelineno-41-5" href="#__codelineno-41-5"></a><span class="w">    </span><span class="n">median_DP</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">median</span><span class="p">(</span><span class="n">DP</span><span class="p">),</span><span class="w">     </span>
+<a id="__codelineno-41-6" name="__codelineno-41-6" href="#__codelineno-41-6"></a><span class="w">    </span><span class="n">min_DP</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">min</span><span class="p">(</span><span class="n">DP</span><span class="p">),</span><span class="w">     </span>
+<a id="__codelineno-41-7" name="__codelineno-41-7" href="#__codelineno-41-7"></a><span class="w">    </span><span class="n">max_DP</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">max</span><span class="p">(</span><span class="n">DP</span><span class="p">)</span>
+<a id="__codelineno-41-8" name="__codelineno-41-8" href="#__codelineno-41-8"></a><span class="w">  </span><span class="p">)</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a># A tibble: 3 × 5
+<a id="__codelineno-42-2" name="__codelineno-42-2" href="#__codelineno-42-2"></a>  sample_id  mean_DP median_DP min_DP max_DP
+<a id="__codelineno-42-3" name="__codelineno-42-3" href="#__codelineno-42-3"></a>  &lt;chr&gt;        &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+<a id="__codelineno-42-4" name="__codelineno-42-4" href="#__codelineno-42-4"></a>1 SRR2584863    10.4      10        2     20
+<a id="__codelineno-42-5" name="__codelineno-42-5" href="#__codelineno-42-5"></a>2 SRR2584866    10.6      10        2     79
+<a id="__codelineno-42-6" name="__codelineno-42-6" href="#__codelineno-42-6"></a>3 SRR2589044     9.3       9.5      3     16
+</code></pre></div>
+</details>
+</div>
+<h2 id="reshaping-data-frames">Reshaping data frames<a class="headerlink" href="#reshaping-data-frames" title="Permanent link">&para;</a></h2>
+<p>It can sometimes be useful to transform the "long" tidy format, into the
+wide format. This transformation can be done with the <code>pivot_wider()</code>
+function provided by the <code>tidyr</code> package (also part of the <code>tidyverse</code>).</p>
+<p><code>pivot_wider()</code> takes a data frame as the first argument, and two
+arguments: the column name that will become the columns and the column
+name that will become the cells in the wide data.</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a><span class="n">variants_wide</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">variants</span><span class="w"> </span><span class="o">%&gt;%</span>
+<a id="__codelineno-43-2" name="__codelineno-43-2" href="#__codelineno-43-2"></a><span class="w">  </span><span class="nf">group_by</span><span class="p">(</span><span class="n">sample_id</span><span class="p">,</span><span class="w"> </span><span class="n">CHROM</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+<a id="__codelineno-43-3" name="__codelineno-43-3" href="#__codelineno-43-3"></a><span class="w">  </span><span class="nf">summarize</span><span class="p">(</span><span class="n">mean_DP</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">mean</span><span class="p">(</span><span class="n">DP</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span>
+<a id="__codelineno-43-4" name="__codelineno-43-4" href="#__codelineno-43-4"></a><span class="w">  </span><span class="nf">pivot_wider</span><span class="p">(</span><span class="n">names_from</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sample_id</span><span class="p">,</span><span class="w"> </span><span class="n">values_from</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mean_DP</span><span class="p">)</span>
+<a id="__codelineno-43-5" name="__codelineno-43-5" href="#__codelineno-43-5"></a>
+<a id="__codelineno-43-6" name="__codelineno-43-6" href="#__codelineno-43-6"></a><span class="n">variants_wide</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a># A tibble: 1 × 4
+<a id="__codelineno-44-2" name="__codelineno-44-2" href="#__codelineno-44-2"></a>  CHROM      SRR2584863 SRR2584866 SRR2589044
+<a id="__codelineno-44-3" name="__codelineno-44-3" href="#__codelineno-44-3"></a>  &lt;chr&gt;           &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
+<a id="__codelineno-44-4" name="__codelineno-44-4" href="#__codelineno-44-4"></a>1 CP000819.1       10.4       10.6        9.3
+</code></pre></div>
+</details>
+</div>
+<p>The opposite operation of <code>pivot_wider()</code> is taken care by
+<code>pivot_longer()</code>. We specify the names of the new columns, and here add
+<code>-CHROM</code> as this column shouldn't be affected by the reshaping:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a><span class="n">variants_wide</span><span class="w"> </span><span class="o">%&gt;%</span>
+<a id="__codelineno-45-2" name="__codelineno-45-2" href="#__codelineno-45-2"></a><span class="w">  </span><span class="nf">pivot_longer</span><span class="p">(</span><span class="o">-</span><span class="n">CHROM</span><span class="p">,</span><span class="w"> </span><span class="n">names_to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;sample_id&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">values_to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;mean_DP&quot;</span><span class="p">)</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a># A tibble: 3 × 3
+<a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a>  CHROM      sample_id  mean_DP
+<a id="__codelineno-46-3" name="__codelineno-46-3" href="#__codelineno-46-3"></a>  &lt;chr&gt;      &lt;chr&gt;        &lt;dbl&gt;
+<a id="__codelineno-46-4" name="__codelineno-46-4" href="#__codelineno-46-4"></a>1 CP000819.1 SRR2584863    10.4
+<a id="__codelineno-46-5" name="__codelineno-46-5" href="#__codelineno-46-5"></a>2 CP000819.1 SRR2584866    10.6
+<a id="__codelineno-46-6" name="__codelineno-46-6" href="#__codelineno-46-6"></a>3 CP000819.1 SRR2589044     9.3
+</code></pre></div>
+</details>
+</div>
+<h2 id="resources">Resources<a class="headerlink" href="#resources" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p><a href="https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf">Handy dplyr
+    cheatsheet</a></p>
+</li>
+<li>
+<p><a href="http://usepa.github.io/introR/2015/01/14/03-Clean/">Much of this lesson was copied or adapted from Jeff Hollister's
+    materials</a></p>
+</li>
+</ul>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>The figure was adapted from the Software Carpentry lesson, <a href="https://swcarpentry.github.io/r-novice-gapminder/13-dplyr/">R for
+Reproducible Scientific
+Analysis</a>&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.50899def.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>
