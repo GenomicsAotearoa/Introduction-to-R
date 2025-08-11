@@ -6,7 +6,7 @@
 
 
 <center>
-![image](./theme_figures/images.jpeg){width="250"}
+<img src="./theme_figures/images.jpeg" alt="R logo" width="300"/>
 </center>
 
 
