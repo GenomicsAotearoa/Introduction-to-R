@@ -23,5 +23,5 @@
 | R basics contd - factors and df| 1 hour       | 1:45-2:45    | may need to skip factors              |
 | BREAK                          | 10 mins      | 2:45-2:55    |                                       |
 | Data viz w ggplot2             | 20 mins      | 2:55-3:15    |                                       |
-| Conclusions/Getting help with R| ~30 mins     | 3:15-END     | optional, free form discussion        |
-| Producing Reports with knitr   |              |              | Discuss if there are questions, otherwise skip this section |
+| Conclusions/Getting help with R| ~30 mins     | 3:15-END     | Free form discussion        |
+| Producing Reports with knitr   |              |              | skip, discuss if questions  |
