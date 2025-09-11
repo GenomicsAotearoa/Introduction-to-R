@@ -6,7 +6,7 @@
 
 ## Workshop timings
 
-**Start time: 10:00am**
+**Start time: 10:00am**  
 **Finish time: 4:00pm**
 
 	
