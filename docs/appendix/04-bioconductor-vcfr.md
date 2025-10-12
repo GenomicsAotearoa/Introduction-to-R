@@ -2,7 +2,7 @@
 
 !!! info 
 
-    === "Keyp oints"
+    === "Key points"
 
         - Bioconductor is an alternative package repository for bioinformatics packages.
         - Installing packages from Bioconductor requires a new method, since it is not compatible with the `install.packages()` function used for CRAN.
