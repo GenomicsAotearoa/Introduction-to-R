@@ -18,9 +18,8 @@
         - How do I get help using R and RStudio?
 
 
-<center>
-![oreilly_book_cover](figures/oreilly_book_covers.png){width="600"}
-</center>
+![oreilly_book_cover](figures/oreilly_book_covers.png)
+
 
 No matter how much experience you have with R, you will find yourself
 needing help. There is no shame in researching how to do something in R,
@@ -133,6 +132,17 @@ and passing a filename to the `file=` argument.
     
     # By convention, we use the .rds file extension
     ```
+
+
+## Using AI
+
+AI tools such as ChatGPT can be very useful for getting help with R
+programming. The best way to learn how to use these tools is to play around with them. Try asking  how to make a nice boxplot in R using your favourite colours, how to import a csv table from your local computer into RStudio, or how to calculate summary statistics for a dataframe in R. You can also ask for help with specific error messages you encounter while coding in R. 
+
+> Note: Be cautious and always verify the information provided by AI, as it may not always be accurate or reliable. Use AI as a starting point, but don't rely on it exclusively for critical tasks. Be very cautious about sharing sensitive or personal information with AI tools. 
+
+
+
 
 ## Final FAQs on R
 
