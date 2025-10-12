@@ -68,7 +68,7 @@ pages.
 Within R Studio, click File → New File → R Markdown and you'll get a
 dialog box like this:
 
-![Alt text](figures/open_new_Rmd.png)
+![Alt text](../figures/open_new_Rmd.png)
 
 You can stick with the default (HTML output), but give it a title.
 
@@ -234,7 +234,7 @@ The Markdown and figure documents are then processed by the tool
 [pandoc](http://pandoc.org/), which converts the Markdown file into an
 html file, with the figures embedded.
 
-![images](figures/knirt_pandoc_convert.png){ width="600" }
+![images](../figures/knirt_pandoc_convert.png){ width="600" }
 
 ## Chunk options
 
@@ -344,3 +344,13 @@ You will then see them in your RStudio `Files` tab, click to open.
          Reporting](https://www.rstudio.com/resources/webinars/reproducible-reporting/)
      -   [Introducing
          Bookdown](https://www.rstudio.com/resources/webinars/introducing-bookdown/)
+
+
+## Quarto - the new R Markdown
+
+[Quarto](https://quarto.org/) is the next generation of R Markdown. It is a scientific and technical publishing system built on knitr and Pandoc. Quarto supports R, Python, Julia, and Observable JavaScript. You can use Quarto to create dynamic documents, presentations, websites, and books that weave together narrative text and code to produce elegantly formatted output.
+
+![images](../figures/quartoRender.png){ width="600" }
+
+
+For more information on Quarto and how to use it, see the Genomics Aotearoa workshop on [Reproducibility with Git and Quarto.](https://genomicsaotearoa.github.io/reproducibility_with_git_and_quarto/)
