@@ -49,6 +49,7 @@ theme:
     - navigation.sections
     - navigation.expand
     - navigation.top
+    - navigation.footer
     
 
   # Necessary for search to work properly
