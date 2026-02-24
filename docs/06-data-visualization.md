@@ -1,4 +1,4 @@
-# Data Visualization with ggplot2
+# Data Visualisation with ggplot2
 
 !!! info 
 
@@ -71,7 +71,7 @@ we cannot create a continuum of shapes for a variable, unlike, say, color.
 !!! tip "Installing `ggplot` on your local machine"
 
     Here, we do not need to install `ggplot` while working within 
-    NeSI's RStudio. However, if you would like to work on 
+    REANNZ's RStudio. However, if you would like to work on 
     your own local R/RStudio, you can install this package (or any other 
     packages) like so:
 
@@ -654,7 +654,7 @@ In addition to
 [`theme_bw()`](https://ggplot2.tidyverse.org/reference/ggtheme.html),
 which changes the plot background to white, **`ggplot2`** comes with
 several other themes which can be useful to quickly change the look of
-your visualization. The complete list of themes is available at
+your visualisation. The complete list of themes is available at
 <https://ggplot2.tidyverse.org/reference/ggtheme.html>.
 `theme_minimal()` and `theme_light()` are popular, and `theme_void()`
 can be useful as a starting point to create a new hand-crafted theme.
