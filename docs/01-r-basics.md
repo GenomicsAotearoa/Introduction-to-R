@@ -265,7 +265,7 @@ natural language, where we refer to them as the parts of speech,
 e.g. nouns, verbs, adverbs, etc. Once you know if a word - perhaps an
 unfamiliar one - is a noun, you can probably guess you can count it and
 make it plural if there is more than one (e.g. 1
-[Tuatara](https://en.wikipedia.org/wiki/Tuatara), or 2 Tuataras). If
+cat, or 2 cats). If
 something is an adjective, you can usually change it into an adverb by
 adding "-ly"
 (e.g., [jejune](https://www.merriam-webster.com/dictionary/jejune) vs.
