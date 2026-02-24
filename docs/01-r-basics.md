@@ -157,7 +157,7 @@ created in R.
 
         ```r
         human_chr_number <- 23
-        gene_name <- 'pten'
+        gene_name <- "pten"
         ensemble_url <- "ftp://ftp.ensemblgenomes.org/pub/bacteria/release-39/fasta/bacteria_5_collection/escherichia_coli_b_str_rel606/"
         human_diploid_chr_num <-  2 * human_chr_number
         ```
@@ -208,10 +208,10 @@ Once an object has a value, you can change that value by overwriting it. R will 
 !!! r-project "r"
 
     ```r
-    # gene_name has the value 'pten' or whatever value you used in the challenge
-    # We will now assign the new value 'tp53'
+    # gene_name has the value "pten" or whatever value you used in the challenge
+    # We will now assign the new value "tp53"
 
-    gene_name <- 'tp53'
+    gene_name <- "tp53"
     ```
 
 You can also remove an object from R's memory entirely. The `rm()` function will delete the object.
@@ -278,9 +278,9 @@ have important analogies when working with R objects.
   
     Create the following objects in R, then verify their modes using the `mode()` function. Try to guess what the mode will be before you look at the solution.
   
-    1.  `chromosome_name <- 'chr02'`
+    1.  `chromosome_name <- "chr02"`
     2.  `od_600_value <- 0.47`
-    3.  `chr_position <- '1001701'`
+    3.  `chr_position <- "1001701"`
     4.  `spock <- TRUE`
     5.  `pilot <- Earhart`
   
