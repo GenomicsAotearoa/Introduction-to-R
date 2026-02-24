@@ -24,4 +24,3 @@
 | BREAK                          | 10 mins      | 2:45-2:55    |                                       |
 | Data viz w ggplot2             | 20 mins      | 2:55-3:15    |                                       |
 | Conclusions/Getting help with R| ~30 mins     | 3:15-END     | Free form discussion        |
-| Producing Reports with knitr   |              |              | skip, discuss if questions  |
