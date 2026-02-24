@@ -66,7 +66,7 @@ the additional learning materials in the tip box below.
     * [R contributed documentation](https://cran.r-project.org/other-docs.html): Also
     linked to the R project; importantly there are materials available in
     several languages 
-    * [R for Data Science](http://r4ds.had.co.nz/): A
+    * [R for Data Science (2e)](https://r4ds.hadley.nz/): A
     wonderful collection by noted R educators and developers Garrett
     Grolemund and Hadley Wickham 
     * [Practical Data Science for Stats](https://peerj.com/collections/50-practicaldatascistats/): Not
