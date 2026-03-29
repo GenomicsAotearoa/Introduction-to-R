@@ -166,7 +166,7 @@ typos and errors in file paths.** Use it!
         ```r
         # Read the csv directly from our github repository
 
-        variants <- read.csv('https://raw.githubusercontent.com/GenomicsAotearoa/Introduction-to-R/refs/heads/main/combined_tidy_vcf.csv')
+        variants <- read.csv("https://raw.githubusercontent.com/GenomicsAotearoa/Introduction-to-R/refs/heads/main/combined_tidy_vcf.csv")
         ```
 
 One of the first things you should notice is that in the Environment
