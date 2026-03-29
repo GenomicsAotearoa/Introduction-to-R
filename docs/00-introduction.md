@@ -419,11 +419,37 @@ order specified in the help manual for each function (see [Getting help with R](
         ```
 
 
+## Libraries and packages
 
+All functions in R sit within a package. Many packages come natively with RStudio, such as `stats`, `base` and `utils`. These are loaded automatically when you start R, so their functions are always available.
+
+One of R's greatest strengths is its huge ecosystem of community-contributed
+packages that extend what R can do. To use one of these packages, you need to:
+
+Step 1. **Install it once** — this downloads the package to your computer:  
+
+(Here on the REANNZ environment, we have already installed all the packages you need for this workshop)
+
+
+!!! r-project "r"
+
+    ```r
+    install.packages("ggplot2")
+    ```
+
+
+Step 2. **Load it each session** — this makes the package's functions available in your
+   current R session:
+
+!!! r-project "r"
+
+    ```r
+    library(ggplot2)
+    ```
 
 We will discuss more on where to look for the libraries and packages
 that contain functions you want to use. For now, be aware that two
-important ones are: 
+important online repositories are: 
 
 * [CRAN](https://cran.r-project.org/), the main repository for R
 * [Bioconductor](http://bioconductor.org/), a popular repository for 
