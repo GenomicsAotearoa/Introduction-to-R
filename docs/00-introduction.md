@@ -381,40 +381,6 @@ number with a decimal:
         [1] 3
         ```
 
-
-## Getting help with function arguments
-
-What if you wanted to round to one significant digit? `round()` can do
-this, but you may first need to read the help to find out how. To see
-the help (in R sometimes also called a "vignette") enter a `?` in front
-of the function name:
-
-!!! r-project "r"
-
-    ```r
-    ?round()
-    ```
-
-The "Help" tab will show you information (often, too much information).
-You will slowly learn how to read and make sense of help files. Checking
-the "Usage" or "Examples" headings is often a good place to look first.
-If you look under "Arguments," we also see what arguments we can pass to
-this function to modify its behavior. You can also see a function's
-argument using the `args()` function:
-
-!!! r-project "r"
-
-    ```r
-    args(round)
-    ```
-
-    !!! success "Output"
-
-        ```
-        function (x, digits = 0) 
-        NULL
-        ```
-
 `round()` takes two arguments, `x`, which is the number to be rounded,
 and a `digits` argument. The `=` sign indicates that a default (in this
 case 0) is already set. Since `x` is not set, `round()` requires we
@@ -437,7 +403,7 @@ the digits argument when we call the function:
 
 Or, R accepts what we call "positional arguments", if you pass a
 function arguments separated by commas, R assumes that they are in the
-order you saw when we used `args()`. In the case below that means that
+order specified in the help manual for each function (see [Getting help with R](08-r-help.md)). In the case below that means that
 `x` is 3.14159 and digits is 2.
 
 !!! r-project "r"
@@ -446,50 +412,14 @@ order you saw when we used `args()`. In the case below that means that
     round(3.14159, 2)
     ```
 
-Finally, what if you are using `?` to get help for a function in a
-package not installed on your system, such as when you are running a
-script which has dependencies.
+    !!! success "Output"
 
-!!! r-project "r"
+        ```
+        [1] 3.14
+        ```
 
-    ```r
-    ?geom_point()
-    ```
 
-The above will return an error:
 
-!!! failure "Error"
-
-    ```
-    Error in .helpForCall(topicExpr, parent.frame()) :
-       no methods for ‘geom_point’ and no documentation for it as a function
-    ```
-
-Use two question marks (i.e. `??geom_point()`) and R will return results
-from a search of the documentation for packages you have installed on
-your computer in the "Help" tab. Finally, if you think there should be a
-function, for example a statistical test, but you aren't sure what it is
-called in R, or what functions may be available, use the `help.search()`
-function.
-
-!!! question "Exercise: Searching for R functions"
-   
-    Use `help.search()` to find R functions for the following statistical
-    functions. Remember to put your search query in quotes inside the
-    function's parentheses.
-   
-    * Chi-Squared test
-    * Student t-test
-    * Mixed linear model
-   
-    ??? success Solution
-    
-        While your search results may return several tests, we list a few
-        you might find: 
-
-        - Chi-Squared test: `stats::Chisquare` 
-        - Student t-test: `stats::t.test` 
-        - Mixed linear model: `stats::lm.glm`
 
 We will discuss more on where to look for the libraries and packages
 that contain functions you want to use. For now, be aware that two
