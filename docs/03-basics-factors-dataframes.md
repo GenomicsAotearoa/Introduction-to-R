@@ -523,6 +523,19 @@ one value (except in some cases where we are taking a range).
         19     1             C
         ```
 
+!!! question "Exercise: Subsetting challenge"
+    **Recreate the output of `head(variants)` using subsetting instead**
+
+    ??? success "Solution"
+        ```r
+        variants[1:6, ]
+        ```
+
+
+
+
+
+
 The subsetting notation is very similar to what we learned for vectors.
 The key differences include:
 
