@@ -1,0 +1,1306 @@
+<!DOCTYPE html><html lang="en" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Genomics Aotearoa">
+      
+      
+        <link rel="canonical" href="https://genomicsaotearoa.github.io/Introduction-to-R/appendix/02A-factors-and-coercion/">
+      
+      
+        <link rel="prev" href="../01A-bioconductor-vcfr/">
+      
+      
+        <link rel="next" href="../03A-dplyr/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../theme_figures/GA_logo_black_test.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Factors and Coercion - Introduction to R</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Mukta";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#factors-and-coercion" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Introduction to R" class="md-header__button md-logo" aria-label="Introduction to R" data-md-component="logo">
+      
+  <img src="../../theme_figures/GA_logo_black_test.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Introduction to R
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Factors and Coercion
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo" aria-label="Switch to light mode" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo" aria-label="Switch to dark mode" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo" aria-label="Switch to system preference" type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required="">
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix="">
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/GenomicsAotearoa/Introduction-to-R" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    GenomicsAotearoa/Introduction-to-R
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Introduction to R" class="md-nav__button md-logo" aria-label="Introduction to R" data-md-component="logo">
+      
+  <img src="../../theme_figures/GA_logo_black_test.png" alt="logo">
+
+    </a>
+    Introduction to R
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/GenomicsAotearoa/Introduction-to-R" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    GenomicsAotearoa/Introduction-to-R
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../00-introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducing R and RStudio IDE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01-r-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    R Basics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02-data-prelude/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction to the example dataset and file type
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03-basics-dataframes-manipulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    R Basics continued - data frames and manipulation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04-data-visualisation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Visualisation with ggplot2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05-r-help/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting help with R
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" checked="">
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Appendix
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Appendix
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01A-bioconductor-vcfr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Using packages from Bioconductor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Factors and Coercion
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Factors and Coercion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#introducing-factors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducing factors
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Introducing factors">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#plotting-and-ordering-factors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plotting and ordering factors
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#coercing-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coercing values
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Coercing values">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lesson-summary-data-coercion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lesson summary: Data coercion
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03A-dplyr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Wrangling and Analyses with Tidyverse
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04A-knitr-markdown/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Producing Reports With knitr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#introducing-factors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introducing factors
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Introducing factors">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#plotting-and-ordering-factors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Plotting and ordering factors
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#coercing-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coercing values
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Coercing values">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lesson-summary-data-coercion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lesson summary: Data coercion
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="factors-and-coercion">Factors and Coercion<a class="headerlink" href="#factors-and-coercion" title="Permanent link">¶</a></h1>
+<h2 id="introducing-factors">Introducing factors<a class="headerlink" href="#introducing-factors" title="Permanent link">¶</a></h2>
+<p>Factors are another major data structure that is important to know about. Factors can be thought of as vectors which are specialized for
+categorical data. Given R's specialization for statistics, this make sense since
+categorial and continuous variables are usually treated differently. Sometimes
+you may want to have data treated as a factor, but in other cases, this may be
+undesirable. Let's see the value of treating some of which are categorical in 
+nature as factors. Let's take a look at just the alternate alleles, continuing on from our variants dataframe example. </p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Recreate the variants dataframe and subset it, if you do not already have these objects in your environment:</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">variants</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv</span><span class="p">(</span><span class="s">"https://raw.githubusercontent.com/GenomicsAotearoa/Introduction-to-R/refs/heads/main/combined_tidy_vcf.csv"</span><span class="p">)</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">subset_variants</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">variants</span><span class="p">[,</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">6</span><span class="p">)]</span>
+</code></pre></div>
+</div>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># Extract the "ALT" column to a new object</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">alt_alleles</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">subset_variants</span><span class="o">$</span><span class="n">ALT</span>
+</code></pre></div>
+</div>
+<p>Let's look at the first few items in our factor using <code>head()</code>:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nf">head</span><span class="p">(</span><span class="n">alt_alleles</span><span class="p">)</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>[1] "G"         "T"         "T"         "CTTTTTTTT" "CCGCGC"    "T"
+</code></pre></div>
+</details>
+</div>
+<p>There are 801 alleles (one for each row). To simplify, lets look at just
+the single-nucleotide alleles (SNPs). We can use some of the vector
+indexing skills from the last episode.</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">alt_snps</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="n">alt_alleles</span><span class="p">[</span><span class="n">alt_alleles</span><span class="o">==</span><span class="s">"A"</span><span class="p">],</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">              </span><span class="n">alt_alleles</span><span class="p">[</span><span class="n">alt_alleles</span><span class="o">==</span><span class="s">"T"</span><span class="p">],</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">              </span><span class="n">alt_alleles</span><span class="p">[</span><span class="n">alt_alleles</span><span class="o">==</span><span class="s">"G"</span><span class="p">],</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">              </span><span class="n">alt_alleles</span><span class="p">[</span><span class="n">alt_alleles</span><span class="o">==</span><span class="s">"C"</span><span class="p">])</span>
+</code></pre></div>
+</div>
+<p>This leaves us with a vector of the 701 alternative alleles which were
+single nucleotides. Right now, they are being treated a characters, but
+we could treat them as categories of SNP. Doing this will enable some
+nice features. For example, we can try to generate a plot of this
+character vector as it is right now:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nf">plot</span><span class="p">(</span><span class="n">alt_snps</span><span class="p">)</span>
+</code></pre></div>
+<details class="failure">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>Error in plot.window(...) : need finite 'ylim' values
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>In addition: Warning messages:
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>1: In xy.coords(x, y, xlabel, ylabel, log) : NAs introduced by coercion
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>2: In min(x) : no non-missing arguments to min; returning Inf
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>3: In max(x) : no non-missing arguments to max; returning -Inf
+</code></pre></div>
+</details>
+</div>
+<p>Whoops! Though the <code>plot()</code> function will do its best to give us a quick
+plot, it is unable to do so here. One way to fix this it to tell R to
+treat the SNPs as categories (i.e.,&nbsp;a factor vector); we will create a
+new object to avoid confusion using the <code>factor()</code> function:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">factor_snps</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">factor</span><span class="p">(</span><span class="n">alt_snps</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<p>Let's learn a little more about this new type of vector:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nf">str</span><span class="p">(</span><span class="n">factor_snps</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a> Factor w/ 4 levels "A","C","G","T": 1 1 1 1 1 1 1 1 1 1 ...
+</code></pre></div>
+</details>
+<p>What we get back are the categories ("A","C","G","T") in our factor;
+these are called "levels". <strong>Levels are the different categories
+contained in a factor</strong>. By default, R will organize the levels in a
+factor in alphabetical order. So the first level in this factor is "A".</p>
+<p>For the sake of efficiency, R stores the content of a factor as a vector
+of integers, which an integer is assigned to each of the possible
+levels. Recall levels are assigned in alphabetical order. In this case,
+the first item in our <code>factor_snps</code> object is "A", which happens to be
+the 1<sup>st</sup> level of our factor, ordered alphabetically. This explains the
+sequence of "1"s (<code>Factor w/ 4 levels"A","C","G","T": 1 1 1 1 1 1 1 1 1
+1 ...</code>), since "A" is the first level and the first few items in our
+factor are all "A"s.</p>
+<p>We can see how many items in our vector fall into each category:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nf">summary</span><span class="p">(</span><span class="n">factor_snps</span><span class="p">)</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>  A   C   G   T 
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>211 139 154 203
+</code></pre></div>
+</details>
+</div>
+<p>As you can imagine, this is already useful when you want to generate a
+tally.</p>
+<div class="admonition tip">
+<p class="admonition-title">Treating objects as categories without changing their mode</p>
+<p>You don't have to make an object a factor to get the benefits of
+treating an object as a factor. See what happens when you use the
+<code>as.factor()</code> function on <code>factor_snps</code>. To generate a tally, you can
+sometimes also use the <code>table()</code> function; though sometimes you may
+need to combine both (i.e., <code>table(as.factor(object))</code>)</p>
+</div>
+<h3 id="plotting-and-ordering-factors">Plotting and ordering factors<a class="headerlink" href="#plotting-and-ordering-factors" title="Permanent link">¶</a></h3>
+<p>One of the most common uses for factors will be when you plot
+categorical values. For example, suppose we want to know how many of our
+variants had each possible SNP we could generate a plot:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nf">plot</span><span class="p">(</span><span class="n">factor_snps</span><span class="p">)</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../figures/factor_snps_barplot.png" data-desc-position="bottom"><img alt="images" src="../../figures/factor_snps_barplot.png" width="600"></a></p>
+</details>
+</div>
+<p>This isn't a particularly pretty example of a plot but it works. We'll
+be learning much more about creating nice, publication-quality graphics
+later in this workshop.</p>
+<p>If you recall, factors are ordered alphabetically. That might make
+sense, but categories (e.g., "red", "blue", "green") often do not have
+an intrinsic order. What if we wanted to order our plot according to the
+numerical value (i.e., in descending order of SNP frequency)? We can
+enforce an order on our factors:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">ordered_factor_snps</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">factor</span><span class="p">(</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">  </span><span class="n">factor_snps</span><span class="p">,</span><span class="w"> </span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">  </span><span class="n">levels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">names</span><span class="p">(</span><span class="nf">sort</span><span class="p">(</span><span class="nf">table</span><span class="p">(</span><span class="n">factor_snps</span><span class="p">)))</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="p">)</span>
+</code></pre></div>
+</div>
+<p>Let's deconstruct this from the <em>inside out</em> (you can try each of these
+commands to see why this works):</p>
+<ol>
+<li>We create a table of <code>factor_snps</code> to get the frequency of each SNP:
+    <code>table(factor_snps)</code></li>
+<li>We sort this table: <code>sort(table(factor_snps))</code>; use the
+    <code>decreasing =</code> parameter for this function if you wanted to change
+    from the default of FALSE</li>
+<li>Using the <code>names()</code> function gives us just the character names of the
+    table sorted by frequencies:<code>names(sort(table(factor_snps)))</code></li>
+<li>The <code>factor</code> function is what allows us to create a factor. We give
+    it the <code>factor_snps</code> object as input, and use the <code>levels=</code>
+    parameter to enforce the ordering of the levels.</li>
+</ol>
+<p>Now we see our plot has be reordered:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nf">plot</span><span class="p">(</span><span class="n">ordered_factor_snps</span><span class="p">)</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../figures/ordered_factor_snps_barplot.png" data-desc-position="bottom"><img alt="images" src="../../figures/ordered_factor_snps_barplot.png" width="600"></a></p>
+</details>
+</div>
+<p>Factors come in handy in many places when using R. Even using more
+sophisticated plotting packages such as <code>ggplot2</code> will sometimes require
+you to understand how to manipulate factors.</p>
+<h2 id="coercing-values">Coercing values<a class="headerlink" href="#coercing-values" title="Permanent link">¶</a></h2>
+<p>Sometimes, it is possible that R will misinterpret the type of data represented
+in a data frame, or store that data in a mode which prevents you from
+operating on the data the way you wish. For example, a long list of gene names
+isn't usually thought of as a categorical variable, the way that your
+experimental condition (e.g., control, treatment) might be. More importantly,
+some R packages you use to analyze your data may expect characters as input,
+not factors. At other times (such as plotting or some statistical analyses) a
+factor may be more appropriate. Ultimately, you should know how to change the
+mode of an object.</p>
+<p>First, its very important to recognize that coercion happens in R all the time.
+This can be a good thing when R gets it right, or a bad thing when the result
+is not what you expect. Consider:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="n">snp_chromosomes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">'3'</span><span class="p">,</span><span class="w"> </span><span class="s">'11'</span><span class="p">,</span><span class="w"> </span><span class="s">'X'</span><span class="p">,</span><span class="w"> </span><span class="s">'6'</span><span class="p">)</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="nf">typeof</span><span class="p">(</span><span class="n">snp_chromosomes</span><span class="p">)</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>[1] "character"
+</code></pre></div>
+</details>
+</div>
+<p>Although there are several numbers in our vector, they are all in
+quotes, so we have explicitly told R to consider them as characters.
+However, even if we removed the quotes from the numbers, R would coerce
+everything into a character:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="n">snp_chromosomes_2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="m">11</span><span class="p">,</span><span class="w"> </span><span class="s">'X'</span><span class="p">,</span><span class="w"> </span><span class="m">6</span><span class="p">)</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="nf">typeof</span><span class="p">(</span><span class="n">snp_chromosomes_2</span><span class="p">)</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="n">snp_chromosomes_2</span><span class="p">[</span><span class="m">1</span><span class="p">]</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>[1] "character"
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>[1] "3"
+</code></pre></div>
+</details>
+</div>
+<p>We can use the <code>as.</code> functions to explicitly coerce values from one form
+into another. Consider the following vector of characters, which all
+happen to be valid numbers:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="n">snp_positions_2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">"8762685"</span><span class="p">,</span><span class="w"> </span><span class="s">"66560624"</span><span class="p">,</span><span class="w"> </span><span class="s">"67545785"</span><span class="p">,</span><span class="w"> </span><span class="s">"154039662"</span><span class="p">)</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="nf">typeof</span><span class="p">(</span><span class="n">snp_positions_2</span><span class="p">)</span>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="n">snp_positions_2</span><span class="p">[</span><span class="m">1</span><span class="p">]</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>[1] "character"
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>[1] "8762685"
+</code></pre></div>
+</details>
+</div>
+<p>Now we can coerce <code>snp_positions_2</code> into a numeric mode using
+<code>as.numeric()</code>:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="n">snp_positions_2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.numeric</span><span class="p">(</span><span class="n">snp_positions_2</span><span class="p">)</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="nf">typeof</span><span class="p">(</span><span class="n">snp_positions_2</span><span class="p">)</span>
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="n">snp_positions_2</span><span class="p">[</span><span class="m">1</span><span class="p">]</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>[1] "double"
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>[1] 8762685
+</code></pre></div>
+</details>
+</div>
+<p>Sometimes coercion is straight forward, but what would happen if we
+tried using <code>as.numeric()</code> on <code>snp_chromosomes_2</code></p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="n">snp_chromosomes_2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.numeric</span><span class="p">(</span><span class="n">snp_chromosomes_2</span><span class="p">)</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>Warning message:
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>NAs introduced by coercion
+</code></pre></div>
+</details>
+</div>
+<p>If we check, we will see that an <code>NA</code> value (R's default value for
+missing data) has been introduced.</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="n">snp_chromosomes_2</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>[1]  3 11 NA  6
+</code></pre></div>
+</details>
+</div>
+<p>Trouble can really start when we try to coerce a factor. For example,
+when we try to coerce the <code>factor_snps</code> into a numeric mode look at the 
+result: </p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="nf">as.numeric</span><span class="p">(</span><span class="n">factor_snps</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>  [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a> [28] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a> [55] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+<a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a> [82] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+<a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a>[109] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+<a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a>[136] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+<a id="__codelineno-28-7" name="__codelineno-28-7" href="#__codelineno-28-7"></a>[163] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+<a id="__codelineno-28-8" name="__codelineno-28-8" href="#__codelineno-28-8"></a>[190] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 4 4 4 4 4
+<a id="__codelineno-28-9" name="__codelineno-28-9" href="#__codelineno-28-9"></a>[217] 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4
+<a id="__codelineno-28-10" name="__codelineno-28-10" href="#__codelineno-28-10"></a>[244] 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4
+<a id="__codelineno-28-11" name="__codelineno-28-11" href="#__codelineno-28-11"></a>[271] 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4
+<a id="__codelineno-28-12" name="__codelineno-28-12" href="#__codelineno-28-12"></a>[298] 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4
+<a id="__codelineno-28-13" name="__codelineno-28-13" href="#__codelineno-28-13"></a>[325] 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4
+<a id="__codelineno-28-14" name="__codelineno-28-14" href="#__codelineno-28-14"></a>[352] 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4
+<a id="__codelineno-28-15" name="__codelineno-28-15" href="#__codelineno-28-15"></a>[379] 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4
+<a id="__codelineno-28-16" name="__codelineno-28-16" href="#__codelineno-28-16"></a>[406] 4 4 4 4 4 4 4 4 4 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+<a id="__codelineno-28-17" name="__codelineno-28-17" href="#__codelineno-28-17"></a>[433] 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+<a id="__codelineno-28-18" name="__codelineno-28-18" href="#__codelineno-28-18"></a>[460] 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+<a id="__codelineno-28-19" name="__codelineno-28-19" href="#__codelineno-28-19"></a>[487] 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+<a id="__codelineno-28-20" name="__codelineno-28-20" href="#__codelineno-28-20"></a>[514] 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+<a id="__codelineno-28-21" name="__codelineno-28-21" href="#__codelineno-28-21"></a>[541] 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+<a id="__codelineno-28-22" name="__codelineno-28-22" href="#__codelineno-28-22"></a>[568] 3 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+<a id="__codelineno-28-23" name="__codelineno-28-23" href="#__codelineno-28-23"></a>[595] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+<a id="__codelineno-28-24" name="__codelineno-28-24" href="#__codelineno-28-24"></a>[622] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+<a id="__codelineno-28-25" name="__codelineno-28-25" href="#__codelineno-28-25"></a>[649] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+<a id="__codelineno-28-26" name="__codelineno-28-26" href="#__codelineno-28-26"></a>[676] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+<a id="__codelineno-28-27" name="__codelineno-28-27" href="#__codelineno-28-27"></a>[703] 2 2 2 2 2 
+</code></pre></div>
+</details>
+<p>Strangely, it works! Almost. Instead of giving an error message, R
+returns numeric values, which in this case are the integers assigned to
+the levels in this factor. This kind of behavior can lead to
+hard-to-find bugs, for example when we do have numbers in a factor, and
+we get numbers from a coercion. If we don't look carefully, we may not
+notice a problem.</p>
+<p>If you need to coerce an entire column you can overwrite it using an
+expression like this one:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="c1"># Make the 'sample_id' column a factor type column</span>
+<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="n">variants</span><span class="o">$</span><span class="n">sample_id</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.factor</span><span class="p">(</span><span class="n">variants</span><span class="o">$</span><span class="n">sample_id</span><span class="p">)</span>
+<a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a>
+<a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a><span class="c1"># check the structure of the column</span>
+<a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a><span class="nf">str</span><span class="p">(</span><span class="n">variants</span><span class="o">$</span><span class="n">sample_id</span><span class="p">)</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>Factor w/ 3 levels "SRR2584863","SRR2584866",..: 1 1 1 1 1 1 1 1 1 1 ...
+</code></pre></div>
+</details>
+</div>
+<h3 id="lesson-summary-data-coercion">Lesson summary: Data coercion<a class="headerlink" href="#lesson-summary-data-coercion" title="Permanent link">¶</a></h3>
+<p>Lets summarize this section on coercion with a few take home messages.</p>
+<ul>
+<li>When you explicitly coerce one data type into another (this is known as
+  <strong>explicit coercion</strong>), be careful to check the result. Ideally, you should 
+  try to see if its possible to avoid steps in your analysis that force you to
+  coerce.</li>
+<li>R will sometimes coerce without you asking for it. This is called
+  (appropriately) <strong>implicit coercion</strong>. For example when we tried to create
+  a vector with multiple data types, R chose one type through implicit
+  coercion.</li>
+<li>Check the structure (<code>str()</code>) of your data before working with them!</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title"><code>StringsAsFactors</code></p>
+<p>Prior to R 4.0 when importing a data frame using any one of the <code>read.table()</code>
+functions such as <code>read.csv()</code> , the argument <code>StringsAsFactors</code> was by
+default
+set to true TRUE. Setting it to FALSE will treat any non-numeric column to
+a character type. <code>read.csv()</code> documentation, you will also see you can
+explicitly type your columns using the <code>colClasses</code> argument. Other R packages
+(such as the Tidyverse <code>readr</code>) don't have this particular conversion issue,
+but many packages will still try to guess a data type.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden="">
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer">
+        
+          
+          <a href="../01A-bioconductor-vcfr/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Using packages from Bioconductor">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Using packages from Bioconductor
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../03A-dplyr/" class="md-footer__link md-footer__link--next" aria-label="Next: Data Wrangling and Analyses with Tidyverse">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Data Wrangling and Analyses with Tidyverse
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "navigation.footer"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>
