@@ -169,57 +169,13 @@ script.
     [1] tools_3.2.3     packrat_0.4.9-1
     ```
 
-Many times, there may be some issues with your data and the way it is
-formatted. In that case, you may want to share that data with someone
-else. However, you may not need to share the whole dataset; looking at a
-subset of your 50,000 row, 10,000 column data frame may be TMI (too much
-information)! You can take an object you have in memory such as a
-data frame and save it to a file. In our example we will use the `dput()` 
-function on the `iris` data frame which is an example dataset that is installed 
-in R:
 
-!!! r-project "r"
-
-    ```r
-    dput(head(iris)) 
-    
-    # iris is an example data.frame that comes with R
-    # the `head()` function just takes the first 6 lines of the iris dataset
-    ```
-
-This generates some output (below) which you will be better able to
-interpret after covering the other R lessons. This info would be helpful
-in understanding how the data is formatted and possibly revealing
-problematic issues.
-
-!!! success "Output"
-
-    ```
-    structure(list(Sepal.Length = c(5.1, 4.9, 4.7, 4.6, 5, 5.4), 
-        Sepal.Width = c(3.5, 3, 3.2, 3.1, 3.6, 3.9), Petal.Length = c(1.4, 
-        1.4, 1.3, 1.5, 1.4, 1.7), Petal.Width = c(0.2, 0.2, 0.2, 
-        0.2, 0.2, 0.4), Species = structure(c(1L, 1L, 1L, 1L, 1L, 
-        1L), levels = c("setosa", "versicolor", "virginica"), class = "factor")), row.names = c(NA, 
-    6L), class = "data.frame")
-    ```
-
-Alternatively, you can also save objects in R memory to a file by
-specifying the name of the object, in this case the `iris` data frame,
-and passing a filename to the `file=` argument.
-
-!!! r-project "r"
-
-    ```r
-    saveRDS(iris, file="iris.rds") 
-    
-    # By convention, we use the .rds file extension
-    ```
 
 
 ## Using AI
 
-AI tools such as ChatGPT can be very useful for getting help with R
-programming. The best way to learn how to use these tools is to play around with them. Try asking  how to make a nice boxplot in R using your favourite colours, how to import a csv table from your local computer into RStudio, or how to calculate summary statistics for a dataframe in R. You can also ask for help with specific error messages you encounter while coding in R. 
+AI tools such as ChatGPT and Claude can be very useful for getting help with R
+programming. The best way to learn how to use these tools is to play around with them. Try asking how to make a nice boxplot in R using your favourite colours, how to import a csv table from your local computer into RStudio, or how to calculate summary statistics for a dataframe in R. You can also ask for help with specific error messages you encounter while coding in R. 
 
 > Note: Be cautious and always verify the information provided by AI, as it may not always be accurate or reliable. Use AI as a starting point, but don't rely on it exclusively for critical tasks. Be very cautious about sharing sensitive or personal information with AI tools. 
 
