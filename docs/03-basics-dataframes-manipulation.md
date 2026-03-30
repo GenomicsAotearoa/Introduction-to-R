@@ -1,4 +1,4 @@
-# R Basics continued - factors and data frames  
+# R Basics continued - data frames and manipulation 
 
 
 !!! info "Learning outcomes"
@@ -8,7 +8,7 @@
         - It is easy to import data into R from tabular formats including Excel.
           However, you still need to check that R has imported and interpreted
           your data correctly
-        - There are best practices for organizing your data (keeping it tidy)
+        - There are best practices for organising your data (keeping it tidy)
           and R is great for this
         - Base R has many useful functions for manipulating your data, but all
           of R's capabilities are greatly enhanced by software packages
@@ -21,14 +21,8 @@
         - Be able to determine the structure of a data frame including its
           dimensions and the datatypes of variables
         - Be able to subset/retrieve values from a data frame
-        - Understand how R may coerce data into different modes
         - Be able to change the mode of an object
-        - Understand that R uses factors to store and manipulate categorical
-          data
-        - Be able to manipulate a factor, including subsetting and reordering
         - Be able to apply an arithmetic function to a data frame
-        - Be able to coerce the class of an object (including variables in a
-          data frame)
         - Be able to import data from Excel
         - Be able to save a data frame as a delimited file
     
@@ -44,12 +38,12 @@
 A substantial amount of the data we work with in genomics will be
 tabular data, this is data arranged in rows and columns - also known as
 spreadsheets. We could write a whole lesson on how to work with
-spreadsheets effectively ([actually we
+spreadsheets effectively ([actually the Carpentries
 did](https://datacarpentry.org/organization-genomics/)). For our
 purposes, we want to remind you of a few principles before we work with
 our first set of example data:
 
-**1) Keep raw data separate from analyzed data**
+**1) Keep raw data separate from analysed data**
 
 This is principle number one because if you can't tell which files are
 the original raw data, you risk making some serious mistakes
@@ -63,7 +57,7 @@ spreadsheet for each observation or sample, and one column for every
 variable that we measure or report on. As simple as this sounds, it's
 very easily violated. Most data scientists agree that significant
 amounts of their time is spent tidying data for analysis. Read more
-about data organization in [our
+about data sation in [this Carpentries
 lesson](https://datacarpentry.org/organization-genomics/) and in [this
 paper](https://www.jstatsoft.org/article/view/v059i10).
 
@@ -98,54 +92,6 @@ will focus on using the tools every R installation comes with (so called
 variant calling workflow. We will need to load the sheet using a
 function called `read.csv()`.
 
-!!! question "Exercise: Review the arguments of the `read.csv()` function"
-
-    **Before using the `read.csv()` function, use R's help feature to
-    answer the following questions**.
-
-    *Hint*: Entering '?' before the function name and then running that
-    line will bring up the help documentation. Also, when reading this
-    particular help be careful to pay attention to the 'read.csv'
-    expression under the 'Usage' heading. Other answers will be in the
-    'Arguments' heading.
-
-    A)  What is the default parameter for 'header' in the `read.csv()`
-        function?
-
-    B)  What argument would you have to change to read a file that was
-        delimited by semicolons (;) rather than commas?
-        
-    C)  What argument would you have to change to read file in which
-        numbers used commas for decimal separation (i.e., 1,00)?
-        
-    D)  What argument would you have to change to read in only the first
-        10,000 rows of a very large file?
-
-    ??? success "Solution"
-
-        A)  The `read.csv()` function has the argument 'header' set to `TRUE`
-            by default. This means the function always assumes the first row
-            is header information, (i.e., column names)
-            
-        B)  The `read.csv()` function has the argument 'sep' set to ",".
-            This means the function assumes commas are used as delimiters,
-            as you would expect. Changing this parameter (e.g., `sep=";"`)
-            would tell R to interpret semicolons as delimiters.
-            
-        C)  Although it is not listed in the `read.csv()` usage,
-            `read.csv()` is a "version" of the function `read.table()` and
-            accepts all its arguments. If you set `dec=","` you could change
-            the decimal operator. We'd probably assume the delimiter is some
-            other character.
-            
-        D)  You can set `nrow` to a numeric value (e.g., `nrow=10000`) to
-            choose how many rows of a file you read in. This may be useful
-            for very large files where not all the data is needed to test
-            some data cleaning steps you are applying.
-
-        Hopefully, this exercise gets you thinking about using the provided
-        help documentation in R. There are many arguments that exist, but
-        which we wont have time to cover. 
 
 Now, let's read in the file `combined_tidy_vcf.csv` which will be
 located in `/home/shared/$USER/R4Genomics/`. Call/assign this data `variants`. 
@@ -176,7 +122,7 @@ name of the object will open a view of the data in a new tab.
 
 ![images](figures/rstudio_dataframeview.png){ width="1000" }
 
-### Summarizing and determining the structure of a data frame.
+### Summarising and determining the structure of a data frame.
 
 A **data frame is the standard way to store tabular data in R**. A data
 frame could also be thought of as a collection of vectors, all of which
@@ -184,6 +130,61 @@ have the same length. Using only two functions, we can learn a lot about
 out data frame including some summary statistics as well as the
 "structure" of the data frame. Let's examine what each of these
 functions can tell us:
+
+!!! r-project "r"
+
+    ```r
+    # Get structure of a dataframe
+
+    str(variants)
+    ```
+
+    ??? success "Output"
+
+        ```
+        'data.frame':	801 obs. of  29 variables:
+        $ sample_id    : chr  "SRR2584863" "SRR2584863" "SRR2584863" "SRR2584863" ...
+        $ CHROM        : chr  "CP000819.1" "CP000819.1" "CP000819.1" "CP000819.1" ...
+        $ POS          : int  9972 263235 281923 433359 473901 648692 1331794 1733343 2103887 2333538 ...
+        $ ID           : logi  NA NA NA NA NA NA ...
+        $ REF          : chr  "T" "G" "G" "CTTTTTTT" ...
+        $ ALT          : chr  "G" "T" "T" "CTTTTTTTT" ...
+        $ QUAL         : num  91 85 217 64 228 210 178 225 56 167 ...
+        $ FILTER       : logi  NA NA NA NA NA NA ...
+        $ INDEL        : logi  FALSE FALSE FALSE TRUE TRUE FALSE ...
+        $ IDV          : int  NA NA NA 12 9 NA NA NA 2 7 ...
+        $ IMF          : num  NA NA NA 1 0.9 ...
+        $ DP           : int  4 6 10 12 10 10 8 11 3 7 ...
+        $ VDB          : num  0.0257 0.0961 0.7741 0.4777 0.6595 ...
+        $ RPB          : num  NA 1 NA NA NA NA NA NA NA NA ...
+        $ MQB          : num  NA 1 NA NA NA NA NA NA NA NA ...
+        $ BQB          : num  NA 1 NA NA NA NA NA NA NA NA ...
+        $ MQSB         : num  NA NA 0.975 1 0.916 ...
+        $ SGB          : num  -0.556 -0.591 -0.662 -0.676 -0.662 ...
+        $ MQ0F         : num  0 0.167 0 0 0 ...
+        $ ICB          : logi  NA NA NA NA NA NA ...
+        $ HOB          : logi  NA NA NA NA NA NA ...
+        $ AC           : int  1 1 1 1 1 1 1 1 1 1 ...
+         $ AN           : int  1 1 1 1 1 1 1 1 1 1 ...
+        $ DP4          : chr  "0,0,0,4" "0,1,0,5" "0,0,4,5" "0,1,3,8" ...
+        $ MQ           : int  60 33 60 60 60 60 60 60 60 60 ...
+        $ Indiv        : chr  "/home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam" "/home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam" "/home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam" "/home/dcuser/dc_workshop/results/bam/SRR2584863.aligned.sorted.bam" ...
+        $ gt_PL        : chr  "121,0" "112,0" "247,0" "91,0" ...
+        $ gt_GT        : int  1 1 1 1 1 1 1 1 1 1 ...
+        $ gt_GT_alleles: chr  "G" "T" "T" "CTTTTTTTT" ...
+
+        ```
+
+Ok, that is a lot up unpack! Some things to notice.
+
+- The object type `data.frame` is displayed in the first row along with its
+  dimensions, in this case 801 observations (rows) and 29 variables (columns).
+- Each variable (column) has a name (e.g., `sample_id`). This is followed
+  by the object mode (e.g., chr, int, etc.). Notice that before each
+  variable name there is a `$` (this will be important later).
+
+
+Now let's look at some summary statistics for our dataframe:
 
 !!! r-project "r"
 
@@ -242,50 +243,12 @@ functions can tell us:
         Mode  :character
         ```
 
-Our data frame has 29 variables, so we get 29 fields that summarize the data.
+Our data frame has 29 variables, so we get 29 fields that summarise the data.
 The `QUAL`, `IMF`, and `VDB` variables (and several others) are
 numerical data and so you get summary statistics on the minimum and maximum 
 values for these columns, as well as mean, median, and 1st and 3rd quantile. 
 Many of the other variables (e.g., `sample_id`) are treated as character data 
-(more on this in a bit). There is a lot to work with, so we will subset the 
-first three columns into a new data frame using the `data.frame()` function.
-
-!!! r-project "r"
-
-    ```r
-    # Put the first three columns of variants into a new data frame called subset_variants
-
-    subset_variants <- variants[, c(1:3, 6)]
-    ```
-
-Now, let's use the `str()` (structure) function to look a little more
-closely at how data frames work:
-
-!!! r-project "r"
-
-    ```r
-    # Get the structure of a data frame
-
-    str(subset_variants)
-    ```
-
-    ??? success "Output"
-
-        ```
-        'data.frame':	801 obs. of  4 variables:
-         $ sample_id: chr  "SRR2584863" "SRR2584863" "SRR2584863" "SRR2584863" ...
-         $ CHROM    : chr  "CP000819.1" "CP000819.1" "CP000819.1" "CP000819.1" ...
-         $ POS      : int  9972 263235 281923 433359 473901 648692 1331794 1733343 2103887 2333538 ...
-         $ ALT      : chr  "G" "T" "T" "CTTTTTTTT" ...
-        ```
-
-Ok, that is a lot up unpack! Some things to notice.
-
-- The object type `data.frame` is displayed in the first row along with its
-  dimensions, in this case 801 observations (rows) and 4 variables (columns).
-- Each variable (column) has a name (e.g., `sample_id`). This is followed
-  by the object mode (e.g., chr, int, etc.). Notice that before each
-  variable name there is a `$` (this will be important later).
+(more on this in a bit). 
 
 ### Subsetting data frames
 
@@ -535,7 +498,6 @@ one value (except in some cases where we are taking a range).
 
 
 
-
 The subsetting notation is very similar to what we learned for vectors.
 The key differences include:
 
@@ -547,520 +509,194 @@ The key differences include:
 -   Index using the name of a column(s) by passing them as vectors using
     `c()`
 
-Finally, in all of the subsetting exercises above, we printed values to
-the screen. You can create a new data frame object by assigning them to
-a new object name:
 
-!!! r-project "r"
 
-    ```r
-    # Create a new data frame containing only observations from "SRR2584863"
-    SRR2584863_variants <- variants[variants$sample_id == "SRR2584863", ]
+There is a lot to work with, so we will subset our columns of interest into a new data frame.
 
-    # Check the dimension of the data frame
-    dim(SRR2584863_variants)
+!!! question "Challenge"
 
-    # Get a summary of the data frame
-    summary(SRR2584863_variants)
-    ```
+    Create a new data frame called `subset_variants` that contains only the
+    columns `sample_id`, `CHROM`, `POS`, and `ALT` from `variants`.
 
-    ??? success "Output"
-    
-        ```
-        [1] 25 29
-    
-          sample_id            CHROM                POS             ID         
-         Length:25          Length:25          Min.   :   9972   Mode:logical  
-         Class :character   Class :character   1st Qu.:1331794   NA's:25       
-         Mode  :character   Mode  :character   Median :2618472                 
-                                               Mean   :2464989                 
-                                               3rd Qu.:3488669                 
-                                               Max.   :4616538                 
-    
-             REF                ALT                 QUAL         FILTER       
-         Length:25          Length:25          Min.   : 31.89   Mode:logical  
-         Class :character   Class :character   1st Qu.:104.00   NA's:25       
-         Mode  :character   Mode  :character   Median :211.00                 
-                                               Mean   :172.97                 
-                                               3rd Qu.:225.00                 
-                                               Max.   :228.00                 
-    
-           INDEL              IDV             IMF               DP      
-         Mode :logical   Min.   : 2.00   Min.   :0.6667   Min.   : 2.0  
-         FALSE:19        1st Qu.: 3.25   1st Qu.:0.9250   1st Qu.: 9.0  
-         TRUE :6         Median : 8.00   Median :1.0000   Median :10.0  
-                         Mean   : 7.00   Mean   :0.9278   Mean   :10.4  
-                         3rd Qu.: 9.75   3rd Qu.:1.0000   3rd Qu.:12.0  
-                         Max.   :12.00   Max.   :1.0000   Max.   :20.0  
-                         NA's   :19      NA's   :19                     
-              VDB               RPB              MQB               BQB        
-         Min.   :0.01627   Min.   :0.9008   Min.   :0.04979   Min.   :0.7507  
-         1st Qu.:0.07140   1st Qu.:0.9275   1st Qu.:0.09996   1st Qu.:0.7627  
-         Median :0.37674   Median :0.9542   Median :0.15013   Median :0.7748  
-         Mean   :0.40429   Mean   :0.9517   Mean   :0.39997   Mean   :0.8418  
-         3rd Qu.:0.65951   3rd Qu.:0.9771   3rd Qu.:0.57507   3rd Qu.:0.8874  
-         Max.   :0.99604   Max.   :1.0000   Max.   :1.00000   Max.   :1.0000  
-                           NA's   :22       NA's   :22        NA's   :22      
-              MQSB             SGB               MQ0F           ICB         
-         Min.   :0.5000   Min.   :-0.6904   Min.   :0.00000   Mode:logical  
-         1st Qu.:0.9599   1st Qu.:-0.6762   1st Qu.:0.00000   NA's:25       
-         Median :0.9962   Median :-0.6620   Median :0.00000                 
-         Mean   :0.9442   Mean   :-0.6341   Mean   :0.04667                 
-         3rd Qu.:1.0000   3rd Qu.:-0.6168   3rd Qu.:0.00000                 
-         Max.   :1.0128   Max.   :-0.4536   Max.   :0.66667                 
-         NA's   :3                                                          
-           HOB                AC          AN        DP4                  MQ       
-         Mode:logical   Min.   :1   Min.   :1   Length:25          Min.   :10.00  
-         NA's:25        1st Qu.:1   1st Qu.:1   Class :character   1st Qu.:60.00  
-                        Median :1   Median :1   Mode  :character   Median :60.00  
-                        Mean   :1   Mean   :1                      Mean   :55.52  
-                        3rd Qu.:1   3rd Qu.:1                      3rd Qu.:60.00  
-                        Max.   :1   Max.   :1                      Max.   :60.00  
-    
-            Indiv              gt_PL               gt_GT   gt_GT_alleles     
-         Length:25          Length:25          Min.   :1   Length:25         
-         Class :character   Class :character   1st Qu.:1   Class :character  
-         Mode  :character   Mode  :character   Median :1   Mode  :character  
-                                               Mean   :1                     
-                                               3rd Qu.:1                     
-                                               Max.   :1                     
-        ```
+    *Hint: use `head()` or `str(variants)` to find which column numbers these correspond to.*
 
-## Introducing factors
+    ??? success "Solution"
 
-Factors are the final major data structure we will introduce in our Introduction 
-to R lessons. Factors can be thought of as vectors which are specialized for
-categorical data. Given R's specialization for statistics, this make sense since
-categorial and continuous variables are usually treated differently. Sometimes
-you may want to have data treated as a factor, but in other cases, this may be
-undesirable. Let's see the value of treating some of which are categorical in 
-nature as factors. Let's take a look at just the alternate alleles.
-
-!!! r-project "r"
-
-    ```r
-    # Extract the "ALT" column to a new object
-
-    alt_alleles <- subset_variants$ALT
-    ```
-
-Let's look at the first few items in our factor using `head()`:
-
-!!! r-project "r"
-
-    ```r
-    head(alt_alleles)
-    ```
-
-    ??? success "Output"
-
-        ```
-        [1] "G"         "T"         "T"         "CTTTTTTTT" "CCGCGC"    "T"
-        ```
-
-There are 801 alleles (one for each row). To simplify, lets look at just
-the single-nucleotide alleles (SNPs). We can use some of the vector
-indexing skills from the last episode.
-
-!!! r-project "r"
-
-    ```r
-    alt_snps <- c(alt_alleles[alt_alleles=="A"],
-                  alt_alleles[alt_alleles=="T"],
-                  alt_alleles[alt_alleles=="G"],
-                  alt_alleles[alt_alleles=="C"])
-    ```
-
-This leaves us with a vector of the 701 alternative alleles which were
-single nucleotides. Right now, they are being treated a characters, but
-we could treat them as categories of SNP. Doing this will enable some
-nice features. For example, we can try to generate a plot of this
-character vector as it is right now:
-
-!!! r-project "r"
-
-    ```r
-    plot(alt_snps)
-    ```
-
-    ??? failure "Output"
-
-        ```
-        Error in plot.window(...) : need finite 'ylim' values
-        In addition: Warning messages:
-        1: In xy.coords(x, y, xlabel, ylabel, log) : NAs introduced by coercion
-        2: In min(x) : no non-missing arguments to min; returning Inf
-        3: In max(x) : no non-missing arguments to max; returning -Inf
-        ```
-
-Whoops! Though the `plot()` function will do its best to give us a quick
-plot, it is unable to do so here. One way to fix this it to tell R to
-treat the SNPs as categories (i.e., a factor vector); we will create a
-new object to avoid confusion using the `factor()` function:
-
-!!! r-project "r"
-
-    ```r
-    factor_snps <- factor(alt_snps)
-    ```
-
-Let's learn a little more about this new type of vector:
-
-!!! r-project "r"
-
-    ```r
-    str(factor_snps)
-    ```
-
-??? success "Output"
-
-    ```
-     Factor w/ 4 levels "A","C","G","T": 1 1 1 1 1 1 1 1 1 1 ...
-    ```
-
-What we get back are the categories ("A","C","G","T") in our factor;
-these are called "levels". **Levels are the different categories
-contained in a factor**. By default, R will organize the levels in a
-factor in alphabetical order. So the first level in this factor is "A".
-
-For the sake of efficiency, R stores the content of a factor as a vector
-of integers, which an integer is assigned to each of the possible
-levels. Recall levels are assigned in alphabetical order. In this case,
-the first item in our `factor_snps` object is "A", which happens to be
-the 1st level of our factor, ordered alphabetically. This explains the
-sequence of "1"s (`Factor w/ 4 levels"A","C","G","T": 1 1 1 1 1 1 1 1 1
-1 ...`), since "A" is the first level and the first few items in our
-factor are all "A"s.
-
-We can see how many items in our vector fall into each category:
-
-!!! r-project "r"
-
-    ```r
-    summary(factor_snps)
-    ```
-
-    ??? success "Output"
-
-        ```
-          A   C   G   T 
-        211 139 154 203
-        ```
-
-As you can imagine, this is already useful when you want to generate a
-tally.
-
-!!! tip "Treating objects as categories without changing their mode"
-
-    You don't have to make an object a factor to get the benefits of
-    treating an object as a factor. See what happens when you use the
-    `as.factor()` function on `factor_snps`. To generate a tally, you can
-    sometimes also use the `table()` function; though sometimes you may
-    need to combine both (i.e., `table(as.factor(object))`)
-
-### Plotting and ordering factors
-
-One of the most common uses for factors will be when you plot
-categorical values. For example, suppose we want to know how many of our
-variants had each possible SNP we could generate a plot:
-
-!!! r-project "r"
-
-    ```r
-    plot(factor_snps)
-    ```
-
-    ??? success "Output"
-
-        ![images](figures/factor_snps_barplot.png){ width="600"}
-
-This isn't a particularly pretty example of a plot but it works. We'll
-be learning much more about creating nice, publication-quality graphics
-later in this workshop.
-
-If you recall, factors are ordered alphabetically. That might make
-sense, but categories (e.g., "red", "blue", "green") often do not have
-an intrinsic order. What if we wanted to order our plot according to the
-numerical value (i.e., in descending order of SNP frequency)? We can
-enforce an order on our factors:
-
-!!! r-project "r"
-
-    ```r
-    ordered_factor_snps <- factor(
-      factor_snps, 
-      levels = names(sort(table(factor_snps)))
-    )
-    ```
-
-Let's deconstruct this from the *inside out* (you can try each of these
-commands to see why this works):
-
-1.  We create a table of `factor_snps` to get the frequency of each SNP:
-    `table(factor_snps)`
-2.  We sort this table: `sort(table(factor_snps))`; use the
-    `decreasing =` parameter for this function if you wanted to change
-    from the default of FALSE
-3.  Using the `names()` function gives us just the character names of the
-    table sorted by frequencies:`names(sort(table(factor_snps)))`
-4.  The `factor` function is what allows us to create a factor. We give
-    it the `factor_snps` object as input, and use the `levels=`
-    parameter to enforce the ordering of the levels.
-
-Now we see our plot has be reordered:
-
-!!! r-project "r"
-
-    ```r
-    plot(ordered_factor_snps)
-    ```
-
-    ??? success "Output"
-
-        ![images](figures/ordered_factor_snps_barplot.png){ width="600" }
-
-Factors come in handy in many places when using R. Even using more
-sophisticated plotting packages such as `ggplot2` will sometimes require
-you to understand how to manipulate factors.
-
-!!! tip "Packages in R &ndash; what are they and why do we use them?"
-
-    Packages are simply collections of functions and/or data that can be
-    used to extend the capabilities of R beyond the core functionality
-    that comes with it by default. There are useful R packages available
-    that span all types of statistical analysis, data visualization, and
-    more. The main place that R packages are installed from is a website
-    called [CRAN](https://cran.r-project.org/) (the Comprehensive R
-    Archive Network). Many thousands of R packages are available there,
-    and when you use the built-in R function `install.packages()`, it will
-    look for a CRAN repository to install from. So, for example, to
-    install [tidyverse](https://www.tidyverse.org) packages such as
-    `dplyr` and `ggplot2` (which you'll do in the next few lessons), you
-    would use the following command:
-
-    !!! r-project "r"
+        `sample_id`, `CHROM`, `POS`, and `ALT` correspond to columns 1, 2, 3, and 6.
+        We want to keep all the rows, which we can indicate by leaving the left side of the comma blank.  
 
         ```r
-        # Install a package from CRAN
-        install.packages("ggplot2")
+        subset_variants <- variants[ , c(1:3, 6)]
         ```
 
-## Coercing values
-
-Sometimes, it is possible that R will misinterpret the type of data represented
-in a data frame, or store that data in a mode which prevents you from
-operating on the data the way you wish. For example, a long list of gene names
-isn't usually thought of as a categorical variable, the way that your
-experimental condition (e.g., control, treatment) might be. More importantly,
-some R packages you use to analyze your data may expect characters as input,
-not factors. At other times (such as plotting or some statistical analyses) a
-factor may be more appropriate. Ultimately, you should know how to change the
-mode of an object.
-
-First, its very important to recognize that coercion happens in R all the time.
-This can be a good thing when R gets it right, or a bad thing when the result
-is not what you expect. Consider:
+Now, let's use the `str()` (structure) function to confirm your `subest_variants` dataframe looks as you expect it to:
 
 !!! r-project "r"
 
     ```r
-    snp_chromosomes <- c('3', '11', 'X', '6')
-    typeof(snp_chromosomes)
+    str(subset_variants)
     ```
 
     ??? success "Output"
 
         ```
-        [1] "character"
+        'data.frame':	801 obs. of  4 variables:
+         $ sample_id: chr  "SRR2584863" "SRR2584863" "SRR2584863" "SRR2584863" ...
+         $ CHROM    : chr  "CP000819.1" "CP000819.1" "CP000819.1" "CP000819.1" ...
+         $ POS      : int  9972 263235 281923 433359 473901 648692 1331794 1733343 2103887 2333538 ...
+         $ ALT      : chr  "G" "T" "T" "CTTTTTTTT" ...
         ```
 
-Although there are several numbers in our vector, they are all in
-quotes, so we have explicitly told R to consider them as characters.
-However, even if we removed the quotes from the numbers, R would coerce
-everything into a character:
+        ??? tip "Extra for experts: using logicals to confirm you correctly subsetted."
+
+            We know that our new `subset_variants` dataframe should have the same number of rows as our original dataframe `variants`.
+            You can confirm this using the `nrow()` function like so and check you get the same number:
+            
+            !!! r-project "r"
+
+                ```r
+                nrow(variants)
+                ```
+
+            ```
+            [1] 801
+            ```
+
+            !!! r-project "r"
+
+                ```r
+                nrow(subset_variants)
+                ```
+
+            ```
+            [1] 801
+            ```
+
+            But you can take this one step further using the logical operator `==` to compare the two statements. The code below is asking R, are the outputs of the two functions the same? If yes, it returns TRUE.
+
+            !!! r-project "r"
+
+                ```r
+                nrow(subset_variants) == nrow(variants)
+                ```
+
+            ```
+            [1] TRUE
+            ```
+
+
+
+## Data manipulating 
+
+### Sorting and counting 
+
+So far we have been exploring the structure of our data. Now let's use what we have learned to do some simple analysis, going back to our research question.
+
+We are interested in single nucleotide polymorphisms (SNPs) — positions in the genome where a single base differs from the reference. The `ALT` column contains the alternate allele at each variant position, but not all of these are single bases; some are longer insertions or deletions (indels) like `CTTTTTTTT`.
+
+We hypothesise that there will be SNP differences between our Cit+ mutants and Cit- wildtype *E. coli*. Let's test this hypothesis.
+
+First, orientate yourself to the data in our `subset_variants` using `head()` and a new function `table()`
+
+!!! r-project "r"
+    ```r
+    head(subset_variants) 
+    ```
+
+    ??? success "Output"
+        ```
+        sample_id      CHROM    POS       ALT
+        1 SRR2584863 CP000819.1   9972         G
+        2 SRR2584863 CP000819.1 263235         T
+        3 SRR2584863 CP000819.1 281923         T
+        4 SRR2584863 CP000819.1 433359 CTTTTTTTT
+        5 SRR2584863 CP000819.1 473901    CCGCGC
+        6 SRR2584863 CP000819.1 648692         T
+        ```
+
+The `table()` function lets us count up how many times each unique element appears in a given vector. For example, we can count how many times each unique sample ID appears in our dataframe, by passing to `table()` the column `subset_variants$sample_id` (which evaluates as a vector):
+
+!!! r-project "r"
+    ```r
+    table(subset_variants$sample_id) 
+    ```
+
+    ??? success "Output"
+        ```
+        SRR2584863  SRR2584866  SRR2589044 
+        20          680         7 
+        ```
+
+    Note: What do our sample_ids correspond to? Go back to the [Introduction to the dataset](02-data-prelude.md#introduction-to-the-dataset) to remind yourself. 
+
+Next, we want to filter our data to keep only rows where ALT is a single nucleotide — A, T, G, or C — which removes indels and leaves us with just SNPs. 
+
+We will use the logical operator `%in%`. You can read this as *"for each element in the vector on the left, return only those that match something in the vector on the right".*
 
 !!! r-project "r"
 
     ```r
-    snp_chromosomes_2 <- c(3, 11, 'X', 6)
-    typeof(snp_chromosomes_2)
-    snp_chromosomes_2[1]
+    alt_snps_subset <- subset_variants[subset_variants$ALT %in% c("A", "G", "C", "T"), ]
+    ```
+
+Finally, we can count how many of each SNP type each sample has using `table()`. This time, in order to get counts of each SNP per sample, we need to pass `table()` two vectors as arguments, to create a contingency table. It uses the first argument as the rows, and the second as columns, then cross-references them to count how many times each unique combination co-occurs. 
+
+!!! r-project "r"
+
+    ```r
+    table(alt_snps_IDs$sample_id, alt_snps_IDs$ALT)
+    ```
+
+    ??? success "Output"
+        ```
+                     A   C   G   T
+        SRR2584863   4   6   3   7
+        SRR2584866  205 133 149 193
+        SRR2589044   2   0   2   3
+        ```
+
+Our Cit+ sample very clearly has a lot more alternative SNPs to the other two samples. Does this support our initial hypothesis?
+
+??? success "Solution"
+    Yes, this supports what we know and/or suspect about this sample. Under glucose-limiting citrate supplemented media, some strains of *E.coli* became hypermutable - so it makes sense this sample has many more SNPs compared to the reference genome! 
+
+
+###  Ordering
+
+
+You can sort a dataframe using the `order()` function. Rather than returning the sorted values themselves, `order()` returns a vector of index positions that correspond to the sorted order — smallest to largest by default. We can then use these index positions to subset our dataframe rows, in the same way we used logical vectors to subset earlier (recall how `snp_positions[snp_positions > 100000000]` worked by evaluating each position to `TRUE` or `FALSE` inside the `[]`). Here, instead of a logical vector, we are passing a vector of index positions inside the `[]`.
+
+
+!!! r-project "r"
+
+    ```r
+    sorted_by_DP <- variants[order(variants$DP), ] 
+    head(sorted_by_DP$DP)
     ```
 
     ??? success "Output"
 
         ```
-        [1] "character"
-        [1] "3"
+        [1] 2 2 2 2 2 2
         ```
 
-We can use the `as.` functions to explicitly coerce values from one form
-into another. Consider the following vector of characters, which all
-happen to be valid numbers:
+The `order()` function lists values in increasing order by default. How could we change `sorted_by_DP` to start with variants with the greatest filtered depth ("DP")? We can include the argument `decreasing = TRUE`.
 
 !!! r-project "r"
-
+    
     ```r
-    snp_positions_2 <- c("8762685", "66560624", "67545785", "154039662")
-    typeof(snp_positions_2)
-    snp_positions_2[1]
+    sorted_by_DP <- variants[order(variants$DP, decreasing = TRUE), ]
+    head(sorted_by_DP$DP)
     ```
 
-    ??? success "Output"
+    !!! success "Output"
 
         ```
-        [1] "character"
-        [1] "8762685"
+        [1] 79 46 41 29 29 27
         ```
 
-Now we can coerce `snp_positions_2` into a numeric mode using
-`as.numeric()`:
 
-!!! r-project "r"
-
-    ```r
-    snp_positions_2 <- as.numeric(snp_positions_2)
-    typeof(snp_positions_2)
-    snp_positions_2[1]
-    ```
-
-    ??? success "Output"
-
-        ```
-        [1] "double"
-        [1] 8762685
-        ```
-
-Sometimes coercion is straight forward, but what would happen if we
-tried using `as.numeric()` on `snp_chromosomes_2`
-
-!!! r-project "r"
-
-    ```r
-    snp_chromosomes_2 <- as.numeric(snp_chromosomes_2)
-    ```
-
-    ??? success "Output"
-
-        ```
-        Warning message:
-        NAs introduced by coercion
-        ```
-
-If we check, we will see that an `NA` value (R's default value for
-missing data) has been introduced.
-
-!!! r-project "r"
-
-    ```r
-    snp_chromosomes_2
-    ```
-
-    ??? success "Output"
-
-        ```
-        [1]  3 11 NA  6
-        ```
-
-Trouble can really start when we try to coerce a factor. For example,
-when we try to coerce the `factor_snps` into a numeric mode look at the 
-result: 
-
-!!! r-project "r"
-
-    ```r
-    as.numeric(factor_snps)
-    ```
-
-??? success "Output"
-
-    ```
-      [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-     [28] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-     [55] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-     [82] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-    [109] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-    [136] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-    [163] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-    [190] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 4 4 4 4 4
-    [217] 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4
-    [244] 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4
-    [271] 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4
-    [298] 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4
-    [325] 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4
-    [352] 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4
-    [379] 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4
-    [406] 4 4 4 4 4 4 4 4 4 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
-    [433] 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
-    [460] 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
-    [487] 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
-    [514] 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
-    [541] 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
-    [568] 3 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
-    [595] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
-    [622] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
-    [649] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
-    [676] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
-    [703] 2 2 2 2 2 
-    ```
-
-Strangely, it works! Almost. Instead of giving an error message, R
-returns numeric values, which in this case are the integers assigned to
-the levels in this factor. This kind of behavior can lead to
-hard-to-find bugs, for example when we do have numbers in a factor, and
-we get numbers from a coercion. If we don't look carefully, we may not
-notice a problem.
-
-If you need to coerce an entire column you can overwrite it using an
-expression like this one:
-
-!!! r-project "r"
-
-    ```r
-    # Make the 'sample_id' column a factor type column
-    variants$sample_id <- as.factor(variants$sample_id)
-
-    # check the structure of the column
-    str(variants$sample_id)
-    ```
-
-    ??? success "Output"
-
-        ```
-        Factor w/ 3 levels "SRR2584863","SRR2584866",..: 1 1 1 1 1 1 1 1 1 1 ...
-        ```
-
-### Lesson summary: Data coercion
-
-Lets summarize this section on coercion with a few take home messages.
-
-- When you explicitly coerce one data type into another (this is known as
-  **explicit coercion**), be careful to check the result. Ideally, you should 
-  try to see if its possible to avoid steps in your analysis that force you to
-  coerce.
-- R will sometimes coerce without you asking for it. This is called
-  (appropriately) **implicit coercion**. For example when we tried to create
-  a vector with multiple data types, R chose one type through implicit
-  coercion.
-- Check the structure (`str()`) of your data before working with them!
-
-
-!!! tip "`StringsAsFactors`"
-
-    Prior to R 4.0 when importing a data frame using any one of the `read.table()`
-    functions such as `read.csv()` , the argument `StringsAsFactors` was by
-    default
-    set to true TRUE. Setting it to FALSE will treat any non-numeric column to
-    a character type. `read.csv()` documentation, you will also see you can
-    explicitly type your columns using the `colClasses` argument. Other R packages
-    (such as the Tidyverse `readr`) don't have this particular conversion issue,
-    but many packages will still try to guess a data type.
-
-
-## Data frame bonus material: math, sorting, renaming
-
-Here are a few operations that don't need much explanation, but which are good
-to know.
+### Math
 
 There are lots of arithmetic functions you may want to apply to your data
 frame, covering those would be a course in itself (there is some starting
@@ -1082,63 +718,17 @@ the number of filtered reads that support each of the reported variants.
         [1] 79
         ```
 
-You can sort a data frame using the `order()` function:
 
-!!! r-project "r"
+!!! question "Exercise: Try out the `mean()` and `min()` functions on any numerical column in the variants dataframe."
 
-    ```r
-    sorted_by_DP <- variants[order(variants$DP), ] 
-    head(sorted_by_DP$DP)
-    ```
+    Examples to try:
 
-    ??? success "Output"
+    1. `mean(variants$QUAL)`
+    2. `min(variants$MQ)`
 
-        ```
-        [1] 2 2 2 2 2 2
-        ```
 
-!!! question "Exercise"
 
-    The `order()` function lists values in increasing order by default.
-    Look at the documentation for this function and change `sorted_by_DP`
-    to start with variants with the greatest filtered depth ("DP").
-
-    ??? success "Solution"
-
-        ```r
-        sorted_by_DP <- variants[order(variants$DP, decreasing = TRUE), ]
-        head(sorted_by_DP$DP)
-        ```
-
-        !!! success "Output"
-
-            ```
-            [1] 79 46 41 29 29 27
-            ```
-
-!!! tip "These functions work on vectors too!"
-
-    When using these functions (i.e., `mean()`, `min()`, `max()`, and `order()`),
-    replace the input with a vector and it will do the same job! For example:
-
-    !!! r-project "r"
-
-        ```r
-        # Minimum position of a SNP
-        min(snp_positions)
-
-        # Decreasing order of SNPs by positions
-        snp_positions[order(snp_positions, decreasing = TRUE)]
-        ```
-
-        !!! success "Output"
-
-            ```
-            [1] 8762685
-            [1] 154039662  67545785  66560624   8762685
-            ```
-
-You can rename columns by logical subsetting or index:
+## Bonus: You can rename columns by logical subsetting or index:
 
 !!! r-project "r"
 
@@ -1257,6 +847,8 @@ frame:
 The type of this object is **tibble**, a type of data frame we will talk
 more about in the [`dplyr` section](appendix/05-dplyr.md). If you needed a true 
 R data frame you could coerce with `as.data.frame()`.
+
+## Review exercises
 
 !!! question "Exercise: Putting it all together - data frames"
 
@@ -1407,3 +999,53 @@ R data frame you could coerce with `as.data.frame()`.
 
             Check the Files tab on the bottom-right panel to see if the file is 
             there.
+
+
+!!! question "Exercise: Review the arguments of the `read.csv()` function"
+
+    **Before using the `read.csv()` function, use R's help feature to
+    answer the following questions**.
+
+    *Hint*: Entering '?' before the function name and then running that
+    line will bring up the help documentation. Also, when reading this
+    particular help be careful to pay attention to the 'read.csv'
+    expression under the 'Usage' heading. Other answers will be in the
+    'Arguments' heading.
+
+    A)  What is the default parameter for 'header' in the `read.csv()`
+        function?
+
+    B)  What argument would you have to change to read a file that was
+        delimited by semicolons (;) rather than commas?
+        
+    C)  What argument would you have to change to read file in which
+        numbers used commas for decimal separation (i.e., 1,00)?
+        
+    D)  What argument would you have to change to read in only the first
+        10,000 rows of a very large file?
+
+    ??? success "Solution"
+
+        A)  The `read.csv()` function has the argument 'header' set to `TRUE`
+            by default. This means the function always assumes the first row
+            is header information, (i.e., column names)
+            
+        B)  The `read.csv()` function has the argument 'sep' set to ",".
+            This means the function assumes commas are used as delimiters,
+            as you would expect. Changing this parameter (e.g., `sep=";"`)
+            would tell R to interpret semicolons as delimiters.
+            
+        C)  Although it is not listed in the `read.csv()` usage,
+            `read.csv()` is a "version" of the function `read.table()` and
+            accepts all its arguments. If you set `dec=","` you could change
+            the decimal operator. We'd probably assume the delimiter is some
+            other character.
+            
+        D)  You can set `nrow` to a numeric value (e.g., `nrow=10000`) to
+            choose how many rows of a file you read in. This may be useful
+            for very large files where not all the data is needed to test
+            some data cleaning steps you are applying.
+
+        Hopefully, this exercise gets you thinking about using the provided
+        help documentation in R. There are many arguments that exist, but
+        which we wont have time to cover. 
