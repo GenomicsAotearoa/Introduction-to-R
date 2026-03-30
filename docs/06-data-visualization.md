@@ -564,7 +564,7 @@ Additionally, you can remove the grid:
             ggplot(data = variants, aes(x = POS, y = QUAL, color = sample_id)) + 
               geom_point() + 
               labs(x = "Base Pair Position", 
-                   y = "PHRED-sacled Quality (QUAL)") + 
+                   y = "PHRED-scaled Quality (QUAL)") + 
               facet_grid(sample_id ~ .)
             ```
 
