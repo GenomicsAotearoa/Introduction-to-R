@@ -20,7 +20,7 @@
 |[1. Introduction](./00-introduction.md){ .md-button .md-button--primary } | General overview of R |
 |[2. R Basics](./01-r-basics.md){ .md-button .md-button--primary } | In the beginning....|
 |[3. Data prelude](./02-data-prelude.md){ .md-button .md-button--primary } | What is data how it works|
-|[4. Factors and Dataframes ](./03-basics-dataframes-manipulation.md){ .md-button .md-button--primary } | Handling Data|
+|[4. Dataframes and manipulation](./03-basics-dataframes-manipulation.md){ .md-button .md-button--primary } | Handling Data|
 |[5. Data Visualisation](./04-data-visualisation.md){ .md-button .md-button--primary } | Plotting|
 |[6. R-help](./05-r-help.md){ .md-button .md-button--primary } | More Resources|
 
