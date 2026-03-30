@@ -20,9 +20,9 @@
 |[1. Introduction](./00-introduction.md){ .md-button .md-button--primary } | General overview of R |
 |[2. R Basics](./01-r-basics.md){ .md-button .md-button--primary } | In the beginning....|
 |[3. Data prelude](./02-data-prelude.md){ .md-button .md-button--primary } | What is data how it works|
-|[4. Factors and Dataframes ](./03-basics-factors-dataframes.md){ .md-button .md-button--primary } | Handling Data|
-|[5. Data Visualisation](./06-data-visualization.md){ .md-button .md-button--primary } | Plotting|
-|[6. R-help](./08-r-help.md){ .md-button .md-button--primary } | More Resources|
+|[4. Factors and Dataframes ](./03-basics-dataframes-manipulation.md){ .md-button .md-button--primary } | Handling Data|
+|[5. Data Visualisation](./04-data-visualisation.md){ .md-button .md-button--primary } | Plotting|
+|[6. R-help](./05-r-help.md){ .md-button .md-button--primary } | More Resources|
 
 </div>
 
@@ -32,9 +32,10 @@
 
 | **Appendix** | **Description** |
 | ------------ | --------------- |
-|[Introduction to Bioconductor](./appendix/04-bioconductor-vcfr.md){ .md-button } | Bioinformatics Resources|
-|[Data wrangling and analyses with Tidyverse](./appendix/05-dplyr.md){ .md-button } | The Tidyverse for handling data|
-|[Producing reports with knitr](./appendix/07-knitr-markdown.md){ .md-button } | Writing Reports|
+|[Introduction to Bioconductor](./appendix/01A-bioconductor-vcfr.md){ .md-button } | Bioinformatics Resources|
+|[Factors and Coercion](./appendix/02A-factors-and-coercion.md){ .md-button } | The Tidyverse for handling data|
+|[Data wrangling and analyses with Tidyverse](./appendix/03A-dplyr.md){ .md-button } | The Tidyverse for handling data|
+|[Producing reports with knitr](./appendix/04A-knitr-markdown.md){ .md-button } | Writing Reports|
 
 </div>
 
