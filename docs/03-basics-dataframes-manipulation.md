@@ -588,8 +588,6 @@ Now, let's use the `str()` (structure) function to confirm your `subest_variants
 
 ## Data manipulating 
 
-### Sorting and counting 
-
 So far we have been exploring the structure of our data. Now let's use what we have learned to do some simple analysis, going back to our research question.
 
 We are interested in single nucleotide polymorphisms (SNPs) — positions in the genome where a single base differs from the reference. The `ALT` column contains the alternate allele at each variant position, but not all of these are single bases; some are longer insertions or deletions (indels) like `CTTTTTTTT`.
@@ -661,10 +659,28 @@ Our Cit+ sample very clearly has a lot more alternative SNPs to the other two sa
     Yes, this supports what we know and/or suspect about this sample. Under glucose-limiting citrate supplemented media, some strains of *E.coli* became hypermutable - so it makes sense this sample has many more SNPs compared to the reference genome! 
 
 
-###  Ordering
+###  Sorting and ordering
 
 
-You can sort a dataframe using the `order()` function. Rather than returning the sorted values themselves, `order()` returns a vector of index positions that correspond to the sorted order — smallest to largest by default. We can then use these index positions to subset our dataframe rows, in the same way we used logical vectors to subset earlier (recall how `snp_positions[snp_positions > 100000000]` worked by evaluating each position to `TRUE` or `FALSE` inside the `[]`). Here, instead of a logical vector, we are passing a vector of index positions inside the `[]`.
+You can sort a dataframe using the `order()` or the `sort()` function. The `sort()` function sorts a column in a dataframe from smallest to largest. Rather than returning the sorted values themselves, the `order()` returns a vector of index positions that correspond to the sorted order — smallest to largest by default. Let's compare how they work.
+
+!!! r-project "r"
+
+    ```r
+    head(order(variants$DP))
+    head(sort(variants$DP))
+    ```
+
+    ??? success "Output"
+
+        ```
+        [1] 20 221 378 379 657 691
+        [1] 2 2 2 2 2 2
+        ```
+
+Why do these outputs look so different? The `order()` function is returning the **index positions** that correspond to the smallest values, rather than the smallest values themselves.
+
+We can then use these index positions to subset our dataframe rows, in the same way we used logical vectors to subset earlier (recall how `snp_positions[snp_positions > 100000000]` worked by evaluating each position to `TRUE` or `FALSE` inside the `[]`). Here, instead of a logical vector, we are passing a vector of index positions inside the `[]`.
 
 
 !!! r-project "r"
@@ -679,6 +695,15 @@ You can sort a dataframe using the `order()` function. Rather than returning the
         ```
         [1] 2 2 2 2 2 2
         ```
+
+
+!!! question "Discussion: Why can we not use sort() in the above subsetting example?"
+    
+
+    ??? success "Solution"
+        The `sort()` function returns our **actual** values. However, when we subset out of a dataframe using the [] brackets, the values within the [] are interpreted as index positions. Everything before the comma "," is treated as all the row numbers you want to keep when you subset the dataframe variants. Therefore, if we used sort() it would think the actual DP numbers (*e.g.,* the first one is 2) is row number 2 instead and subset that. In fact, row 2 would be repeated several times in the subsetted new dataframe, because the first several results returned by `sort(variants$DP)` are all 2. 
+
+
 
 The `order()` function lists values in increasing order by default. How could we change `sorted_by_DP` to start with variants with the greatest filtered depth ("DP")? We can include the argument `decreasing = TRUE`.
 
