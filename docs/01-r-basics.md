@@ -568,7 +568,7 @@ bracket notation:
     C) Vectors may have different lengths <br>
     D) Items within a vector may be of different modes <br>
     E) You can use the `c()` to add one or more items to an existing vector <br>
-    F) You can use the `c()` to add a vector to an exiting vector
+    F) You can use the `c()` to add a vector to an existing vector
 
     ??? success "Solution"
 
