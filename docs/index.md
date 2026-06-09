@@ -33,7 +33,7 @@
 | **Appendix** | **Description** |
 | ------------ | --------------- |
 |[Introduction to Bioconductor](./appendix/01A-bioconductor-vcfr.md){ .md-button } | Bioinformatics Resources|
-|[Factors and Coercion](./appendix/02A-factors-and-coercion.md){ .md-button } | The Tidyverse for handling data|
+|[Factors and Coercion](./appendix/02A-factors-and-coercion.md){ .md-button } | Data structures and types |
 |[Data wrangling and analyses with Tidyverse](./appendix/03A-dplyr.md){ .md-button } | The Tidyverse for handling data|
 |[Producing reports with knitr](./appendix/04A-knitr-markdown.md){ .md-button } | Writing Reports|
 
