@@ -190,7 +190,7 @@ to more easily:
         RStudio projects end with the `.Rproj` file extension.
 
 
-!!! tip "Make your project more reproducible with renv"
+??? tip "Make your project more reproducible with renv"
    
     One of the most wonderful and also frustrating aspects of working with
     R is managing packages. We will talk more about them, but packages
@@ -203,7 +203,7 @@ to more easily:
     that will associate your packages and project so that your work is
     more portable and reproducible. To turn on renv click on the
     **Tools** menu and select
-    **Project Options**. Under **Enviornments**
+    **Project Options**. Under **Environments**
     check off "**Use renv with this project**" and follow any installation
     instructions.
 
@@ -403,7 +403,7 @@ the digits argument when we call the function:
 
 Or, R accepts what we call "positional arguments", if you pass a
 function arguments separated by commas, R assumes that they are in the
-order specified in the help manual for each function (see [Getting help with R](08-r-help.md)). In the case below that means that
+order specified in the help manual for each function (see [Getting help with R](05-r-help.md)). In the case below that means that
 `x` is 3.14159 and digits is 2.
 
 !!! r-project "r"
