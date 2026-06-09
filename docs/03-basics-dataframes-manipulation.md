@@ -94,7 +94,7 @@ function called `read.csv()`.
 
 
 Now, let's read in the file `combined_tidy_vcf.csv` which will be
-located in `/home/shared/$USER/R4Genomics/`. Call/assign this data `variants`. 
+located in `/home/shared/<user>/R4Genomics/`. Call/assign this data `variants`. 
 The first argument to pass to our `read.csv()` function is the file path for our
 data. The file path must be in quotes and now is a good time to remember
 to use tab autocompletion. **If you use tab autocompletion you avoid
@@ -104,8 +104,8 @@ typos and errors in file paths.** Use it!
 
     ```r
     # Read in a CSV file and save it as 'variants'
-    # absolute path
-    variants <- read.csv("/home/shared/$USER/R4Genomics/combined_tidy_vcf.csv")
+    # absolute path - replace <user> with your own username
+    variants <- read.csv("/home/shared/<user>/R4Genomics/combined_tidy_vcf.csv")
 
     # or use relative path as we should be in R4Genomics dir 
     variants <- read.csv("combined_tidy_vcf.csv")
