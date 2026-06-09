@@ -72,8 +72,8 @@ the sequence reads from this experiment.
 
 | SRA run number | Clone    | Generation | Cit     | Hypermutable | Read length | Sequencing depth |
 | -------------- | -------- | ---------- | ------- | ------------ | ----------- | ---------------- |
-| SRR2589044     | REL2181A | 5,000      | Unknown | None         | 150         | 60.2             |
-| SRR2584863     | REL7179B | 15,000     | Unknown | None         | 150         | 88               |
+| SRR2589044     | REL2181A | 5,000      | Cit-   | None         | 150         | 60.2             |
+| SRR2584863     | REL7179B | 15,000     | Cit-   | None         | 150         | 88               |
 | SRR2584866     | REL11365 | 50,000     | Cit+    | plus         | plus        | 138.3            |
 
 We want to be able to look at differences in mutation rates between
