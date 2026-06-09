@@ -245,10 +245,11 @@ In the console, we expect to see the following output:
 !!! success "Output"
 
     ```
-    [1] "/home/shared/<USERID>"
+    [1] "/home/shared/<USERID>/R4Genomics"
     ```
 
 * Notice, at the Console, the instruction you executed above the output in blue.
+
 
 Since we will be learning several commands, we may already want to keep
 some short notes in our script to explain the purpose of the command.
@@ -276,8 +277,7 @@ include a comment on the purpose of commands you are learning, e.g.:
         instead of entering commands one-by-one.
 
 For the purposes of this exercise we want you to be in the directory
-`"/home/shared/<USERID>/R4Genomics"`. What if you weren't? You can set your home
-directory using the `setwd()` command. Enter this command in your
+`"/home/shared/<USERID>/R4Genomics"`. What if you weren't? You can set your current working directory using the `setwd()` command. Enter this command in your
 script, but ***don't run*** this yet.
 
 !!! r-project
