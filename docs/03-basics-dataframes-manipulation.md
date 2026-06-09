@@ -104,8 +104,12 @@ typos and errors in file paths.** Use it!
 
     ```r
     # Read in a CSV file and save it as 'variants'
+    # absolute path
+    variants <- read.csv("/home/shared/$USER/R4Genomics/combined_tidy_vcf.csv")
 
-    variants <- read.csv("/home/shared/<USERID>/R4Genomics/combined_tidy_vcf.csv")
+    # or use relative path as we should be in R4Genomics dir 
+    variants <- read.csv("combined_tidy_vcf.csv")
+
     ```
 
     ??? tip "What if you want to access this file on your personal computer?"
@@ -786,13 +790,13 @@ the number of filtered reads that support each of the reported variants.
 
 ## Saving your data frame to a file
 
-We can save data to a file. We will save our `SRR2584863_variants` object
+We can save data to a file. We will save our `subset_variants` object
 to a `.csv` (comma-separated values) file using the `write.csv()` function:
 
 !!! r-project "r"
 
     ```r
-    write.csv(SRR2584863_variants, file = "SRR2584863_variants.csv")
+    write.csv(subset_variants, file = "subset_variants.csv")
     ```
 
 The `write.csv()` function has some additional arguments listed in the
@@ -870,7 +874,7 @@ frame:
         ```
 
 The type of this object is **tibble**, a type of data frame we will talk
-more about in the [`dplyr` section](appendix/05-dplyr.md). If you needed a true 
+more about in the [`dplyr` section](appendix/03A-dplyr.md). If you needed a true 
 R data frame you could coerce with `as.data.frame()`.
 
 ## Review exercises
