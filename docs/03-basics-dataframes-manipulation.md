@@ -646,7 +646,7 @@ Finally, we can count how many of each SNP type each sample has using `table()`.
 !!! r-project "r"
 
     ```r
-    alt_snps_subsets$sample_id, alt_snps_IDs$ALT)
+    table(alt_snps_subset$sample_id, alt_snps_subset$ALT)
     ```
 
     ??? success "Output"
