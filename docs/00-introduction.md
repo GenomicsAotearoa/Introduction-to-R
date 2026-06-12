@@ -56,8 +56,8 @@ R:
         you have to pay for your own 
         [MATLAB](https://en.wikipedia.org/wiki/MATLAB) or 
         [SAS](https://en.wikipedia.org/wiki/SAS_(software)) license. Open 
-        source, is important to your colleagues in parts of the world where 
-        expensive software in inaccessible. It also means that R is actively 
+        source is likely important to your colleagues in parts of the world where 
+        expensive software is inaccessible. It also means that R is actively 
         developed by a community 
         (see [r-project.org](https://www.r-project.org/)), and there are 
         regular updates.
