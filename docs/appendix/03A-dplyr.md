@@ -97,9 +97,9 @@ package.
 
 The package `dplyr` tries to provide easy tools for the most common data 
 manipulation tasks. This package is also included in the [`tidyverse` 
-package](https://www.tidyverse.org/), which is a collection of eight different 
+package](https://www.tidyverse.org/), which is a collection of nine different 
 packages (`dplyr`, `ggplot2`, `tibble`, `tidyr`, `readr`, `purrr`, `stringr`, 
-and `forcats`). It is built to work directly with data frames. The thinking 
+`forcats`, and `lubridate`). It is built to work directly with data frames. The thinking 
 behind it was largely inspired by the package `plyr` which has been in use for 
 some time but suffered from being slow in some cases.`dplyr` addresses this by 
 porting much of the computation to C++. An additional feature is the ability to 
