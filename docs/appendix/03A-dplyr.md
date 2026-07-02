@@ -75,7 +75,7 @@ too much; I'd recommend choosing the RStudio mirror.
     library("tidyr")          
     # Loads in ggplot2 package to use 
     library("ggplot2")          
-    # Load in readr package to use`
+    # Load in readr package to use
     library("readr")          
     ```
 
