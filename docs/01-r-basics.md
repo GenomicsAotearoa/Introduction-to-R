@@ -616,7 +616,7 @@ logical operator:
         ```
 
 In the square brackets you place the name of the vector followed by the
-comparison operator and (in this case) a numeric value. Some common logical operators in R are:
+comparison (or also called relational) operator and (in this case) a numeric value. Some common comparison operators in R are:
 
 | Operator | Description              |
 | -------- | ------------------------ |
@@ -626,9 +626,16 @@ comparison operator and (in this case) a numeric value. Some common logical oper
 | `>=`     | Greater than or equal to |
 | `==`     | Exactly equal to         |
 | `!=`     | Not equal to             |
-| `!x`     | Not x                    |
-| `a | b`  | a or b                   |
-| `a & b`  | a and b                  |
+
+There are also logical operators, which combine conditional statements to return TRUE or FALSE.
+
+| Operator | Description              |
+| -------- | ----------------------- |
+| `a | b`  | a or b. Element-wise Logical OR operator. Returns TRUE if one of the statements is TRUE    |
+| `a || b`  | a or b. Logical OR operator. Returns TRUE if one of the statements is TRUE    |
+| `a & b`  | a and b. Element-wise Logical AND operator. Returns TRUE if both elements are TRUE    |
+| `a && b`  | a and b. Logical AND operator - Returns TRUE if both statements are TRUE     |
+ 
 
 **:magic_wand: The magic of programming**
 
