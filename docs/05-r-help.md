@@ -30,6 +30,13 @@ some tips to make this process as helpful and efficient as possible.
 > "Never memorize something that you can look up" — A. Einstein
 
 
+## R cheatsheets
+
+There are some fantastic cheatsheets for R packages, such as ggplot, dplyr, tidyr, etc., provided by Posit. [Check them out here](https://rstudio.github.io/cheatsheets/) and follow the links to the downloadable PDFs. 
+
+
+[![ggplot cheatsheet](figures/ggplot-cheatsheet.png)](https://rstudio.github.io/cheatsheets/data-visualization.pdf)
+
 ## Getting help with function arguments
 
 What if you wanted to round to one significant digit? `round()` can do
