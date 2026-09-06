@@ -42,4 +42,4 @@
 
 
 !!! note "Attribution notice"
-    - The material used to prepare for this workshop was extracted from **Intro to R and RStudio for Genomics** maintained by Carpentries foundation  https://datacarpentry.org/genomics-r-intro/
+    - The material used to prepare for this workshop was extracted from **Intro to R and RStudio for Genomics** maintained by Carpentries foundation  https://datacarpentry.org/genomics-r-intro/. This material was further developed by Genomics Aotearoa.   

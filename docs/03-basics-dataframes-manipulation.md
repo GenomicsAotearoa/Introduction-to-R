@@ -596,7 +596,7 @@ So far we have been exploring the structure of our data. Now let's use what we h
 
 We are interested in single nucleotide polymorphisms (SNPs) — positions in the genome where a single base differs from the reference. The `ALT` column contains the alternate allele at each variant position, but not all of these are single bases; some are longer insertions or deletions (indels) like `CTTTTTTTT`.
 
-We hypothesise that there will be SNP differences between our Cit+ mutants and Cit- wildtype *E. coli*. Let's test this hypothesis.
+We hypothesise that there will be SNP differences between our Cit+ mutants and Cit- wildtype-like *E. coli*. Let's test this hypothesis.
 
 First, orientate yourself to the data in our `subset_variants` using `head()` and a new function `table()`
 
