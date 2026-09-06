@@ -307,10 +307,23 @@ value R will consider them to be in the "character" mode if they are
 enclosed with single or double quotes. Also, notice that you cannot take a
 string of alphanumeric characters (i.e., Earhart) and assign it as a value
 for an object. In this case, R looks for an object named `Earhart`, but
-since there is no object, no assignment can be made. If `Earhart` did
-exist, then the mode of `pilot` would be whatever the mode of `Earhart`
-was originally. If we want to create an object called `pilot` that was
-the **name** "Earhart", we need to enclose `Earhart` in quotation marks.
+since there is no object, no assignment can be made. 
+
+What would happen if `Earhart` did exist, before we tried to run `pilot <- Earhart` ?
+
+!!! r-project "r"
+
+    ```r
+    Earhart <- "Amelia"
+    pilot <- Earhart
+    mode(pilot)
+    ```
+
+
+
+If `Earhart` did
+exist as an object already, then `pilot` becomes the same as our `Earhart` object. Then the mode of `pilot` would be whatever the mode of `Earhart`
+was originally. In this case, `Earhart` is a character string ["Amelia"](https://en.wikipedia.org/wiki/Amelia_Earhart).  If we want to create an object called `pilot` that was the **name** "Earhart", we need to enclose `Earhart` in quotation marks.
 
 !!! r-project "r"
 
