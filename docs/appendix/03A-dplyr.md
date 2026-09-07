@@ -773,7 +773,7 @@ group into a single-row summary. `summarize()` does this by applying an
 aggregating or summary function to each group.
 
 It can be a bit tricky at first, but we can imagine physically splitting
-the data frame by groups and applying a certain function to summarize
+the data frame by groups and applying a certain function to summarise
 the data.
 
 ![split_apply_combine](../figures/split_apply_combine.png){width="500"}[^1]

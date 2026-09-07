@@ -2,8 +2,8 @@
 
 ## Introducing factors
 
-Factors are another major data structure that is important to know about. Factors can be thought of as vectors which are specialized for
-categorical data. Given R's specialization for statistics, this make sense since
+Factors are another major data structure that is important to know about. Factors can be thought of as vectors which are specialised for
+categorical data. Given R's specialisation for statistics, this make sense since
 categorial and continuous variables are usually treated differently. Sometimes
 you may want to have data treated as a factor, but in other cases, this may be
 undesirable. Let's see the value of treating some of which are categorical in 
@@ -104,7 +104,7 @@ Let's learn a little more about this new type of vector:
 
 What we get back are the categories ("A","C","G","T") in our factor;
 these are called "levels". **Levels are the different categories
-contained in a factor**. By default, R will organize the levels in a
+contained in a factor**. By default, R will organise the levels in a
 factor in alphabetical order. So the first level in this factor is "A".
 
 For the sake of efficiency, R stores the content of a factor as a vector
@@ -216,12 +216,12 @@ in a data frame, or store that data in a mode which prevents you from
 operating on the data the way you wish. For example, a long list of gene names
 isn't usually thought of as a categorical variable, the way that your
 experimental condition (e.g., control, treatment) might be. More importantly,
-some R packages you use to analyze your data may expect characters as input,
+some R packages you use to analyse your data may expect characters as input,
 not factors. At other times (such as plotting or some statistical analyses) a
 factor may be more appropriate. Ultimately, you should know how to change the
 mode of an object.
 
-First, its very important to recognize that coercion happens in R all the time.
+First, its very important to recognise that coercion happens in R all the time.
 This can be a good thing when R gets it right, or a bad thing when the result
 is not what you expect. Consider:
 
@@ -396,7 +396,7 @@ expression like this one:
 
 ### Lesson summary: Data coercion
 
-Lets summarize this section on coercion with a few take home messages.
+Lets summarise this section on coercion with a few take home messages.
 
 - When you explicitly coerce one data type into another (this is known as
   **explicit coercion**), be careful to check the result. Ideally, you should 

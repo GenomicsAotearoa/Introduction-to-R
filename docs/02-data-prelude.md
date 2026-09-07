@@ -37,7 +37,7 @@ independently of the Genomics Data Carpentry lessons.
 This dataset was selected for several reasons, including:
 
 - Simple, but iconic NGS-problem: Examine a population where we want
-    to characterize changes in sequence *a priori*
+    to characterise changes in sequence *a priori*
 - Dataset publicly available - in this case through the NCBI SRA
     (http://www.ncbi.nlm.nih.gov/sra)
 
@@ -51,12 +51,12 @@ eukaryotic systems. In [Tenaillon et al.
 (2016)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4988878/), 12
 populations of *Escherichia coli* were propagated for more than 50,000
 generations in a glucose-limited minimal medium. This medium was
-supplemented with citrate which *E. coli* cannot metabolize in the
+supplemented with citrate which *E. coli* cannot metabolise in the
 aerobic conditions of the experiment. Sequencing of the populations at
 regular time points reveals that spontaneous citrate-using mutants
 (Cit+) appeared in a population of *E.coli* (designated Ara-3) at around
 31,000 generations. It should be noted that spontaneous Cit+ mutants are
-extraordinarily rare - inability to metabolize citrate is one of the
+extraordinarily rare - inability to metabolise citrate is one of the
 defining characters of the *E. coli* species. Eventually, Cit+ mutants
 became the dominant population as the experimental growth medium
 contained a high concentration of citrate relative to glucose. Around
@@ -77,7 +77,7 @@ the sequence reads from this experiment.
 | SRR2584866     | REL11365 | 50,000     | Cit+    | plus         | plus        | 138.3            |
 
 We want to be able to look at differences in mutation rates between
-hypermutable and non-hypermutable strains. We also want to analyze the
+hypermutable and non-hypermutable strains. We also want to analyse the
 sequences to figure out what changes occurred in genomes to make the
 strains Cit+. Ultimately, we will use R to answer these questions:
 
@@ -93,7 +93,7 @@ from NCBI SRA. However, FASTQ files contain unaligned sequences of
 varying quality, and require clean up and alignment steps before variants
 can be called from the reference genome.
 
-There are five steps we must take to transform raw FASTQ files into variant calls (VCF files). At each of the five steps we will be using specialized, non-R based bioinformatics tools:
+There are five steps we must take to transform raw FASTQ files into variant calls (VCF files). At each of the five steps we will be using specialised, non-R based bioinformatics tools:
 
 
 <figure markdown>

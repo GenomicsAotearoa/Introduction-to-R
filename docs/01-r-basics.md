@@ -4,9 +4,9 @@
 
     === "Key points"
 
-        - Effectively using R is a journey of months or years. Still, you don't have to be an expert to use R, and you can start using and analyzing your data with about a day's worth of training.
-        - It is important to understand how R organizes data in a given object type and how the mode of that type (e.g. numeric, character, logical, etc.) will determine how R will operate on that data.
-        - Working with vectors effectively prepares you to understand how R organizes data.
+        - Effectively using R is a journey of months or years. Still, you don't have to be an expert to use R, and you can start using and analysing your data with about a day's worth of training.
+        - It is important to understand how R organises data in a given object type and how the mode of that type (e.g. numeric, character, logical, etc.) will determine how R will operate on that data.
+        - Working with vectors effectively prepares you to understand how R organises data.
 
     === "Objectives"
 
@@ -32,8 +32,8 @@ Before we begin this lesson, we want you to be clear on the goal of the workshop
 ## What these lessons will not teach you
 
 Nobody wants to learn how to use R. People want to learn how to use R to
-analyze their own research questions! Ok, maybe some folks learn R for
-R's sake, but these lessons assume that you want to start analyzing
+analyse their own research questions! Ok, maybe some folks learn R for
+R's sake, but these lessons assume that you want to start analysing
 genomic data as soon as possible. Given this, there are many valuable
 pieces of information about R that we simply won't have time to cover.
 Hopefully, we will clear the hurdle of giving you just enough knowledge

@@ -13,7 +13,7 @@
         - Choose the correct aesthetics and alter the geom parameters for a
           scatter plot, bar chart, density, or box plot.
         - Layer multiple geometries in a single plot.
-        - Customize plot titles, themes, and fonts.
+        - Customise plot titles, themes, and fonts.
         - Apply a facet to a plot.
         - Apply additional `ggplot2`-compatible plotting libraries.
         - Save a ggplot to a file.
@@ -247,7 +247,7 @@ every dimension (variable), and a row for every observation. Well-structured
 data will save you time when making figures with **`ggplot2`**.
 
 **`ggplot2`** graphics are built step-by-step by adding new elements. Adding 
-layers in this fashion allows for extensive flexibility and customization of 
+layers in this fashion allows for extensive flexibility and customisation of 
 plots, and more equally important the readability of the code.
 
 To build a ggplot, we will use the following basic template that can be used for 

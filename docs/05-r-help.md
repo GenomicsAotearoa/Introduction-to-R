@@ -4,7 +4,7 @@
 
     === "Key points"
 
-        - R provides thousands of functions for analyzing data, and provides several way to get help
+        - R provides thousands of functions for analysing data, and provides several way to get help
         - Using R will mean searching for online help, and there are tips and resources on how to search effectively
 
     === "Objectives"

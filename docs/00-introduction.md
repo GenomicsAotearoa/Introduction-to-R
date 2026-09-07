@@ -5,18 +5,18 @@
     === "Key points"
     
         - R is a powerful, popular open-source scripting language
-        - You can customize the layout of RStudio, and use the project feature
+        - You can customise the layout of RStudio, and use the project feature
           to manage the files and packages used in your analysis
         - RStudio allows you to run R in an easy-to-use interface and makes it
           easy to find help
 
     === "Objectives"
 
-        - Know advantages of analyzing data in R
+        - Know advantages of analysing data in R
         - Know advantages of using RStudio
         - Create an RStudio project, and know the benefits of working within a 
           project
-        - Be able to customize the RStudio layout
+        - Be able to customise the RStudio layout
         - Be able to locate and change the current working directory with 
           `getwd()` and `setwd()`
         - Compose an R script file containing comments and commands
@@ -45,7 +45,7 @@ by Ross Ihaka for more info on the subject.
 
 At more than 20 years old, R is fairly mature and [growing in
 popularity](https://www.tiobe.com/tiobe-index/r/). However, programming
-isn't a popularity contest. Here are key advantages of analyzing data in
+isn't a popularity contest. Here are key advantages of analysing data in
 R:
 
 !!! quote ""
@@ -100,7 +100,7 @@ standalone software.
 ![image](./figures/rstudio_session_default.png){width="700"}
 
 
-## Overview and customization of the RStudio layout
+## Overview and customisation of the RStudio layout
 
 Here are the major windows (or panes) of the RStudio environment:
 
@@ -142,8 +142,8 @@ Here are the major windows (or panes) of the RStudio environment:
     Uploads are also possible.
 
 All of the panes in RStudio have configuration options. For example, you
-can minimize/maximize a pane, or by moving your mouse in the space
-between panes you can resize as needed. The most important customization
+can minimise/maximise a pane, or by moving your mouse in the space
+between panes you can resize as needed. The most important customisation
 options for pane layout are in the `View`
 menu. Other options such as font sizes, colors/themes, and more are in
 the `Tools` menu under `Global
@@ -305,7 +305,7 @@ When you run this command, the console repeats the command, but gives
 you no output. Instead, you see the blank R prompt: `>`.
 Congratulations! Although it seems small, knowing what your working
 directory is and being able to set your working directory is the first
-step to analyzing your data.
+step to analysing your data.
 
 !!! tip  "Never use `setwd()`"
 
