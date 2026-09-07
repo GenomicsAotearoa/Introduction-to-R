@@ -1,0 +1,1088 @@
+<!DOCTYPE html><html lang="en" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <meta name="author" content="Genomics Aotearoa">
+      
+      
+        <link rel="canonical" href="https://genomicsaotearoa.github.io/Introduction-to-R/appendix/05A-import-excel/">
+      
+      
+        <link rel="prev" href="../04A-knitr-markdown/">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../theme_figures/GA_logo_black_test.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Importing data from Excel - Introduction to R</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Mukta";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#importing-data-from-excel" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Introduction to R" class="md-header__button md-logo" aria-label="Introduction to R" data-md-component="logo">
+      
+  <img src="../../theme_figures/GA_logo_black_test.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Introduction to R
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Importing data from Excel
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo" aria-label="Switch to light mode" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo" aria-label="Switch to dark mode" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo" aria-label="Switch to system preference" type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required="">
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix="">
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/GenomicsAotearoa/Introduction-to-R" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    GenomicsAotearoa/Introduction-to-R
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Introduction to R" class="md-nav__button md-logo" aria-label="Introduction to R" data-md-component="logo">
+      
+  <img src="../../theme_figures/GA_logo_black_test.png" alt="logo">
+
+    </a>
+    Introduction to R
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/GenomicsAotearoa/Introduction-to-R" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    GenomicsAotearoa/Introduction-to-R
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../00-introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introducing R and RStudio IDE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01-r-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    R Basics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02-data-prelude/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction to the example dataset and file type
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03-basics-dataframes-manipulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    R Basics continued - data frames and manipulation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04-data-visualisation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Visualisation with ggplot2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05-r-help/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting help with R
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" checked="">
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Appendix
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Appendix
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01A-bioconductor-vcfr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Using packages from Bioconductor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02A-factors-and-coercion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Factors and Coercion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03A-dplyr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data Wrangling and Analyses with Tidyverse
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04A-knitr-markdown/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Producing Reports With knitr
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Importing data from Excel
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Importing data from Excel
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#review-exercises" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Review exercises
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#review-exercises" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Review exercises
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="importing-data-from-excel">Importing data from Excel<a class="headerlink" href="#importing-data-from-excel" title="Permanent link">¶</a></h1>
+<p>Excel is one of the most common formats, so we need to discuss how to
+make these files play nicely with R. The simplest way to import data
+from Excel is to <strong>save your Excel file in <code>.csv</code> format</strong>. You can then
+import into R right away. Sometimes you may not be able to do this
+(imagine you have data in 300 Excel files, are you going to open and
+export all of them?).</p>
+<p>One common R package (a set of code with features you can download and
+add to your R installation) is the <a href="https://CRAN.R-project.org/package=readxl">readxl 
+package</a> which can open and
+import Excel files. Rather than addressing package installation this
+second (we'll discuss this soon!), we can take advantage of RStudio's
+import feature which integrates this package. </p>
+<div class="admonition bell">
+<p class="admonition-title"><code>readxl</code>-RStudio integration</p>
+<p>This feature is only available on RStudio version 1.0.44 or later.</p>
+</div>
+<p>First, <a href="https://github.com/GenomicsAotearoa/Introduction-to-R/blob/main/docs/Ecoli_metadata.xlsx">go to this link</a> and click the download button to download the <strong>Ecoli_metadata.xlsx</strong> file from our Github.   </p>
+<p>In the RStudio menu go to <strong>File</strong>, select <strong>Import Dataset</strong>,
+and choose <strong>From Excel...</strong> (notice there are several other options you
+can explore).</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../figures/rstudio_import_menu.png" data-desc-position="bottom"><img alt="images" src="../../figures/rstudio_import_menu.png" width="600"></a></p>
+<p>Next, under <strong>File/Url:</strong> click the <kbd>Browse</kbd>
+button and navigate to the <strong>Ecoli_metadata.xlsx</strong> file located on your computer. You should now see a preview of the
+data to be imported:</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../../figures/rstudio_import_screen.png" data-desc-position="bottom"><img alt="images" src="../../figures/rstudio_import_screen.png" width="1200"></a></p>
+<p>Notice that you have the option to change the data type of each variable
+by clicking arrow (drop-down menu) next to each column title. Under
+<strong>Import Options</strong> you may also rename the data, choose a different
+sheet to import, and choose how you will handle headers and skipped
+rows. Under <strong>Code Preview</strong> you can see the code that will be used to
+import this file. We could have written this code and imported the Excel
+file without the RStudio import function, but now you can choose your
+preference.</p>
+<p>In this exercise, we will leave the name of the data frame as
+<strong>Ecoli_metadata</strong>, and there are no other options we need to adjust.
+Click the <kbd>Import</kbd> button to import the data.</p>
+<p>Finally, let's check the first few lines of the <code>Ecoli_metadata</code> data
+frame:</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nf">head</span><span class="p">(</span><span class="n">Ecoli_metadata</span><span class="p">)</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a># A tibble: 6 × 7
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  sample   generation clade   strain cit     run       genome_size
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>  &lt;chr&gt;         &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>1 REL606            0 NA      REL606 unknown NA               4.62
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>2 REL1166A       2000 unknown REL606 unknown SRR098028        4.63
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>3 ZDB409         5000 unknown REL606 unknown SRR098281        4.6 
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>4 ZDB429        10000 UC      REL606 unknown SRR098282        4.59
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>5 ZDB446        15000 UC      REL606 unknown SRR098283        4.66
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>6 ZDB458        20000 (C1,C2) REL606 unknown SRR098284        4.63
+</code></pre></div>
+</details>
+</div>
+<p>The type of this object is <strong>tibble</strong>, a type of data frame we will talk
+more about in the <a href="appendix/03A-dplyr.md"><code>dplyr</code> section</a>. If you needed a true 
+R data frame you could coerce with <code>as.data.frame()</code>.</p>
+<h2 id="review-exercises">Review exercises<a class="headerlink" href="#review-exercises" title="Permanent link">¶</a></h2>
+<div class="admonition question">
+<p class="admonition-title">Exercise: Putting it all together - data frames</p>
+<p><strong>Using the <code>Ecoli_metadata</code> data frame created above, answer the following questions</strong></p>
+<p>A)  What are the dimensions (# rows, # columns) of the data frame?</p>
+<p>B)  What are categories are there in the <code>cit</code> column? <em>hint</em>: treat column as factor</p>
+<p>C)  How many of each of the <code>cit</code> categories are there?</p>
+<p>D)  What is the genome size for the 7<sup>th</sup> observation in this data set?</p>
+<p>E)  What is the median value of the variable <code>genome_size</code>?</p>
+<p>F)  Rename the column <code>sample</code> to <code>sample_id</code>.</p>
+<p>G)  Create a new column named <code>genome_size_bp</code> and set it equal to the genome_size multiplied by 1,000,000.</p>
+<p>H)  Save the edited <code>Ecoli_metadata</code> data frame as "exercise_solution.csv" in your current working directory.</p>
+<details class="success">
+<summary>Solution</summary>
+<p>A)</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nf">dim</span><span class="p">(</span><span class="n">Ecoli_metadata</span><span class="p">)</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>[1] 30  7
+</code></pre></div>
+</details>
+</div>
+<p>B)</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nf">levels</span><span class="p">(</span><span class="nf">as.factor</span><span class="p">(</span><span class="n">Ecoli_metadata</span><span class="o">$</span><span class="n">cit</span><span class="p">))</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>[1] "minus"   "plus"    "unknown"
+</code></pre></div>
+</details>
+</div>
+<p>C)</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nf">table</span><span class="p">(</span><span class="nf">as.factor</span><span class="p">(</span><span class="n">Ecoli_metadata</span><span class="o">$</span><span class="n">cit</span><span class="p">))</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>minus    plus unknown 
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    9       9      12 
+</code></pre></div>
+</details>
+</div>
+<p>D)</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">Ecoli_metadata</span><span class="p">[</span><span class="m">7</span><span class="p">,</span><span class="w"> </span><span class="m">7</span><span class="p">]</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a># A tibble: 1 × 1
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>  genome_size
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>        &lt;dbl&gt;
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>1        4.62 
+</code></pre></div>
+</details>
+</div>
+<p>E)</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nf">median</span><span class="p">(</span><span class="n">Ecoli_metadata</span><span class="o">$</span><span class="n">genome_size</span><span class="p">)</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>[1] 4.625
+</code></pre></div>
+</details>
+</div>
+<p>F)</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nf">colnames</span><span class="p">(</span><span class="n">Ecoli_metadata</span><span class="p">)[</span><span class="nf">colnames</span><span class="p">(</span><span class="n">Ecoli_metadata</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">"sample"</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">"sample_id"</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="c1"># Check the column names</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="nf">colnames</span><span class="p">(</span><span class="n">Ecoli_metadata</span><span class="p">)</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>[1] "sample_id"   "generation"  "clade"       "strain"     
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>[5] "cit"         "run"         "genome_size"
+</code></pre></div>
+</details>
+</div>
+<p>G)</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="n">Ecoli_metadata</span><span class="o">$</span><span class="n">genome_size_bp</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">Ecoli_metadata</span><span class="o">$</span><span class="n">genome_size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">1000000</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="c1"># Check the first few rows</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="nf">head</span><span class="p">(</span><span class="n">Ecoli_metadata</span><span class="p">)</span>
+</code></pre></div>
+<details class="success">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a># A tibble: 6 × 8
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>  sample_id generation clade   strain cit     run       genome_size genome_size_bp
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>  &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;           &lt;dbl&gt;          &lt;dbl&gt;
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>1 REL606             0 NA      REL606 unknown NA               4.62        4620000
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>2 REL1166A        2000 unknown REL606 unknown SRR098028        4.63        4630000
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>3 ZDB409          5000 unknown REL606 unknown SRR098281        4.6         4600000
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>4 ZDB429         10000 UC      REL606 unknown SRR098282        4.59        4590000
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>5 ZDB446         15000 UC      REL606 unknown SRR098283        4.66        4660000
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>6 ZDB458         20000 (C1,C2) REL606 unknown SRR098284        4.63        4630000
+</code></pre></div>
+</details>
+</div>
+<p>H)</p>
+<div class="admonition r-project">
+<p class="admonition-title">r</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="nf">write.csv</span><span class="p">(</span><span class="n">Ecoli_metadata</span><span class="p">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"exercise_solution.csv"</span><span class="p">)</span>
+</code></pre></div>
+<p>Check the Files tab on the bottom-right panel to see if the file is 
+there.</p>
+</div>
+</details>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Exercise: Review the arguments of the <code>read.csv()</code> function</p>
+<p><strong>Before using the <code>read.csv()</code> function, use R's help feature to
+answer the following questions</strong>.</p>
+<p><em>Hint</em>: Entering '?' before the function name and then running that
+line will bring up the help documentation. Also, when reading this
+particular help be careful to pay attention to the 'read.csv'
+expression under the 'Usage' heading. Other answers will be in the
+'Arguments' heading.</p>
+<p>A)  What is the default parameter for 'header' in the <code>read.csv()</code>
+    function?</p>
+<p>B)  What argument would you have to change to read a file that was
+    delimited by semicolons (;) rather than commas?</p>
+<p>C)  What argument would you have to change to read file in which
+    numbers used commas for decimal separation (i.e.,&nbsp;1,00)?</p>
+<p>D)  What argument would you have to change to read in only the first
+    10,000 rows of a very large file?</p>
+<details class="success">
+<summary>Solution</summary>
+<p>A)  The <code>read.csv()</code> function has the argument 'header' set to <code>TRUE</code>
+    by default. This means the function always assumes the first row
+    is header information, (i.e.,&nbsp;column names)</p>
+<p>B)  The <code>read.csv()</code> function has the argument 'sep' set to ",".
+    This means the function assumes commas are used as delimiters,
+    as you would expect. Changing this parameter (e.g.,&nbsp;<code>sep=";"</code>)
+    would tell R to interpret semicolons as delimiters.</p>
+<p>C)  Although it is not listed in the <code>read.csv()</code> usage,
+    <code>read.csv()</code> is a "version" of the function <code>read.table()</code> and
+    accepts all its arguments. If you set <code>dec=","</code> you could change
+    the decimal operator. We'd probably assume the delimiter is some
+    other character.</p>
+<p>D)  You can set <code>nrow</code> to a numeric value (e.g.,&nbsp;<code>nrow=10000</code>) to
+    choose how many rows of a file you read in. This may be useful
+    for very large files where not all the data is needed to test
+    some data cleaning steps you are applying.</p>
+<p>Hopefully, this exercise gets you thinking about using the provided
+help documentation in R. There are many arguments that exist, but
+which we wont have time to cover. </p>
+</details>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden="">
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer">
+        
+          
+          <a href="../04A-knitr-markdown/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Producing Reports With knitr">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Producing Reports With knitr
+              </div>
+            </div>
+          </a>
+        
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tracking", "navigation.sections", "navigation.expand", "navigation.top", "navigation.footer"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>
