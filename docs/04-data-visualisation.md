@@ -52,13 +52,13 @@ The idea of **mapping** is crucial in **ggplot**. One familiar example is to
 *map* the value of one variable in a dataset to $x$ and the other to $y$. 
 However, we often encounter datasets that include more than two variables. 
 In this case, **ggplot** allows you to *map* those other variables to visual 
-marks such as **color** and **shape**. Along with the mapped coordinates 
+marks such as **colour** and **shape**. Along with the mapped coordinates 
 $x$ and $y$, these visual marks constitute the **aesthetics** of the figure 
 (specified using `aes()`). One thing you may want to remember is the difference 
 between **discrete** and **continuous** variables. Some aesthetics, 
 such as the shape of dots, do not accept continuous variables. 
 If forced to do so, R will give an error. This is easy to understand; 
-we cannot create a continuum of shapes for a variable, unlike, say, color.
+we cannot create a continuum of shapes for a variable, unlike, say, colour.
 
 !!! tip "Checking continuous/discrete variables"
     
@@ -269,7 +269,7 @@ ggplot(data = <DATA>, mapping = aes(<MAPPINGS>)) + <GEOM_FUNCTION>()
 -   Define a mapping (using the aesthetic (`aes`) function), by
     selecting the variables to be plotted and specifying how to present
     them in the graph, e.g., as x and y positions or characteristics such
-    as size, shape, color, etc.
+    as size, shape, colour, etc.
 
 !!! r-project "r"
 
@@ -368,33 +368,33 @@ For instance, we can add transparency (`alpha`) to avoid over-plotting:
       geom_point(alpha = 0.5)
     ```
 
-We can also add colors for all the points:
+We can also add colours for all the points (`color` or `colour` both work):
 
 !!! r-project "r"
 
     ```r
     ggplot(data = variants, aes(x = POS, y = DP)) + 
-      geom_point(alpha = 0.5, color = "blue")
+      geom_point(alpha = 0.5, colour = "blue")
     ```
-Or to color each species in the plot differently, you could use a vector as an 
-input to the argument `color`. **`ggplot2`** will provide a different color 
+Or to colour each species in the plot differently, you could use a vector as an 
+input to the argument `colour`. **`ggplot2`** will provide a different colour 
 corresponding to different values in the vector. Here is an example where we 
-color with **`sample_id`**:
+colour with **`sample_id`**:
 
 !!! r-project "r"
 
     ```r
-    ggplot(data = variants, aes(x = POS, y = DP, color = sample_id)) +
+    ggplot(data = variants, aes(x = POS, y = DP, colour = sample_id)) +
       geom_point(alpha = 0.5)
     ```
 
-Notice that we can change the geom layer and colors will be still
+Notice that we can change the geom layer and colours will be still
 determined by **`sample_id`**
 
 !!! r-project "r"
 
     ```r
-    ggplot(data = variants, aes(x = POS, y = DP, color = sample_id)) +
+    ggplot(data = variants, aes(x = POS, y = DP, colour = sample_id)) +
       geom_line(alpha = 0.5)
     ```
 
@@ -403,7 +403,7 @@ To make our plot more readable, we can add axis labels:
 !!! r-project "r"
 
     ```r
-    ggplot(data = variants, aes(x = POS, y = DP, color = sample_id)) +
+    ggplot(data = variants, aes(x = POS, y = DP, colour = sample_id)) +
       geom_point(alpha = 0.5) +
       labs(x = "Base Pair Position",
            y = "Read Depth (DP)")
@@ -415,7 +415,7 @@ To add a *main* title to the plot, we use
 !!! r-project "r"
 
     ```r
-    ggplot(data = variants, aes(x = POS, y = DP, color = sample_id)) +
+    ggplot(data = variants, aes(x = POS, y = DP, colour = sample_id)) +
       geom_point(alpha = 0.5) +
       labs(x = "Base Pair Position",
            y = "Read Depth (DP)") +
@@ -432,7 +432,7 @@ To add a *main* title to the plot, we use
     !!! r-project "r"
 
         ```r
-        ggplot(data = variants, aes(x = POS, y = DP, color = sample_id)) +
+        ggplot(data = variants, aes(x = POS, y = DP, colour = sample_id)) +
           geom_point(alpha = 0.5) +
           labs(x = "Base Pair Position",
                y = "Read Depth (DP)",
@@ -472,31 +472,34 @@ created file called `depth.pdf` with the above plot.
 
 !!! question "Challenge"
 
-    Use what you just learned to create a scatter plot of mapping quality (`MQ`) over position (`POS`) with the samples showing in different colors. Make sure to give your plot relevant axis labels.
+    Use what you just learned to create a scatter plot of mapping quality (`MQ`) over position (`POS`) with the samples showing in different colours. Make sure to give your plot relevant axis labels.
 
     ??? success "Output"
     
         !!! r-project "r"
         
             ```r
-            ggplot(data = variants, aes(x = POS, y = MQ, color = sample_id)) +   
+            ggplot(data = variants, aes(x = POS, y = MQ, colour = sample_id)) +   
               geom_point() +   
               labs(x = "Base Pair Position",        
                    y = "Mapping Quality (MQ)")
             ```
 
-To further customize the plot, we can change the default font format:
+!!! tip "Further customise plots"
+  
+    - Change the `geom_point` dot size with `size`
+    - Change the default font typeface and size with `theme(text = element_text( family = "..", size = <int>))`
 
-!!! r-project "r"
+    !!! r-project "r"
 
-    ```r
-    ggplot(data = variants, aes(x = POS, y = DP, color = sample_id)) +   
-      geom_point(alpha = 0.5) +   
-      labs(x = "Base Pair Position",        
-           y = "Read Depth (DP)") +   
-      ggtitle("Read Depth vs. Position") +   
-      theme(text = element_text(family = "mono"))
-    ```
+        ```r
+        ggplot(data = variants, aes(x = POS, y = DP, colour = sample_id)) +   
+          geom_point(alpha = 0.5, size = 3) +   
+          labs(x = "Base Pair Position",        
+               y = "Read Depth (DP)") +   
+          ggtitle("Read Depth vs. Position") +   
+          theme(text = element_text(family = "mono", size = 16))
+        ```
 
 
 ## Faceting
@@ -509,7 +512,7 @@ quality plot into three panels, one for each sample.
 !!! r-project "r"
 
     ```r
-    ggplot(data = variants, aes(x = POS, y = MQ, color = sample_id)) +  
+    ggplot(data = variants, aes(x = POS, y = MQ, colour = sample_id)) +  
       geom_point() +  
       labs(x = "Base Pair Position",       
            y = "Mapping Quality (MQ)") +  
@@ -526,7 +529,7 @@ formula).
 !!! r-project "r"
 
     ```r
-    ggplot(data = variants, aes(x = POS, y = MQ, color = sample_id)) +  
+    ggplot(data = variants, aes(x = POS, y = MQ, colour = sample_id)) +  
       geom_point() +  
       labs(x = "Base Pair Position",       
            y = "Mapping Quality (MQ)") +  
@@ -541,7 +544,7 @@ Additionally, you can remove the grid:
 !!! r-project "r"
 
     ```r
-    ggplot(data = variants, aes(x = POS, y = MQ, color = sample_id)) +   
+    ggplot(data = variants, aes(x = POS, y = MQ, colour = sample_id)) +   
       geom_point() +   
       labs(x = "Base Pair Position",        
            y = "Mapping Quality (MQ)") +   
@@ -553,7 +556,7 @@ Additionally, you can remove the grid:
 !!! question "Challenge"
 
     Use what you just learned to create a scatter plot of PHRED scaled
-    quality (`QUAL`) over position (`POS`) with the points colored and faceted 
+    quality (`QUAL`) over position (`POS`) with the points coloured and faceted 
     based on samples. Make sure to give your plot relevant axis labels.
 
     ??? success "Solution"
@@ -561,7 +564,7 @@ Additionally, you can remove the grid:
         !!! r-project "r"
 
             ```r
-            ggplot(data = variants, aes(x = POS, y = QUAL, color = sample_id)) + 
+            ggplot(data = variants, aes(x = POS, y = QUAL, colour = sample_id)) + 
               geom_point() + 
               labs(x = "Base Pair Position", 
                    y = "PHRED-scaled Quality (QUAL)") + 
@@ -592,7 +595,7 @@ sample that are indels.
         !!! r-project "r"
 
             ```r
-            ggplot(data = variants, aes(x = INDEL, color = sample_id)) +
+            ggplot(data = variants, aes(x = INDEL, colour = sample_id)) +
               geom_bar(show.legend = F) +
               facet_grid(sample_id ~ .)
             ```
@@ -674,7 +677,7 @@ additional themes.
 
     - See if you can change the size or shape of the plotting symbol.
     - Can you find a way to change the name of the legend? What about its labels?
-    - Try using a different color palette (see the [Cookbook for R](http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/)).
+    - Try using a different colour palette (see the [Cookbook for R](http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/)).
 
 
 ## More **`ggplot2`** Plots
