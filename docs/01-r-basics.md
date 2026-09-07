@@ -738,10 +738,19 @@ any `NA` value:
         ```
         [1] FALSE FALSE FALSE FALSE FALSE  TRUE FALSE
         ```
+    
+    ```r
+    # Retrieve TRUE if a value is NOT an NA using !is.na()
+    !is.na(snp_genes)
+    ```
+    ??? success "Output"
+
+        ```
+        [1]  TRUE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE
+        ```
 
 Sometimes, you may wish to find out if a specific value (or several values) is 
-present in a vector. You can do this using the comparison operator `%in%`  
-which will return `TRUE` for any value in the vector you are searching:
+present in a vector. You can do this using the comparison operator `%in%` which will return `TRUE` for any value in the vector you are searching:
 
 !!! r-project "r"
 
@@ -761,7 +770,24 @@ which will return `TRUE` for any value in the vector you are searching:
         [1] TRUE TRUE
         ```
 
+!!! question "Exercise: Try swap the order or the two vectors above on the left and right of the %in%"
 
+    How does the output change and how can we interpret this?
+
+    ??? success "Output"
+
+        ```r
+        snp_genes %in% c("ACTN3","APOA5")
+        ```
+
+        ```
+        [1] FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE
+        ```
+
+        In this scenario, we get back 7 TRUE/FALSE, one for each value in the vector on the left. This is like asking R, for each value in the vector on the left, return a TRUE or FALSE if it matches any value in the vector on the right.  This might be useful if you suspect your genes in the right vector exist multiple times in your left vector.  
+
+
+    
 
 ## Review exercises
 
@@ -853,8 +879,10 @@ which will return `TRUE` for any value in the vector you are searching:
 
 !!! question "Exercise 5"
 
-    What type of data is `combined`?
+    What type of data is `combined`? Was this the type you expected? 
 
     ??? success "Solution"
 
-        It is a character vector. Use `typeof()` to find out.
+        It is a character vector. Use `mode()` or `typeof()` to find out. The first 3 vectors were already character vectors, but our last vector `snp_positions` is a numeric vector. In R, all vectors must be of the same mode, so if you combine values of mixed modes into one vector, R will coerce the values to the same mode. There is a coercion hierarchy in R - logicals will get coerced to numeric and numeric coerced to character. 
+        
+        There is some additional information on coercion in the Appendix. 
