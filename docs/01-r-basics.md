@@ -470,7 +470,6 @@ positions of the elements you wish to retrieve).
 
     ```r
     # Get the 1st, 3rd, and 4th value in the 'snps' vector
-
     snps[c(1, 3, 4)]
     ```
 
@@ -482,10 +481,8 @@ Several of these subsetting expressions can be combined:
 !!! r-project "r"
 
     ```r
-    # Get the 1st through the 3rd value, and 4th value in the 'snps' vector
-    # Yes, this is a little silly in a vector of only 4 values.
-
-    snps[c(1:3, 4)]
+    # Get creative! Return the 1st through the 3rd value, 4th, 2nd twice, and 3rd values in the 'snps' vector
+    snps[c(1:3,4,2,2,3)]
     ```
 
 
