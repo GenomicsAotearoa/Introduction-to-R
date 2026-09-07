@@ -626,7 +626,7 @@ The `table()` function lets us count up how many times each unique element appea
     ??? success "Output"
         ```
         SRR2584863  SRR2584866  SRR2589044 
-        20          680         7 
+        25          766         10 
         ```
 
     Note: What do our sample_ids correspond to? Go back to the [Introduction to the dataset](02-data-prelude.md#introduction-to-the-dataset) to remind yourself. 
