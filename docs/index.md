@@ -36,6 +36,8 @@
 |[Factors and Coercion](./appendix/02A-factors-and-coercion.md){ .md-button } | Data structures and types |
 |[Data wrangling and analyses with Tidyverse](./appendix/03A-dplyr.md){ .md-button } | The Tidyverse for handling data|
 |[Producing reports with knitr](./appendix/04A-knitr-markdown.md){ .md-button } | Writing Reports|
+|[Importing data from Excel](./appendix/05A-import-excel.md){ .md-button } | Importing `.xlsx` files as dataframes |
+
 
 </div>
 

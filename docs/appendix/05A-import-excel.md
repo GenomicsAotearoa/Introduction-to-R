@@ -69,7 +69,7 @@ frame:
         ```
 
 The type of this object is **tibble**, a type of data frame we will talk
-more about in the [`dplyr` section](appendix/03A-dplyr.md). If you needed a true 
+more about in the [`dplyr` section](03A-dplyr.md). If you needed a true 
 R data frame you could coerce with `as.data.frame()`.
 
 ## Review exercises

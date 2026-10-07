@@ -57,7 +57,7 @@ spreadsheet for each observation or sample, and one column for every
 variable that we measure or report on. As simple as this sounds, it's
 very easily violated. Most data scientists agree that significant
 amounts of their time is spent tidying data for analysis. Read more
-about data sation in [this Carpentries
+about data organisation in [this Carpentries
 lesson](https://datacarpentry.org/organization-genomics/) and in [this
 paper](https://www.jstatsoft.org/article/view/v059i10).
 
@@ -533,7 +533,7 @@ There is a lot to work with, so we will subset our columns of interest into a ne
         subset_variants <- variants[ , c(1:3, 6)]
         ```
 
-Now, let's use the `str()` (structure) function to confirm your `subest_variants` dataframe looks as you expect it to:
+Now, let's use the `str()` (structure) function to confirm your `subset_variants` dataframe looks as you expect it to:
 
 !!! r-project "r"
 

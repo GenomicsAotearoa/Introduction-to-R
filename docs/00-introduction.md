@@ -321,7 +321,7 @@ step to analysing your data.
     [`file.path()`](https://www.rdocumentation.org/packages/base/versions/3.4.3/topics/file.path)
     allow you to specify file paths that are operating system independent. See 
     Jenny Bryan's [blog
-    post](https://www.tidyverse.org/articles/2017/12/workflow-vs-script/)
+    post](https://tidyverse.org/blog/2017/12/workflow-vs-script/)
     for this and other R tips.
 
 
