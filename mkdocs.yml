@@ -1,4 +1,4 @@
-site_name: Introduction to R
+site_name: Introduction to R for Bioinformatics
 site_author: Genomics Aotearoa
 site_dir: public
 site_url: "https://genomicsaotearoa.github.io/Introduction-to-R/"
@@ -50,6 +50,7 @@ theme:
     - navigation.expand
     - navigation.top
     - navigation.footer
+    - content.code.copy
     
 
   # Necessary for search to work properly

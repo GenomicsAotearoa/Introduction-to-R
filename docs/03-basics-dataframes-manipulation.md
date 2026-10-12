@@ -532,6 +532,13 @@ There is a lot to work with, so we will subset our columns of interest into a ne
         ```r
         subset_variants <- variants[ , c(1:3, 6)]
         ```
+        Alternatively, we can also do this using the column names:
+        
+        ```r
+        subset_variants <- variants[ , c("sample_id", "CHROM", "POS", "ALT")]
+        ```
+
+
 
 Now, let's use the `str()` (structure) function to confirm your `subset_variants` dataframe looks as you expect it to:
 

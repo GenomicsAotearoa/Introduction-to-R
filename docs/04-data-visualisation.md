@@ -274,7 +274,7 @@ ggplot(data = <DATA>, mapping = aes(<MAPPINGS>)) + <GEOM_FUNCTION>()
 !!! r-project "r"
 
     ```r
-    ggplot(data = variants, aes(x = POS, y = DP))
+    ggplot(data = variants, mapping = aes(x = POS, y = DP))
     ```
 
 -   Add 'geoms' &ndash; graphical representations of the data in the plot
@@ -295,7 +295,7 @@ continuous variables, let's use
 !!! r-project "r"
 
     ```r
-    ggplot(data = variants, aes(x = POS, y = DP)) + 
+    ggplot(data = variants, mapping = aes(x = POS, y = DP)) + 
       geom_point()
     ```
 
@@ -308,7 +308,7 @@ plots, so the above plot can also be generated with code like this:
 
     ```r
     # Assign plot to a variable 
-    coverage_plot <- ggplot(data = variants, aes(x = POS, y = DP))
+    coverage_plot <- ggplot(data = variants, mapping = aes(x = POS, y = DP))
     
     # Draw the plot
     coverage_plot + 
@@ -348,13 +348,13 @@ plots, so the above plot can also be generated with code like this:
 
 Building plots with **`ggplot2`** is typically an iterative process. We
 start by defining the dataset we'll use, lay out the axes, and choose a
-geom:
+geom. We'll also drop off the `data =` and `mapping = `. Remember that R functions expects arguments in a particular order, so we do not need to specify these arguments if they are in the correct order:
 
 
 !!! r-project "r"
 
     ```r
-    ggplot(data = variants, aes(x = POS, y = DP)) + 
+    ggplot(variants, aes(x = POS, y = DP)) + 
       geom_point()
     ```
 
@@ -364,7 +364,7 @@ For instance, we can add transparency (`alpha`) to avoid over-plotting:
 !!! r-project "r"
 
     ```r
-    ggplot(data = variants, aes(x = POS, y = DP)) + 
+    ggplot(variants, aes(x = POS, y = DP)) + 
       geom_point(alpha = 0.5)
     ```
 
@@ -373,7 +373,7 @@ We can also add colours for all the points (`color` or `colour` both work):
 !!! r-project "r"
 
     ```r
-    ggplot(data = variants, aes(x = POS, y = DP)) + 
+    ggplot(variants, aes(x = POS, y = DP)) + 
       geom_point(alpha = 0.5, colour = "blue")
     ```
 Or to colour each species in the plot differently, you could use a vector as an 
@@ -384,7 +384,7 @@ colour with **`sample_id`**:
 !!! r-project "r"
 
     ```r
-    ggplot(data = variants, aes(x = POS, y = DP, colour = sample_id)) +
+    ggplot(variants, aes(x = POS, y = DP, colour = sample_id)) +
       geom_point(alpha = 0.5)
     ```
 
@@ -403,7 +403,7 @@ To make our plot more readable, we can add axis labels:
 !!! r-project "r"
 
     ```r
-    ggplot(data = variants, aes(x = POS, y = DP, colour = sample_id)) +
+    ggplot(variants, aes(x = POS, y = DP, colour = sample_id)) +
       geom_point(alpha = 0.5) +
       labs(x = "Base Pair Position",
            y = "Read Depth (DP)")
@@ -415,7 +415,7 @@ To add a *main* title to the plot, we use
 !!! r-project "r"
 
     ```r
-    ggplot(data = variants, aes(x = POS, y = DP, colour = sample_id)) +
+    ggplot(variants, aes(x = POS, y = DP, colour = sample_id)) +
       geom_point(alpha = 0.5) +
       labs(x = "Base Pair Position",
            y = "Read Depth (DP)") +
@@ -432,7 +432,7 @@ To add a *main* title to the plot, we use
     !!! r-project "r"
 
         ```r
-        ggplot(data = variants, aes(x = POS, y = DP, colour = sample_id)) +
+        ggplot(variants, aes(x = POS, y = DP, colour = sample_id)) +
           geom_point(alpha = 0.5) +
           labs(x = "Base Pair Position",
                y = "Read Depth (DP)",
@@ -493,7 +493,7 @@ created file called `depth.pdf` with the above plot.
     !!! r-project "r"
 
         ```r
-        ggplot(data = variants, aes(x = POS, y = DP, colour = sample_id)) +   
+        ggplot(variants, aes(x = POS, y = DP, colour = sample_id)) +   
           geom_point(alpha = 0.5, size = 3) +   
           labs(x = "Base Pair Position",        
                y = "Read Depth (DP)") +   
@@ -512,7 +512,7 @@ quality plot into three panels, one for each sample.
 !!! r-project "r"
 
     ```r
-    ggplot(data = variants, aes(x = POS, y = MQ, colour = sample_id)) +  
+    ggplot(variants, aes(x = POS, y = MQ, colour = sample_id)) +  
       geom_point() +  
       labs(x = "Base Pair Position",       
            y = "Mapping Quality (MQ)") +  
@@ -529,7 +529,7 @@ formula).
 !!! r-project "r"
 
     ```r
-    ggplot(data = variants, aes(x = POS, y = MQ, colour = sample_id)) +  
+    ggplot(variants, aes(x = POS, y = MQ, colour = sample_id)) +  
       geom_point() +  
       labs(x = "Base Pair Position",       
            y = "Mapping Quality (MQ)") +  
@@ -544,7 +544,7 @@ Additionally, you can remove the grid:
 !!! r-project "r"
 
     ```r
-    ggplot(data = variants, aes(x = POS, y = MQ, colour = sample_id)) +   
+    ggplot(variants, aes(x = POS, y = MQ, colour = sample_id)) +   
       geom_point() +   
       labs(x = "Base Pair Position",        
            y = "Mapping Quality (MQ)") +   
@@ -564,7 +564,7 @@ Additionally, you can remove the grid:
         !!! r-project "r"
 
             ```r
-            ggplot(data = variants, aes(x = POS, y = QUAL, colour = sample_id)) + 
+            ggplot(variants, aes(x = POS, y = QUAL, colour = sample_id)) + 
               geom_point() + 
               labs(x = "Base Pair Position", 
                    y = "PHRED-scaled Quality (QUAL)") + 
@@ -581,7 +581,7 @@ sample that are indels.
 !!! r-project "r"
 
     ```r
-    ggplot(data = variants, aes(x = INDEL, fill = sample_id)) +   
+    ggplot(variants, aes(x = INDEL, fill = sample_id)) +   
       geom_bar() +   
       facet_grid(sample_id ~ .)
     ```
@@ -595,7 +595,7 @@ sample that are indels.
         !!! r-project "r"
 
             ```r
-            ggplot(data = variants, aes(x = INDEL, colour = sample_id)) +
+            ggplot(variants, aes(x = INDEL, colour = sample_id)) +
               geom_bar(show.legend = F) +
               facet_grid(sample_id ~ .)
             ```
@@ -615,7 +615,7 @@ plot the distribution of `DP`
 !!! r-project "r"
 
     ```r
-    ggplot(data = variants, aes(x = DP)) +   
+    ggplot(variants, aes(x = DP)) +   
       geom_density()
     ```
 
@@ -632,7 +632,7 @@ variants is about 10 reads.
         !!! r-project "r"
 
             ```r
-            ggplot(data = variants, aes(x = DP, fill = sample_id)) +
+            ggplot(variants, aes(x = DP, fill = sample_id)) +
               geom_density(alpha = 0.5) +
               theme_bw()
             ```
@@ -646,7 +646,7 @@ looks different if it is an indel.
 !!! r-project "r"
 
     ```r
-    ggplot(data = variants, aes(x = sample_id, y = DP, fill = INDEL)) +
+    ggplot(variants, aes(x = sample_id, y = DP, fill = INDEL)) +
       geom_boxplot(alpha = 0.5) +
       theme_bw()
     ```

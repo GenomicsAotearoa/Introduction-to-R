@@ -30,12 +30,39 @@ some tips to make this process as helpful and efficient as possible.
 > "Never memorize something that you can look up" — A. Einstein
 
 
-## R cheatsheets
+## Resources
+
+
+### R cheatsheets
 
 There are some fantastic cheatsheets for R packages, such as ggplot, dplyr, tidyr, etc., provided by Posit. [Check them out here](https://rstudio.github.io/cheatsheets/) and follow the links to the downloadable PDFs. 
 
 
 [![ggplot cheatsheet](figures/ggplot-cheatsheet.png)](https://rstudio.github.io/cheatsheets/data-visualization.pdf)
+
+
+!!! tip "Where to learn more"
+    
+    The following are good resources for learning more about R. Some of
+    them can be quite technical, but if you are a regular R user you may
+    ultimately need this technical knowledge.
+
+    * [R for Beginners](https://cran.r-project.org/doc/contrib/Paradis-rdebuts_en.pdf):
+    By Emmanuel Paradis and a great starting point 
+    * [The R Manuals](https://cran.r-project.org/manuals.html): Maintained by the R
+    project 
+    * [R contributed documentation](https://cran.r-project.org/other-docs.html): Also
+    linked to the R project; importantly there are materials available in
+    several languages 
+    * [R for Data Science (2e)](https://r4ds.hadley.nz/): A
+    wonderful collection by noted R educators and developers Garrett
+    Grolemund and Hadley Wickham 
+    * [Practical Data Science for Stats](https://peerj.com/collections/50-practicaldatascistats/): Not
+    exclusively about R usage, but a nice collection of pre-prints on data
+    science and applications for R 
+    * [Programming in R Software Carpentry
+    lesson](https://software-carpentry.org/lessons/): There are several
+    Software Carpentry lessons in R to choose from 
 
 ## Getting help with function arguments
 

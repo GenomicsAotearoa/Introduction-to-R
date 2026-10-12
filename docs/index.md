@@ -1,6 +1,6 @@
 </center>
 <style>h1 {text-align: center;}</style>
-<h1><b>Introduction to R</b></h1>
+<h1><b>Introduction to R for Bioinformatics</b></h1>
 </center>
 
 

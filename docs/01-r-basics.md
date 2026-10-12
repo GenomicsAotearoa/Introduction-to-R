@@ -53,28 +53,6 @@ the additional learning materials in the tip box below.
   `ggplot2`)
 * How to use advanced R statistical functions
 
-!!! tip "Where to learn more"
-    
-    The following are good resources for learning more about R. Some of
-    them can be quite technical, but if you are a regular R user you may
-    ultimately need this technical knowledge.
-
-    * [R for Beginners](https://cran.r-project.org/doc/contrib/Paradis-rdebuts_en.pdf):
-    By Emmanuel Paradis and a great starting point 
-    * [The R Manuals](https://cran.r-project.org/manuals.html): Maintained by the R
-    project 
-    * [R contributed documentation](https://cran.r-project.org/other-docs.html): Also
-    linked to the R project; importantly there are materials available in
-    several languages 
-    * [R for Data Science (2e)](https://r4ds.hadley.nz/): A
-    wonderful collection by noted R educators and developers Garrett
-    Grolemund and Hadley Wickham 
-    * [Practical Data Science for Stats](https://peerj.com/collections/50-practicaldatascistats/): Not
-    exclusively about R usage, but a nice collection of pre-prints on data
-    science and applications for R 
-    * [Programming in R Software Carpentry
-    lesson](https://software-carpentry.org/lessons/): There are several
-    Software Carpentry lessons in R to choose from 
 
 
 ## Objects
@@ -449,6 +427,11 @@ we place the index (i.e., a number that corresponds to the position of the value
     # Get the 3rd value in the 'snps' vector
     snps[3]
     ```
+    !!! success "Output"
+
+        ```
+        [1] "rs6152"
+        ```
 
 In R, every item in your vector is indexed, starting from the first item
 (1) through to the final number of items in your vector. You can also
@@ -461,6 +444,12 @@ retrieve a range of numbers:
 
     snps[1:3]
     ```
+    !!! success "Output"
+
+        ```
+        [1] "rs53576"   "rs1815739" "rs6152" 
+        ```
+
 
 If you want to retrieve several (but not necessarily sequential) items from
 a vector, you pass a **vector of indices** (i.e., a vector that has the numbered
@@ -472,6 +461,11 @@ positions of the elements you wish to retrieve).
     # Get the 1st, 3rd, and 4th value in the 'snps' vector
     snps[c(1, 3, 4)]
     ```
+    !!! success "Output"
+
+        ```
+        [1] "rs53576"   "rs6152"    "rs1799971"
+        ```    
 
 There are additional (and perhaps less commonly used) ways of subsetting
 a vector (see [these
@@ -484,7 +478,11 @@ Several of these subsetting expressions can be combined:
     # Get creative! Return the 1st through the 3rd value, 4th, 2nd twice, and 3rd values in the 'snps' vector
     snps[c(1:3,4,2,2,3)]
     ```
+    !!! success "Output"
 
+        ```
+        [1] "rs53576"   "rs1815739" "rs6152"    "rs1799971" "rs1815739" "rs1815739" "rs6152"
+        ```  
 
 ### Adding to, removing, or replacing values in existing vectors
 
@@ -508,7 +506,7 @@ We can verify that "snp_genes" contains the new gene entry
     snp_genes
     ```
 
-    ??? success "Output"
+    !!! success "Output"
 
         ```
         [1] "OXTR"   "ACTN3"  "AR"     "OPRM1"  "CYP1A1" "APOA5" 
@@ -523,7 +521,7 @@ index's value removed:
     snp_genes[-6]
     ```
 
-    ??? success "Output"
+    !!! success "Output"
 
         ```
         [1] "OXTR"   "ACTN3"  "AR"     "OPRM1"  "CYP1A1"
@@ -540,7 +538,7 @@ expression:
     snp_genes
     ```
 
-    ??? success "Output"
+    !!! success "Output"
 
         ```
         [1] "OXTR"   "ACTN3"  "AR"     "OPRM1"  "CYP1A1"
@@ -557,7 +555,7 @@ bracket notation:
     snp_genes
     ```
 
-    ??? success "Output"
+    !!! success "Output"
 
         ```
         [1] "OXTR"   "ACTN3"  "AR"     "OPRM1"  "CYP1A1" NA       "APOA5" 
@@ -606,7 +604,7 @@ logical operator:
     snp_positions[snp_positions > 100000000]
     ```
 
-    ??? success "Output"
+    !!! success "Output"
 
         ```
         [1] 154039662
@@ -646,7 +644,7 @@ can be better understood if you examine what the expression
     snp_positions > 100000000
     ```
 
-    ??? success "Output"
+    !!! success "Output"
 
         ```
         [1] FALSE FALSE FALSE  TRUE
@@ -660,7 +658,7 @@ The output above is a logical vector where the 4th element is `TRUE`. When you p
     snp_positions[c(FALSE, FALSE, FALSE, TRUE)]
     ```
 
-    ??? success "Output"
+    !!! success "Output"
 
         ```
         [1] 154039662
@@ -684,7 +682,7 @@ evaluates as `TRUE` in our comparison:
     which(snp_positions > 100000000)
     ```
 
-    ??? success "Output"
+    !!! success "Output"
 
         ```
         [1] 4
@@ -703,7 +701,7 @@ we can use an object that can take on whatever value we need. So for example:
     snp_positions[snp_positions > snp_marker_cutoff]
     ```
 
-    ??? success "Output"
+    !!! success "Output"
 
         ```
         [1] 154039662
